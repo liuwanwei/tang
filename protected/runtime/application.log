@@ -1,0 +1,35 @@
+2013/09/02 16:58:21 [error] [php] PDO::__construct(): [2002] No such file or directory (trying to connect via unix:///var/mysql/mysql.sock) (/Users/liuwanwei/www/yii/framework/db/CDbConnection.php:423)
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/db/CDbConnection.php(330): CDbConnection->open()
+#1 /Users/liuwanwei/www/yii/framework/db/CDbConnection.php(308): CDbConnection->setActive()
+#2 /Users/liuwanwei/www/yii/framework/base/CModule.php(387): CDbConnection->init()
+#3 /Users/liuwanwei/www/yii/framework/base/CModule.php(103): CWebApplication->getComponent()
+#4 /Users/liuwanwei/www/yii/framework/gii/generators/model/ModelCode.php(57): CWebApplication->__get()
+#5 /Users/liuwanwei/www/yii/framework/web/CFormModel.php(39): ModelCode->init()
+#6 /Users/liuwanwei/www/yii/framework/gii/CCodeGenerator.php(153): ModelCode->__construct()
+#7 /Users/liuwanwei/www/yii/framework/gii/CCodeGenerator.php(63): ModelGenerator->prepare()
+#8 /Users/liuwanwei/www/yii/framework/web/actions/CInlineAction.php(49): ModelGenerator->actionIndex()
+#9 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/liuwanwei/www/yii/framework/web/CController.php(286): ModelGenerator->runAction()
+#11 /Users/liuwanwei/www/yii/framework/web/CController.php(265): ModelGenerator->runActionWithFilters()
+#12 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): ModelGenerator->run()
+#13 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/tang/index.php?r=gii/model
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/04 16:43:03 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (72)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/04 16:43:17 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (72)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/04 16:48:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "country/index".' in /Users/liuwanwei/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('country/index')
+#1 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#2 /Users/liuwanwei/www/tang/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/tang/index.php?r=country/index&view=about
+HTTP_REFERER=http://localhost/tang/index.php?r=restaurant/index
+---
