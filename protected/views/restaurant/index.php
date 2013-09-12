@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Restaurants',
+	'汤馆列表',
 );
 
 $this->menu=array(
@@ -12,9 +12,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>Restaurants</h1>
+<h1>汤馆列表</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
+	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 )); ?>

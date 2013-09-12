@@ -9,8 +9,8 @@
  * @property string $phone
  * @property string $business_hour
  * @property string $address
- * @property integer $county
- * @property integer $area
+ * @property integer $county_id
+ * @property integer $area_id
  * @property integer $is_shutdown
  * @property string $image_url
  * @property double $latitude
@@ -46,14 +46,14 @@ class Restaurant extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, address', 'required'),
-			array('county, area, is_shutdown', 'numerical', 'integerOnly'=>true),
+			array('county_id, area_id, is_shutdown', 'numerical', 'integerOnly'=>true),
 			array('latitude, longitude', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
 			array('image_url, description', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, phone, business_hour, address, county, area, is_shutdown, image_url, latitude, longitude, description', 'safe', 'on'=>'search'),
+			array('id, name, phone, business_hour, address, county_id, area_id, is_shutdown, image_url, latitude, longitude, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +65,8 @@ class Restaurant extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'county' => array(self::BELONGS_TO, 'County', 'county_id'),
+			'area' => array(self::BELONGS_TO, 'Area', 'area_id'),
 		);
 	}
 
@@ -79,8 +81,8 @@ class Restaurant extends CActiveRecord
 			'phone' => 'Phone',
 			'business_hour' => 'Business Hour',
 			'address' => 'Address',
-			'county' => 'County',
-			'area' => 'Area',
+			'county_id' => 'County',
+			'area_id' => 'Area',
 			'is_shutdown' => 'Is Shutdown',
 			'image_url' => 'Image Url',
 			'latitude' => 'Latitude',
@@ -105,8 +107,8 @@ class Restaurant extends CActiveRecord
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('business_hour',$this->business_hour,true);
 		$criteria->compare('address',$this->address,true);
-		$criteria->compare('county',$this->county);
-		$criteria->compare('area',$this->area);
+		$criteria->compare('county_id',$this->county_id);
+		$criteria->compare('area_id',$this->area_id);
 		$criteria->compare('is_shutdown',$this->is_shutdown);
 		$criteria->compare('image_url',$this->image_url,true);
 		$criteria->compare('latitude',$this->latitude);

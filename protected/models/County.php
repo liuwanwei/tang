@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'county':
  * @property integer $id
- * @property integer $name
+ * @property string $name
  */
 class County extends CActiveRecord
 {
@@ -35,8 +35,7 @@ class County extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, name', 'required'),
-			array('id, name', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name', 'safe', 'on'=>'search'),
@@ -51,6 +50,7 @@ class County extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			// 'restaurants' => array(self::HAS_MANY, 'Restaurant', 'id'),
 		);
 	}
 
@@ -77,7 +77,7 @@ class County extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name);
+		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

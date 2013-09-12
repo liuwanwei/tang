@@ -46,20 +46,23 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'county'); ?>
-		<?php echo $form->textField($model,'county'); ?>
-		<?php echo $form->error($model,'county'); ?>
+		<?php echo $form->labelEx($model,'county_id'); ?>
+		<!--<?php echo $form->textField($model,'county_id'); ?> -->
+		<?php echo $form->dropDownList($model, 'county_id',  $counties);?>
+		<?php echo $form->error($model,'county_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'area'); ?>
-		<?php echo $form->textField($model,'area'); ?>
-		<?php echo $form->error($model,'area'); ?>
+		<?php echo $form->labelEx($model,'area_id'); ?>
+		<!--<?php echo $form->textField($model,'area_id'); ?>-->
+		<?php echo $form->dropDownList($model, 'area_id', $areas); ?>
+		<?php echo $form->error($model,'area_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'is_shutdown'); ?>
-		<?php echo $form->textField($model,'is_shutdown'); ?>
+		<!--<?php echo $form->textField($model,'is_shutdown'); ?>-->
+		<?php echo $form->dropDownList($model, 'is_shutdown', array('0'=>'正常营业', '1'=>'停业'));?>
 		<?php echo $form->error($model,'is_shutdown'); ?>
 	</div>
 

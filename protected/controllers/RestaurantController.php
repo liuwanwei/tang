@@ -98,8 +98,24 @@ class RestaurantController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		$dataProvider = new CActiveDataProvider('County');
+		$data = $dataProvider->getData();
+		$counties = array();
+		foreach ($data as $key => $value) {
+			$counties[$value->id] = $value->name;
+		}
+
+		$dataProvider = new CActiveDataProvider('Area');
+		$data = $dataProvider->getData();
+		$areas = array();
+		foreach ($data as $key => $value) {
+			$areas[$value->id] = $value->name;
+		}
+
 		$this->render('update',array(
 			'model'=>$model,
+			'counties'=>$counties,
+			'areas'=>$areas,
 		));
 	}
 

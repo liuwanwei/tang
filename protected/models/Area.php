@@ -5,7 +5,8 @@
  *
  * The followings are the available columns in table 'area':
  * @property integer $id
- * @property integer $name
+ * @property string $name
+ * @property integer $county
  */
 class Area extends CActiveRecord
 {
@@ -35,11 +36,11 @@ class Area extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, name', 'required'),
-			array('id, name', 'numerical', 'integerOnly'=>true),
+			array('county', 'numerical', 'integerOnly'=>true),
+			array('name', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('id, name, county', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class Area extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'county' => 'County',
 		);
 	}
 
@@ -77,7 +79,8 @@ class Area extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('county',$this->county);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -50,7 +50,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'phone',
 		'business_hour',
 		'address',
-		'county',
+		'county_id',
 		/*
 		'area',
 		'is_shutdown',
