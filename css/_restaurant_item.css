@@ -1,0 +1,12 @@
+.restaurant-profile{
+	float: left;
+	/*position: relative;*/
+	margin-top: 4px;
+	width: 10%;
+	height: 50px;
+}
+
+.restaurant-detail{
+	float: right;
+	width: 85%;
+}
