@@ -56,6 +56,33 @@ class RestaurantController extends Controller
 		));
 	}
 
+	private function staticSelectors(){
+		// 所有行政县、区数据，用于选择汤馆所在区域。
+		$dataProvider = new CActiveDataProvider('County');
+		$data = $dataProvider->getData();
+		$counties = array();
+		foreach ($data as $key => $value) {
+			$counties[$value->id] = $value->name;
+		}
+
+		// 所有自定义区域数据，用于选择汤馆所在区域。
+		$dataProvider = new CActiveDataProvider('Area');
+		$data = $dataProvider->getData();
+		$areas = array();
+		foreach ($data as $key => $value) {
+			$areas[$value->id] = $value->name;
+		}
+
+		$dataProvider = new CActiveDataProvider('RestaurantStatus');
+		$data = $dataProvider->getData();
+		$statuses = array();
+		foreach ($data as $key => $value) {
+			$statuses[$value->id] = $value->name;
+		}
+
+		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses);
+	}
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -74,8 +101,10 @@ class RestaurantController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+
 		$this->render('create',array(
 			'model'=>$model,
+			'selectors'=>$this->staticSelectors(),
 		));
 	}
 
@@ -98,24 +127,9 @@ class RestaurantController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$dataProvider = new CActiveDataProvider('County');
-		$data = $dataProvider->getData();
-		$counties = array();
-		foreach ($data as $key => $value) {
-			$counties[$value->id] = $value->name;
-		}
-
-		$dataProvider = new CActiveDataProvider('Area');
-		$data = $dataProvider->getData();
-		$areas = array();
-		foreach ($data as $key => $value) {
-			$areas[$value->id] = $value->name;
-		}
-
 		$this->render('update',array(
 			'model'=>$model,
-			'counties'=>$counties,
-			'areas'=>$areas,
+			'selectors'=>$this->staticSelectors(),
 		));
 	}
 

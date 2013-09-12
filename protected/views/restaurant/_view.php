@@ -36,11 +36,11 @@
 		<?php echo CHtml::encode($data->area['name']); ?>
 		<br />
 
-		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('is_shutdown')); ?>:</b>
-		<?php echo CHtml::encode($data->is_shutdown); ?>
+		<?php echo CHtml::encode($data->status['name']); ?>
 		<br />
 
+		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('image_url')); ?>:</b>
 		<?php echo CHtml::encode($data->image_url); ?>
 		<br />
