@@ -23,8 +23,9 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'county'); ?>
-		<?php echo $form->textField($model,'county'); ?>
-		<?php echo $form->error($model,'county'); ?>
+		<!--<?php echo $form->textField($model,'county_id'); ?>-->
+		<?php echo $form->dropDownList($model, 'county_id', $counties); ?>
+		<?php echo $form->error($model,'county_id'); ?>
 	</div>
 
 	<div class="row buttons">

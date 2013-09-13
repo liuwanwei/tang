@@ -19,6 +19,17 @@ class AreaController extends Controller
 		);
 	}
 
+	private function counties(){
+		$dataProvider = new CActiveDataProvider('County');
+		$data = $dataProvider->getData();
+		$counties = array();
+		foreach ($data as $key => $value) {
+			$counties[$value->id] = $value->name;
+		}
+
+		return $counties;
+	}
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -76,6 +87,7 @@ class AreaController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'counties' =>$this->counties(),
 		));
 	}
 
@@ -100,6 +112,7 @@ class AreaController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'counties'=>$this->counties(),
 		));
 	}
 

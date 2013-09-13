@@ -36,11 +36,11 @@ class Area extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('county', 'numerical', 'integerOnly'=>true),
+			array('county_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, county', 'safe', 'on'=>'search'),
+			array('id, name, county_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +52,7 @@ class Area extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'county' => array(self::BELONGS_TO, 'County', 'county_id'),
 		);
 	}
 
@@ -63,7 +64,7 @@ class Area extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'county' => 'County',
+			'county_id' => 'County',
 		);
 	}
 
@@ -80,7 +81,7 @@ class Area extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('county',$this->county);
+		$criteria->compare('county_id',$this->county_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
