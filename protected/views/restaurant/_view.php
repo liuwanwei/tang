@@ -5,16 +5,38 @@
 
 <div class="view">
 	<div class="restaurant-profile">
-		<?php echo CHtml::image('images/default_profile.jpg'); ?>
+		<?php 
+		if (! empty($data->image_url)) {
+			echo CHtml::image(Yii::app()->baseUrl.$data->image_url, $data->name,array("width"=>75, 'height'=>75));
+		}else{
+			echo CHtml::image('images/default_profile.jpg'); 
+		}
+		?>
 	</div>
 	<div class="restaurant-detail">
+		<!--
 		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
 		<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 		<br />
+		-->
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-		<?php echo CHtml::encode($data->name); ?>
+		<b>
+		<?php echo CHtml::link(CHtml::encode($data->name), array('view', 'id'=>$data->id)); ?></b>
 		<br />
+
+		<b><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</b>
+		<?php echo CHtml::encode($data->address); ?>
+		<br />
+
+		<!--
+		<b><?php echo CHtml::encode($data->getAttributeLabel('county_id')); ?>:</b>
+		<?php echo CHtml::encode($data->county['name']); ?>
+		<br />
+
+		<b><?php echo CHtml::encode($data->getAttributeLabel('area_id')); ?>:</b>
+		<?php echo CHtml::encode($data->area['name']); ?>
+		<br />
+		-->
 
 		<b><?php echo CHtml::encode($data->getAttributeLabel('phone')); ?>:</b>
 		<?php echo CHtml::encode($data->phone); ?>
@@ -24,27 +46,15 @@
 		<?php echo CHtml::encode($data->business_hour); ?>
 		<br />
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</b>
-		<?php echo CHtml::encode($data->address); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('county_id')); ?>:</b>
-		<?php echo CHtml::encode($data->county['name']); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('area_id')); ?>:</b>
-		<?php echo CHtml::encode($data->area['name']); ?>
-		<br />
-
 		<b><?php echo CHtml::encode($data->getAttributeLabel('is_shutdown')); ?>:</b>
 		<?php echo CHtml::encode($data->status['name']); ?>
 		<br />
 
-		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('image_url')); ?>:</b>
 		<?php echo CHtml::encode($data->image_url); ?>
 		<br />
 
+		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('latitude')); ?>:</b>
 		<?php echo CHtml::encode($data->latitude); ?>
 		<br />

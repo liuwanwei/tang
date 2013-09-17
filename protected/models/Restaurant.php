@@ -51,6 +51,7 @@ class Restaurant extends CActiveRecord
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
 			array('image_url, description', 'length', 'max'=>256),
+			array('image_url', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, phone, business_hour, address, county_id, area_id, is_shutdown, image_url, latitude, longitude, description', 'safe', 'on'=>'search'),
@@ -78,17 +79,20 @@ class Restaurant extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'phone' => 'Phone',
-			'business_hour' => 'Business Hour',
-			'address' => 'Address',
-			'county_id' => 'County',
-			'area_id' => 'Area',
-			'is_shutdown' => 'Status',
-			'image_url' => 'Image Url',
-			'latitude' => 'Latitude',
-			'longitude' => 'Longitude',
-			'description' => 'Description',
+			'name' => '店名',
+			'phone' => '电话',
+			'business_hour' => '营业时间',
+			'address' => '地址',
+			'county_id' => '区域',
+			'area_id' => '位置',
+			'is_shutdown' => '状态',
+			'status.name' => '服务状态',
+			'county.name'	=> '区域',
+			'area.name' => '商圈',
+			'image_url' => '店面图片',
+			'latitude' => '经度',
+			'longitude' => '纬度',
+			'description' => '描述',
 		);
 	}
 

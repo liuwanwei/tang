@@ -83,6 +83,10 @@ class RestaurantController extends Controller
 		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses);
 	}
 
+	private function urlImagePath($model, $extension){
+		return '/images/restaurant/profile_'.$model->id.'.'.$extension;
+	}
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -97,7 +101,12 @@ class RestaurantController extends Controller
 		if(isset($_POST['Restaurant']))
 		{
 			$model->attributes=$_POST['Restaurant'];
+			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
+			$extension = $uploadedFile->getExtensionName();
+			$filename = $this->urlImagePath($model, $extension);
+			$model->image_url = $filename;
 			if($model->save())
+				$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
@@ -123,7 +132,19 @@ class RestaurantController extends Controller
 		if(isset($_POST['Restaurant']))
 		{
 			$model->attributes=$_POST['Restaurant'];
+
+			$filename = '';
+			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
+			if (!empty($uploadedFile)) {
+				$extension = $uploadedFile->getExtensionName();				
+				$filename = $this->urlImagePath($model, $extension);
+				$model->image_url = $filename;
+			}
+			
 			if($model->save())
+				if (!empty($uploadedFile)) {
+					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
+				}
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
@@ -148,13 +169,61 @@ class RestaurantController extends Controller
 	}
 
 	/**
+	* 获取包含所有行政区的菜单。菜单的格式要符合zii::widgets::CMenu::items的形式要求。
+	*/
+	private function countyMenu(){
+		$selectors = $this->staticSelectors();
+		$counties = $selectors['counties'];
+
+		$menuItems = array();
+		foreach ($counties as $key => $value) {
+			// var_dump($value);
+			$menuItems[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
+		}
+
+		return $menuItems;
+	}
+
+	private function areaMenu($countyId){
+		$dataProvider = new CActiveDataProvider('Area');
+
+		if ($countyId !== 0) {
+			$criteria = new CDbCriteria();
+			$criteria->compare('county_id', $countyId);
+			$dataProvider->criteria = $criteria;
+		}
+
+		$data = $dataProvider->getData();
+		$menuItems = array();
+		foreach ($data as $key => $value) {
+			$menuItems[] = array('label' => $value->name, 'url' => array('/restaurant/index&county='.$countyId.'&area='.$value->id));
+		}
+
+		return $menuItems;
+	}
+
+	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($county = 0, $area = 0)
 	{
 		$dataProvider=new CActiveDataProvider('Restaurant');
+
+		$criteria = new CDbCriteria();
+		if ($county !== 0) {
+			$criteria->compare('county_id', $county);
+		}
+
+		if ($area !== 0) {
+			$criteria->compare('area_id', $area);
+		}
+
+		$dataProvider->criteria = $criteria;
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider'=>$dataProvider, 
+			'countyMenu'=>$this->countyMenu(),
+			'areaMenu'=>$this->areaMenu($county),
 		));
 	}
 

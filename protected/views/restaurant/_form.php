@@ -8,6 +8,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'restaurant-form',
+	'htmlOptions' => array('enctype'=>'multipart/form-data'),
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -66,11 +67,19 @@
 		<?php echo $form->error($model,'is_shutdown'); ?>
 	</div>
 
+	<!-- 图像文件上传框 -->
 	<div class="row">
 		<?php echo $form->labelEx($model,'image_url'); ?>
-		<?php echo $form->textField($model,'image_url',array('size'=>60,'maxlength'=>256)); ?>
+		<?php echo CHtml::activeFileField($model, 'image_url'); ?>
 		<?php echo $form->error($model,'image_url'); ?>
 	</div>
+
+	<!-- 已有图像显示框 -->
+	<?php if($model->isNewRecord!='1'){ ?>
+	<div class="row">
+		<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
+	</div>
+	<?php } ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'latitude'); ?>

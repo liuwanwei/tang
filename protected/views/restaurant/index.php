@@ -12,6 +12,14 @@ $this->menu=array(
 );
 ?>
 
+<div id="county-menu">
+	<?php $this->widget('zii.widgets.CMenu',array('items'=>$countyMenu)); ?>
+</div><!-- countymenu -->
+
+<div id="area-menu">
+	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
+</div><!-- area-menu -->
+
 <h1>汤馆列表</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
