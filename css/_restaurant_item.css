@@ -10,3 +10,19 @@
 	float: right;
 	width: 85%;
 }
+
+#county-menu li, #area-menu li{
+	display: inline-table;
+	width: 100px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	background:#B7D6E7;
+}
+
+#county-menu li a, #area-menu li a{
+	padding: 5px 8px;
+	margin:0;
+	text-decoration: none;
+	color:#298dcd;
+}

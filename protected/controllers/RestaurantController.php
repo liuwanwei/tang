@@ -142,6 +142,7 @@ class RestaurantController extends Controller
 			}
 			
 			if($model->save())
+
 				if (!empty($uploadedFile)) {
 					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
@@ -186,6 +187,10 @@ class RestaurantController extends Controller
 
 	private function areaMenu($countyId){
 		$dataProvider = new CActiveDataProvider('Area');
+
+		if ($countyId === 0) {
+			return null;
+		}
 
 		if ($countyId !== 0) {
 			$criteria = new CDbCriteria();

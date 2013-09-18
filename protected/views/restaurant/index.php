@@ -16,9 +16,11 @@ $this->menu=array(
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$countyMenu)); ?>
 </div><!-- countymenu -->
 
+<?php if (! empty($areaMenu)) { ?>
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
 </div><!-- area-menu -->
+<?php } ?>
 
 <h1>汤馆列表</h1>
 
