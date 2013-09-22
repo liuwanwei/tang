@@ -8,7 +8,7 @@ class VoteController extends Controller
 		$records = $dataProvider->getData();
 		$totalPoints = 0;
 		foreach ($records as $key => $value) {
-			$totalPoints += $value->averagePoints;
+			$totalPoints += $value->average_points;
 		}
 
 		$totalAveragePoints = $totalPoints / count($records);
@@ -17,7 +17,7 @@ class VoteController extends Controller
 		$ranks = array();
 		$minVotes = 10;
 		foreach ($records as $key => $value) {
-			$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->averagePoints + 
+			$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->average_points + 
 						($minVotes  / ($value->votes + $minVotes)) * $totalAveragePoints;
 			$value->weighted_points = $weightedPoints;
 			$value->save();
@@ -69,7 +69,8 @@ class VoteController extends Controller
 		    	// 保存本次投票记录。
 		        	$model->save();
 
-		        	$this->redirect(array('restaurant', 'index'));
+		        	// 重定向到餐厅列表。
+		        	$this->redirect(array('restaurant/index'));
 
 		        	return;
 		    }
