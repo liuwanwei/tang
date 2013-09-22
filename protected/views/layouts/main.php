@@ -27,8 +27,14 @@
 
 <div class="container" id="page">
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+	<div id="header" style="height: 41px">
+		<div class="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<?php if(Yii::app()->user->isGuest) {
+				$this->widget('ext.oauthLogin.OauthLogin',array(
+           			'itemView'=>'medium_login', //效果样式
+					'back_url'=>Yii::app()->request->url,
+ 				));
+		}?>
 	</div><!-- header -->
 
 	<div id="mainmenu">
@@ -39,7 +45,7 @@
 				array('label'=>'区域', 'url'=>array('/area/index')),
 				array('label'=>'状态', 'url'=>array('/restaurantstatus/index')),
 				array('label'=>'gii',    'url'=>array('/gii/')),
-				array('label'=>'登录', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+// 				array('label'=>'登陆', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
@@ -61,6 +67,10 @@
 	</div><!-- footer -->
 	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>
 </div><!-- page -->
+
+<script type="text/javascript">
+		$('.social-login-sina-weibo').click(function(){var url=$(this).attr('href');location.href=url;});
+</script>
 
 </body>
 </html>
