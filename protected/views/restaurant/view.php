@@ -30,8 +30,8 @@ $this->menu=array(
 		'area.name',
 		'status.name',
 		'image_url',
-		'latitude',
-		'longitude',
-		'description',
+		'weighted_points',
+		'votes',
+		'average_points',
 	),
 )); ?>

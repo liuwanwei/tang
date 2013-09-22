@@ -144,7 +144,9 @@ class RestaurantController extends Controller
 			if($model->save())
 
 				if (!empty($uploadedFile)) {
-					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
+					$destPath = Yii::app()->basePath.'/..'.$filename;
+					// print_r($destPath);
+					$uploadedFile->saveAs($destPath);
 				}
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -212,9 +214,14 @@ class RestaurantController extends Controller
 	 */
 	public function actionIndex($county = 0, $area = 0)
 	{
+		// $rankFilePath = Yii::app()->basePath . "/../ranks.db";
+		// $ranks = unserialize($rankFilePath);
+
 		$dataProvider=new CActiveDataProvider('Restaurant');
 
 		$criteria = new CDbCriteria();
+		$criteria->order = 'weighted_points DESC';
+
 		if ($county !== 0) {
 			$criteria->compare('county_id', $county);
 		}

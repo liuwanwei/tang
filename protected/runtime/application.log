@@ -2956,3 +2956,96 @@ REQUEST_URI=/tang/index.php
 in /Users/liuwanwei/www/tang/protected/views/restaurant/index.php (20)
 in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (232)
 in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 11:23:50 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /Users/liuwanwei/www/yii/framework/web/CController.php:336
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /Users/liuwanwei/www/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /Users/liuwanwei/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /Users/liuwanwei/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /Users/liuwanwei/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /Users/liuwanwei/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /Users/liuwanwei/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#7 /Users/liuwanwei/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): CController->run('create')
+#9 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('rating/create')
+#10 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#11 /Users/liuwanwei/www/tang/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/tang/index.php?r=rating/create
+---
+2013/09/22 11:24:10 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /Users/liuwanwei/www/yii/framework/web/CController.php:336
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /Users/liuwanwei/www/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /Users/liuwanwei/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /Users/liuwanwei/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /Users/liuwanwei/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /Users/liuwanwei/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /Users/liuwanwei/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#7 /Users/liuwanwei/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): CController->run('create')
+#9 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('rating/create')
+#10 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#11 /Users/liuwanwei/www/tang/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/tang/index.php?r=rating/create
+---
+2013/09/22 11:24:20 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /Users/liuwanwei/www/yii/framework/web/CController.php:336
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /Users/liuwanwei/www/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /Users/liuwanwei/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /Users/liuwanwei/www/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 /Users/liuwanwei/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 /Users/liuwanwei/www/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 /Users/liuwanwei/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#7 /Users/liuwanwei/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): CController->run('create')
+#9 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('rating/create')
+#10 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#11 /Users/liuwanwei/www/tang/index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/tang/index.php?r=rating/create
+---
+2013/09/22 16:00:49 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:00:49 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:01:13 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:01:13 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:02:53 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:02:53 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:05:59 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:05:59 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:06:50 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:06:50 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:43:43 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:43:43 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:45:00 [warning] [application] Failed to set unsafe attribute "id" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 16:45:00 [warning] [application] Failed to set unsafe attribute "image_url" of "Restaurant".
+in /Users/liuwanwei/www/tang/protected/controllers/RestaurantController.php (134)
+in /Users/liuwanwei/www/tang/index.php (13)

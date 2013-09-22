@@ -82,15 +82,21 @@
 	<?php } ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'latitude'); ?>
-		<?php echo $form->textField($model,'latitude'); ?>
-		<?php echo $form->error($model,'latitude'); ?>
+		<?php echo $form->labelEx($model,'weighted_points'); ?>
+		<?php echo $form->textField($model,'weighted_points'); ?>
+		<?php echo $form->error($model,'weighted_points'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'longitude'); ?>
-		<?php echo $form->textField($model,'longitude'); ?>
-		<?php echo $form->error($model,'longitude'); ?>
+		<?php echo $form->labelEx($model,'votes'); ?>
+		<?php echo $form->textField($model,'votes'); ?>
+		<?php echo $form->error($model,'votes'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'average_points'); ?>
+		<?php echo $form->textField($model,'average_points'); ?>
+		<?php echo $form->error($model,'average_points'); ?>
 	</div>
 
 	<div class="row">

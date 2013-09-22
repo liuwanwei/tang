@@ -16,6 +16,9 @@
  * @property double $latitude
  * @property double $longitude
  * @property string $description
+ * @property integer $votes
+ * @property double $average_points
+ * @property double $weighted_points
  */
 class Restaurant extends CActiveRecord
 {
@@ -46,8 +49,8 @@ class Restaurant extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, address', 'required'),
-			array('county_id, area_id, is_shutdown', 'numerical', 'integerOnly'=>true),
-			array('latitude, longitude', 'numerical'),
+			array('county_id, area_id, is_shutdown, votes', 'numerical', 'integerOnly'=>true),
+			array('latitude, longitude, average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
 			array('image_url, description', 'length', 'max'=>256),
@@ -93,6 +96,9 @@ class Restaurant extends CActiveRecord
 			'latitude' => '经度',
 			'longitude' => '纬度',
 			'description' => '描述',
+			'votes' => '投票数',
+			'average_points' => '平均得分',
+			'weighted_points' => '排名权重',
 		);
 	}
 
@@ -119,6 +125,10 @@ class Restaurant extends CActiveRecord
 		$criteria->compare('latitude',$this->latitude);
 		$criteria->compare('longitude',$this->longitude);
 		$criteria->compare('description',$this->description,true);
+		$criteria->compare('votes',$this->votes);
+		$criteria->compare('average_points',$this->average_points);
+		$criteria->compare('weighted_points',$this->weighted_points);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
