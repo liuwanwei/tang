@@ -44,6 +44,7 @@
 				array('label'=>'县区', 'url'=>array('/county/index', 'view'=>'about')),
 				array('label'=>'区域', 'url'=>array('/area/index')),
 				array('label'=>'状态', 'url'=>array('/restaurantstatus/index')),
+				array('label'=>'评分测试', 'url'=>array('/vote/create')),
 				array('label'=>'gii',    'url'=>array('/gii/')),
 // 				array('label'=>'登陆', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

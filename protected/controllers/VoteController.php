@@ -34,16 +34,19 @@ class VoteController extends Controller
 		$restaurantId = $voteAttributes['restaurant_id'];
 		$rating = $voteAttributes['rating'];
 
-		$restaurant = new Restaurant($restaurantId);
-		$oldVotes = $restaurant['votes'];
-		$oldAveragePoints = $restaurant['average_points'];
+		$restaurant = Restaurant::model()->findByPk($restaurantId);
+
+		$oldVotes = $restaurant->votes;
+		$oldAveragePoints = $restaurant->average_points;
 
 		$averagePoints = ($oldVotes * $oldAveragePoints + $rating ) / ($oldVotes + 1);
 
 		$restaurant->votes = $oldVotes + 1;
 		$restaurant->average_points = $averagePoints;
 
-		$restaurant->save();
+		if(! $restaurant->save()){
+			die('save restaurant record faild: '.$restaurant->getErrors());
+		}
 	}
 
 	public function actionIndex()

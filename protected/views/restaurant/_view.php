@@ -50,19 +50,17 @@
 		<?php echo CHtml::encode($data->status['name']); ?>
 		<br />
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('image_url')); ?>:</b>
-		<?php echo CHtml::encode($data->image_url); ?>
+		<b><?php echo CHtml::encode($data->getAttributeLabel('votes')); ?>:</b>
+		<?php echo CHtml::encode($data->votes); ?>
+		
+		<b><?php echo CHtml::encode($data->getAttributeLabel('average_points')); ?>:</b>
+		<?php echo CHtml::encode($data->average_points); ?>
+
+		<b><?php echo CHtml::encode($data->getAttributeLabel('weighted_points')); ?>:</b>
+		<?php echo CHtml::encode($data->weighted_points); ?>
 		<br />
 
 		<?php /*
-		<b><?php echo CHtml::encode($data->getAttributeLabel('latitude')); ?>:</b>
-		<?php echo CHtml::encode($data->latitude); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('longitude')); ?>:</b>
-		<?php echo CHtml::encode($data->longitude); ?>
-		<br />
-
 		<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 		<?php echo CHtml::encode($data->description); ?>
 		<br />
