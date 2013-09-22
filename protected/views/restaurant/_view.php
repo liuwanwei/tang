@@ -21,7 +21,7 @@
 		-->
 
 		<b>
-		<?php echo CHtml::link(CHtml::encode($data->name), array('view', 'id'=>$data->id)); ?></b>
+		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id)); ?></b>
 		<br />
 
 		<b><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</b>
