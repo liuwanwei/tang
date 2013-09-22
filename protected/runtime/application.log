@@ -3192,3 +3192,46 @@ REQUEST_URI=/index.php?r=vote/create
 in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (53)
 in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (84)
 in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 22:42:28 [error] [exception.CException] exception 'CException' with message 'Property "Vote.oldRating" is not defined.' in /Users/liuwanwei/www/yii/framework/base/CComponent.php:173
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/db/ar/CActiveRecord.php(159): CComponent->__set('oldRating', '2')
+#1 /Users/liuwanwei/www/tang/protected/controllers/VoteController.php(63): CActiveRecord->__set('oldRating', '2')
+#2 /Users/liuwanwei/www/tang/protected/controllers/VoteController.php(88): VoteController->saveVoteRecord(Object(Vote))
+#3 /Users/liuwanwei/www/yii/framework/web/actions/CInlineAction.php(49): VoteController->actionCreate()
+#4 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /Users/liuwanwei/www/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#6 /Users/liuwanwei/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): CController->run('create')
+#8 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('vote/create')
+#9 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /Users/liuwanwei/www/tang/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/index.php?r=vote/create
+HTTP_REFERER=http://localhost/index.php?r=vote/create
+---
+2013/09/22 22:43:03 [error] [php] Object of class Vote could not be converted to string (/Users/liuwanwei/www/tang/protected/controllers/VoteController.php:36)
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Users/liuwanwei/www/yii/framework/web/CController.php(286): VoteController->runAction()
+#2 /Users/liuwanwei/www/yii/framework/web/CController.php(265): VoteController->runActionWithFilters()
+#3 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): VoteController->run()
+#4 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (36)
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (91)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 22:45:51 [error] [php] Division by zero (/Users/liuwanwei/www/tang/protected/controllers/VoteController.php:45)
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Users/liuwanwei/www/yii/framework/web/CController.php(286): VoteController->runAction()
+#2 /Users/liuwanwei/www/yii/framework/web/CController.php(265): VoteController->runActionWithFilters()
+#3 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): VoteController->run()
+#4 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (45)
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (91)
+in /Users/liuwanwei/www/tang/index.php (13)

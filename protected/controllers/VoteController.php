@@ -31,17 +31,22 @@ class VoteController extends Controller
 
 	// 更新餐厅记录，由此引发餐厅排名的重新计算。
 	private function updateRestaurant($model){
-		$restaurantId = $model->restaurant_id;
 		$rating = $model->rating;
 
-		$restaurant = Restaurant::model()->findByPk($restaurantId);
+		$restaurant = Restaurant::model()->findByPk($model->restaurant_id);
 
 		$oldVotes = $restaurant->votes;
 		$oldAveragePoints = $restaurant->average_points;
 
-		$averagePoints = ($oldVotes * $oldAveragePoints + $rating ) / ($oldVotes + 1);
-
-		$restaurant->votes = $oldVotes + 1;
+		if (empty($model->oldRating)) {
+			// 新的投票。
+			$averagePoints = ($oldVotes * $oldAveragePoints + $model->rating ) / ($oldVotes + 1);
+			$restaurant->votes = $oldVotes + 1;
+		}else{
+			// 更新旧投票。
+			$averagePoints = ($oldVotes * $oldAveragePoints - $model->oldRating + $model->rating) / $oldVotes;
+		}
+		
 		$restaurant->average_points = $averagePoints;
 
 		if(! $restaurant->save()){
@@ -57,6 +62,7 @@ class VoteController extends Controller
 		$oldModel = $model->find($criteria);
 
 		if ($oldModel != null) {
+			$oldModel->oldRating = $oldModel->rating;
 			$oldModel->rating = $model->attributes['rating'];
 			$oldModel->save();
 			return $oldModel;
