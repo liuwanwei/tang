@@ -3137,3 +3137,58 @@ Stack trace:
 REQUEST_URI=/index.php?r=vote/restaurant&0=index
 HTTP_REFERER=http://localhost/index.php?r=vote/create
 ---
+2013/09/22 22:11:03 [error] [php] Trying to get property of non-object (/Users/liuwanwei/www/tang/protected/controllers/VoteController.php:54)
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Users/liuwanwei/www/yii/framework/web/CController.php(286): VoteController->runAction()
+#2 /Users/liuwanwei/www/yii/framework/web/CController.php(265): VoteController->runActionWithFilters()
+#3 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): VoteController->run()
+#4 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (54)
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (87)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 22:12:17 [error] [php] Trying to get property of non-object (/Users/liuwanwei/www/tang/protected/controllers/VoteController.php:54)
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Users/liuwanwei/www/yii/framework/web/CController.php(286): VoteController->runAction()
+#2 /Users/liuwanwei/www/yii/framework/web/CController.php(265): VoteController->runActionWithFilters()
+#3 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): VoteController->run()
+#4 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (54)
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (87)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 22:22:20 [error] [php] Undefined variable: oldRecord (/Users/liuwanwei/www/tang/protected/controllers/VoteController.php:61)
+Stack trace:
+#0 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /Users/liuwanwei/www/yii/framework/web/CController.php(286): VoteController->runAction()
+#2 /Users/liuwanwei/www/yii/framework/web/CController.php(265): VoteController->runActionWithFilters()
+#3 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): VoteController->run()
+#4 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#6 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (61)
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (92)
+in /Users/liuwanwei/www/tang/index.php (13)
+2013/09/22 22:33:00 [error] [php] include(CDBCriteria.php): failed to open stream: No such file or directory (/Users/liuwanwei/www/yii/framework/YiiBase.php:421)
+Stack trace:
+#0 /Users/liuwanwei/www/tang/protected/controllers/VoteController.php(53): spl_autoload_call()
+#1 /Users/liuwanwei/www/tang/protected/controllers/VoteController.php(84): VoteController->saveVoteRecord()
+#2 /Users/liuwanwei/www/yii/framework/web/actions/CInlineAction.php(49): VoteController->actionCreate()
+#3 /Users/liuwanwei/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/liuwanwei/www/yii/framework/web/CController.php(286): VoteController->runAction()
+#5 /Users/liuwanwei/www/yii/framework/web/CController.php(265): VoteController->runActionWithFilters()
+#6 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(282): VoteController->run()
+#7 /Users/liuwanwei/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /Users/liuwanwei/www/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#9 /Users/liuwanwei/www/tang/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (53)
+in /Users/liuwanwei/www/tang/protected/controllers/VoteController.php (84)
+in /Users/liuwanwei/www/tang/index.php (13)

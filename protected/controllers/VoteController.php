@@ -30,9 +30,9 @@ class VoteController extends Controller
 
 
 	// 更新餐厅记录，由此引发餐厅排名的重新计算。
-	private function updateRestaurant($voteAttributes){
-		$restaurantId = $voteAttributes['restaurant_id'];
-		$rating = $voteAttributes['rating'];
+	private function updateRestaurant($model){
+		$restaurantId = $model->restaurant_id;
+		$rating = $model->rating;
 
 		$restaurant = Restaurant::model()->findByPk($restaurantId);
 
@@ -46,6 +46,23 @@ class VoteController extends Controller
 
 		if(! $restaurant->save()){
 			die('save restaurant record faild: '.$restaurant->getErrors());
+		}
+	}
+
+	private function saveVoteRecord($model){
+		$criteria = new CDbCriteria();
+		$criteria->compare('user_id', $model->attributes['user_id']);
+		$criteria->compare('restaurant_id', $model->attributes['restaurant_id']);
+
+		$oldModel = $model->find($criteria);
+
+		if ($oldModel != null) {
+			$oldModel->rating = $model->attributes['rating'];
+			$oldModel->save();
+			return $oldModel;
+		}else{
+			$model->save();
+			return $model;
 		}
 	}
 
@@ -63,14 +80,14 @@ class VoteController extends Controller
 		    $model->attributes=$_POST['Vote'];
 		    if($model->validate())
 		    {
+		    	// 保存本次投票记录。
+		    	$model = $this->saveVoteRecord($model);
+
 		    	// 更新餐厅记录。
-		    	$this->updateRestaurant($model->attributes);
+		    	$this->updateRestaurant($model);
 
 		    	// 更新所有记录，包括餐厅排序。
 		    	$this->calculateRank();
-		    
-		    	// 保存本次投票记录。
-		        	$model->save();
 
 		        	// 重定向到餐厅列表。
 		        	$this->redirect(array('restaurant/index'));
