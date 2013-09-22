@@ -4,5 +4,5 @@
  */
 define( "WB_AKEY" , '2989285180' );
 define( "WB_SKEY" , '8e43950fd0c3fd5fefe5c7ebbd7dcc93' );
-define( "WB_CALLBACK_URL" , 'http://localhost/php/tang/index.php?r=site/wbLogin');
+define( "WB_CALLBACK_URL" , 'http://www.hetangla.com/index.php?r=site/wbLogin');
 
