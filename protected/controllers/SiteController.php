@@ -106,4 +106,51 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+	public function actionWbLogin()
+	{
+		if(isset($_REQUEST['state'])==Yii::app()->session['sina_state']){
+			if(isset($_REQUEST['code'])){
+				Yii::import('ext.oauthLogin.sina.sinaWeibo',true);
+				$keys = array();
+				$keys['code'] = $_REQUEST['code'];
+				$keys['redirect_uri'] = WB_CALLBACK_URL;
+				try {
+					$weibo = new SaeTOAuthV2(WB_AKEY,WB_SKEY);
+					$sinaToken = $weibo->getAccessToken('code',$keys);
+				} catch (CHttpException $e) {
+	
+				}
+				//获取认证
+				if (isset($sinaToken)) {
+					Yii::app()->session->add('sinaToken',$sinaToken);
+					//查询微博的账号信息
+					$c = new SaeTClientV2( WB_AKEY , WB_SKEY ,Yii::app()->session['sinaToken']['access_token']);
+					$userShow  = $c->getUserShow(Yii::app()->session['sinaToken']); // done
+					//查询是否有绑定账号
+					$user = User::model()->find('extension_user_id = :user_id',array(':user_id' =>Yii::app()->session['sinaToken']['uid']));
+					//如果没有存在则创建账号及绑定
+					if (!isset($user)){
+						$user = new User;
+	
+						$user->extension_user_id = Yii::app()->session['sinaToken']['uid'];
+						$user->nick_name = $userShow['screen_name'];
+						$user->image_url = $userShow['profile_image_url'];
+						$user->role	= 0;
+						$user->source = 1;
+	
+						$user->save();
+					}
+	
+					Yii::app()->user->id = $user->id;
+					Yii::app()->user->name = $user->nick_name;
+						
+					$this->redirect(Yii::app()->session['back_url']);
+				}  else {
+					echo '认证失败';
+				}
+			}
+		}
+	}
+	
 }
