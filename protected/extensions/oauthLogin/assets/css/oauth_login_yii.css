@@ -1,0 +1,62 @@
+.auth-login-yii{
+	padding: 5px;
+}
+
+.auth-big-yii{
+    text-decoration: none;
+	display: inline-block;
+	margin-right: 10px;
+	border: 1px solid #CCC;
+	border-bottom-color: #BBB;
+	padding: 10px;
+	background-color: white;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+	font-size: 14px;
+	line-height: 1;
+	color: #666;
+}
+
+.auth-medium-yii{
+	text-decoration: none;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 14px;
+	line-height: 1;
+	color: #666;
+}
+
+.auth-small-yii{
+    margin-right: 10px;
+}
+
+.auth-login-yii img {
+	border: none;
+}
+
+.social-login-sina-weibo {
+	height: 40px;	
+	cursor: pointer;
+	background-color: #d34d4c;
+	width:270px;
+	float:right;
+}
+
+.social-login-icon {
+	padding: 8px;
+	background-color: #c54443;
+	line-height: 2em;
+	font-size: 20px;
+}
+
+.social-login-text {
+	color: white;
+	padding: 10px;
+	font-size: 14px;
+}
+
+a {
+	color: #0088cc;
+	text-decoration: none;
+}
