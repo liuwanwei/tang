@@ -5,7 +5,13 @@
 
 <div class="feed-item folding feed-item-hook feed-item-a first-combine combine navigable-focusin">	
 	<div class="avatar">
-		<img src=<?php echo CHtml::encode($data->user->image_url)?>>
+		<?php 
+			if (! empty($data->user->image_url)) {
+				echo CHtml::image($data->user->image_url);
+			}else{
+				echo CHtml::image('images/male.png'); 
+			}	
+		?>
 	</div>
 
 	<div class="feed-main">
