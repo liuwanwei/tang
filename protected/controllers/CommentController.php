@@ -1,7 +1,7 @@
 	<?php
 
 class CommentController extends Controller
-{
+{	
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -74,9 +74,9 @@ class CommentController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-// 		$this->render('create',array(
-// 			'model'=>$model,
-// 		));
+		$this->render('create',array(
+			'model'=>$model,
+		));
 	}
 
 	/**
@@ -135,16 +135,17 @@ class CommentController extends Controller
 				'condition'=>'restaurant_id='.$restaurant_id,
 				'order'=>'create_datetime DESC',
 		));
-		
 		$dataProvider=new CActiveDataProvider('Comment',array(
 			'criteria'=>$criteria,
 		));
-		
 		$dataProvider->pagination->pageSize = $dataProvider->totalItemCount;
 		
+		$restaurant = Restaurant::model()->findByPk($restaurant_id);
+		 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			'model'=>$model,
+			'restaurant'=>$restaurant,
 		));
 	}
 
