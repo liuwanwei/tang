@@ -16,34 +16,16 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<!-- <div class="row">
 		<?php echo $form->labelEx($model,'id'); ?>
 		<?php echo $form->textField($model,'id'); ?>
 		<?php echo $form->error($model,'id'); ?>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'phone'); ?>
-		<?php echo $form->textField($model,'phone',array('size'=>60,'maxlength'=>64)); ?>
-		<?php echo $form->error($model,'phone'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'business_hour'); ?>
-		<?php echo $form->textField($model,'business_hour',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'business_hour'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'address'); ?>
-		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'address'); ?>
 	</div>
 
 	<div class="row">
@@ -58,6 +40,24 @@
 		<!--<?php echo $form->textField($model,'area_id'); ?>-->
 		<?php echo $form->dropDownList($model, 'area_id', $selectors['areas']); ?>
 		<?php echo $form->error($model,'area_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'address'); ?>
+		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'address'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'phone'); ?>
+		<?php echo $form->textField($model,'phone',array('size'=>60,'maxlength'=>64)); ?>
+		<?php echo $form->error($model,'phone'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'business_hour'); ?>
+		<?php echo $form->textField($model,'business_hour',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'business_hour'); ?>
 	</div>
 
 	<div class="row">
@@ -80,7 +80,7 @@
 		<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
 	</div>
 	<?php } ?>
-
+<!-- 
 	<div class="row">
 		<?php echo $form->labelEx($model,'weighted_points'); ?>
 		<?php echo $form->textField($model,'weighted_points'); ?>
@@ -97,7 +97,7 @@
 		<?php echo $form->labelEx($model,'average_points'); ?>
 		<?php echo $form->textField($model,'average_points'); ?>
 		<?php echo $form->error($model,'average_points'); ?>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>

@@ -4,7 +4,7 @@
 ?>
 
 <div class="view">
-	<div class="restaurant-profile">
+<!-- 	<div class="restaurant-profile">
 		<?php 
 		if (! empty($data->image_url)) {
 			echo CHtml::image(Yii::app()->baseUrl.$data->image_url, $data->name,array("width"=>75, 'height'=>75));
@@ -12,7 +12,7 @@
 			echo CHtml::image('images/default_profile.jpg'); 
 		}
 		?>
-	</div>
+	</div> -->
 	<div class="restaurant-detail">
 		<!--
 		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
