@@ -109,7 +109,7 @@ class SiteController extends Controller
 	
 	public function actionWbLogin()
 	{
-		if(isset($_REQUEST['state'])==Yii::app()->session['sina_state']){
+		if(isset($_REQUEST['state']) && $_REQUEST['state'] == Yii::app()->session['sina_state']){
 			if(isset($_REQUEST['code'])){
 				Yii::import('ext.oauthLogin.sina.sinaWeibo',true);
 				$keys = array();
