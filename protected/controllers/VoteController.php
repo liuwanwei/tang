@@ -2,8 +2,19 @@
 
 class VoteController extends Controller
 {
-	private function calculateRank(){
+	private $_get_new_vote_key 	= 'get_new_vote';
+	private $_new_vote_exist 	= '1';
+	private $_new_vote_not_exist 	= '0';
+
+
+	public function actionCalculateRank(){
 		// 计算所有店铺平均分的算术平均值。
+
+		$model = Setting::model()->findByPk($this->_get_new_vote_key);
+		if ($model->value === $this->_new_vote_not_exist) {
+			die('Data not changed yet!');
+		}
+
 		$dataProvider = new CActiveDataProvider('Restaurant');
 		$records = $dataProvider->getData();
 		$totalPoints = 0;
@@ -23,9 +34,11 @@ class VoteController extends Controller
 			$value->save();
 		}
 
-		// 保存所有店铺权重得分结果。
-		// $rankFilePath = Yii::app()->basePath . '/../ranks.db';
-		// file_put_contents($rankFilePath, $ranks);
+
+		$model->value = $this->_new_vote_not_exist;
+		$model->save();
+
+		die('Update rank success!');
 	}
 
 
@@ -51,6 +64,10 @@ class VoteController extends Controller
 
 		if(! $restaurant->save()){
 			die('save restaurant record faild: '.$restaurant->getErrors());
+		}else{
+			$model = Setting::model()->findByPk($this->_get_new_vote_key);
+			$model->value = $this->_new_vote_exist;
+			$model->save();
 		}
 	}
 
@@ -93,7 +110,7 @@ class VoteController extends Controller
 		    	$this->updateRestaurant($model);
 
 		    	// 更新所有记录，包括餐厅排序。
-		    	$this->calculateRank();
+		    	// $this->actionCalculateRank();
 
 		        	// 重定向到餐厅列表。
 		        	$this->redirect(array('restaurant/index'));
