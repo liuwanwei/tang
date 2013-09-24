@@ -95,4 +95,19 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	 * 当前用户是否是管理员
+	 */
+	public static function isAdmin()
+	{
+		$user = User::model()->findByPk(Yii::app()->user->id);
+	
+		if ($user !== null)
+		{
+			return $user->role == 1;
+		}
+	
+		return false;
+	}
 }
