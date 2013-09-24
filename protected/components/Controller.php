@@ -20,4 +20,13 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+	
+	/**
+	 * 判断当前登陆用户是否是管理员
+	 * @return boolean
+	 */
+	protected function isAdmin()
+	{
+		return User::isAdmin();
+	}
 }
