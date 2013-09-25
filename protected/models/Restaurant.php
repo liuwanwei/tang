@@ -134,4 +134,20 @@ class Restaurant extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	/**
+	 * 所有行政县、区数据，用于选择汤馆所在区域。
+	 */
+	public function getCountries()
+	{
+		$dataProvider = new CActiveDataProvider('County');
+		$data = $dataProvider->getData();
+		$counties = array();
+		foreach ($data as $key => $value)
+		{
+			$counties[$value->id] = $value->name;
+		}
+		
+		return $counties;
+	}
 }

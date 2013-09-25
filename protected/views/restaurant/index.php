@@ -12,9 +12,10 @@ $this->menu=array(
 );
 ?>
 
-<div id="county-menu">
-	<?php $this->widget('zii.widgets.CMenu',array('items'=>$countyMenu)); ?>
-</div><!-- countymenu -->
+<!-- <div id="county-menu"> 
+	<?php //$this->widget('zii.widgets.CMenu',array('items'=>$countyMenu)); ?> 
+</div> --> 
+
 
 <?php if (! empty($areaMenu)) { ?>
 <div id="area-menu">

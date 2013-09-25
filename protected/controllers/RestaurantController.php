@@ -208,7 +208,7 @@ class RestaurantController extends Controller
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider, 
-			'countyMenu'=>$this->countyMenu(),
+// 			'countyMenu'=>$this->countyMenu(),
 			'areaMenu'=>$this->areaMenu($county),
 		));
 	}
