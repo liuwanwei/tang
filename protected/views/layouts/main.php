@@ -40,7 +40,7 @@
 	<?php
 		 $menu = array();
 		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
-		 $counties = Restaurant::model()->getCountries();
+		 $counties = County::model()->getCountries(0);
 		 foreach ($counties as $key => $value) 
 		 {
 		 	$menu[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
