@@ -1,6 +1,6 @@
 <?php
 
-class RestaurantStatusController extends Controller
+class SettingController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -16,6 +16,32 @@ class RestaurantStatusController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
 		);
 	}
 
@@ -36,16 +62,16 @@ class RestaurantStatusController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new RestaurantStatus;
+		$model=new Setting;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RestaurantStatus']))
+		if(isset($_POST['Setting']))
 		{
-			$model->attributes=$_POST['RestaurantStatus'];
+			$model->attributes=$_POST['Setting'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->key));
 		}
 
 		$this->render('create',array(
@@ -65,11 +91,11 @@ class RestaurantStatusController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RestaurantStatus']))
+		if(isset($_POST['Setting']))
 		{
-			$model->attributes=$_POST['RestaurantStatus'];
+			$model->attributes=$_POST['Setting'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->key));
 		}
 
 		$this->render('update',array(
@@ -96,7 +122,7 @@ class RestaurantStatusController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('RestaurantStatus');
+		$dataProvider=new CActiveDataProvider('Setting');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -107,10 +133,10 @@ class RestaurantStatusController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new RestaurantStatus('search');
+		$model=new Setting('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['RestaurantStatus']))
-			$model->attributes=$_GET['RestaurantStatus'];
+		if(isset($_GET['Setting']))
+			$model->attributes=$_GET['Setting'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -121,12 +147,12 @@ class RestaurantStatusController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return RestaurantStatus the loaded model
+	 * @return Setting the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=RestaurantStatus::model()->findByPk($id);
+		$model=Setting::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -134,11 +160,11 @@ class RestaurantStatusController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param RestaurantStatus $model the model to be validated
+	 * @param Setting $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='restaurant-status-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='setting-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

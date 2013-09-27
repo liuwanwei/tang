@@ -14,9 +14,6 @@ $this->menu=array(
 ?>
 
 <div class="county-menu-title"><span>区域</span></div>
-<div id="county-menu">
-	<?php $this->widget('zii.widgets.CMenu',array('items'=>$countyMenu)); ?>
-</div><!-- countymenu -->
 
 <?php if (! empty($areaMenu)) { ?>
 <div id="area-menu">

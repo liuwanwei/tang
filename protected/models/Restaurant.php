@@ -48,7 +48,7 @@ class Restaurant extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, address， county_id, area_id', 'required'),
+			array('name, address, county_id, area_id', 'required'),
 			array('county_id, area_id, is_shutdown, votes', 'numerical', 'integerOnly'=>true),
 			array('latitude, longitude, average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
@@ -72,6 +72,7 @@ class Restaurant extends CActiveRecord
 			'county' => array(self::BELONGS_TO, 'County', 'county_id'),
 			'area' => array(self::BELONGS_TO, 'Area', 'area_id'),
 			'status' => array(self::BELONGS_TO, 'RestaurantStatus', 'is_shutdown'),
+			'comment_count' => array(self::STAT, 'Comment','restaurant_id'),
 		);
 	}
 

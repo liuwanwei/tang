@@ -1,13 +1,13 @@
 <?php
-/* @var $this CountyController */
-/* @var $model County */
+/* @var $this SettingController */
+/* @var $model Setting */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'county-form',
+	'id'=>'setting-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -16,15 +16,15 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>64)); ?>
-		<?php echo $form->error($model,'name'); ?>
+		<?php echo $form->labelEx($model,'key'); ?>
+		<?php echo $form->textField($model,'key',array('size'=>60,'maxlength'=>64)); ?>
+		<?php echo $form->error($model,'key'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type'); ?>
-		<?php echo $form->error($model,'type'); ?>
+		<?php echo $form->labelEx($model,'value'); ?>
+		<?php echo $form->textField($model,'value',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'value'); ?>
 	</div>
 
 	<div class="row buttons">

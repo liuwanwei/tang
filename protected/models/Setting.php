@@ -1,19 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "county".
+ * This is the model class for table "setting".
  *
- * The followings are the available columns in table 'county':
- * @property integer $id
- * @property string $name
- * @property integer $type
+ * The followings are the available columns in table 'setting':
+ * @property string $key
+ * @property string $value
  */
-class County extends CActiveRecord
+class Setting extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return County the static model class
+	 * @return Setting the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +24,7 @@ class County extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'county';
+		return 'setting';
 	}
 
 	/**
@@ -36,11 +35,12 @@ class County extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>64),
+			array('key, value', 'required'),
+			array('key', 'length', 'max'=>64),
+			array('value', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, type', 'safe', 'on'=>'search'),
+			array('key, value', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,7 +52,6 @@ class County extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'restaurants' => array(self::HAS_MANY, 'Restaurant', 'id'),
 		);
 	}
 
@@ -62,9 +61,8 @@ class County extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'type' => 'Type',
+			'key' => 'Key',
+			'value' => 'Value',
 		);
 	}
 
@@ -79,36 +77,11 @@ class County extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('type',$this->type);
+		$criteria->compare('key',$this->key,true);
+		$criteria->compare('value',$this->value,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	/**
-	 * 获取行政县、区数据
-	 * @param  $type 0 区； 1 县
-	 * @return array
-	 */
-	public function getCountries($type)
-	{
-		$criteria=new CDbCriteria(array(
-				'condition'=>'type='.$type,
-		));
-		$dataProvider=new CActiveDataProvider('County',array(
-				'criteria'=>$criteria,
-		));
-		
-		$data = $dataProvider->getData();
-		$counties = array();
-		foreach ($data as $key => $value)
-		{
-			$counties[$value->id] = $value->name;
-		}
-	
-		return $counties;
 	}
 }
