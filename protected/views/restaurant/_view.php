@@ -3,7 +3,7 @@
 /* @var $data Restaurant */
 ?>
 
-<div class="view">
+<div class="view-item">
 <!-- 	<div class="restaurant-profile">
 		<?php 
 		if (! empty($data->image_url)) {
@@ -13,20 +13,21 @@
 		}
 		?>
 	</div> -->
+
+	<span class="ranking"><strong><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?></strong></span>
 	<div class="restaurant-detail">
 		<!--
 		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
 		<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 		<br />
 		-->
-
-		<b>
-		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id)); ?></b>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</b>
-		<?php echo CHtml::encode($data->address); ?>
-		<br />
+		
+<ul>
+		<li><strong>
+		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id)); ?></strong>
+		
+		</li>
+		
 
 		<!--
 		<b><?php echo CHtml::encode($data->getAttributeLabel('county_id')); ?>:</b>
@@ -37,29 +38,65 @@
 		<?php echo CHtml::encode($data->area['name']); ?>
 		<br />
 		-->
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('phone')); ?>:</b>
-		<?php echo CHtml::encode($data->phone); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('business_hour')); ?>:</b>
-		<?php echo CHtml::encode($data->business_hour); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('is_shutdown')); ?>:</b>
-		<?php echo CHtml::encode($data->status['name']); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('votes')); ?>:</b>
-		<?php echo CHtml::encode($data->votes); ?>
 		
-		<b><?php echo CHtml::encode($data->getAttributeLabel('average_points')); ?>:</b>
-		<?php echo CHtml::encode($data->average_points); ?>
 
-		<b><?php echo CHtml::encode($data->getAttributeLabel('weighted_points')); ?>:</b>
-		<?php echo CHtml::encode($data->weighted_points); ?>
-		<br />
+		<!--<li>
+		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('business_hour')); ?>:</span>
+		<span><?php echo CHtml::encode($data->business_hour); ?></span>
+		</li>
 
+		<li>
+		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('phone')); ?>:</span>
+		<span><?php echo CHtml::encode($data->phone); ?></span>
+		</li>
+
+		<li>
+		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('is_shutdown')); ?>:</span>
+		<span><?php echo CHtml::encode($data->status['name']); ?></span>
+		</li>
+-->
+		<li>
+		<span  class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
+		<span><?php echo CHtml::encode($data->address); ?></span>
+		</li>
+
+		<li>
+		<!--<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('votes')); ?>:</span>
+		<span><?php echo CHtml::encode($data->votes); ?></span>
+		-->
+		
+		<div class="rating-widget">
+		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+		<div class="rating-list" data-rating-default="<?php echo CHtml::encode($data->average_points); ?>" 
+			data-clicknum="0" 
+			data-user="<?php echo Yii::app()->user->id ?>"
+			data-id="<?php echo CHtml::encode($data->id);?>">
+		<span class="rating-stars">
+		<a class="rating-icon star-on"><span>1</span></a>
+		<a class="rating-icon star-on"><span>2</span></a>
+		<a class="rating-icon star-on"><span>3</span></a>
+		<a class="rating-icon star-on"><span>4</span></a>
+		<a class="rating-icon star-on"><span>5</span></a>
+		<a class="rating-icon star-on"><span>6</span></a>
+		<a class="rating-icon star-on"><span>7</span></a>
+		<a class="rating-icon star-on"><span>8</span></a>
+		<a class="rating-icon star-on"><span>9</span></a>
+		<a class="rating-icon star-on"><span>10</span></a>
+		</span>
+		<span class="rating-rating">
+		<span class="fonttext-shadow-2-3-5-000 value"><?php echo CHtml::encode($data->average_points); ?></span>
+		<span class="grey">/</span>
+		<span class="grey">10</span>
+		</span>
+		<span class="rating-cancel">
+			<a title="删除">
+				<span>X</span>
+			</a>
+		</span>
+		</div>
+		</div>
+		</li>
+		</ul>
 		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 		<?php echo CHtml::encode($data->description); ?>

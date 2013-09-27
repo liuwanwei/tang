@@ -6,23 +6,253 @@
 	height: 50px;
 }
 
-.restaurant-detail{
-	float: right;
+.restaurant-detail{	
+	width: 95%;		
+	float:left;
+	border-left:2px solid #A65900;
+	padding-left:3px; 
+	margin-left: 5px;
+}
+
+/*
+*将summaryText输出的内容隐藏
+*/
+.list-view .summary
+{
+	display: none;
+}
+
+div.view-item
+{
 	width: 100%;
+	padding: 5px;
+	margin: 5px 0px 5px 0px;	
+	display: inline-block;
+	vertical-align: top;
+
+
+	
 }
 
-#county-menu li, #area-menu li{
-	display: inline-table;
-	width: 100px;
-	height: 25px;
-	line-height: 25px;
-	text-align: center;
-	background:#B7D6E7;
+/*排名*/
+div.view-item .ranking
+{
+	color:rgb(126, 186, 208);
+	font-size: 1.4em;
+	font-family: Arial;
+	float:left;	
+
+	
+	
 }
 
-#county-menu li a, #area-menu li a{
-	padding: 5px 8px;
+div.view-item:hover,div.view-item:focus
+{
+	box-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-moz-box-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-o-box-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+}
+
+div.view-item .restaurant-detail ul
+{
+	margin: 0;
+	padding:0;
+	list-style: none;
+	
+
+}
+div.view-item .restaurant-detail ul li
+{
+	width: 250px;
+	
+	
+}
+
+div.view-item .restaurant-detail ul li:first-child
+{
+	border-top:1px solid #555;
+	border-bottom:1px solid #555;
+	
+}
+div.view-item .restaurant-detail ul li span.title
+{
+	font-weight: 500;
+}
+div.view-item .restaurant-detail ul li strong
+{
+	font-size: 1.0em;	
+	margin-right: 10px;
+
+}
+
+div.view-item .restaurant-detail ul li strong a
+{
+	color:#555;
+	text-decoration:none;
+}
+
+div.view-item .restaurant-detail ul li strong a:hover,div.view-item .restaurant-detail ul li strong a:focus
+{
+	color:#000;
+}
+
+.fontsize-0-8em
+{
+	font-size:.8em;	
+
+}
+.fonttext-shadow-2-3-5-000
+{
+
+	text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-moz-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-webkit-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-o-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+
+}
+
+.content-title
+{
+	font-size:1.1em;
+	text-align:left;
+	border-bottom:1px solid rgb(204, 204, 204);
+	display:block;
+	margin:10px 0px;	
+	color: rgb(34, 34, 34);
+	font-weight:bold;
+	line-height: 30px;
+	background-image: url(../images/icon/logo-tang_32.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left:48px;
+}
+
+div.rating-widget
+{
+	float:left;
+	
+}
+.rating-widget .rating-widget-lable
+{
+	font-weight: bold;
+	font-size: 11px;
+	color:#555;
+}
+.rating-widget .rating-list
+{
+	display: inline-block;	
+	line-height: 13px;
+	height: 13px;
+	width: 198px;
+	font-size: 11px;
+	color:rgb(165, 134, 0);
+}
+
+.rating-widget .rating-list:hover
+{
+	color:#555;
+}
+
+.rating-list .rating-stars 
+{
+
+}
+
+.rating-icon
+{
+	background-image: url(../images/icon/sprite.png);
+	background-repeat: no-repeat;
+}
+
+.rating-list .rating-stars a
+{
+
+	width: 14px;	
+	height:13px;
+	display:block;
+	float:left;			
+	margin: 0px;
+
+}
+
+.rating-list .rating-stars .star-on
+{
+	background-position: 0px -27px;
+}
+.rating-list .rating-stars a span
+{
+	
+	visibility: hidden;
+
+	
+}
+
+.rating-list .rating-rating
+{
+	width:40px;
+	display: inline-block;
+	text-align: right;
+	font-weight: bold;
+	font-size: 11px;	
 	margin:0;
-	text-decoration: none;
-	color:#298dcd;
+}
+.rating-list .rating-rating .grey
+{
+	font-weight: normal;
+	color: rgb(204, 204, 204);
+
+}
+ 
+.rating-list .rating-hover
+{
+	
+	
+	background-position: 0px -69px;
+	cursor: pointer;
+	
+}
+
+.rating-list .rating-off
+{
+	background-position: 0px -55px;
+}
+.rating-list .rating-init
+{
+	background-position: 0px -41px;
+}
+
+.rating-list .rating-cancel
+{
+	width: 14px;
+	height: 13px;	
+	
+	display: none;
+	font-size: 11px;
+
+}
+
+.rating-icon .rating-your
+{
+	background-position: 0px 0px;
+	display: inline-block;
+}
+
+.rating-list .rating-cancel:hover
+{
+	background-position:0px -13px;
+	cursor: pointer;
+
+}
+
+.rating-list .rating-cancel a span
+{
+	visibility:hidden;
+}
+
+.rating-list .rating-pending
+{
+	background: url(../images/spinner.gif);
+	background-repeat: no-repeat;
+	display: inline-block;
 }
