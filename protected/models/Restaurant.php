@@ -72,6 +72,7 @@ class Restaurant extends CActiveRecord
 			'county' => array(self::BELONGS_TO, 'County', 'county_id'),
 			'area' => array(self::BELONGS_TO, 'Area', 'area_id'),
 			'status' => array(self::BELONGS_TO, 'RestaurantStatus', 'is_shutdown'),
+			'comment_count' => array(self::STAT, 'Comment','restaurant_id'),
 		);
 	}
 
