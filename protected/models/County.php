@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'county':
  * @property integer $id
  * @property string $name
+ * @property integer $type
  */
 class County extends CActiveRecord
 {
@@ -35,10 +36,11 @@ class County extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('type', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>64),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('id, name, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,7 +52,7 @@ class County extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			// 'restaurants' => array(self::HAS_MANY, 'Restaurant', 'id'),
+				'restaurants' => array(self::HAS_MANY, 'Restaurant', 'id'),
 		);
 	}
 
@@ -62,6 +64,7 @@ class County extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'type' => 'Type',
 		);
 	}
 
@@ -78,9 +81,34 @@ class County extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('type',$this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/**
+	 * 获取行政县、区数据
+	 * @param  $type 0 区； 1 县
+	 * @return array
+	 */
+	public function getCountries($type)
+	{
+		$criteria=new CDbCriteria(array(
+				'condition'=>'type='.$type,
+		));
+		$dataProvider=new CActiveDataProvider('County',array(
+				'criteria'=>$criteria,
+		));
+		
+		$data = $dataProvider->getData();
+		$counties = array();
+		foreach ($data as $key => $value)
+		{
+			$counties[$value->id] = $value->name;
+		}
+	
+		return $counties;
 	}
 }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.8.2
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 09 月 23 日 10:21
--- 服务器版本: 5.5.29
--- PHP 版本: 5.3.15
+-- 生成日期: 2013 年 09 月 27 日 08:40
+-- 服务器版本: 5.6.11
+-- PHP 版本: 5.3.26
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- 表的结构 `area`
 --
 
+DROP TABLE IF EXISTS `area`;
 CREATE TABLE IF NOT EXISTS `area` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -47,27 +48,14 @@ INSERT INTO `area` (`id`, `name`, `county_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `comment`
---
-
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `restaurant_id` int(11) NOT NULL,
-  `create_datetime` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `county`
 --
 
+DROP TABLE IF EXISTS `county`;
 CREATE TABLE IF NOT EXISTS `county` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '0 区；1 县',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
@@ -75,11 +63,11 @@ CREATE TABLE IF NOT EXISTS `county` (
 -- 转存表中的数据 `county`
 --
 
-INSERT INTO `county` (`id`, `name`) VALUES
-(1, '涧西区'),
-(2, '西工区'),
-(3, '老城区'),
-(4, '洛龙区');
+INSERT INTO `county` (`id`, `name`, `type`) VALUES
+(1, '涧西区', 0),
+(2, '西工区', 0),
+(3, '老城区', 0),
+(4, '洛龙区', 0);
 
 -- --------------------------------------------------------
 
@@ -87,6 +75,7 @@ INSERT INTO `county` (`id`, `name`) VALUES
 -- 表的结构 `restaurant`
 --
 
+DROP TABLE IF EXISTS `restaurant`;
 CREATE TABLE IF NOT EXISTS `restaurant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -105,14 +94,14 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `weighted_points` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `restaurant`
 --
 
 INSERT INTO `restaurant` (`id`, `name`, `phone`, `business_hour`, `address`, `county_id`, `area_id`, `is_shutdown`, `image_url`, `latitude`, `longitude`, `description`, `votes`, `average_points`, `weighted_points`) VALUES
-(1, '大石桥羊肉汤', '09999999', '6:00 - 12:00', '建设路24号', 1, 2, 2, '/images/restaurant/profile_1.png', 0, 0, '好喝', 2, 5.5, 1.70833),
+(1, '大石桥羊肉汤', '138', '6:00 - 12:00', '建设路24号', 1, 2, 2, '/images/restaurant/profile_1.png', 0, 0, '好喝', 2, 5.5, 1.70833),
 (2, '清真牛肉汤', '', '6:00 - 20:00', '涧西区西苑路2号', 1, 1, 0, '/images/restaurant/profile_2.png', 0, 0, '好地方。', 1, 4, 1.22727),
 (3, '怀府驴肉汤', '15038595869', '6:00 - 20:00', '洛阳市西工区健康路8号', 2, 1, 0, '/images/restaurant/profile_3.png', 0, 0, '好地方。', 0, 0, 0.95),
 (4, '白沙羊肉汤', '15038595869', '6:00 - 20:00', '洛阳市西工区七一路30号', 4, 1, 1, '/images/restaurant/profile_4.jpg', 0, 0, '好地方。', 0, 0, 0.95),
@@ -130,6 +119,7 @@ INSERT INTO `restaurant` (`id`, `name`, `phone`, `business_hour`, `address`, `co
 -- 表的结构 `restaurant_status`
 --
 
+DROP TABLE IF EXISTS `restaurant_status`;
 CREATE TABLE IF NOT EXISTS `restaurant_status` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -148,32 +138,10 @@ INSERT INTO `restaurant_status` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `user`
---
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `extension_user_id` int(11) NOT NULL,
-  `nick_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `image_url` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `role` int(11) NOT NULL COMMENT '0 normal 1 admin',
-  `source` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- 转存表中的数据 `user`
---
-
-INSERT INTO `user` (`id`, `extension_user_id`, `nick_name`, `image_url`, `role`, `source`) VALUES
-(4, 1655929253, '刘万伟', 'http://tp2.sinaimg.cn/1655929253/50/5658842323/1', 0, 1);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `vote`
 --
 
+DROP TABLE IF EXISTS `vote`;
 CREATE TABLE IF NOT EXISTS `vote` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
