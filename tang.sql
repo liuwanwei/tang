@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.7
+-- version 3.5.8.2
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 09 月 27 日 08:40
--- 服务器版本: 5.6.11
--- PHP 版本: 5.3.26
+-- 生成日期: 2013 年 09 月 27 日 17:32
+-- 服务器版本: 5.5.29
+-- PHP 版本: 5.3.15
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,6 +44,29 @@ INSERT INTO `area` (`id`, `name`, `county_id`) VALUES
 (3, '新都汇', 2),
 (4, '万达广场', 1),
 (5, '谷水', 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `create_datetime` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+
+--
+-- 转存表中的数据 `comment`
+--
+
+INSERT INTO `comment` (`id`, `user_id`, `content`, `restaurant_id`, `create_datetime`) VALUES
+(31, 5, '配的饼最近质量下降了，原来很酥脆，现在很软，估计供不应求。', 1, '2013-09-23 14:30:47');
 
 -- --------------------------------------------------------
 
@@ -134,6 +157,51 @@ INSERT INTO `restaurant_status` (`id`, `name`) VALUES
 (0, '正常营业'),
 (1, '临时关闭'),
 (2, '永久关闭');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `setting`
+--
+
+DROP TABLE IF EXISTS `setting`;
+CREATE TABLE IF NOT EXISTS `setting` (
+  `key` varchar(64) NOT NULL,
+  `value` varchar(128) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `setting`
+--
+
+INSERT INTO `setting` (`key`, `value`) VALUES
+('get_new_vote', '0');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `extension_user_id` int(11) NOT NULL,
+  `nick_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `image_url` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `role` int(11) NOT NULL COMMENT '0 normal 1 admin',
+  `source` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`id`, `extension_user_id`, `nick_name`, `image_url`, `role`, `source`) VALUES
+(4, 1655929253, '刘万伟', 'http://tp2.sinaimg.cn/1655929253/50/5658842323/1', 1, 1),
+(5, 2147483647, '比赛闹钟', 'http://tp4.sinaimg.cn/2472803787/50/5620173593/1', 0, 1);
 
 -- --------------------------------------------------------
 
