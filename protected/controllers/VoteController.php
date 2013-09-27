@@ -79,10 +79,12 @@ class VoteController extends Controller
 
 	public function actionCreate()
 	{
-	    	$model=new Vote;
+		//echo $_POST['Vote']['user_id']." ".$_POST['Vote']['restaurant_id']." ".$_POST['Vote']['rating']; exit;
+		   	$model=new Vote;
 
 	   	 if(isset($_POST['Vote']))
 		{
+
 		    $model->attributes=$_POST['Vote'];
 		    if($model->validate())
 		    {
@@ -91,7 +93,7 @@ class VoteController extends Controller
 
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
-
+//echo "2"; exit;
 		    	// 更新所有记录，包括餐厅排序。
 		    	$this->calculateRank();
 
