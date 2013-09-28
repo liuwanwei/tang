@@ -27,7 +27,7 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div class="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		
 		<?php if(Yii::app()->user->isGuest) {
 				$this->widget('ext.oauthLogin.OauthLogin',array(
            			'itemView'=>'medium_login', //效果样式
@@ -35,21 +35,26 @@
  				));
 		}?>
 	</div><!-- header -->
-
+<?php
+		 $menu = array();
+		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
+		 $counties = County::model()->getCountries(0);
+		 foreach ($counties as $key => $value) 
+		 {
+		 	$menu[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
+		 }
+		 $menu[] = array('label'=>'县区','url'=>'');
+// 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
+// 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
+// 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
+		 $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
+	?>
 	<div id="mainmenu">
 
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(				
-				array('label'=>'首页', 'url'=>array('/restaurant/index')),
-				array('label'=>'县区', 'url'=>array('/county/index', 'view'=>'about')),
-				array('label'=>'区域', 'url'=>array('/area/index')),
-				array('label'=>'状态', 'url'=>array('/restaurantstatus/index')),
-				array('label'=>'评分测试', 'url'=>array('/vote/create')),
-				array('label'=>'gii',    'url'=>array('/gii/')),
-// 				array('label'=>'登陆', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
+	<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>$menu
+		)); 
+		?>
 	</div><!-- mainmenu -->
 	<!--主体内容部分-->
 	<div class="tang-content" id="tang-content">

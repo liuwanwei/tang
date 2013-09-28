@@ -10,10 +10,11 @@ body
 
 #page
 {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	background: white;
-	
+	margin-top: 0;
+	margin-bottom: 5px;	
+	_background: #e5e5e5;
+	background: radial-gradient(ellipse at center, #ffffff 0%,#e5e5e5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=1 );
 	
 }
 
@@ -22,7 +23,8 @@ body
 	margin: 0;
 	padding: 0;
 	border-top: 3px solid #C9E0ED;
-	display:none;
+	display:block;
+	height: 40px;
 	}
 
 #tang-content.tang-content
@@ -52,11 +54,14 @@ body
 
 #mainmenu
 {
-	background:#BF7D30;
-	height:45px;
-	line-height:45px;
+	background:#27C070;
+	height:70px;
+	line-height:70px;
 	font-family:微软雅黑;
-	box-shadow:0 1px 3px rgba(0,0,0,0.6);
+	/*box-shadow:0 1px 3px rgba(0,0,0,0.6);*/
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 
 }
 
@@ -86,8 +91,8 @@ body
 
 #mainmenu ul li a:hover, #mainmenu ul li.active a
 {
-	
-	background-color:#A65900;
+	cursor: pointer;
+	/*background-color:#A65900;*/
 	text-decoration:none;
 	display:block;
 }
@@ -101,11 +106,12 @@ body
 	text-align:left;
 	border-bottom:1px solid rgb(204, 204, 204);
 	margin-top:10px;
-	padding-left:48px;
+	
 	color: rgb(34, 34, 34);
 	font-weight:bold;
 	line-height:30px;
-	background: url(../images/icon/area_32.png) no-repeat left top;
+	padding-left:5px;
+	/*background: url(../images/icon/area_32.png) no-repeat left top;*/
 
 	
 	

@@ -72,21 +72,46 @@ rating_list_dome.each(function(){
 
 		raing_value.text(i);
 
+		//单击星星时发生
 		$(this).one("click",function(){
 		a_this.attr("data-clicknum",i);
 		selected_a.removeClass();
 		selected_a.addClass("rating-icon rating-off");
-		$(".rating-cancel",a_this).addClass('rating-pending');
+		var rating_cancel=$(".rating-cancel",a_this);
+		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
 		console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
-				console.log(resultdata);
-		});
+				//console.log(resultdata.msg);
+				if (resultdata.msg==="0") {
+					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
+					rating_cancel.one('click',function(){
+						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
+						$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
+							rating:"0"}},function(rating_cancel_result){
+								
+								if (rating_cancel_result.msg==="0") {
+									rating_cancel.removeClass('rating-pending');
+									a_this.attr("data-clicknum","0");
+									raing_value.text(raing_default);
+									//console.log(rating_cancel_result+"abc");
+									ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+								}else{
+									//服务器出错
+								}
+							},"json");
+					});
+				}else{
+					//服务器出错
+				}
+		},"json");
 		});
 		
 	
 	},function(){});
+
+	
 
 	//当鼠标移出rating-list的矩形时根据状态还原星星的样式
 		$(".rating-stars",a_this).bind("mouseout",function(){	
@@ -97,7 +122,7 @@ rating_list_dome.each(function(){
 		raing_value.text(parseInt(raing_default)==0?'-':raing_default);		
 		}else if(clicknum=="0" && parseInt(raing_default)>0)
 		{
-			ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+			ratingInit(a_this,"rating-icon rating-init",Math.round(raing_default),raing_value);
 			raing_value.text(raing_default);
 		}
 		else{
@@ -124,6 +149,12 @@ function ratingInit(e_this,classname,i,evalue)
 		no_selected_a.addClass("rating-icon star-on");
 
 }
+
+	//清除评分
+	function ratingCancelClick(event)
+	{
+		console.log("a="+event.data.rating);
+	}
 
 });
 
