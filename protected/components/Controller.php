@@ -55,4 +55,10 @@ class Controller extends CController
 			),
 		);
 	}
+	
+	public function actionAdmin()
+	{
+		$this->layout='//layouts/column_admin';
+	}
+
 }

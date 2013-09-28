@@ -128,6 +128,8 @@ class CommentController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		parent::actionAdmin();
+		
 		$model=new Comment('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Comment']))

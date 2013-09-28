@@ -218,6 +218,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		parent::actionAdmin();
+		
 		$model=new Restaurant('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Restaurant']))
