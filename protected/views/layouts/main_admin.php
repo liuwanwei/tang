@@ -40,6 +40,7 @@
 		 $menu[] = array('label'=>'区域管理','url'=>array('area/admin'));
 		 $menu[] = array('label'=>'评论管理','url'=>array('comment/admin'));
 		 $menu[] = array('label'=>'用户管理','url'=>array('user/admin'));
+		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
 		 $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
 	?>
 
