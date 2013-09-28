@@ -107,6 +107,8 @@ class UserController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		parent::actionAdmin();
+		
 		$model=new User('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['User']))

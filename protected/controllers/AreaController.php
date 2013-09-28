@@ -120,6 +120,8 @@ class AreaController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		parent::actionAdmin();
+		
 		$model=new Area('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Area']))

@@ -107,6 +107,8 @@ class RestaurantStatusController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		parent::actionAdmin();
+		
 		$model=new RestaurantStatus('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['RestaurantStatus']))
