@@ -18,6 +18,23 @@ class RestaurantController extends Controller
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
+	
+	public function accessRules()
+	{
+		
+		return array(
+				array('allow',
+						'actions'=>array('index'),
+						'users'=>array('*')),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions'=>array('admin','delete','create','update','view'),
+						'expression'=>array($this,'isAdmin'),
+				),
+				array('deny',  // deny all users
+						'users'=>array('*'),
+				),
+		);
+	}
 
 	/**
 	 * Displays a particular model.
@@ -25,6 +42,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionView($id)
 	{
+		parent::actionAdmin();
+		
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -67,6 +86,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionCreate()
 	{
+		parent::actionAdmin();
+		
 		$model=new Restaurant;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -98,6 +119,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		parent::actionAdmin();
+		
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -138,6 +161,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		parent::actionAdmin();
+		
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
