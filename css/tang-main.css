@@ -11,7 +11,7 @@ body
 #page
 {
 	margin-top: 0;
-	margin-bottom: 5px;	
+	margin-bottom: 5px;		
 	_background: #e5e5e5;
 	background: radial-gradient(ellipse at center, #ffffff 0%,#e5e5e5 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=1 );
@@ -30,6 +30,7 @@ body
 #tang-content.tang-content
 {
 	width:960px;
+	min-height: 600px;
 	 margin:0 auto;
 	font-family:微软雅黑;
 }
@@ -38,12 +39,16 @@ body
 
 #footer
 {
-	padding: 10px;
+	padding: 0px;
 	margin: 0;
 	font-size: 0.8em;
-	text-align: center;
-	border-top: 1px solid rgb(204, 204, 204);
-	background-color:#BF7D30;
+	text-align: center;		
+	background: #8F8275;
+box-shadow: inset 0 0 30px #5A5249;
+-moz-box-shadow: inset 0 0 30px #5A5249;
+-webkit-box-shadow: inset 0 0 30px #5A5249;
+-o-box-shadow: inset 0 0 30px #5A5249;
+color: white;
 }
 
 #logo
@@ -62,6 +67,10 @@ body
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+}
+#mainmenu .login
+{
 
 }
 
@@ -411,3 +420,118 @@ body, input, textarea, select, button {
 	display:block;
 
 }
+
+
+
+.modal-backdrop
+{
+	position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1040;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.7;
+}
+
+
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 1050;
+    width: 500px;
+    margin-left: -280px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px 6px 6px 6px;
+    outline: medium none;
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+    background-clip: padding-box;
+}
+/*.fade {
+    opacity: 0;
+    transition: opacity 0.15s linear 0s;
+}*/
+
+.modal.fade.in {
+    top: 10%;
+}
+.modal.fade {
+    top: -25%;
+    transition: opacity 0.3s linear 0s, top 0.3s ease-out 0s;
+}
+/*.fade.in {
+    opacity: 1;
+}*/
+.hide {
+    display: none;
+}
+
+.modal-header {
+    padding: 5px 15px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.modal-header .close {
+    margin-top: 2px;
+     padding: 0px;
+    cursor: pointer;
+    background: none repeat scroll 0% 0% transparent;
+    border: 0px none;
+     float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: rgb(0, 0, 0);
+    text-shadow: 0px 1px 0px rgb(255, 255, 255);
+    opacity: 0.2;
+}
+
+.modal-header .close:hover
+{
+	opacity: 0.5;
+}
+
+.modal-header h3 {
+    margin: 0px;
+    line-height: 25px;
+     font-size: 1.3em;
+     color:#555;
+}
+
+.modal-body {
+    position: relative;
+    max-height: 400px;
+    min-height: 50px;
+    padding: 15px;
+    
+}
+.modal-body a
+{
+	display: block;
+	text-decoration: none;
+	padding-left:30px;
+	line-height: 30px;
+
+}
+.modal-body a.icon-sina-logo
+{
+	background: url(../images/icon/sina_weibo_24.png) no-repeat top left;
+	
+	
+}
+
+.modal-body a span
+{
+	visibility:visible;
+}
+
+.modal-body a.qq-login
+{
+	background: url(../images/icon/qq_24.png) no-repeat top left;
+	
+}
+
+

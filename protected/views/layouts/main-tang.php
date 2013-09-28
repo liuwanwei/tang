@@ -18,7 +18,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
 	<!-- Bootstrap
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
 	 -->
 </head>
@@ -26,15 +26,7 @@
 <body>
 <div class="container" id="page">
 
-	<div id="header">
-		
-		<?php if(Yii::app()->user->isGuest) {
-				$this->widget('ext.oauthLogin.OauthLogin',array(
-           			'itemView'=>'medium_login', //效果样式
-					'back_url'=>Yii::app()->request->url,
- 				));
-		}?>
-	</div><!-- header -->
+	
 <?php
 		 $menu = array();
 		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
@@ -48,14 +40,42 @@
 // 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
 // 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
 		 $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
+		 $menu[] = array('label'=>'登陆','url'=>'','visible'=>yii::app()->user->isGuest, 
+		 	'linkOptions'=>array('class'=>'login'));
 	?>
+
 	<div id="mainmenu">
 
 	<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 
 		?>
+		
 	</div><!-- mainmenu -->
+
+<!--登陆的模态窗口-->
+<div id="myModal" class="modal hide fade in" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="myModalLabel">选择登陆</h3>
+</div>
+<div class="modal-body">
+<?php if(Yii::app()->user->isGuest) {
+				$this->widget('ext.oauthLogin.OauthLogin',array(
+           			'itemView'=>'medium_login', //效果样式
+					'back_url'=>Yii::app()->request->url,
+ 				));
+		}?>
+
+		<a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a>
+</div>
+
+</div>
+
+<div class="modal-backdrop hide"></div>
+
+
+
 	<!--主体内容部分-->
 	<div class="tang-content" id="tang-content">
 	<?php echo $content; ?>
@@ -67,11 +87,22 @@
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
-	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>
+	<!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
 </div><!-- page -->
 
 <script type="text/javascript">
-		$('.social-login-sina-weibo').click(function(){var url=$(this).attr('href');location.href=url;});
+$(function(){
+//点击登陆弹出模态窗口
+$(".login").click(function(){
+	$(".modal-backdrop").show();
+	$("#myModal").slideDown(200);
+	$(".close").one("click",function(){
+		$(".modal-backdrop").hide();
+		$("#myModal").slideUp(100);
+
+	});
+});
+});
 </script>
 
 </body>
