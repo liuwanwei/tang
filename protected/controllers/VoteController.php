@@ -96,7 +96,7 @@ class VoteController extends Controller
 
 	public function actionCreate()
 	{
-		//echo $_POST['Vote']['user_id']." ".$_POST['Vote']['restaurant_id']." ".$_POST['Vote']['rating']; exit;
+		
 		   	$model=new Vote;
 
 	   	 if(isset($_POST['Vote']))
@@ -110,17 +110,17 @@ class VoteController extends Controller
 
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
-//echo "2"; exit;
+
 		    	// 更新所有记录，包括餐厅排序。
 		    	// $this->actionCalculateRank();
 
 		        	// 重定向到餐厅列表。
-		        	$this->redirect(array('restaurant/index'));
+		        	echo json_encode(array('msg' =>"0" ));
 
 		        	return;
 		    }
 	    	}
-	    	$this->render('create',array('model'=>$model));
+	    	echo json_encode(array('msg' =>"1" ));
 	}
 
 	// Uncomment the following methods and override them if needed

@@ -14,7 +14,7 @@
 		?>
 	</div> -->
 
-	<span class="ranking"><strong><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?></strong></span>
+	<span class="ranking"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?>.</span>
 	<div class="restaurant-detail">
 		<!--
 		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
@@ -67,7 +67,7 @@
 		
 		<div class="rating-widget">
 		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-		<div class="rating-list" data-rating-default="<?php echo CHtml::encode($data->average_points); ?>" 
+		<div class="rating-list" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
 			data-clicknum="0" 
 			data-user="<?php echo Yii::app()->user->id ?>"
 			data-id="<?php echo CHtml::encode($data->id);?>">
@@ -84,11 +84,11 @@
 		<a class="rating-icon star-on"><span>10</span></a>
 		</span>
 		<span class="rating-rating">
-		<span class="fonttext-shadow-2-3-5-000 value"><?php echo CHtml::encode($data->average_points); ?></span>
+		<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?></span>
 		<span class="grey">/</span>
 		<span class="grey">10</span>
 		</span>
-		<span class="rating-cancel">
+		<span class="rating-cancel ">
 			<a title="删除">
 				<span>X</span>
 			</a>
