@@ -12,8 +12,7 @@ $this->widget('zii.widgets.CDetailView', array(
 				array(
 						'label'=>$attribute['address'],
 						'type'=>'raw',
-						'value'=>CHtml::label($restaurant->address."&nbsp &nbsp &nbsp &nbsp  &nbsp  &nbsp".$attribute['phone']
-								."&nbsp  &nbsp".$restaurant->phone, ''),
+						'value'=>CHtml::label($restaurant->address."&nbsp &nbsp".$restaurant->phone, ''),
 				),
 				
 				array(

@@ -1,16 +1,6 @@
 <?php
 /* @var $this RestaurantController */
 /* @var $dataProvider CActiveDataProvider */
-
-/*
- *汤馆前台主布局
- */
- $this->layout="main-tang";
-
-$this->menu=array(
-	array('label'=>'Create Restaurant', 'url'=>array('create')),
-	array('label'=>'Manage Restaurant', 'url'=>array('admin')),
-);
 ?>
 
 <div class="county-menu-title"><span>区域</span></div>
