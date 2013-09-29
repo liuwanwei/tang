@@ -6,15 +6,15 @@ class VoteController extends Controller
 	private $_new_vote_exist 	= '1';
 	private $_new_vote_not_exist 	= '0';
 
-
+	// 更新（计算）所有参观的权重排名。
 	public function actionCalculateRank(){
-		// 计算所有店铺平均分的算术平均值。
-
+		// 获取“计算标记”。
 		$model = Setting::model()->findByPk($this->_get_new_vote_key);
 		if ($model->value === $this->_new_vote_not_exist) {
 			die('Data not changed yet!');
 		}
 
+		// 计算所有店铺平均分的算术平均值。
 		$dataProvider = new CActiveDataProvider('Restaurant');
 		$records = $dataProvider->getData();
 		$totalPoints = 0;
@@ -34,11 +34,18 @@ class VoteController extends Controller
 			$value->save();
 		}
 
-
-		$model->value = $this->_new_vote_not_exist;
-		$model->save();
+		// 清除“计算标记”。
+		$this->setCalculateRankFlag(false);
 
 		die('Update rank success!');
+	}
+
+	private function setCalculateRankFlag($flag){
+		$model = Setting::model()->findByPk($this->_get_new_vote_key);
+
+		$value = $flag == true ? $this->_new_vote_exist : $this->_new_vote_not_exist;
+		$model->value = $value;
+		$model->save();
 	}
 
 
@@ -65,9 +72,7 @@ class VoteController extends Controller
 		if(! $restaurant->save()){
 			die('save restaurant record faild: '.$restaurant->getErrors());
 		}else{
-			$model = Setting::model()->findByPk($this->_get_new_vote_key);
-			$model->value = $this->_new_vote_exist;
-			$model->save();
+			$this->setCalculateRankFlag(true);
 		}
 	}
 
@@ -97,9 +102,9 @@ class VoteController extends Controller
 	public function actionCreate()
 	{
 		
-		   	$model=new Vote;
+		$model=new Vote;
 
-	   	 if(isset($_POST['Vote']))
+	   	if(isset($_POST['Vote']))
 		{
 
 		    $model->attributes=$_POST['Vote'];
@@ -121,6 +126,83 @@ class VoteController extends Controller
 		    }
 	    	}
 	    	echo json_encode(array('msg' =>"1" ));
+	}
+
+	// 删除餐馆的一个投票。
+	private function removeVoteFromRestaurant($restaurantId, $rating){
+		$calculateRank = false;
+		$model = Restaurant::model()->findByPk($restaurantId);
+		if (! empty($model)) {
+			$totalPoints = $model->average_points * $model->votes;
+			// die($totalPoints);
+			if ($totalPoints != 0) {
+				if ($totalPoints >= $rating) {
+					$totalPoints -= $rating;
+				}else{
+					$totalPoints = 0;
+				}
+
+				if ($model->votes >= 1) {
+					$model->votes --;
+				}
+
+				if ($model->votes === 0) {
+					$model->average_points = 0;
+				}else{
+					$model->average_points = $totalPoints /  $model->votes;
+				}
+
+				$calculateRank = true;
+			}else{
+				// 数据紊乱。清零投票数。
+				$model->votes = 0;
+			}
+
+			$model->save();
+
+			if ($calculateRank === true) {
+				// 需要重新计算所有餐馆的权重排名。
+				$this->setCalculateRankFlag(true);
+			}
+		}
+	}
+
+	public function actionDelete(){
+		$model=new Vote;
+
+		if (isset($_POST['Vote'])) {
+			// $model->attributes = $_POST['Vote'];
+			$id = $_POST['Vote']['id'];
+			$model = $this->loadModel($id);
+			if (! empty($model)) {
+				$rating = $model->rating;
+
+				// 删除投票表中的记录。
+				$model->delete();
+
+				// 更新汤馆表中的平均分和投票总数。
+				$this->removeVoteFromRestaurant($model->restaurant_id, $rating);
+			}
+
+			return;	
+		}
+
+		$this->render('delete', array('model'=>$model));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer $id the ID of the model to be loaded
+	 * @return Restaurant the loaded model
+	 * @throws CHttpException
+	 */
+	public function loadModel($id)
+	{
+		$model=Vote::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
 	}
 
 	// Uncomment the following methods and override them if needed
