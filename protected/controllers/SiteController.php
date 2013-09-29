@@ -1,7 +1,7 @@
 <?php
 
 class SiteController extends Controller
-{
+{	
 	/**
 	 * Declares class-based actions.
 	 */
@@ -70,6 +70,19 @@ class SiteController extends Controller
 			}
 		}
 		$this->render('contact',array('model'=>$model));
+	}
+	
+	public function actionAdmin()
+	{
+		if (parent::isAdmin())
+		{echo 1;
+			parent::actionAdmin();
+			$this->render('index');
+		}
+		else 
+		{
+			$this->actionLogin();
+		}
 	}
 
 	/**

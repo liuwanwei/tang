@@ -18,6 +18,23 @@ class CommentController extends Controller
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
+	
+	public function accessRules()
+	{
+		return array(
+				array('allow',
+						'actions'=>array('index','create'),
+						'users'=>array('*')
+				),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions'=>array('admin','delete','update','view'),
+						'expression'=>array($this,'isAdmin'),
+				),
+				array('deny',  // deny all users
+						'users'=>array('*'),
+				),
+		);
+	}
 
 	/**
 	 * Displays a particular model.
@@ -52,6 +69,7 @@ class CommentController extends Controller
 			'model'=>$model,
 		));
 	}
+	
 
 	/**
 	 * Updates a particular model.
@@ -128,6 +146,8 @@ class CommentController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		parent::actionAdmin();
+		
 		$model=new Comment('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Comment']))
