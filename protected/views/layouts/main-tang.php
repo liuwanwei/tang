@@ -82,16 +82,58 @@
 	</div>
 	<div class="clear"></div>
 
-	<div id="footer">
+	
+	<!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
+</div><!-- page -->
+<div id="footer">
 		Copyright &copy; <?php echo date('Y'); ?> 曦光科技.<br/>
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
-	<!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
-</div><!-- page -->
-
 <script type="text/javascript">
 $(function(){
+
+
+					
+						
+							var footerHeight = 0,
+									footerTop = 0,
+									$footer = $("#footer");
+							positionFooter();
+							//定义positionFooter function
+							function positionFooter() {
+								//取到div#footer高度
+								footerHeight = $footer.height();
+								//div#footer离屏幕顶部的距离
+								footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
+								/* DEBUGGING STUFF
+									console.log("Document height: ", $(document.body).height());
+									console.log("Window height: ", $(window).height());
+									console.log("Window scroll: ", $(window).scrollTop());
+									console.log("Footer height: ", footerHeight);
+									console.log("Footer top: ", footerTop);
+									console.log("-----------")
+								*/
+								//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
+								if ( ($(document.body).height()+footerHeight) < $(window).height()) {
+									$footer.css({
+										position: "absolute"
+										,top: footerTop});
+									/*.stop().animate({
+										top: footerTop
+									});*/
+								} else {
+									$footer.css({
+										position: "static"
+									});
+
+								}
+							}
+							$(window).scroll(positionFooter).resize(positionFooter);
+						
+				
+
+
 //点击登陆弹出模态窗口
 $(".login").click(function(){
 	$(".modal-backdrop").show();
@@ -102,6 +144,8 @@ $(".login").click(function(){
 
 	});
 });
+
+
 });
 </script>
 
