@@ -58,7 +58,7 @@ class VoteController extends Controller
 		$oldVotes = $restaurant->votes;
 		$oldAveragePoints = $restaurant->average_points;
 
-		if (empty($model->oldRating)) {
+		if (! isset($model->oldRating)) {
 			// 新的投票。
 			$averagePoints = ($oldVotes * $oldAveragePoints + $model->rating ) / ($oldVotes + 1);
 			$restaurant->votes = $oldVotes + 1;
@@ -101,7 +101,6 @@ class VoteController extends Controller
 
 	public function actionCreate()
 	{
-		
 		$model=new Vote;
 
 	   	if(isset($_POST['Vote']))
@@ -116,9 +115,6 @@ class VoteController extends Controller
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
 
-		    	// 更新所有记录，包括餐厅排序。
-		    	// $this->actionCalculateRank();
-
 		        	// 重定向到餐厅列表。
 		        	echo json_encode(array('msg' =>"0" ));
 
@@ -126,6 +122,29 @@ class VoteController extends Controller
 		    }
 	    	}
 	    	echo json_encode(array('msg' =>"1" ));
+	}
+
+	/**
+	* 测试用投票接口。正式投票使用voteCreate接口.
+	*/
+	public function actionVote(){
+		$model=new Vote;
+
+	   	if(isset($_POST['Vote']))
+		{
+
+		    $model->attributes=$_POST['Vote'];
+		    if($model->validate())
+		    {
+		    	// 保存本次投票记录。
+		    	$model = $this->saveVoteRecord($model);
+
+		    	// 更新餐厅记录。
+		    	$this->updateRestaurant($model);
+		    }
+	    	}
+	    	
+	    	$this->render('create', array('model' => $model));
 	}
 
 	// 删除餐馆的一个投票。
