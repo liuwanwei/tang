@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 09 月 27 日 17:32
+-- 生成日期: 2013 年 09 月 29 日 14:02
 -- 服务器版本: 5.5.29
 -- PHP 版本: 5.3.15
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `county` (
   `name` varchar(64) NOT NULL DEFAULT '',
   `type` int(11) NOT NULL DEFAULT '0' COMMENT '0 区；1 县',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `county`
@@ -90,7 +90,10 @@ INSERT INTO `county` (`id`, `name`, `type`) VALUES
 (1, '涧西区', 0),
 (2, '西工区', 0),
 (3, '老城区', 0),
-(4, '洛龙区', 0);
+(4, '洛龙区', 0),
+(5, '伊川县', 1),
+(6, '宜阳县', 1),
+(7, '孟津县', 1);
 
 -- --------------------------------------------------------
 
@@ -102,6 +105,7 @@ DROP TABLE IF EXISTS `restaurant`;
 CREATE TABLE IF NOT EXISTS `restaurant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
+  `type_id` int(11) NOT NULL DEFAULT '1',
   `phone` varchar(64) NOT NULL DEFAULT '',
   `business_hour` varchar(128) NOT NULL DEFAULT '6:00 - 20:00',
   `address` varchar(128) NOT NULL,
@@ -123,18 +127,18 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 -- 转存表中的数据 `restaurant`
 --
 
-INSERT INTO `restaurant` (`id`, `name`, `phone`, `business_hour`, `address`, `county_id`, `area_id`, `is_shutdown`, `image_url`, `latitude`, `longitude`, `description`, `votes`, `average_points`, `weighted_points`) VALUES
-(1, '大石桥羊肉汤', '138', '6:00 - 12:00', '建设路24号', 1, 2, 2, '/images/restaurant/profile_1.png', 0, 0, '好喝', 2, 5.5, 1.70833),
-(2, '清真牛肉汤', '', '6:00 - 20:00', '涧西区西苑路2号', 1, 1, 0, '/images/restaurant/profile_2.png', 0, 0, '好地方。', 1, 4, 1.22727),
-(3, '怀府驴肉汤', '15038595869', '6:00 - 20:00', '洛阳市西工区健康路8号', 2, 1, 0, '/images/restaurant/profile_3.png', 0, 0, '好地方。', 0, 0, 0.95),
-(4, '白沙羊肉汤', '15038595869', '6:00 - 20:00', '洛阳市西工区七一路30号', 4, 1, 1, '/images/restaurant/profile_4.jpg', 0, 0, '好地方。', 0, 0, 0.95),
-(5, '大众牛肉汤', '15038595869', '6:00 - 20:00', '洛阳市洛龙区龙翔路99号', 1, 1, 0, '', 0, 0, '好地方。', 0, 0, 0.95),
-(6, '大众牛肉汤', '15038595869', '6:00 - 20:00', '洛阳市涧西区湖北路87号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0.95),
-(7, '百碗羊汤', '1', '6:00 - 20:00', '洛阳市西工区解放路80号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0.95),
-(8, '百碗羊汤', '15038595869', '6:00 - 20:00', '洛阳市老城区金业路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0.95),
-(9, '桥头豆腐汤', '15038595869', '6:00 - 20:00', '洛阳市西工区七一路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0.95),
-(10, '赵记丸子汤', '15038595869', '6:00 - 20:00', '洛阳市老城区民主街881号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0.95),
-(11, '大众牛肉汤', '', '6:00 - 20:00', '西工区九都路98号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0);
+INSERT INTO `restaurant` (`id`, `name`, `type_id`, `phone`, `business_hour`, `address`, `county_id`, `area_id`, `is_shutdown`, `image_url`, `latitude`, `longitude`, `description`, `votes`, `average_points`, `weighted_points`) VALUES
+(1, '大石桥羊肉汤', 0, '138', '6:00 - 12:00', '建设路24号', 1, 2, 2, '/images/restaurant/profile_1.png', 0, 0, '好喝', 1, 0, 0.909091),
+(2, '清真牛肉汤', 0, '', '6:00 - 20:00', '涧西区西苑路2号', 1, 1, 0, '/images/restaurant/profile_2.png', 0, 0, '好地方。', 1, 4, 1.27273),
+(3, '怀府驴肉汤', 0, '15038595869', '6:00 - 20:00', '洛阳市西工区健康路8号', 2, 1, 0, '/images/restaurant/profile_3.png', 0, 0, '好地方。', 0, 0, 1),
+(4, '白沙羊肉汤', 0, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路30号', 4, 1, 1, '/images/restaurant/profile_4.jpg', 0, 0, '好地方。', 1, 6, 1.45455),
+(5, '大众牛肉汤', 0, '15038595869', '6:00 - 20:00', '洛阳市洛龙区龙翔路99号', 1, 1, 0, '', 0, 0, '好地方。', 0, 0, 1),
+(6, '大众牛肉汤', 0, '15038595869', '6:00 - 20:00', '洛阳市涧西区湖北路87号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1),
+(7, '百碗羊汤', 0, '1', '6:00 - 20:00', '洛阳市西工区解放路80号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1),
+(8, '百碗羊汤', 0, '15038595869', '6:00 - 20:00', '洛阳市老城区金业路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1),
+(9, '桥头豆腐汤', 0, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1),
+(10, '赵记丸子汤', 0, '15038595869', '6:00 - 20:00', '洛阳市老城区民主街881号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1),
+(11, '大众牛肉汤', 0, '', '6:00 - 20:00', '西工区九都路98号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -157,6 +161,30 @@ INSERT INTO `restaurant_status` (`id`, `name`) VALUES
 (0, '正常营业'),
 (1, '临时关闭'),
 (2, '永久关闭');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `restaurant_type`
+--
+
+DROP TABLE IF EXISTS `restaurant_type`;
+CREATE TABLE IF NOT EXISTS `restaurant_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `restaurant_type`
+--
+
+INSERT INTO `restaurant_type` (`id`, `name`) VALUES
+(1, '牛肉汤'),
+(2, '羊肉汤'),
+(3, '驴肉汤'),
+(4, '丸子汤'),
+(5, '豆腐汤');
 
 -- --------------------------------------------------------
 
@@ -216,16 +244,16 @@ CREATE TABLE IF NOT EXISTS `vote` (
   `restaurant_id` int(11) NOT NULL,
   `rating` tinyint(4) NOT NULL COMMENT '1-10分',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- 转存表中的数据 `vote`
 --
 
 INSERT INTO `vote` (`id`, `user_id`, `restaurant_id`, `rating`) VALUES
-(15, 1, 1, 6),
 (16, 1, 2, 4),
-(17, 4, 1, 5);
+(18, 4, 4, 6),
+(19, 4, 1, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

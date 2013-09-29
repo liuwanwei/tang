@@ -73,7 +73,14 @@ class RestaurantController extends Controller
 			$statuses[$value->id] = $value->name;
 		}
 
-		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses);
+		$dataProvider = new CActiveDataProvider('RestaurantType');
+		$data = $dataProvider->getData();
+		$types = array();
+		foreach ($data as $key => $value) {
+			$types[$value->id] = $value->name;
+		}
+
+		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses, 'types'=>$types);
 	}
 
 	private function urlImagePath($model, $extension){
