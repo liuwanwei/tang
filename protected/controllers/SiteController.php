@@ -75,7 +75,7 @@ class SiteController extends Controller
 	public function actionAdmin()
 	{
 		if (parent::isAdmin())
-		{echo 1;
+		{
 			parent::actionAdmin();
 			$this->render('index');
 		}
@@ -163,6 +163,10 @@ class SiteController extends Controller
 					echo '认证失败';
 				}
 			}
+		}
+		else 
+		{
+			$this->redirect(Yii::app()->session['back_url']);
 		}
 	}
 	
