@@ -29,6 +29,13 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'type_id'); ?>
+		<!--<?php echo $form->textField($model,'type_id'); ?> -->
+		<?php echo $form->dropDownList($model, 'type_id',  $selectors['types']);?>
+		<?php echo $form->error($model,'type_id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'county_id'); ?>
 		<!--<?php echo $form->textField($model,'county_id'); ?> -->
 		<?php echo $form->dropDownList($model, 'county_id',  $selectors['counties']);?>

@@ -71,6 +71,7 @@ class Restaurant extends CActiveRecord
 		return array(
 			'county' => array(self::BELONGS_TO, 'County', 'county_id'),
 			'area' => array(self::BELONGS_TO, 'Area', 'area_id'),
+			'type' => array(self::BELONGS_TO, 'RestaurantType', 'type_id'),
 			'status' => array(self::BELONGS_TO, 'RestaurantStatus', 'is_shutdown'),
 			'comment_count' => array(self::STAT, 'Comment','restaurant_id'),
 		);
@@ -84,6 +85,7 @@ class Restaurant extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => '店名',
+			'type_id' => '类型',
 			'phone' => '电话',
 			'business_hour' => '营业时间',
 			'address' => '地址',
@@ -116,6 +118,7 @@ class Restaurant extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		// $criteria->compare('type_id', $this->type_id, true),
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('business_hour',$this->business_hour,true);
 		$criteria->compare('address',$this->address,true);
