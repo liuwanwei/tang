@@ -27,7 +27,7 @@ $this->menu=array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
-	
+	'template' => "{pager}\n{summary}\n{items}\n{pager}"
 )); ?>
 
 <script type="text/javascript">
