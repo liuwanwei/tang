@@ -13,13 +13,16 @@ $this->menu=array(
 );
 ?>
 
-<div class="county-menu-title"><span>区域</span></div>
+
 
 <?php if (! empty($areaMenu)) { ?>
+<div class="county-menu-title"><span>区域</span>
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
 </div><!-- area-menu -->
 <?php } ?>
+</div>
+
 
 
 <div class="content-title">找汤馆</div>
@@ -33,9 +36,6 @@ $this->menu=array(
 <script type="text/javascript">
 
 $(function(){
-
-//var i=$(".rating-widget .rating-list .rating-stars a").length;
-//console.log("rating-widget-count:"+i);
 
 /*
  *评分组件

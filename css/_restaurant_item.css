@@ -29,7 +29,7 @@ div.view-item
 	margin: 5px 0px 5px 0px;	
 	display: inline-block;
 	vertical-align: top;
-
+	/*border-bottom:1px inset #999; */
 
 	
 }
@@ -57,47 +57,70 @@ div.view-item .ranking
 
 div.view-item .restaurant-detail ul
 {
-	margin: 0;
-	padding:0;
 	list-style: none;
 	
-
+	
 }
-div.view-item .restaurant-detail ul li
+div.view-item .restaurant-detail>ul
 {
-	width: 255px;
-	
-	
+	width: 700px;
 }
 
-div.view-item .restaurant-detail ul li:first-child
+div.view-item .restaurant-detail>ul li ul
+{
+	width: 255px; 
+	float: left;
+}
+div.view-item .restaurant-detail>ul li ul li
+{
+	width: 100%; 
+}
+
+div.view-item .restaurant-detail>ul li ul li:first-child
 {
 
 	/*border-top:1px solid #555;
 	border-bottom:1px solid #555;
 	*/
 }
-div.view-item .restaurant-detail ul li span.title
+div.view-item .restaurant-detail>ul li ul li span.title
 {
 	font-weight: 500;
 }
-div.view-item .restaurant-detail ul li strong
+div.view-item .restaurant-detail>ul li ul li strong
 {
 	font-size: 1.0em;	
 	margin-right: 10px;
 
 }
 
-div.view-item .restaurant-detail ul li strong a
+div.view-item .restaurant-detail>ul li ul li strong a
 {
 	color:#555;
 	text-decoration:none;
 }
 
-div.view-item .restaurant-detail ul li strong a:hover,div.view-item .restaurant-detail ul li strong a:focus
+div.view-item .restaurant-detail>ul li ul li strong a:hover,div.view-item .restaurant-detail>ul li ul li strong a:focus
 {
 	color:#000;
 }
+
+div.view-item .restaurant-detail>ul li ul+ul
+{
+	margin-top:20px;
+	float: right;
+	width: 100px; 
+	font-size: 12px;
+
+}
+
+div.view-item .restaurant-detail>ul li ul+ul li strong
+{
+	margin: 0;
+	padding: 0;
+	color:#555;
+}
+
 
 .fontsize-0-8em
 {

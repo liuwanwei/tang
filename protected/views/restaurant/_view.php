@@ -23,6 +23,7 @@
 		-->
 		
 <ul>
+	<li><ul>
 		<li><strong>
 		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id)); ?></strong>
 		
@@ -95,8 +96,17 @@
 		</span>
 		</div>
 		</div>
+			<div class="clear"><!--清除浮动--></div>
 		</li>
 		</ul>
+		<ul>
+			<li><span>投票数:</span> <strong><?php echo CHtml::encode($data->votes);?></strong>人</li>
+			<li><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
+		</ul>
+		<div class="clear"></div>
+	</li>
+		</ul>
+
 		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 		<?php echo CHtml::encode($data->description); ?>
