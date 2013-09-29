@@ -22,12 +22,17 @@ $this->menu=array(
 <?php } ?>
 
 
-<div class="content-title">找汤馆</div>
+<div class="content-title">分类</div>
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
-	'template' => "{pager}\n{summary}\n{items}\n{pager}"
+	'template' => "{pager}\n{summary}\n{items}\n{pager}",
+	'pager'=>array('header'=>'',
+			'prevPageLabel'=>'<',
+			'nextPageLabel'=>'>',
+			'firstPageLabel'=>'首页',
+			'lastPageLabel'=>'末页'),
 )); ?>
 
 <script type="text/javascript">
