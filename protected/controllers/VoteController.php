@@ -115,8 +115,8 @@ class VoteController extends Controller
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
 
-		        	// 重定向到餐厅列表。
-		        	echo json_encode(array('msg' =>"0" ));
+		        	// 提交成功向前台输出JSON。
+		        	echo json_encode(array('msg' =>"0",'voteid'=>$model->id));
 
 		        	return;
 		    }
@@ -202,11 +202,12 @@ class VoteController extends Controller
 				// 更新汤馆表中的平均分和投票总数。
 				$this->removeVoteFromRestaurant($model->restaurant_id, $rating);
 			}
-
+			echo json_encode(array('msg' =>"0"));
 			return;	
 		}
 
-		$this->render('delete', array('model'=>$model));
+		//$this->render('delete', array('model'=>$model));
+		echo json_encode(array('msg' =>"1"));
 	}
 
 	/**

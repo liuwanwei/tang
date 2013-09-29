@@ -29,6 +29,7 @@
 	
 <?php
 		 $menu = array();
+		 $areamenu=array();
 		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
 		 $counties = County::model()->getCountries(0);
 		 $areas=county::model()->getCountries(1);
@@ -37,7 +38,10 @@
 		 {
 		 	$menu[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
 		 }
-		 $menu[] = array('label'=>'县区','url'=>'');
+		 foreach ($areas as $key => $value) {
+		 	$areamenu[]=array('label'=>$value,'url'=>array('/restaurant/index&county='.$key));
+		 }
+		 $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 // 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
 // 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
 // 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
@@ -47,7 +51,7 @@
 	?>
 
 	<div id="mainmenu">
-
+<a href="#" class="tang-logo"><span>老汤馆</span></a>
 	<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 
@@ -128,6 +132,13 @@ $(".login").click(function(){
 		$("#myModal").slideUp(100);
 
 	});
+});
+
+//县菜单鼠标放上去显示下级菜单
+$(".areamenu").hover(function(){
+	$(this).find('ul').show(100);
+},function(){
+	$(this).find('ul').hide(100);
 });
 
 

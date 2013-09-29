@@ -4392,3 +4392,42 @@ Stack trace:
 #24 {main}
 REQUEST_URI=/
 ---
+2013/09/29 08:37:03 [error] [php] Division by zero (D:\work\php\wamp\www\tang\protected\controllers\VoteController.php:67)
+Stack trace:
+#0 D:\work\php\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\work\php\wamp\www\yii\framework\web\CController.php(286): VoteController->runAction()
+#2 D:\work\php\wamp\www\yii\framework\web\CController.php(265): VoteController->runActionWithFilters()
+#3 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(282): VoteController->run()
+#4 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\work\php\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 D:\work\php\wamp\www\tang\index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in D:\work\php\wamp\www\tang\protected\controllers\VoteController.php (67)
+in D:\work\php\wamp\www\tang\protected\controllers\VoteController.php (116)
+in D:\work\php\wamp\www\tang\index.php (13)
+2013/09/29 08:37:15 [error] [php] Division by zero (D:\work\php\wamp\www\tang\protected\controllers\VoteController.php:67)
+Stack trace:
+#0 D:\work\php\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\work\php\wamp\www\yii\framework\web\CController.php(286): VoteController->runAction()
+#2 D:\work\php\wamp\www\yii\framework\web\CController.php(265): VoteController->runActionWithFilters()
+#3 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(282): VoteController->run()
+#4 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\work\php\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 D:\work\php\wamp\www\tang\index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in D:\work\php\wamp\www\tang\protected\controllers\VoteController.php (67)
+in D:\work\php\wamp\www\tang\protected\controllers\VoteController.php (116)
+in D:\work\php\wamp\www\tang\index.php (13)
+2013/09/29 08:37:33 [error] [php] Division by zero (D:\work\php\wamp\www\tang\protected\controllers\VoteController.php:67)
+Stack trace:
+#0 D:\work\php\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\work\php\wamp\www\yii\framework\web\CController.php(286): VoteController->runAction()
+#2 D:\work\php\wamp\www\yii\framework\web\CController.php(265): VoteController->runActionWithFilters()
+#3 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(282): VoteController->run()
+#4 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\work\php\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 D:\work\php\wamp\www\tang\index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=vote/create
+in D:\work\php\wamp\www\tang\protected\controllers\VoteController.php (67)
+in D:\work\php\wamp\www\tang\protected\controllers\VoteController.php (116)
+in D:\work\php\wamp\www\tang\index.php (13)

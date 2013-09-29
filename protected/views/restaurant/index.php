@@ -20,9 +20,8 @@ $this->menu=array(
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
 </div><!-- area-menu -->
-<?php } ?>
 </div>
-
+<?php } ?>
 
 
 <div class="content-title">找汤馆</div>
@@ -74,24 +73,30 @@ rating_list_dome.each(function(){
 
 		//单击星星时发生
 		$(this).one("click",function(){
+			if (a_this.attr('data-userlogin')=="1") {
+				//点击登陆弹出模态窗口
+				
+
+				return false;
+			}
 		a_this.attr("data-clicknum",i);
 		selected_a.removeClass();
 		selected_a.addClass("rating-icon rating-off");
 		var rating_cancel=$(".rating-cancel",a_this);
 		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
-		console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
-				//console.log(resultdata.msg);
+				//console.log("aa="+resultdata.voteid);
 				if (resultdata.msg==="0") {
+					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
-							rating:"0"}},function(rating_cancel_result){
-								
+						$.post("/index.php?r=vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
 								if (rating_cancel_result.msg==="0") {
+									a_this.removeAttr('voteid');
 									rating_cancel.removeClass('rating-pending');
 									a_this.attr("data-clicknum","0");
 									raing_value.text(raing_default);
