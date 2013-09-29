@@ -25,15 +25,9 @@
 
 <body>
 
-<div class="container" id="page">
-
-	<div id="header" style="height: 41px">
-		<div class="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
-	
+<div class="container" id="page">	
 	<?php
 		 $menu = array();
-		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
 		 $menu[] = array('label'=>'餐馆管理','url'=>array('/restaurant/admin'));
 		 $menu[] = array('label'=> '餐馆状态管理','url'=>array('/restaurantStatus/admin'));
 		 $menu[] = array('label'=>'县区管理','url'=>array('/county/admin'));
