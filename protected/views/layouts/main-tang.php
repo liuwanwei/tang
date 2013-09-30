@@ -21,6 +21,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
 	 -->
+	 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js">
+		
+	 </script>
 </head>
 
 <body>
@@ -125,14 +128,10 @@ $(function(){
 
 //点击登陆弹出模态窗口
 $(".login").click(function(){
-	$(".modal-backdrop").show();
-	$("#myModal").slideDown(200);
-	$(".close").one("click",function(){
-		$(".modal-backdrop").hide();
-		$("#myModal").slideUp(100);
-
-	});
+	loginModal();
 });
+
+
 
 //县菜单鼠标放上去显示下级菜单
 $(".areamenu").hover(function(){

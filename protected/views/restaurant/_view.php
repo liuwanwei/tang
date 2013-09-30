@@ -68,7 +68,7 @@
 		
 		<div class="rating-widget">
 		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-		<div class="rating-list" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
+		<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
 			data-clicknum="0" 
 			data-user="<?php echo Yii::app()->user->id ?>"
 			data-id="<?php echo CHtml::encode($data->id);?>"

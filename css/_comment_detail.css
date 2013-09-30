@@ -1,0 +1,22 @@
+.comment_detail
+{
+	width: 100%;
+	clear:both;	
+}
+.comment_detail ul
+{
+	list-style: none;
+	padding: 5px;
+}
+.comment_detail ul li
+{
+	line-height: 30px;
+	font-size: 0.9em;
+
+}
+.comment_detail ul li span:first-child
+{
+	font-weight: bold;
+	margin-right: 5px;
+	clear:both;
+}
