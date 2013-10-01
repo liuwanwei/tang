@@ -116,7 +116,7 @@ class VoteController extends Controller
 		    	$this->updateRestaurant($model);
 
 		        	// 重定向到餐厅列表。
-		        	echo json_encode(array('msg' =>"0" ));
+		        	echo json_encode(array('msg' =>"0" , 'id'=>$model->id));
 
 		        	return;
 		    }
