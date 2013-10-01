@@ -21,6 +21,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
 	 -->
+	 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js">
+		
+	 </script>
 </head>
 
 <body>
@@ -29,13 +32,19 @@
 	
 <?php
 		 $menu = array();
+		 $areamenu=array();
 		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
 		 $counties = County::model()->getCountries(0);
-		 foreach ($counties as $key => $value) 
+		 $areas=county::model()->getCountries(1);
+		 //echo count($areas);
+		 foreach ($counties as $key => $value)
 		 {
 		 	$menu[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
 		 }
-		 $menu[] = array('label'=>'县区','url'=>'');
+		 foreach ($areas as $key => $value) {
+		 	$areamenu[]=array('label'=>$value,'url'=>array('/restaurant/index&county='.$key));
+		 }
+		 $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 // 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
 // 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
 // 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
@@ -45,7 +54,7 @@
 	?>
 
 	<div id="mainmenu">
-
+<a href="#" class="tang-logo"><span>老汤馆</span></a>
 	<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 
@@ -69,13 +78,8 @@
 
 		<a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a>
 </div>
-
 </div>
-
 <div class="modal-backdrop hide"></div>
-
-
-
 	<!--主体内容部分-->
 	<div class="tang-content" id="tang-content">
 	<?php echo $content; ?>
@@ -92,10 +96,6 @@
 	</div><!-- footer -->
 <script type="text/javascript">
 $(function(){
-
-
-					
-						
 							var footerHeight = 0,
 									footerTop = 0,
 									$footer = $("#footer");
@@ -105,15 +105,7 @@ $(function(){
 								//取到div#footer高度
 								footerHeight = $footer.height();
 								//div#footer离屏幕顶部的距离
-								footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
-								/* DEBUGGING STUFF
-									console.log("Document height: ", $(document.body).height());
-									console.log("Window height: ", $(window).height());
-									console.log("Window scroll: ", $(window).scrollTop());
-									console.log("Footer height: ", footerHeight);
-									console.log("Footer top: ", footerTop);
-									console.log("-----------")
-								*/
+								footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";								
 								//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
 								if ( ($(document.body).height()+footerHeight) < $(window).height()) {
 									$footer.css({
@@ -136,13 +128,16 @@ $(function(){
 
 //点击登陆弹出模态窗口
 $(".login").click(function(){
-	$(".modal-backdrop").show();
-	$("#myModal").slideDown(200);
-	$(".close").one("click",function(){
-		$(".modal-backdrop").hide();
-		$("#myModal").slideUp(100);
+	loginModal();
+});
 
-	});
+
+
+//县菜单鼠标放上去显示下级菜单
+$(".areamenu").hover(function(){
+	$(this).find('ul').show(100);
+},function(){
+	$(this).find('ul').hide(100);
 });
 
 

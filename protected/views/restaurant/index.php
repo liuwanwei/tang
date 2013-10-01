@@ -3,12 +3,14 @@
 /* @var $dataProvider CActiveDataProvider */
 ?>
 
-<div class="county-menu-title"><span>区域</span></div>
+
 
 <?php if (! empty($areaMenu)) { ?>
+<div class="county-menu-title"><span>区域</span>
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
 </div><!-- area-menu -->
+</div>
 <?php } ?>
 
 
@@ -29,9 +31,6 @@
 
 $(function(){
 
-//var i=$(".rating-widget .rating-list .rating-stars a").length;
-//console.log("rating-widget-count:"+i);
-
 /*
  *评分组件
  *@当鼠标移到星星上（A标签），就给小于等于当前鼠标位置的元素加上选中的样式，
@@ -50,43 +49,45 @@ rating_list_dome.each(function(){
 	
 	ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 
-	a_arr.hover(function(){
 
-
-		//当鼠标移到a标签上时的事件
-
-		var i=parseInt($("span",$(this)).text());
-		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
-		selected_a.removeClass();
-		selected_a.addClass("rating-icon rating-hover");
-
-		
-		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
-		no_selected_a.removeClass();
-		no_selected_a.addClass("rating-icon star-on");
-
-		raing_value.text(i);
 
 		//单击星星时发生
-		$(this).one("click",function(){
-		a_this.attr("data-clicknum",i);
+		a_arr.live("click",function(event){
+
+			if (a_this.attr("isclick")=="true") {
+				return false;
+			}
+			var i=parseInt($("span",$(this)).text());
+		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
+			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
+			//event.preventDefault()
+			//event.stopPropagation();
+			console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+
+			if (a_this.attr('data-user')=="") {
+				//点击登陆弹出模态窗口
+				loginModal();
+
+				return false;
+			}
+		a_this.attr("data-clicknum",parseInt($("span",$(this)).text()));
 		selected_a.removeClass();
 		selected_a.addClass("rating-icon rating-off");
 		var rating_cancel=$(".rating-cancel",a_this);
 		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
-		console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
-				//console.log(resultdata.msg);
+				//console.log("aa="+resultdata.voteid);
 				if (resultdata.msg==="0") {
+					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
-							rating:"0"}},function(rating_cancel_result){
-								
+						$.post("/index.php?r=vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
 								if (rating_cancel_result.msg==="0") {
+									a_this.removeAttr('voteid');
 									rating_cancel.removeClass('rating-pending');
 									a_this.attr("data-clicknum","0");
 									raing_value.text(raing_default);
@@ -101,10 +102,33 @@ rating_list_dome.each(function(){
 					//服务器出错
 				}
 		},"json");
+	
+		a_this.attr("isclick","true");
 		});
+
+	a_arr.hover(function(){
+
+
+		//当鼠标移到a标签上时的事件
+		var i=parseInt($("span",$(this)).text());
+		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
+		selected_a.removeClass();
+		selected_a.addClass("rating-icon rating-hover");
+
+		
+		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
+		no_selected_a.removeClass();
+		no_selected_a.addClass("rating-icon star-on");
+
+		raing_value.text(i);
+
+		
 		
 	
-	},function(){});
+	},function(){
+
+		a_this.attr("isclick","flase");
+	});
 
 	
 

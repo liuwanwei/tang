@@ -13,9 +13,21 @@ body
 	background: radial-gradient(ellipse at center, #ffffff 0%,#e5e5e5 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=1 );			
 
-
-	
 }
+.tang-logo
+{
+	background: url(../images/icon/tang_logo_64.png);
+	width: 64px;
+	height: 64px;
+	display: block;
+	float: left;
+	margin-left: 10px;
+}
+.tang-logo span
+{
+	visibility: hidden;
+}
+
 
 
 #page
@@ -83,14 +95,15 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 
 }
 
-#mainmenu ul
+#mainmenu>ul
 {	
 	margin:0 auto;
 	width:960px;
+	list-style:none;
 	
 }
 
-#mainmenu ul li
+#mainmenu>ul>li
 {
 	float:left;
 	list-style:none;
@@ -98,7 +111,7 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	
 }
 
-#mainmenu ul li a
+#mainmenu>ul>li>a
 {
 	color:#ffffff;
 	background-color:transparent;
@@ -107,32 +120,74 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 	padding:0px 8px;
 }
 
-#mainmenu ul li a:hover, #mainmenu ul li.active a
+#mainmenu>ul>li a:hover, #mainmenu>ul>li.active a
 {
 	cursor: pointer;
 	/*background-color:#A65900;*/
 	text-decoration:none;
-	display:block;
+	
+}
+
+li.areamenu ul
+{
+	min-height: 100px;
+	width: 100px;	
+	list-style:none;
+	background-color: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
+	position: absolute;
+	z-index: 500;
+	padding: 10px 0px 0px 0px;
+	display: none;
+
+}
+
+li.areamenu ul li
+{
+	height: 30px;
+	line-height: 30px;
+	padding: 0px 0px 0px 10px;
+
+}
+li.areamenu ul li:hover,li.areamenu ul li:focus
+{
+	background: #9c9c9c;
+}
+
+li.areamenu ul li a
+{
+	color: #555;
+
 }
 
 
 .county-menu-title 
 {
 	
-	font-size:1.1em;		
+			
 	text-align:left;
 	border-bottom:1px solid rgb(204, 204, 204);
 	margin-top:10px;
 	margin-bottom: 10px;
-	color: rgb(34, 34, 34);
-	font-weight:bold;
-	line-height:30px;
+	color: rgb(34, 34, 34);	
+	line-height:40px;
 	padding-left:5px;
 	/*background: url(../images/icon/area_32.png) no-repeat left top;*/
 
-	
-	
-	
+}
+.county-menu-title>span
+{
+	font-weight:bold;
+	font-size:1.1em;
 }
 
 /*区域-----------------------------start*/
@@ -168,13 +223,19 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 
 }
 
+#area-menu
+{
+	padding-left: 10px;
+	display: inline-block;
+}
+
 #area-menu li{
-	display: inline-table;
+	display: inline-block;
 	font-size: .9em;
 	height: 25px;
 	line-height: 25px;
 	text-align: center;
-	background:#9c9c9c;/#8F8275*3CA0D0*/
+	background:#9c9c9c;
 	margin-right:10px;
 	/*box-shadow:3px 2px rgba(0,52,118,.6);
 	-moz-box-shadow:3px 2px rgba(0,52,118,.6);
@@ -194,8 +255,7 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 #county-menu li a, #area-menu li a{
-	padding: 5px 8px;
-	margin:0;
+	padding: 5px;	
 	text-decoration: none;
 	color:#FFFFFF;
 }
@@ -428,6 +488,12 @@ body, input, textarea, select, button {
 	display:block;
 
 }
+.clear
+{
+	width: 0px;
+	height: 0px;
+	clear: both;
+}
 
 
 
@@ -541,5 +607,165 @@ body, input, textarea, select, button {
 	background: url(../images/icon/qq_24.png) no-repeat top left;
 	
 }
+
+/****************评分组件************************/
+div.rating-widget
+{
+	float:left;
+	
+}
+.rating-widget .rating-widget-lable
+{
+	font-weight: bold;
+	font-size: 11px;
+	color:#555;
+}
+.rating-widget .rating-list
+{
+	display: inline-block;	
+	line-height: 13px;
+	height: 13px;
+	width: 210px;
+	font-size: 11px;
+	
+	
+}
+.rating-widget .rating-list.m
+{
+	color:rgb(165, 134, 0);
+}
+
+
+.rating-widget .rating-list.m:hover
+{
+	color:#555;
+}
+.rating-widget .rating-list.n
+{
+	color:#5F6699;
+}
+.rating-widget .rating-list.n:hover
+{
+	color:#000;
+}
+
+.rating-list .rating-stars
+{
+
+}
+
+.rating-icon
+{
+	background-image: url(../images/icon/sprite.png);
+	background-repeat: no-repeat;
+}
+
+.rating-list .rating-stars a
+{
+
+	width: 14px;	
+	height:13px;
+	display:block;
+	float:left;			
+	margin: 0px;
+
+}
+
+.rating-list .rating-stars .star-on
+{
+	background-position: 0px -27px;
+}
+.rating-list .rating-stars a span
+{
+	
+	visibility: hidden;
+
+	
+}
+
+.rating-list .rating-rating
+{
+	width:50px;
+	display: inline-block;
+	text-align: right;
+	font-weight: bold;
+	font-size: 11px;	
+	margin:0;
+	padding: 0;
+}
+.rating-list .rating-rating .grey
+{
+	font-weight: normal;
+	color: rgb(204, 204, 204);
+
+}
+ 
+.rating-list .rating-hover
+{
+	background-position: 0px -69px;
+	cursor: pointer;
+	
+}
+
+.rating-list .rating-off
+{
+	background-position: 0px -55px;
+}
+.rating-list .rating-init
+{
+	background-position: 0px -41px;
+}
+
+.rating-list .rating-cancel
+{
+	width: 14px;
+	height: 13px;	
+	display: none;
+	font-size: 11px;
+	margin:0;
+
+}
+
+ .rating-list .rating-your
+{
+	background-position: 0px 0px;
+	display: inline-block;
+}
+
+.rating-list .rating-your:hover
+{
+	background-position:0px -13px;
+	cursor: pointer;
+
+}
+
+.rating-list .rating-cancel a span
+{
+	visibility:hidden;
+}
+
+.rating-list .rating-pending
+{
+	background: url(../images/spinner.gif);
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.fontsize-0-8em
+{
+	font-size:.8em;	
+
+}
+.fonttext-shadow-2-3-5-000
+{
+
+	text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-moz-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-webkit-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+	-o-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
+
+}
+/****************评分组件***end*********************/
+
 
 

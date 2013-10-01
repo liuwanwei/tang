@@ -23,6 +23,7 @@
 		-->
 		
 <ul>
+	<li><ul>
 		<li><strong>
 		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id)); ?></strong>
 		
@@ -67,10 +68,11 @@
 		
 		<div class="rating-widget">
 		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-		<div class="rating-list" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
+		<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
 			data-clicknum="0" 
 			data-user="<?php echo Yii::app()->user->id ?>"
-			data-id="<?php echo CHtml::encode($data->id);?>">
+			data-id="<?php echo CHtml::encode($data->id);?>"
+			data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
 		<span class="rating-stars">
 		<a class="rating-icon star-on"><span>1</span></a>
 		<a class="rating-icon star-on"><span>2</span></a>
@@ -95,8 +97,17 @@
 		</span>
 		</div>
 		</div>
+			<div class="clear"><!--清除浮动--></div>
 		</li>
 		</ul>
+		<ul>
+			<li><span>投票数:</span> <strong><?php echo CHtml::encode($data->votes);?></strong>人</li>
+			<li><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
+		</ul>
+		<div class="clear"></div>
+	</li>
+		</ul>
+
 		<?php /*
 		<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 		<?php echo CHtml::encode($data->description); ?>
