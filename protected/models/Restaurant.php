@@ -86,6 +86,7 @@ class Restaurant extends CActiveRecord
 			'id' => 'ID',
 			'name' => '店名',
 			'type_id' => '类型',
+			'type.name' => '类型',
 			'phone' => '电话',
 			'business_hour' => '营业时间',
 			'address' => '地址',

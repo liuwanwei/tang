@@ -207,9 +207,31 @@ class RestaurantController extends Controller
 		}
 
 		$data = $dataProvider->getData();
+
+		$baseUrl = '/restaurant/index&county='.$countyId;
+
 		$menuItems = array();
+		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
+		$menuItems[] = array('label'=>'全部', 'url'=>array($baseUrl));
 		foreach ($data as $key => $value) {
-			$menuItems[] = array('label' => $value->name, 'url' => array('/restaurant/index&county='.$countyId.'&area='.$value->id));
+			$menuItems[] = array('label' => $value->name, 'url' => array($baseUrl.'&area='.$value->id));
+		}
+
+		return $menuItems;
+	}
+
+	private function typeMenu($countyId, $areaId){
+		$dataProvider = new CActiveDataProvider('RestaurantType');
+		$criteria = new CDbCriteria();
+		$criteria->compare('id', '<>0');
+		$dataProvider->criteria = $criteria;
+
+		$data = $dataProvider->getData();
+		$menuItems = array();
+		$baseUrl = '/restaurant/index&county='.$countyId.'&area='.$areaId;
+		$menuItems[] = array('label'=>'全部', 'url' => array($baseUrl));
+		foreach ($data as $key => $value) {
+			$menuItems[] = array('label'=>$value->name, 'url' => array($baseUrl.'&type='.$value->id));
 		}
 
 		return $menuItems;
@@ -218,7 +240,7 @@ class RestaurantController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($county = 0, $area = 0)
+	public function actionIndex($county = 0, $area = 0, $type = 0)
 	{
 		// $rankFilePath = Yii::app()->basePath . "/../ranks.db";
 		// $ranks = unserialize($rankFilePath);
@@ -228,20 +250,27 @@ class RestaurantController extends Controller
 		$criteria = new CDbCriteria();
 		$criteria->order = 'weighted_points DESC';
 
-		if ($county !== 0) {
+		if (!empty($county)) {
 			$criteria->compare('county_id', $county);
 		}
 
-		if ($area !== 0) {
+		if (! empty($area)) {
 			$criteria->compare('area_id', $area);
 		}
 
+		if (! empty($type)) {
+			$criteria->compare('type_id', $type);
+		}
+
 		$dataProvider->criteria = $criteria;
+
+		$data = $dataProvider->getData();
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider, 
 // 			'countyMenu'=>$this->countyMenu(),
 			'areaMenu'=>$this->areaMenu($county),
+			'typeMenu'=>$this->typeMenu($county, $area),
 		));
 	}
 

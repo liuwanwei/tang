@@ -24,6 +24,7 @@ $this->menu=array(
 		'id',
 		'name',
 		'phone',
+		'type.name',
 		'business_hour',
 		'address',
 		'county.name',

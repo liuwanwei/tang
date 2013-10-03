@@ -5,7 +5,7 @@
 
 
 
-<?php if (! empty($areaMenu)) { ?>
+<?php if (! empty($areaMenu) &&  count($areaMenu) > 1) { ?>
 <div class="county-menu-title"><span>区域</span>
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
@@ -14,7 +14,15 @@
 <?php } ?>
 
 
-<div class="content-title">分类</div>
+<?php if (! empty($typeMenu)) { ?>
+<div class="county-menu-title"><span>分类</span>
+<div id="area-menu">
+	<?php $this->widget('zii.widgets.CMenu',array('items'=>$typeMenu)); ?>
+</div><!-- type-menu -->
+</div>
+<?php } ?>
+
+
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
