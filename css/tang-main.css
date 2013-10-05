@@ -16,7 +16,7 @@ body
 }
 .tang-logo
 {
-	background: url(../images/icon/tang_logo_64.png);
+	background: url(../images/icon/tang_logo_64.png) no-repeat left -10px;
 	width: 64px;
 	height: 64px;
 	display: block;
@@ -166,6 +166,7 @@ li.areamenu ul li:hover,li.areamenu ul li:focus
 li.areamenu ul li a
 {
 	color: #555;
+	text-decoration: none;
 
 }
 

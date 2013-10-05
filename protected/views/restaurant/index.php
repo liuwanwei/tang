@@ -33,11 +33,18 @@
 			'nextPageLabel'=>'>',
 			'firstPageLabel'=>'首页',
 			'lastPageLabel'=>'末页'),
+
 )); ?>
 
 <script type="text/javascript">
 
 $(function(){
+
+	tang_main_rating();
+
+function tang_main_rating()
+{
+
 
 /*
  *评分组件
@@ -160,6 +167,8 @@ rating_list_dome.each(function(){
 
 
 });
+
+}
 
 function ratingInit(e_this,classname,i,evalue)
 {	
