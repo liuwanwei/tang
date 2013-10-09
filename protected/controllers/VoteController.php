@@ -209,6 +209,25 @@ class VoteController extends Controller
 		echo json_encode(array('msg' =>"1"));
 	}
 
+	public function actionQuery($restaurantId, $userId){
+		if (empty($restaurantId) || empty($userId)) {
+			die('error: $restaurantId and $userId are needed!');
+		}
+
+		$criteria = new CDbCriteria;
+		$criteria->compare('restaurant_id', $restaurantId);
+		$criteria->compare('user_id', $userId);
+		$model = Vote::model()->find($criteria);
+
+		if (!empty($model)) {
+			echo json_encode(array('id'=>$model->id, 'rating' => $model->rating));
+		}else{
+			echo json_encode(array('msg'=>'not found'));
+		}
+		
+		return;
+	}
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
