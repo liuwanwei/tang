@@ -38,8 +38,8 @@ var init = function() {
         //alert('您点击的位置为: [' + event.latLng.getLat() + ', ' +
         //event.latLng.getLng() + ']');
 
-    	document.getElementById("").value=event.latLng.getLat();//维度
-    	document.getElementById("").value=event.latLng.getLng();//经度
+    	document.getElementById("Restaurant_latitude").value=event.latLng.getLat();//维度
+    	document.getElementById("Restaurant_longitude").value=event.latLng.getLng();//经度
     });
     soso.maps.Event.addListener(map,'mousemove',function(event) {
         var latLng = event.latLng,
@@ -50,10 +50,12 @@ var init = function() {
 
 
     });
+
+    codeAddress();
 }
 
 function codeAddress() {
-    var address = document.getElementById("address").value;
+    var address = '洛阳市';//document.getElementById("address").value;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status == soso.maps.GeocoderStatus.OK) {
             map.setCenter(results.location);
