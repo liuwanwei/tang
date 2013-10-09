@@ -50,11 +50,23 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'address'); ?>
-		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'address'); ?>
+		<?php echo $form->labelEx($model,'latitude'); ?>
+		<?php echo $form->textField($model,'latitude'); ?>
+		<?php echo $form->error($model,'latitude'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'longitude'); ?>
+		<?php echo $form->textField($model,'longitude'); ?>
+		<?php echo $form->error($model,'longitude'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'description'); ?>
+		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>256)); ?>
+		<?php echo $form->error($model,'description'); ?>
+	</div>
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'phone'); ?>
 		<?php echo $form->textField($model,'phone',array('size'=>60,'maxlength'=>64)); ?>
