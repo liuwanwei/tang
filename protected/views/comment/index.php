@@ -57,6 +57,8 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 
 </li></ul>
+
+<div id="map_container"></div><div class="clear"></div>
 </div>
 <?php
 
@@ -257,7 +259,52 @@ function ratingInit(e_this,classname,i,evalue)
 		console.log("a="+event.data.rating);
 	}
 
+	//异步加载SOSO地图JS库
+	<?php if ($restaurant->latitude!=0 && $restaurant->longitude!=0) {
+		echo 'loadScript();';
+	}; ?>
+
+
 });
 
+/*
+ *加载地图定位
+ */
+var geocoder,map, marker = null;
+var init = function() {
+    var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->latitude).','.CHtml::encode($restaurant->longitude); ?>);//(39.916527,116.397128);
+    map = new soso.maps.Map(document.getElementById('map_container'),{
+        center: center,
+        zoom: 16
+    });
+    var info = new soso.maps.InfoWindow({map: map});
+    geocoder = new soso.maps.Geocoder({
+        complete : function(result){
+            map.setCenter(result.detail.location);
+            var marker = new soso.maps.Marker({
+                map:map,
+                position: result.detail.location
+            });
+            soso.maps.event.addListener(marker, 'click', function() {
+                info.open();
+                info.setContent('<div style="width:150px;height:80px;">'+
+                    result.detail.address+'</div>');
+                info.setPosition(result.detail.location);
+            });
+        }
+    });
 
+geocoder.getAddress(center);
+    
+}
+
+
+function loadScript() {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://map.soso.com/api/v2/main.js?callback=init";
+  document.body.appendChild(script);
+}
+//window.onload = loadScript;
 </script>
+
