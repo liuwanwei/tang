@@ -5,8 +5,11 @@
 }
 .comment_detail ul
 {
+	width: 450px;
 	list-style: none;
 	padding: 5px;
+	float: left;
+	
 }
 .comment_detail ul li
 {
@@ -19,4 +22,13 @@
 	font-weight: bold;
 	margin-right: 5px;
 	clear:both;
+
+}
+
+#map_container
+{
+	width: 400px;
+	height:190px;
+	float:right;
+	
 }
