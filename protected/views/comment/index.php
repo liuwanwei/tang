@@ -287,8 +287,7 @@ var init = function() {
             });
             soso.maps.event.addListener(marker, 'click', function() {
                 info.open();
-                info.setContent('<div style="width:150px;height:80px;">'+
-                    result.detail.address+'</div>');
+                info.setContent('<div style="width:150px;height:40px;"><?php echo $restaurant->name;  ?></div>');//'+result.detail.address+'
                 info.setPosition(result.detail.location);
             });
         }
