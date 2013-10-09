@@ -1,12 +1,12 @@
 <?php
 
-class RestaurantFeatureController extends Controller
+class FeatureController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/column_admin';
 
 	/**
 	 * @return array action filters
@@ -45,19 +45,25 @@ class RestaurantFeatureController extends Controller
 		);
 	}
 
-	public function actionQuery(){
-		$dataProvider = new CActiveDataProvider('RestaurantFeature');
-		$criteria = new CDbCriteria();
-		$criteria->order = 'type ASC';
-		$dataProvider->criteria = $criteria;
-		$models = $dataProvider->getData();
+	public function actionQuery($restaurantId){
+		$models = array();
+		if (! empty($restaurantId)) {
+			$dataProvider = new CActiveDataProvider('Feature');
+			$criteria = new CDbCriteria();
+			$criteria->compare('restaurant_id', $restaurantId);
+			$dataProvider->criteria = $criteria;
+			$models = $dataProvider->getData();
 
-		$results = array();
-		foreach ($models as $key => $model) {
-			$results[] = array('id' => $model->id, 'type' => $model->type, 'name' => $model->name, 'image_url' => $model->image_url);
+			$results = array();
+			foreach ($models as $key => $model) {
+				$results[] = array('id'=>$model->id, 
+					'restaurant_id'=>$model->restaurant_id, 
+					'feature_id' => $model->feature_id,
+					'feature_name' => $model->restaurantFeature->name);
+			}
+
+			echo json_encode($results);
 		}
-
-		echo json_encode($results);
 	}
 
 	/**
@@ -77,14 +83,14 @@ class RestaurantFeatureController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new RestaurantFeature;
+		$model=new Feature;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RestaurantFeature']))
+		if(isset($_POST['Feature']))
 		{
-			$model->attributes=$_POST['RestaurantFeature'];
+			$model->attributes=$_POST['Feature'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -106,9 +112,9 @@ class RestaurantFeatureController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RestaurantFeature']))
+		if(isset($_POST['Feature']))
 		{
-			$model->attributes=$_POST['RestaurantFeature'];
+			$model->attributes=$_POST['Feature'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -137,7 +143,7 @@ class RestaurantFeatureController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('RestaurantFeature');
+		$dataProvider=new CActiveDataProvider('Feature');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -148,10 +154,10 @@ class RestaurantFeatureController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new RestaurantFeature('search');
+		$model=new Feature('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['RestaurantFeature']))
-			$model->attributes=$_GET['RestaurantFeature'];
+		if(isset($_GET['Feature']))
+			$model->attributes=$_GET['Feature'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -162,12 +168,12 @@ class RestaurantFeatureController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return RestaurantFeature the loaded model
+	 * @return Feature the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=RestaurantFeature::model()->findByPk($id);
+		$model=Feature::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -175,11 +181,11 @@ class RestaurantFeatureController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param RestaurantFeature $model the model to be validated
+	 * @param Feature $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='restaurant-feature-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='feature-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
