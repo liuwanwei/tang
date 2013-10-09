@@ -9,6 +9,7 @@
  * @property string $phone
  * @property string $business_hour
  * @property string $address
+ * @property integer $type_id
  * @property integer $county_id
  * @property integer $area_id
  * @property integer $is_shutdown
@@ -49,7 +50,7 @@ class Restaurant extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, address, county_id, area_id', 'required'),
-			array('county_id, area_id, is_shutdown, votes', 'numerical', 'integerOnly'=>true),
+			array('county_id, type_id, area_id, is_shutdown, votes', 'numerical', 'integerOnly'=>true),
 			array('latitude, longitude, average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),

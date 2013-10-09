@@ -103,12 +103,21 @@ class RestaurantController extends Controller
 		if(isset($_POST['Restaurant']))
 		{
 			$model->attributes=$_POST['Restaurant'];
+
+			// 获取汤馆图片的地址，转换成服务器存储路径。
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
-			$extension = $uploadedFile->getExtensionName();
-			$filename = $this->urlImagePath($model, $extension);
-			$model->image_url = $filename;
+			if (!empty($uploadedFile)) {
+				$extension = $uploadedFile->getExtensionName();
+				$filename = $this->urlImagePath($model, $extension);
+				$model->image_url = $filename;
+			}
+
 			if($model->save())
-				$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
+				if (isset($filename)) {
+					// 保存汤馆图片到服务器存储路径。
+					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
+				}
+				
 				$this->redirect(array('view','id'=>$model->id));
 		}
 

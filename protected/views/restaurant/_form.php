@@ -82,7 +82,7 @@
 	</div>
 
 	<!-- 已有图像显示框 -->
-	<?php if($model->isNewRecord!='1'){ ?>
+	<?php if($model->isNewRecord!='1' &&  !empty($model->image_url)){ ?>
 	<div class="row">
 		<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
 	</div>
