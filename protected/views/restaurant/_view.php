@@ -29,7 +29,6 @@
 		
 		</li>
 		
-
 		<!--
 		<b><?php echo CHtml::encode($data->getAttributeLabel('county_id')); ?>:</b>
 		<?php echo CHtml::encode($data->county['name']); ?>
@@ -99,6 +98,14 @@
 		</div>
 			<div class="clear"><!--清除浮动--></div>
 		</li>
+		<?php if (!empty($data->features)) {
+			?>
+		<li><span class="title">特色:</span>
+			<?php  foreach ($data->features as $value) {
+			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
+		} ?></li>
+		<?php
+		} ?>
 		</ul>
 		<ul>
 			<li><span>投票数:</span> <strong><?php echo CHtml::encode($data->votes);?></strong>人</li>
@@ -106,6 +113,7 @@
 		</ul>
 		<div class="clear"></div>
 	</li>
+
 		</ul>
 
 		<?php /*
