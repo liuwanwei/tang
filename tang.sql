@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 10 月 04 日 21:06
+-- 生成日期: 2013 年 10 月 10 日 09:01
 -- 服务器版本: 5.5.29
 -- PHP 版本: 5.3.15
 
@@ -99,6 +99,27 @@ INSERT INTO `county` (`id`, `name`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `feature`
+--
+
+DROP TABLE IF EXISTS `feature`;
+CREATE TABLE IF NOT EXISTS `feature` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `restaurant_id` int(11) NOT NULL,
+  `feature_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `feature`
+--
+
+INSERT INTO `feature` (`id`, `restaurant_id`, `feature_id`) VALUES
+(1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `restaurant`
 --
 
@@ -111,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `business_hour` varchar(128) NOT NULL DEFAULT '6:00 - 20:00',
   `address` varchar(128) NOT NULL,
   `county_id` int(11) NOT NULL DEFAULT '0' COMMENT '所属县、区',
-  `area_id` int(11) NOT NULL DEFAULT '0' COMMENT '商圈范围。',
+  `area_id` int(11) NOT NULL DEFAULT '9999' COMMENT '商圈范围。',
   `is_shutdown` tinyint(4) NOT NULL DEFAULT '0',
   `image_url` varchar(256) NOT NULL DEFAULT '',
   `latitude` double NOT NULL DEFAULT '0',
@@ -122,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `weighted_points` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- 转存表中的数据 `restaurant`
@@ -138,8 +159,36 @@ INSERT INTO `restaurant` (`id`, `name`, `type_id`, `phone`, `business_hour`, `ad
 (7, '百碗羊汤', 2, '1', '6:00 - 20:00', '洛阳市西工区解放路80号', 2, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
 (8, '百碗羊汤', 2, '15038595869', '6:00 - 20:00', '洛阳市老城区金业路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
 (9, '桥头豆腐汤', 4, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
-(10, '赵记丸子汤', 5, '15038595869', '6:00 - 20:00', '洛阳市老城区民主街881号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
-(11, '大众牛肉汤', 1, '', '6:00 - 20:00', '西工区九都路98号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0);
+(10, '赵记丸子汤', 4, '15038595869', '6:00 - 20:00', '洛阳市老城区民主街881号', 3, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
+(11, '大众牛肉汤', 1, '', '6:00 - 20:00', '西工区九都路98号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0),
+(14, '老城豆腐汤', 5, '', '6:00 - 20:00', '长安路景华路交叉口南200米，路东', 1, 1, 0, '', 0, 0, '好地方。', 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `restaurant_feature`
+--
+
+DROP TABLE IF EXISTS `restaurant_feature`;
+CREATE TABLE IF NOT EXISTS `restaurant_feature` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` int(16) NOT NULL DEFAULT '0',
+  `name` varchar(64) NOT NULL,
+  `image_url` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `restaurant_feature`
+--
+
+INSERT INTO `restaurant_feature` (`id`, `type`, `name`, `image_url`) VALUES
+(1, 1, '油炸丸子（面）', ''),
+(2, 1, '油炸丸子（豆面）', ''),
+(3, 0, '清真', ''),
+(4, 2, '油旋馍', ''),
+(5, 2, '饼丝', ''),
+(6, 2, '烧饼', '');
 
 -- --------------------------------------------------------
 
