@@ -52,7 +52,7 @@ class Feature extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'restaurantFeature' => array(self::BELONGS_TO, 'RestaurantFeature', 'feature_id'),
+			'details' => array(self::BELONGS_TO, 'RestaurantFeature', 'feature_id'),
 		);
 	}
 
