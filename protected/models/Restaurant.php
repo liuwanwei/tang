@@ -75,6 +75,7 @@ class Restaurant extends CActiveRecord
 			'type' => array(self::BELONGS_TO, 'RestaurantType', 'type_id'),
 			'status' => array(self::BELONGS_TO, 'RestaurantStatus', 'is_shutdown'),
 			'comment_count' => array(self::STAT, 'Comment','restaurant_id'),
+			'features' => array(self::HAS_MANY, 'Feature', 'restaurant_id'),
 		);
 	}
 
