@@ -41,7 +41,7 @@ class Vote extends CActiveRecord
 		return array(
 			array('user_id, restaurant_id, rating', 'required'),
 			array('user_id, restaurant_id', 'numerical', 'integerOnly'=>true),
-			array('rating', 'numerical', 'integerOnly'=>true,  'min'=>0, 'max'=>10),
+			array('rating', 'numerical', 'integerOnly'=>true,  'min'=>1, 'max'=>5),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, restaurant_id, rating', 'safe', 'on'=>'search'),
