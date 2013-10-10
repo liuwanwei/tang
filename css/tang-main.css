@@ -768,5 +768,23 @@ div.rating-widget
 }
 /****************评分组件***end*********************/
 
+/************汤馆特色*********************/
+.feature
+{
+	margin:0px 3px 0px 0px;
+	padding:3px 5px;
+	text-align: center;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-o-border-radius:10px;
+	font-size: 1.2em;
+	font-family: '楷体','微软雅黑';
+	white-space: nowrap;
+	background: #9c9c9c;
+	color:#FFFFFF;
+	cursor: pointer;
+}
+
 
 
