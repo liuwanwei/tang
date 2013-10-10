@@ -56,7 +56,16 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 			<div class="clear"><!--清除浮动--></div>
 
 
-</li></ul>
+</li>
+<?php if (!empty($restaurant->features)) {
+			?>
+		<li><span class="title">特色:</span>
+			<?php  foreach ($restaurant->features as $value) {
+			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
+		} ?></li>
+		<?php
+		} ?>
+</ul>
 
 <div id="map_container"></div><div class="clear"></div>
 </div>
