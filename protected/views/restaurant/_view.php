@@ -101,7 +101,8 @@
 		<?php if (!empty($data->features)) {
 			?>
 		<li><span class="title">特色:</span>
-			<?php  foreach ($data->features as $value) {
+			<?php 			
+			 foreach ($data->features as $value) {			 	
 			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
 		} ?></li>
 		<?php
@@ -111,6 +112,7 @@
 			<li><span>投票数:</span> <strong><?php echo CHtml::encode($data->votes);?></strong>人</li>
 			<li><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
 		</ul>
+
 		<div class="clear"></div>
 	</li>
 
@@ -122,7 +124,23 @@
 		<br />
 
 		*/ ?>
+
 	</div>
+<div class="view-edit-btn"><div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
+<ul>
+<li class="feature-btn">贴标</li>
+
+</ul>
+</div>
+
+<div class="feature-content" data-item-id="<?php echo $data->id; ?>" data-selected-items="<?php
+				foreach ($data->features as $value) {
+			 	echo $value->feature_id.",";
+			 	} ?>">
+<div class="feature-content-content"></div>
+<div class="feature-content-footer"><button id="feature-edit-submit">提交</button><button id="feature-edit-close">关闭</button></div>
+			 </div>
+</div>
 	<div style="clear:both;"></div>
 
 </div>

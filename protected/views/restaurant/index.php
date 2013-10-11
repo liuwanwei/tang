@@ -77,7 +77,7 @@ rating_list_dome.each(function(){
 			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
 			//event.preventDefault()
 			//event.stopPropagation();
-			console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+			//console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 
 			if (a_this.attr('data-user')=="") {
 				//点击登陆弹出模态窗口
@@ -191,6 +191,68 @@ function ratingInit(e_this,classname,i,evalue)
 	{
 		console.log("a="+event.data.rating);
 	}
+
+
+/*当用户角色是管理员，就显示编辑功能*/
+
+var btnedit_div=$(".view-edit-btn");
+
+	$(".view-edit-header",btnedit_div).hover(function(){
+		var d_this=$(this),p_this=d_this.parent();
+		d_this.find("ul").show();
+		d_this.find(".feature-btn").bind("click",function(){
+			var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
+			//ajax加载数据
+			$.get("index.php?r=restaurantFeature/query",{},function(data){
+				
+				var t="<ul>";
+				if (data) {
+
+					$.each(data,function(a){
+						
+						if (isContain(feature_selected_items,data[a].id)) {
+							t+='<li><label><input type="checkbox" value='+data[a].id+' checked />'+data[a].name+'</label> </li>';
+						}
+						else{
+							t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
+						}
+					});
+				}
+				t+="</ul>";
+
+				$(".feature-content .feature-content-content",p_this).html(t);
+			},"json");
+
+			$(".feature-content",p_this).css({'display':'block'}).animate(
+				{	
+					width:'200px',
+					minHeight:'200px',
+					left:$(this).offset().left-$(this).width()-200,
+					top:$(this).offset().top-25
+					
+				},200);
+		});
+	},function(){
+	$(this).find("ul").hide();
+	$(this).find(".feature-btn").unbind("click");
+	});
+
+$("#feature-edit-close",btnedit_div).click(function(){
+
+	$(this).parent().parent().hide(100);
+});
+
+//数组中是否包含一个元素
+function isContain(a,b)
+{
+	for(var i in a)
+	{
+		if (a[i]==b) {
+			return true;
+		}
+	}
+	return false;
+}
 
 });
 
