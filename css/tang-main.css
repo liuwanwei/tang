@@ -521,8 +521,14 @@ body, input, textarea, select, button {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    -o-border-radius: 6px 6px 6px 6px;
     outline: medium none;
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+    -o-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
     background-clip: padding-box;
 }
 /*.fade {
