@@ -4,6 +4,13 @@
 ?>
 
 
+<div class="tooltip">
+	<div class="title"></div>
+	<div class="content">
+
+	</div>
+</div>
+
 
 <?php if (! empty($areaMenu) &&  count($areaMenu) > 1) { ?>
 <div class="county-menu-title"><span>区域</span>
@@ -35,6 +42,7 @@
 			'lastPageLabel'=>'末页'),
 
 )); ?>
+
 
 <script type="text/javascript">
 
@@ -122,7 +130,10 @@ rating_list_dome.each(function(){
 		});
 
 	a_arr.hover(function(){
-
+		var a_offset=$(this).offset();
+		var tooltip=$(".tooltip");
+		tooltip.find('.content').text($(this).attr('data-title'));
+		tooltip.css({'top':a_offset.top+20,'left':a_offset.left-$(this).width()/2-20}).show();
 
 		//当鼠标移到a标签上时的事件
 		var i=parseInt($("span",$(this)).text());
@@ -141,7 +152,7 @@ rating_list_dome.each(function(){
 		
 	
 	},function(){
-
+		$(".tooltip").hide();
 		a_this.attr("isclick","flase");
 	});
 
@@ -192,7 +203,8 @@ function ratingInit(e_this,classname,i,evalue)
 		console.log("a="+event.data.rating);
 	}
 
-
+<?php if (User::model()->isAdmin()) {
+?>
 /*当用户角色是管理员，就显示编辑功能*/
 
 var btnedit_div=$(".view-edit-btn");
@@ -211,7 +223,7 @@ var btnedit_div=$(".view-edit-btn");
 					$.each(data,function(a){
 						
 						if (isContain(feature_selected_items,data[a].id)) {
-							t+='<li><label><input type="checkbox" value='+data[a].id+' checked />'+data[a].name+'</label> </li>';
+							t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" />'+data[a].name+'</label> </li>';
 						}
 						else{
 							t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
@@ -238,9 +250,39 @@ var btnedit_div=$(".view-edit-btn");
 	});
 
 $("#feature-edit-close",btnedit_div).click(function(){
-
-	$(this).parent().parent().hide(100);
+	btnedit_div_hide($(this));
+	
 });
+
+$("#feature-edit-submit",btnedit_div).click(function(){
+	var d_this=$(this);
+	var parent_edit_dom=$(this).parent().parent();
+	
+	var features1="";
+	$("input:checked",parent_edit_dom.find(".feature-content-content")).each(function(){
+		features1+=$(this).val()+",";
+	});
+	features1=features1.substring(0,features1.length-1);
+	//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
+	$.post("/index.php?r=feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
+		if (data.success) {
+			//当提交成功时关闭窗体
+			btnedit_div_hide(d_this);
+		}else
+		{
+			//提示错误信息
+		}
+	},"json");
+});
+
+
+function btnedit_div_hide(a)
+{
+a.parent().parent().hide(100,function(){
+		$(this).css({'width':'100px','min-height':'50px','left':$(this).parent().offset().left,'top':$(this).parent().offset().top+25});
+		$(".feature-content-content").html('');
+	});
+}
 
 //数组中是否包含一个元素
 function isContain(a,b)
@@ -254,6 +296,7 @@ function isContain(a,b)
 	return false;
 }
 
+<?php } ?>
 });
 
 </script>

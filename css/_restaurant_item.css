@@ -31,7 +31,7 @@ div.view-item
 	margin: 5px 0px 5px 0px;	
 	display: inline-block;
 	vertical-align: top;
-	/*border-bottom:1px inset #999; */
+	border-bottom:1px inset #999; 
 
 	
 }
@@ -224,6 +224,10 @@ div.view-item .restaurant-detail>ul li ul+ul li strong
 .feature-content ul input[type="checkbox"]
 {
 	margin-right: 5px;
+}
+.feature-content .feature-content-content
+{
+	min-height: 60%;
 }
 
 .feature-content .feature-content-footer
