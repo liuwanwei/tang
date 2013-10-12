@@ -24,24 +24,20 @@ class FeatureController extends Controller
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
+public function accessRules()
 	{
+		
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'query'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
+				array('allow',
+						'actions'=>array('index'),
+						'users'=>array('*')),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions'=>array('admin','delete','create','update','view','AddRestaurantFeature'),
+						'expression'=>array($this,'isAdmin'),
+				),
+				array('deny',  // deny all users
+						'users'=>array('*'),
+				),
 		);
 	}
 
@@ -99,7 +95,64 @@ class FeatureController extends Controller
 			'model'=>$model,
 		));
 	}
-
+	
+	/**
+	 * 首页提供为餐馆打标签功能
+	 * 从$_POST[Feature]获取参数，格式如：1,2
+	 */
+	public function actionAddRestaurantFeature()
+	{
+		$result = true;
+		if (isset($_POST('Feature')))
+		{
+			$feature = $_POST('Feature');
+			$restaurant_id = $feature['restaurant_id'];
+			if (isset($restaurant_id))
+			{
+				$this->actionDeleteRestaurantFeatures($restaurant_id);
+				
+				$features = $feature['features'];
+				if (isset($feature))
+				{
+					$features_array = split(',', $features);
+					foreach ($features_array as $value)
+					{
+						$model = new Feature;
+						$model->restaurant_id = $restaurant_id;
+						$model->feature_id = $value;
+						
+						$model->save();
+					}
+				}
+				else
+				{
+					$result = false;
+				}
+			}
+			else
+			{
+					$result = false;
+			}
+		}
+		else 
+		{
+			$result = false;
+		}
+		
+		if ($result)
+		{
+			echo json_encode(array('sue' =>"" ));
+		}
+		else
+		{
+			echo json_encode(array('error' =>"" ));
+		}
+	}
+	
+	private function actionDeleteRestaurantFeatures($restaurant_id)
+	{
+		Feature::model()->deleteAll('restaurant_id=:restaurant_id',array(':restaurant_id'=>$restaurant_id));
+	}
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
