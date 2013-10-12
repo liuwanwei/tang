@@ -31,7 +31,7 @@ div.view-item
 	margin: 5px 0px 5px 0px;	
 	display: inline-block;
 	vertical-align: top;
-	/*border-bottom:1px inset #999; */
+	border-bottom:1px inset #999; 
 
 	
 }

@@ -780,6 +780,44 @@ div.rating-widget
 	padding:0px 10px;
 		
 }
+.tooltip
+{
+	width: auto;
+	height: 25px;
+	padding: 0px 10px;
+	background: rgba(0,0,0,0.8);	
+	position: absolute;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	color: #ffffff;
+	line-height: 25px;
+	display: none;
+	font-size: 0.9em;
+}
+.tooltip .title
+{
+	
+	
+	width: 0px;
+	height: 0px;
+	border-color: transparent;
+	border-width:5px;
+	border-top-width: 0px;
+	border-bottom-color: rgba(0,0,0,0.8); 	
+	display: block;
+	border-style: solid;
+	position: absolute;
+	top:-5px;
+	left: 50%;
+	margin-left: -5px;
+
+}
+
+
+
+
 /****************评分组件***end*********************/
 
 /************汤馆特色*********************/

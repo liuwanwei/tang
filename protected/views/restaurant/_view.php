@@ -73,11 +73,11 @@
 			data-id="<?php echo CHtml::encode($data->id);?>"
 			data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
 		<span class="rating-stars">
-		<a class="rating-icon star-on" title="不推荐"><span>1</span></a>
-		<a class="rating-icon star-on" title="聊胜于无"><span>2</span></a>
-		<a class="rating-icon star-on" title="日常饮食"><span>3</span></a>
-		<a class="rating-icon star-on" title="值得品尝"><span>4</span></a>
-		<a class="rating-icon star-on" title="汤中一绝"><span>5</span></a>
+		<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
+		<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
+		<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
+		<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
+		<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
 		<!--<a class="rating-icon star-on"><span>6</span></a>
 		<a class="rating-icon star-on"><span>7</span></a>
 		<a class="rating-icon star-on"><span>8</span></a>
@@ -130,7 +130,7 @@
 	<?php if (User::model()->isAdmin()) {
 	?>	
 	<!--编辑功能-->
-<div class="view-edit-btn"><div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
+<div class="view-edit-btn" ><div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
 <ul>
 <li class="feature-btn">贴标</li>
 

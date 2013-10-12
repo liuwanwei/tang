@@ -12,6 +12,12 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 
 ?>
+<div class="tooltip">
+	<div class="title"></div>
+	<div class="content">
+
+	</div>
+</div>
 
 <div class="comment_detail">
 <ul>
@@ -30,11 +36,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 			data-id="<?php echo CHtml::encode($restaurant->id);?>"
 			>
 		<span class="rating-stars">
-		<a class="rating-icon star-on" title="不推荐"><span>1</span></a>
-		<a class="rating-icon star-on" title="聊胜于无"><span>2</span></a>
-		<a class="rating-icon star-on" title="日常饮食"><span>3</span></a>
-		<a class="rating-icon star-on" title="值得品尝"><span>4</span></a>
-		<a class="rating-icon star-on" title="汤中一绝"><span>5</span></a>		
+		<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
+		<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
+		<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
+		<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
+		<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>		
 		</span>
 		<span class="rating-rating"><!-- echo sprintf("%.1f",CHtml::encode($restaurant->average_points)); -->
 		<span class="fonttext-shadow-2-3-5-000 value">-</span>
@@ -227,7 +233,10 @@ rating_list_dome.each(function(){
 		});
 
 	a_arr.hover(function(){
-
+		var a_offset=$(this).offset();
+		var tooltip=$(".tooltip");
+		tooltip.find('.content').text($(this).attr('data-title'));
+		tooltip.css({'top':a_offset.top+20,'left':a_offset.left-$(this).width()/2-20}).show();
 
 		//当鼠标移到a标签上时的事件
 		var i=parseInt($("span",$(this)).text());
@@ -246,7 +255,7 @@ rating_list_dome.each(function(){
 		
 	
 	},function(){
-
+		$(".tooltip").hide();
 		a_this.attr("isclick","flase");
 	});
 

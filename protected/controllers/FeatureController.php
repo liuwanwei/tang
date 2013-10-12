@@ -102,19 +102,20 @@ public function accessRules()
 	 */
 	public function actionAddRestaurantFeature()
 	{
+		
 		$result = true;
-		if (isset($_POST('Feature')))
+		if (isset($_POST['Feature']))
 		{
-			$feature = $_POST('Feature');
-			$restaurant_id = $feature['restaurant_id'];
+			$feature = $_POST['Feature'];
+			$restaurant_id = $feature['restaurant_id']; 
 			if (isset($restaurant_id))
 			{
 				$this->actionDeleteRestaurantFeatures($restaurant_id);
 				
-				$features = $feature['features'];
+				$features = $feature['features']; 
 				if (isset($feature))
 				{
-					$features_array = split(',', $features);
+					$features_array = explode(",", $features);
 					foreach ($features_array as $value)
 					{
 						$model = new Feature;
@@ -141,12 +142,13 @@ public function accessRules()
 		
 		if ($result)
 		{
-			echo json_encode(array('sue' =>"" ));
+			echo json_encode(array('success' =>"success" ));
 		}
 		else
 		{
-			echo json_encode(array('error' =>"" ));
+			echo json_encode(array('error' =>"网络繁忙，请稍后重试!" ));
 		}
+	
 	}
 	
 	private function actionDeleteRestaurantFeatures($restaurant_id)
