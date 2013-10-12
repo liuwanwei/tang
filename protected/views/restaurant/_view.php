@@ -73,21 +73,21 @@
 			data-id="<?php echo CHtml::encode($data->id);?>"
 			data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
 		<span class="rating-stars">
-		<a class="rating-icon star-on"><span>1</span></a>
-		<a class="rating-icon star-on"><span>2</span></a>
-		<a class="rating-icon star-on"><span>3</span></a>
-		<a class="rating-icon star-on"><span>4</span></a>
-		<a class="rating-icon star-on"><span>5</span></a>
-		<a class="rating-icon star-on"><span>6</span></a>
+		<a class="rating-icon star-on" title="不推荐"><span>1</span></a>
+		<a class="rating-icon star-on" title="聊胜于无"><span>2</span></a>
+		<a class="rating-icon star-on" title="日常饮食"><span>3</span></a>
+		<a class="rating-icon star-on" title="值得品尝"><span>4</span></a>
+		<a class="rating-icon star-on" title="汤中一绝"><span>5</span></a>
+		<!--<a class="rating-icon star-on"><span>6</span></a>
 		<a class="rating-icon star-on"><span>7</span></a>
 		<a class="rating-icon star-on"><span>8</span></a>
 		<a class="rating-icon star-on"><span>9</span></a>
-		<a class="rating-icon star-on"><span>10</span></a>
+		<a class="rating-icon star-on"><span>10</span></a>-->
 		</span>
 		<span class="rating-rating">
 		<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?></span>
 		<span class="grey">/</span>
-		<span class="grey">10</span>
+		<span class="grey">5</span>
 		</span>
 		<span class="rating-cancel ">
 			<a title="删除">
@@ -126,6 +126,10 @@
 		*/ ?>
 
 	</div>
+
+	<?php if (User::model()->isAdmin()) {
+	?>	
+	<!--编辑功能-->
 <div class="view-edit-btn"><div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
 <ul>
 <li class="feature-btn">贴标</li>
@@ -141,6 +145,7 @@
 <div class="feature-content-footer"><button id="feature-edit-submit">提交</button><button id="feature-edit-close">关闭</button></div>
 			 </div>
 </div>
+<?php } ?>
 	<div style="clear:both;"></div>
 
 </div>

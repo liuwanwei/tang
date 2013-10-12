@@ -192,7 +192,8 @@ function ratingInit(e_this,classname,i,evalue)
 		console.log("a="+event.data.rating);
 	}
 
-
+<?php if (User::model()->isAdmin()) {
+?>
 /*当用户角色是管理员，就显示编辑功能*/
 
 var btnedit_div=$(".view-edit-btn");
@@ -211,7 +212,7 @@ var btnedit_div=$(".view-edit-btn");
 					$.each(data,function(a){
 						
 						if (isContain(feature_selected_items,data[a].id)) {
-							t+='<li><label><input type="checkbox" value='+data[a].id+' checked />'+data[a].name+'</label> </li>';
+							t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" disabled />'+data[a].name+'</label> </li>';
 						}
 						else{
 							t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
@@ -238,8 +239,11 @@ var btnedit_div=$(".view-edit-btn");
 	});
 
 $("#feature-edit-close",btnedit_div).click(function(){
-
-	$(this).parent().parent().hide(100);
+	
+	$(this).parent().parent().hide(100,function(){
+		$(this).css({'width':'100px','min-height':'50px','left':$(this).parent().offset().left,'top':$(this).parent().offset().top+25});
+		$(".feature-content-content").html('');
+	});
 });
 
 //数组中是否包含一个元素
@@ -254,6 +258,7 @@ function isContain(a,b)
 	return false;
 }
 
+<?php } ?>
 });
 
 </script>

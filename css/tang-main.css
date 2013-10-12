@@ -632,10 +632,8 @@ div.rating-widget
 	display: inline-block;	
 	line-height: 13px;
 	height: 13px;
-	width: 210px;
+	width: 150px;
 	font-size: 11px;
-	
-	
 }
 .rating-widget .rating-list.m
 {
@@ -771,6 +769,16 @@ div.rating-widget
 	-webkit-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
 	-o-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
 
+}
+.rating-avg
+{
+	/*background: url(../images/icon/detail_rating_big.png);*/
+	font-size: 1.4em;	
+	color: #666;
+	border-radius: 10px;
+	background: #ccc;
+	padding:0px 10px;
+		
 }
 /****************评分组件***end*********************/
 

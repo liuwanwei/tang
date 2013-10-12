@@ -225,6 +225,10 @@ div.view-item .restaurant-detail>ul li ul+ul li strong
 {
 	margin-right: 5px;
 }
+.feature-content .feature-content-content
+{
+	min-height: 60%;
+}
 
 .feature-content .feature-content-footer
 {

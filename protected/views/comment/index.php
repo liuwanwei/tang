@@ -24,27 +24,22 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 <!--详细页评分组件-->
 <div class="rating-widget">
 		<span class="rating-widget-lable">评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-		<div class="rating-list m" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($restaurant->average_points)); ?>" 
+		<div class="rating-list m" data-rating-default="0" 
 			data-clicknum="0" 
 			data-user="<?php echo Yii::app()->user->id ?>"
 			data-id="<?php echo CHtml::encode($restaurant->id);?>"
 			>
 		<span class="rating-stars">
-		<a class="rating-icon star-on"><span>1</span></a>
-		<a class="rating-icon star-on"><span>2</span></a>
-		<a class="rating-icon star-on"><span>3</span></a>
-		<a class="rating-icon star-on"><span>4</span></a>
-		<a class="rating-icon star-on"><span>5</span></a>
-		<a class="rating-icon star-on"><span>6</span></a>
-		<a class="rating-icon star-on"><span>7</span></a>
-		<a class="rating-icon star-on"><span>8</span></a>
-		<a class="rating-icon star-on"><span>9</span></a>
-		<a class="rating-icon star-on"><span>10</span></a>
+		<a class="rating-icon star-on" title="不推荐"><span>1</span></a>
+		<a class="rating-icon star-on" title="聊胜于无"><span>2</span></a>
+		<a class="rating-icon star-on" title="日常饮食"><span>3</span></a>
+		<a class="rating-icon star-on" title="值得品尝"><span>4</span></a>
+		<a class="rating-icon star-on" title="汤中一绝"><span>5</span></a>		
 		</span>
-		<span class="rating-rating">
-		<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($restaurant->average_points)); ?></span>
+		<span class="rating-rating"><!-- echo sprintf("%.1f",CHtml::encode($restaurant->average_points)); -->
+		<span class="fonttext-shadow-2-3-5-000 value">-</span>
 		<span class="grey">/</span>
-		<span class="grey">10</span>
+		<span class="grey">5</span>
 		</span>
 		<span class="rating-cancel ">
 			<a title="删除">
@@ -53,6 +48,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		</span>
 		</div>
 		</div><!--<span><?php echo $restaurant->average_points; ?></span>-->
+		<span class="rating-avg"><?php echo $restaurant->average_points; ?></span>
 			<div class="clear"><!--清除浮动--></div>
 
 
@@ -132,15 +128,46 @@ $(function(){
  *如果未评分就还原默认的数字
  */
 var rating_list_dome=$(".rating-widget .rating-list");
-rating_list_dome.each(function(){
+	var rating_item1=rating_list_dome.eq(0);
+	$.get("/index.php?r=vote/query",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
+		
+		if (data.msg) {
+			rating_item1.attr("data-rating-default",0);
+			$(".rating-rating>.value",rating_item1).text("-");
+		}else{
+			rating_item1.attr("data-rating-default",data.rating);
+			$(".rating-rating>.value",rating_item1).text(data.rating);
+			rating_item1.attr('voteid',data.id);//将voteid邦定到dom对象上
+			$(".rating-cancel",rating_item1).removeClass('rating-pending').addClass("rating-icon rating-your");
+			$(".rating-cancel",rating_item1).one('click',function(){
+						$(".rating-cancel",rating_item1).removeClass('rating-icon rating-your').addClass("rating-pending");
+						$.post("/index.php?r=vote/delete",{Vote:{id:rating_item1.attr("voteid")}},function(rating_cancel_result){								
+								if (rating_cancel_result.msg==="0") {
+									rating_item1.removeAttr('voteid');
+									$(".rating-cancel",rating_item1).removeClass('rating-pending');
+									rating_item1.attr("data-clicknum","0");
+									$(".rating-rating>.value",rating_item1).text(rating_item1.attr("data-rating-default"));
+									//console.log(rating_cancel_result+"abc");
+									ratingInit(rating_item1,"rating-icon star-on",1,$(".rating-rating>.value",rating_item1));
+								}else{
+									//服务器出错
+								}
+							},"json");
+					});
+		}
 
+		ratingfnc();
+		//rating_list_dome.eq(0).attr("data-rating-default");
+	},"json");
+function ratingfnc(){
+rating_list_dome.each(function(){	
 	var a_this=$(this);//当前遍历rating-list的jqueryDOM对象
 	var a_arr=$(".rating-stars a",a_this);//取出当前rating-list下的所有a对象
 	var raing_value=$(".rating-rating>.value",a_this);//评分的值
 	var raing_default=a_this.attr("data-rating-default");//评分的默认值
 		//raing_default=parseFloat(raing_default)==0? '-':raing_default;
 	
-	ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+	ratingInit(a_this,"rating-icon rating-off",Math.round(parseFloat(raing_default)),raing_value);
 
 
 
@@ -183,9 +210,9 @@ rating_list_dome.each(function(){
 									a_this.removeAttr('voteid');
 									rating_cancel.removeClass('rating-pending');
 									a_this.attr("data-clicknum","0");
-									raing_value.text(raing_default);
+									raing_value.text("-");
 									//console.log(rating_cancel_result+"abc");
-									ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+									ratingInit(a_this,"rating-icon star-on",1,raing_value);
 								}else{
 									//服务器出错
 								}
@@ -234,7 +261,7 @@ rating_list_dome.each(function(){
 		raing_value.text(parseInt(raing_default)==0?'-':raing_default);		
 		}else if(clicknum=="0" && parseInt(raing_default)>0)
 		{
-			ratingInit(a_this,"rating-icon rating-init",Math.round(raing_default),raing_value);
+			ratingInit(a_this,"rating-icon rating-off",Math.round(raing_default),raing_value);
 			raing_value.text(raing_default);
 		}
 		else{
@@ -245,6 +272,7 @@ rating_list_dome.each(function(){
 
 
 });
+}
 
 function ratingInit(e_this,classname,i,evalue)
 {	
