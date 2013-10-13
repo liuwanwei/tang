@@ -5,7 +5,7 @@
 
 
 <div class="tooltip">
-	<div class="title"></div>
+	<div class="bottomtitle"></div>
 	<div class="content">
 
 	</div>
@@ -133,7 +133,7 @@ rating_list_dome.each(function(){
 		var a_offset=$(this).offset();
 		var tooltip=$(".tooltip");
 		tooltip.find('.content').text($(this).attr('data-title'));
-		tooltip.css({'top':a_offset.top+20,'left':a_offset.left-$(this).width()/2-20}).show();
+		tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
 
 		//当鼠标移到a标签上时的事件
 		var i=parseInt($("span",$(this)).text());
