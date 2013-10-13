@@ -52,7 +52,6 @@ body
 	min-height: 600px;
 	 margin:0 auto;
 	font-family:微软雅黑;
-	
 }
 
 
@@ -813,6 +812,22 @@ div.rating-widget
 	left: 50%;
 	margin-left: -5px;
 
+}
+
+.tooltip .bottomtitle
+{
+	width: 0px;
+	height: 0px;
+	border-color: transparent;
+	border-width:5px;
+	border-bottom-width: 0px;
+	border-top-color: rgba(0,0,0,0.8); 	
+	display: block;
+	border-style: solid;
+	position: absolute;
+	top:25px;
+	left: 50%;
+	margin-left: -5px;
 }
 
 
