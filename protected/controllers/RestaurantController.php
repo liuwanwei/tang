@@ -203,15 +203,41 @@ class RestaurantController extends Controller
 	}
 
 	private function areaMenu($countyId){
-		$dataProvider = new CActiveDataProvider('Area');
-
-		if ($countyId === 0) {
+		
+		if ($countyId == 0) {
 			return null;
 		}
+		
+		$county = County::model()->findByPk($countyId);
 
+		$restaurantAreaDataProvider = new CActiveDataProvider('Restaurant');
+
+		$criteria = new CDbCriteria();
+		$criteria->compare('county_id', $countyId);
+		$criteria->select = array('area_id');
+		$criteria->group = 'area_id';
+		
+		$restaurantAreaDataProvider->criteria = $criteria;
+		
+		$restaurants = $restaurantAreaDataProvider->getData();
+		
+		if (!isset($restaurants) && count($restaurants) === 0)
+		{
+			return null;
+		}
+		
+		$areasId = array();
+		foreach ($restaurants as $key => $value)
+		{
+			$areasId[] = $value->area_id;
+		}
+		
+		$dataProvider = new CActiveDataProvider('Area');
 		if ($countyId !== 0) {
 			$criteria = new CDbCriteria();
-			$criteria->compare('county_id', $countyId);
+// 			$criteria->compare('county_id', $countyId);
+			$criteria->addInCondition('id', $areasId);
+			$criteria->order = 'id desc';
 			$dataProvider->criteria = $criteria;
 		}
 
@@ -221,7 +247,10 @@ class RestaurantController extends Controller
 
 		$menuItems = array();
 		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
-		$menuItems[] = array('label'=>'全部', 'url'=>array($baseUrl));
+// 		if (count($restaurants) > 0) {
+			$menuItems[] = array('label'=>$county->name, 'url'=>array($baseUrl));
+// 		}
+	
 		foreach ($data as $key => $value) {
 			$menuItems[] = array('label' => $value->name, 'url' => array($baseUrl.'&area='.$value->id));
 		}
@@ -230,9 +259,38 @@ class RestaurantController extends Controller
 	}
 
 	private function typeMenu($countyId, $areaId){
+		$restaurantAreaDataProvider = new CActiveDataProvider('Restaurant');
+		$criteria = new CDbCriteria();
+		$criteria->select = array('type_id');
+		$criteria->group = 'type_id';
+		
+		if ($countyId != 0) {
+			$criteria->compare('county_id', $countyId);
+		}
+		
+		if ($areaId != 0) {
+			$criteria->compare('area_id', $areaId);
+		}
+		
+		$restaurantAreaDataProvider->criteria = $criteria;
+		
+		$restaurants = $restaurantAreaDataProvider->getData();
+		
+		if (!isset($restaurants) && count($restaurants) === 0)
+		{
+			return null;
+		}
+		
+		$typesId = array();
+		foreach ($restaurants as $key => $value)
+		{
+			$typesId[] = $value->type_id;
+		}
+		
 		$dataProvider = new CActiveDataProvider('RestaurantType');
 		$criteria = new CDbCriteria();
 		$criteria->compare('id', '<>0');
+		$criteria->addInCondition('id', $typesId);
 		$dataProvider->criteria = $criteria;
 
 		$data = $dataProvider->getData();
@@ -274,7 +332,6 @@ class RestaurantController extends Controller
 		$dataProvider->criteria = $criteria;
 
 		$data = $dataProvider->getData();
-
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider, 
 // 			'countyMenu'=>$this->countyMenu(),
