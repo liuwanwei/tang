@@ -19,7 +19,7 @@ body
 	background: url(../images/icon/tang_logo_64.png) no-repeat left -10px;
 	width: 64px;
 	height: 64px;
-	display: block;
+	display: none;
 	float: left;
 	margin-left: 10px;
 }
