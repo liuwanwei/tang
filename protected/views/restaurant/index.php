@@ -235,6 +235,7 @@ var btnedit_div=$(".view-edit-btn");
 				t+="</ul>";
 
 				$(".feature-content .feature-content-content",p_this).html(t);
+
 			},"json");
 
 
@@ -264,8 +265,10 @@ $("#feature-edit-submit",btnedit_div).click(function(){
 	var parent_edit_dom=$(this).parent().parent();
 	
 	var features1="";
+	var feature_arr=[];	
 	$("input:checked",parent_edit_dom.find(".feature-content-content")).each(function(){
-		features1+=$(this).val()+",";
+		features1+=$(this).val()+",";		
+		//feature_arr.push({id:$(this).val(),name:$(this).parent().text()});
 	});
 	features1=features1.substring(0,features1.length-1);
 	//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
@@ -273,6 +276,12 @@ $("#feature-edit-submit",btnedit_div).click(function(){
 		if (data.success) {
 			//当提交成功时关闭窗体
 			btnedit_div_hide(d_this);
+			//当提交成功时动态更新特色数据
+
+
+			//console.log("className="+$(".restaurant-detail>ul>li>ul:eq(0) li",parent_edit_dom.parent().parent()).eq(0).text());
+
+			//$("<li>adfsadf</li>").appendTo($(".restaurant-detail>ul>li>ul:eq(0) li:eq(1)",parent_edit_dom.parent().parent()));
 		}else
 		{
 			//提示错误信息
