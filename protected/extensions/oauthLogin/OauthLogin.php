@@ -63,11 +63,11 @@ class oauthLogin extends CWidget
      */
     public function sinaLogin()
     {
-        $state = md5(rand(5, 10));
-        Yii::app()->session->add('sina_state',$state);
+//         $state = md5(rand(5, 10));
+//         Yii::app()->session->add('sina_state',$state);
         $weiboService = new SaeTOAuthV2(WB_AKEY,WB_SKEY);
-        $this->sina_code_url = $weiboService->getAuthorizeURL(WB_CALLBACK_URL,'code',$state);
-        Yii::app()->session->add('back_url',$this->back_url);
+        $this->sina_code_url = $weiboService->getAuthorizeURL(WB_CALLBACK_URL,'code',$this->back_url);
+//         Yii::app()->session->add('back_url',$this->back_url);
     }
     
     /**
