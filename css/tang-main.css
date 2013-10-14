@@ -84,14 +84,14 @@ body
 	line-height:55px;
 	font-family:微软雅黑;
 	/*box-shadow:0 1px 3px rgba(0,0,0,0.6);*/
-	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	/*-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 
 }
 #mainmenu .login
 {
-
+	
 }
 
 #mainmenu>ul
@@ -114,7 +114,7 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 {
 	color:#ffffff;
 	background-color:transparent;
-	font-size:1.2em;	
+	font-size:15px;	
 	text-decoration:none;
 	padding:0px 8px;
 }
@@ -231,7 +231,7 @@ li.areamenu ul li a
 
 #area-menu li{
 	display: inline-block;
-	font-size: .9em;
+	font-size: 12px;
 	height: 25px;
 	line-height: 25px;
 	text-align: center;
@@ -622,8 +622,7 @@ div.rating-widget
 }
 .rating-widget .rating-widget-lable
 {
-	font-weight: bold;
-	font-size: 11px;
+	
 	color:#555;
 }
 .rating-widget .rating-list
@@ -772,11 +771,12 @@ div.rating-widget
 .rating-avg
 {
 	/*background: url(../images/icon/detail_rating_big.png);*/
-	font-size: 1.4em;	
+	font-size: 1.0em;	
 	color: #666;
 	border-radius: 10px;
 	background: #ccc;
-	padding:0px 10px;
+	padding:2px 10px;
+	
 		
 }
 .tooltip
@@ -845,8 +845,7 @@ div.rating-widget
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	-o-border-radius:10px;
-	font-size: 1.2em;
-	font-family: '楷体','微软雅黑';
+	font-size: 12px;	
 	white-space: nowrap;
 	background: #9c9c9c;
 	color:#FFFFFF;
