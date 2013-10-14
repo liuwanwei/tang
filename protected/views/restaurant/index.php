@@ -35,11 +35,13 @@
 	'itemView'=>'_view',
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 	'template' => "{pager}\n{summary}\n{items}\n{pager}",
+	'ajaxUpdate'=> false,
 	'pager'=>array('header'=>'',
-			'prevPageLabel'=>'<',
-			'nextPageLabel'=>'>',
+			'prevPageLabel'=>'«',
+			'nextPageLabel'=>'»',
 			'firstPageLabel'=>'首页',
-			'lastPageLabel'=>'末页'),
+			'lastPageLabel'=>'末页',
+			'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
 )); ?>
 
@@ -235,7 +237,10 @@ var btnedit_div=$(".view-edit-btn");
 				$(".feature-content .feature-content-content",p_this).html(t);
 			},"json");
 
-			$(".feature-content",p_this).css({'display':'block'}).animate(
+
+			$(".feature-content",p_this).css({'display':'block',
+				'top':p_this.offset().top+25,
+				'left':p_this.offset().left}).animate(
 				{	
 					width:'200px',
 					minHeight:'200px',

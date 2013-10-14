@@ -15,6 +15,8 @@
 	
 }
 
+
+
 /*
 *将summaryText输出的内容隐藏
 */
@@ -76,6 +78,11 @@ div.view-item .restaurant-detail>ul li ul
 div.view-item .restaurant-detail>ul li ul li
 {
 	width: 100%; 
+
+}
+div.view-item .restaurant-detail>ul li ul li img
+{
+	border:0px none;
 }
 
 div.view-item .restaurant-detail>ul li ul li:first-child
@@ -150,8 +157,6 @@ div.view-item .restaurant-detail>ul li ul+ul li strong
 	text-align: center;
 	cursor: pointer;
 	float: right;
-
-
 }
 .view-edit-btn a
 {

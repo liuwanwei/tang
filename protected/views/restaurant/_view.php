@@ -58,7 +58,22 @@
 		<li>
 		<span  class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
 		<span><?php echo CHtml::encode($data->address); ?></span>
+		<?php if ($data->latitude!=0 && $data->longitude!=0) {
+		?>
+			<a href="/index.php?r=comment/index&restaurant_id=<?php echo $data->id; ?>"><img src="../images/icon/map_16.png" alt="地图"  title="看看汤馆的位置"/></a>
+		<?php 
+		} ?>
 		</li>
+
+		<?php if (!empty($data->features)) {
+			?>
+		<li><span class="title">特色:</span>
+			<?php 			
+			 foreach ($data->features as $value) {			 	
+			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
+		} ?></li>
+		<?php
+		} ?>
 
 		<li>
 		<!--<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('votes')); ?>:</span>
@@ -98,15 +113,7 @@
 		</div>
 			<div class="clear"><!--清除浮动--></div>
 		</li>
-		<?php if (!empty($data->features)) {
-			?>
-		<li><span class="title">特色:</span>
-			<?php 			
-			 foreach ($data->features as $value) {			 	
-			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
-		} ?></li>
-		<?php
-		} ?>
+		
 		</ul>
 		<ul>
 			<li><span>投票数:</span> <strong><?php echo CHtml::encode($data->votes);?></strong>人</li>
