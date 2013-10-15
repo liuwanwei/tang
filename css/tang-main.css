@@ -96,14 +96,12 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 	font-size: 14px;
 	color: #FFFFFF;
 	text-decoration: none;	
-	margin-right: 40px;
 }
 #mainmenu .loginout
 {
 	font-size: 14px;
 	color: #FFFFFF;
 	text-decoration: none;	
-	margin-right: 40px;
 }
 
 #mainmenu .mainmenu-content
@@ -119,9 +117,8 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 #mainmenu .rigth-menu
 {
 	width: auto;
-	position: absolute;
-	left:90%;
-	top: 0px;
+	float: right;
+	margin-right:28%;
 }
 
 #mainmenu .mainmenu-content>ul
@@ -142,10 +139,11 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 }
 #mainmenu .mainmenu-content .mainmenu-home
 {
-	font-size: 18px;
+	font-size: 26px;
 	float: left;
-	margin:0px;
+	margin-right:10px;
 	color: #FFFFFF;
+	text-decoration: none;
 }
 
 #mainmenu .mainmenu-content>ul>li>a
@@ -498,7 +496,7 @@ body, input, textarea, select, button {
 	display: inline-block;
 	font-size: 12px;
 	color: #999;
-	float: right;
+	margin-left: 10px;
 }
 
 .logo {
@@ -585,6 +583,10 @@ body, input, textarea, select, button {
 }*/
 .hide {
     display: none;
+}
+.hide-visibility
+{
+	visibility: hidden;
 }
 
 .modal-header {
@@ -821,7 +823,7 @@ div.rating-widget
 }
 .rating-widget-avg div
 {
-	width: 70px;
+	width: 50px;
 	float: left;
 	margin-top: 3px;	
 }
@@ -845,7 +847,7 @@ div.rating-widget
 	font-size: 14px;
 	display: inline-block;
 	width: 50px;
-	color: #000;
+	color: rgb(165, 134, 0);
 	font-family: tahoma;	
 	text-align: right;
 	

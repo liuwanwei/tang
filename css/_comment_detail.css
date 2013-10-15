@@ -47,7 +47,8 @@
 textarea
 {
 	border: 1px solid #ccc;
-	width: 785px;
+	width: 775px;
+	padding: 5px;
 }
 textarea:hover,textarea:focus
 {

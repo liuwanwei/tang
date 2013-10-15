@@ -62,10 +62,7 @@
 		)); 
 		?>
 
-
-
-		</div>
-
+		
 		<div class="rigth-menu">
 			<?php if (yii::app()->user->isGuest) {
 				?>
@@ -77,6 +74,9 @@
 				}?>
 			
 		</div>
+		</div>
+
+		
 		
 	</div><!-- mainmenu -->
 
