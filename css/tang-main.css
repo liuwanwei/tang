@@ -823,7 +823,7 @@ div.rating-widget
 }
 .rating-widget-avg div
 {
-	width: 50px;
+	width: 70px;
 	float: left;
 	margin-top: 3px;	
 }
@@ -846,7 +846,7 @@ div.rating-widget
 {
 	font-size: 14px;
 	display: inline-block;
-	width: 50px;
+	width: 28px;
 	color: rgb(165, 134, 0);
 	font-family: tahoma;	
 	text-align: right;
