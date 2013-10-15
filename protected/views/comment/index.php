@@ -95,9 +95,12 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-	'enablePagination'=>false,	
-)); ?>
-</div>
+	'enablePagination'=>true,
+	'emptyText'=>'还没有人评论，客官您先来吐个槽吧.',
+	'summaryText' => '共 {count} 条评论, 显示 {start} - {end}',
+)); 
+?>
+
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 
