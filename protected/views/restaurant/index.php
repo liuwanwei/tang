@@ -12,7 +12,7 @@
 </div>
 
 
-<?php if (! empty($areaMenu) &&  count($areaMenu) > 1) { ?>
+<?php if (! empty($areaMenu) &&  count($areaMenu) >= 1) { ?>
 <div class="county-menu-title"><span>区域</span>
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>

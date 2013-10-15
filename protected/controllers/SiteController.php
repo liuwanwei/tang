@@ -122,7 +122,7 @@ class SiteController extends Controller
 	
 	public function actionWbLogin()
 	{
-		if(isset($_REQUEST['state']) && $_REQUEST['state'] == Yii::app()->session['sina_state']){
+		if(isset($_REQUEST['state'])){
 			if(isset($_REQUEST['code'])){
 				Yii::import('ext.oauthLogin.sina.sinaWeibo',true);
 				$keys = array();
@@ -157,8 +157,8 @@ class SiteController extends Controller
 	
 					Yii::app()->user->id = $user->id;
 					Yii::app()->user->name = $user->nick_name;
-						
-					$this->redirect(Yii::app()->session['back_url']);
+					
+					$this->redirect($_REQUEST['state']);
 				}  else {
 					echo '认证失败';
 				}
@@ -166,7 +166,7 @@ class SiteController extends Controller
 		}
 		else 
 		{
-			$this->redirect(Yii::app()->session['back_url']);
+			$this->redirect($_REQUEST['state']);
 		}
 	}
 	
