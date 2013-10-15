@@ -89,28 +89,65 @@ body
 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 
 }
+
 #mainmenu .login
 {
-	
+	font-size: 14px;
+	color: #FFFFFF;
+	text-decoration: none;	
+	margin-right: 40px;
+}
+#mainmenu .loginout
+{
+	font-size: 14px;
+	color: #FFFFFF;
+	text-decoration: none;	
+	margin-right: 40px;
 }
 
-#mainmenu>ul
-{	
+#mainmenu .mainmenu-content
+{
+	width: 960px;
+	height: 100%;
 	margin:0 auto;
-	width:960px;
+	display: block;
+	position: relative;
+	left: 0;
+	
+}
+#mainmenu .rigth-menu
+{
+	width: auto;
+	position: absolute;
+	left:90%;
+	top: 0px;
+}
+
+#mainmenu .mainmenu-content>ul
+{	
+	
+	width:auto;
 	list-style:none;
+	float: left;
 	
 }
 
-#mainmenu>ul>li
+#mainmenu .mainmenu-content>ul>li
 {
 	float:left;
 	list-style:none;
 
 	
 }
+#mainmenu .mainmenu-content .mainmenu-home
+{
+	font-size: 18px;
+	float: left;
+	margin:0px;
+	color: #FFFFFF;
+}
 
-#mainmenu>ul>li>a
+#mainmenu .mainmenu-content>ul>li>a
 {
 	color:#ffffff;
 	background-color:transparent;
@@ -119,7 +156,7 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 	padding:0px 8px;
 }
 
-#mainmenu>ul>li a:hover, #mainmenu>ul>li.active a
+#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a
 {
 	cursor: pointer;
 	/*background-color:#A65900;*/
@@ -768,26 +805,48 @@ div.rating-widget
 	-o-text-shadow: 2px 3px 5px rgba(0,0,0,0.6);
 
 }
+
+
+/*
+ *总平均分的显示组件
+ */
+.rating-widget-avg
+{
+	display: inline-block;
+	width: 130px;
+	line-height: 20px;
+	vertical-align: middle;
+
+}
+.rating-widget-avg div
+{
+	width: 70px;
+	float: left;
+	margin-top: 3px;	
+}
+.rating-widget-avg a
+{
+	display: inline-block;
+	width: 14px;
+	height: 13px;
+
+	
+}
+.rating-icon.rating-avg-init
+{
+	
+	background-position: 0px -41px;
+}
+
+
 .rating-avg 
 {
-	position: relative;
-}
-.rating-avg span
-{
-	/*background: url(../images/icon/detail_rating_big.png);*/
-	font-size: 15px;	
+	font-size: 14px;
+	display: inline-block;
+	width: 50px;
 	color: #000;
-	font-family: tahoma;
-	font-weight: bold;
-	/*border-radius: 10px;*/
-	width: 72px;
-	height: 72px;
-	line-height: 72px;
-	background: url(../images/icon/detail_rating_big_72.png);
-	position: absolute;
-	top:-70px;
-	left:150px;
-	text-align: center;
+	font-family: tahoma;	
+	text-align: right;
 	
 		
 }

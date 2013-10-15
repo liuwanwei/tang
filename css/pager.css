@@ -32,6 +32,12 @@ ul.yiiPager li
 	height: 25px;	
 	border-left: 1px solid #9d9d9d;
 }
+ul.yiiPager li:first-child
+{
+	text-align: center;
+	padding: 0px 5px;
+	border-right: 1px solid #9d9d9d;
+}
 ul.yiiPager li:first-child,ul.yiiPager li:first-child+li
 {
 	
@@ -48,6 +54,9 @@ ul.yiiPager li a
 {
 
 	color: #666;
+	display:block;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
 }
 
