@@ -33,7 +33,7 @@
 <?php
 		 $menu = array();
 		 $areamenu=array();
-		 $menu[] = array('label'=>'首页', 'url'=>array('/restaurant/index'));
+		 //$menu[] = array('label'=>'老汤馆', 'url'=>array('/restaurant/index'),'linkOptions'=>array('class'=>'mainmenu-home'));
 		 $counties = County::model()->getCountries(0);
 		 $areas=county::model()->getCountries(1);
 		 //echo count($areas);
@@ -48,17 +48,35 @@
 // 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
 // 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
 // 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
-		 $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
-		 $menu[] = array('label'=>'登陆','url'=>'','visible'=>yii::app()->user->isGuest, 
-		 	'linkOptions'=>array('class'=>'login'));
+		// $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
+		 //$menu[] = array('label'=>'登陆','url'=>'','visible'=>yii::app()->user->isGuest, 
+		 //	'linkOptions'=>array('class'=>'login'));
 	?>
 
 	<div id="mainmenu">
-<a href="#" class="tang-logo"><span>老汤馆</span></a>
+		<div class="mainmenu-content">
+		<a href="#" class="tang-logo"><span>老汤馆</span></a>
+		<a href="/index.php?r=restaurant/index" class="mainmenu-home">老汤馆</a>
 	<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 
 		?>
+
+
+
+		</div>
+
+		<div class="rigth-menu">
+			<?php if (yii::app()->user->isGuest) {
+				?>
+				<a href="#" class="login">登陆</a>
+				<?php } else {
+					?>
+				<a href="/index.php?r=site/logout" class="loginout">登出(<?php echo Yii::app()->user->name; ?>)</a>
+				<?php	
+				}?>
+			
+		</div>
 		
 	</div><!-- mainmenu -->
 

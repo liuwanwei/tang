@@ -276,6 +276,8 @@ $("#feature-edit-submit",btnedit_div).click(function(){
 		if (data.success) {
 			//当提交成功时关闭窗体
 			btnedit_div_hide(d_this);
+			//刷新页面
+			location="/index.php"+window.location.search;
 			//当提交成功时动态更新特色数据
 
 

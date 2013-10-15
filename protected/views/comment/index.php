@@ -26,12 +26,34 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 <li><span>电话</span><span><?php echo $restaurant->phone; ?></span></li>
 <li><span>区域</span><span><?php echo $restaurant->county->name.' '.$restaurant->area->name; ?></span></li>
 <li><span>营业时间</span><span><?php echo $restaurant->business_hour; ?></span></li>
+<?php if (!empty($restaurant->features)) {
+			?>
+		<li><span class="title">特色:</span>
+			<?php  foreach ($restaurant->features as $value) {
+			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
+		} ?></li>
+		<?php
+		} ?>
+<li >
+	<span class="rating-widget-lable">平均打分:</span>
+<div class="rating-widget-avg">
+	<div>
+	<?php for ($i=0; $i < $restaurant->average_points/1; $i++) { 
+		echo '<a href="#" class="rating-icon rating-avg-init"></a>';
+	} ?>
+</div>
+	<span class="rating-avg"><?php echo $restaurant->average_points; ?></span>
+	
+</div>
+
+</li>
 <li>
 
 
 
 <!--详细页评分组件-->
 <div class="rating-widget">
+	
 	
 		<span class="rating-widget-lable">我的评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 		<div class="rating-list m" data-rating-default="0" 
@@ -58,72 +80,24 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		</span>
 		</div>
 		</div>
-		<div class="rating-avg"><span><?php echo $restaurant->average_points; ?></span></div>
+		
 			<div class="clear"><!--清除浮动--></div>
 
 
 </li>
-<?php if (!empty($restaurant->features)) {
-			?>
-		<li><span class="title">特色:</span>
-			<?php  foreach ($restaurant->features as $value) {
-			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
-		} ?></li>
-		<?php
-		} ?>
+
 </ul>
 
 <div id="map_container"></div><div class="clear"></div>
 </div>
+<div class="user-comment-list">
 <?php
-
-/*$this->widget('zii.widgets.CDetailView', array(
-		'data'=>$restaurant,
-		//'cssFile' => Yii::app()->request->baseUrl. '/css/_comment_detail.css',
-		'attributes'=>array(
-// 				'id',
-				'name',
-				array(
-						'label'=>$attribute['address'],
-						'type'=>'raw',
-						'value'=>CHtml::label($restaurant->address."&nbsp &nbsp &nbsp &nbsp  &nbsp  &nbsp".$attribute['phone']
-								."&nbsp  &nbsp".$restaurant->phone, ''),
-				),
-				
-				array(
-						'label'=>$attribute['county.name'],
-						'type'=>'raw',
-						'value'=>CHtml::label($restaurant->county->name."&nbsp &nbsp &nbsp"
-								.$restaurant->area->name, ''),
-				),
-				
-// 				'phone',
-				'business_hour',
-				array(
-						'label'=>'评分',
-						'type'=>'raw',
-						'value'=>'等小梁填充',
-				),
-						
-// 				'county.name',
-// 				'area.name',
-// 				'status.name',
-// 				'image_url',
-// 				'latitude',
-// 				'longitude',
-// 				'description',
-		),
-));
-*/
-
-
-
 $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 	'enablePagination'=>false,	
 )); ?>
-
+</div>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
 
 
