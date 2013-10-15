@@ -131,6 +131,18 @@ $(".login").click(function(){
 	loginModal();
 });
 
+$(".modal-backdrop").click(function(){
+	$("#myModal").hide();
+	$(this).hide();
+});
+$(document.body).keyup(function(event){
+         //if(event.ctrlKey && event.which == 13)       //13等于回车键(Enter)键值,ctrlKey 等于 Ctrl
+         //alert("按了ctrl+回车键!")
+        if(event.keyCode==27)
+        	$("#myModal").hide();
+			$(".modal-backdrop").hide();
+       });
+
 
 
 //县菜单鼠标放上去显示下级菜单

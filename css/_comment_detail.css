@@ -5,7 +5,7 @@
 }
 .comment_detail ul
 {
-	width: 450px;
+	width: 360px;
 	list-style: none;
 	padding: 5px;
 	float: left;
@@ -29,6 +29,53 @@
 {
 	width: 400px;
 	height:190px;
-	float:right;
+	margin-top: 15px;	
+	padding: 5px;
+	background: #FFFFFF;
+	box-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+	-moz-box-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+	-webkit-box-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+	-o-box-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+	float:left;
 	
+}
+
+textarea
+{
+	border: 1px solid #ccc;
+}
+textarea:hover,textarea:focus
+{
+	
+	box-shadow: 1px 1px 8px rgba(39,192,112,0.6);
+	-moz-box-shadow: 1px 1px 6px rgba(39,192,112,0.6);
+	-webkit-box-shadow: 1px 1px 6px rgba(39,192,112,0.6);
+	-o-box-shadow: 1px 1px 6px rgba(39,192,112,0.6);
+
+}
+
+input[type=submit]
+{
+	width: 100px;
+	height: 40px;
+	border-width:1px;
+	border-style:solid;
+	background-color: rgb(0, 163, 95) !important;
+	background-repeat: repeat-x;
+	background-image: linear-gradient(rgb(0, 214, 124), rgb(0, 163, 95));
+	border-color: rgb(0, 163, 95) rgb(0, 163, 95) rgb(0, 150, 87);
+	color: #FFFFFF !important;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.16);
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	margin-top: 10px;
+	cursor: pointer;
+
+}
+input[type=submit]:focus,input[type=submit]:hover
+{
+	
+	background: #02BD70;
 }

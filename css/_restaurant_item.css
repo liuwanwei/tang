@@ -162,6 +162,10 @@ div.view-item .restaurant-detail>ul li ul+ul li strong
 {
 	text-decoration: none;
 }
+.view-edit-btn .view-edit-header>a:hover,.view-edit-btn .view-edit-header>a:focus
+{
+	color: #8F8275;
+}
 .view-edit-btn .view-edit-header ul
 {
 	width: 100%;

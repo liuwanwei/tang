@@ -28,10 +28,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 <li><span>营业时间</span><span><?php echo $restaurant->business_hour; ?></span></li>
 <li>
 
+
+
 <!--详细页评分组件-->
 <div class="rating-widget">
-	<span class="rating-widget-lable">平均分:</span>
-	<span class="rating-avg"><?php echo $restaurant->average_points; ?></span>
+	
 		<span class="rating-widget-lable">我的评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 		<div class="rating-list m" data-rating-default="0" 
 			data-clicknum="0" 
@@ -57,7 +58,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		</span>
 		</div>
 		</div>
-		
+		<div class="rating-avg"><span><?php echo $restaurant->average_points; ?></span></div>
 			<div class="clear"><!--清除浮动--></div>
 
 
