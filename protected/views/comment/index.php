@@ -42,7 +42,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		echo '<a href="#" class="rating-icon rating-avg-init"></a>';
 	} ?>
 </div>
-	<span class="rating-avg"><?php echo $restaurant->average_points; ?></span>
+	<span class="rating-avg"><?php echo $restaurant->average_points==0?"-":$restaurant->average_points; ?></span>
 	
 </div>
 
@@ -88,7 +88,15 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 </ul>
 
-<div id="map_container"></div><div class="clear"></div>
+<?php
+ if ($restaurant->latitude==0) {
+	?>
+<div id="map_container hide-visibility"></div><div class="clear"></div>
+<?php 
+}else{
+	?>
+<div id="map_container"></div><div class="clear"></div>	
+<?php } ?>
 </div>
 <div class="user-comment-list">
 <?php
