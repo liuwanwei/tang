@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.8.2
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
--- 主机: 127.0.0.1
--- 生成日期: 2013 年 10 月 10 日 09:01
--- 服务器版本: 5.5.29
--- PHP 版本: 5.3.15
+-- 主机: localhost
+-- 生成日期: 2013 年 10 月 15 日 15:09
+-- 服务器版本: 5.1.69
+-- PHP 版本: 5.3.2-1ubuntu4.21
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -60,14 +60,15 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `restaurant_id` int(11) NOT NULL,
   `create_datetime` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- 转存表中的数据 `comment`
 --
 
 INSERT INTO `comment` (`id`, `user_id`, `content`, `restaurant_id`, `create_datetime`) VALUES
-(31, 5, '配的饼最近质量下降了，原来很酥脆，现在很软，估计供不应求。', 1, '2013-09-23 14:30:47');
+(31, 5, '配的饼最近质量下降了，原来很酥脆，现在很软，估计供不应求。', 1, '2013-09-23 14:30:47'),
+(32, 4, '敖德萨发顺丰\r\n', 4, '2013-10-14 10:03:32');
 
 -- --------------------------------------------------------
 
@@ -108,14 +109,18 @@ CREATE TABLE IF NOT EXISTS `feature` (
   `restaurant_id` int(11) NOT NULL,
   `feature_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `feature`
 --
 
 INSERT INTO `feature` (`id`, `restaurant_id`, `feature_id`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(3, 4, 3),
+(4, 4, 4),
+(5, 2, 5),
+(6, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -150,18 +155,18 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 --
 
 INSERT INTO `restaurant` (`id`, `name`, `type_id`, `phone`, `business_hour`, `address`, `county_id`, `area_id`, `is_shutdown`, `image_url`, `latitude`, `longitude`, `description`, `votes`, `average_points`, `weighted_points`) VALUES
-(1, '大石桥羊肉汤', 2, '13849996518', '6:00 - 12:00', '建设路24号', 1, 2, 0, '/images/restaurant/profile_1.png', 0, 0, '好喝', 1, 0, 1.18182),
+(1, '大石桥羊肉汤', 2, '13849996518', '6:00 - 12:00', '建设路24号', 1, 2, 0, '/images/restaurant/profile_1.png', 34.6600647082123, 112.399540274208, '好喝', 1, 0, 1.18182),
 (2, '清真牛肉汤', 1, '', '6:00 - 20:00', '涧西区西苑路2号', 1, 1, 0, '/images/restaurant/profile_2.png', 0, 0, '好地方。', 1, 4, 1.54545),
-(3, '怀府驴肉汤', 3, '15038595869', '6:00 - 20:00', '洛阳市西工区健康路8号', 2, 1, 0, '/images/restaurant/profile_3.png', 0, 0, '好地方。', 0, 0, 1.3),
-(4, '白沙羊肉汤', 2, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路30号', 4, 1, 1, '/images/restaurant/profile_4.jpg', 0, 0, '好地方。', 1, 9, 2),
-(5, '大众牛肉汤', 1, '15038595869', '6:00 - 20:00', '洛阳市洛龙区龙翔路99号', 4, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
-(6, '大众牛肉汤', 1, '15038595869', '6:00 - 20:00', '洛阳市涧西区湖北路87号', 1, 1, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
+(3, '怀府驴肉汤', 3, '15038595869', '6:00 - 20:00', '洛阳市西工区健康路8号', 2, 1, 0, '/images/restaurant/profile_3.png', 0, 0, '好地方。', 1, 5, 1.3),
+(4, '白沙羊肉汤', 2, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路30号', 4, 1, 1, '/images/restaurant/profile_4.jpg', 34.6678708489134, 112.450282304352, '好地方。', 2, 4, 2),
+(5, '大众牛肉汤', 1, '15038595869', '6:00 - 20:00', '洛阳市洛龙区龙翔路99号', 4, 0, 0, '', 34.6233340894468, 112.426142423218, '好地方。', 1, 4, 1.3),
+(6, '大众牛肉汤', 1, '15038595869', '6:00 - 20:00', '洛阳市涧西区湖北路87号', 1, 1, 0, '', 34.6601023605574, 112.393049328392, '好地方。', 0, 0, 1.3),
 (7, '百碗羊汤', 2, '1', '6:00 - 20:00', '洛阳市西工区解放路80号', 2, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
-(8, '百碗羊汤', 2, '15038595869', '6:00 - 20:00', '洛阳市老城区金业路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
-(9, '桥头豆腐汤', 4, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路11号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
-(10, '赵记丸子汤', 4, '15038595869', '6:00 - 20:00', '洛阳市老城区民主街881号', 3, 0, 0, '', 0, 0, '好地方。', 0, 0, 1.3),
+(8, '百碗羊汤', 2, '15038595869', '6:00 - 20:00', '洛阳市老城区金业路11号', 1, 0, 0, '', 34.6813641077852, 112.470345227783, '好地方。', 0, 0, 1.3),
+(9, '桥头豆腐汤', 4, '15038595869', '6:00 - 20:00', '洛阳市西工区七一路11号', 1, 0, 0, '', 34.6686355990339, 112.44952592141, '好地方。', 0, 0, 1.3),
+(10, '赵记丸子汤', 4, '15038595869', '6:00 - 20:00', '洛阳市老城区民主街881号', 3, 0, 0, '', 34.6795942705833, 112.479513018196, '好地方。', 0, 0, 1.3),
 (11, '大众牛肉汤', 1, '', '6:00 - 20:00', '西工区九都路98号', 0, 0, 0, '', 0, 0, '好地方。', 0, 0, 0),
-(14, '老城豆腐汤', 5, '', '6:00 - 20:00', '长安路景华路交叉口南200米，路东', 1, 1, 0, '', 0, 0, '好地方。', 0, 0, 0);
+(14, '老城豆腐汤', 5, '', '6:00 - 20:00', '长安路景华路交叉口南200米，路东', 1, 1, 0, '', 34.6652647659882, 112.377492516106, '好地方。', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -254,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
 --
 
 INSERT INTO `setting` (`key`, `value`) VALUES
-('get_new_vote', '0');
+('get_new_vote', '1');
 
 -- --------------------------------------------------------
 
@@ -271,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` int(11) NOT NULL COMMENT '0 normal 1 admin',
   `source` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `user`
@@ -279,7 +284,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `extension_user_id`, `nick_name`, `image_url`, `role`, `source`) VALUES
 (4, 1655929253, '刘万伟', 'http://tp2.sinaimg.cn/1655929253/50/5658842323/1', 1, 1),
-(5, 2147483647, '比赛闹钟', 'http://tp4.sinaimg.cn/2472803787/50/5620173593/1', 0, 1);
+(5, 2147483647, '比赛闹钟', 'http://tp4.sinaimg.cn/2472803787/50/5620173593/1', 0, 1),
+(6, 1733875695, '毛_宇', 'http://tp4.sinaimg.cn/1733875695/50/5647446298/1', 1, 1),
+(7, 1914550097, '草-蛋', 'http://tp2.sinaimg.cn/1914550097/50/5669003732/1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `vote` (
   `restaurant_id` int(11) NOT NULL,
   `rating` tinyint(4) NOT NULL COMMENT '1-10分',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- 转存表中的数据 `vote`
@@ -302,8 +309,11 @@ CREATE TABLE IF NOT EXISTS `vote` (
 
 INSERT INTO `vote` (`id`, `user_id`, `restaurant_id`, `rating`) VALUES
 (16, 1, 2, 4),
-(18, 4, 4, 9),
-(19, 4, 1, 0);
+(18, 4, 4, 3),
+(19, 4, 1, 0),
+(20, 7, 3, 5),
+(21, 7, 5, 4),
+(22, 7, 4, 5);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
