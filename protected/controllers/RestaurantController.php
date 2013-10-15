@@ -268,7 +268,7 @@ class RestaurantController extends Controller
 			$criteria->compare('county_id', $countyId);
 		}
 		
-		if ($areaId != 0) {
+		if ($areaId != -1) {
 			$criteria->compare('area_id', $areaId);
 		}
 		
@@ -307,7 +307,7 @@ class RestaurantController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($county = 0, $area = 0, $type = 0)
+	public function actionIndex($county = 0, $area = -1, $type = 0)
 	{
 		// $rankFilePath = Yii::app()->basePath . "/../ranks.db";
 		// $ranks = unserialize($rankFilePath);
@@ -321,7 +321,7 @@ class RestaurantController extends Controller
 			$criteria->compare('county_id', $county);
 		}
 
-		if (! empty($area)) {
+		if ($area != -1) {
 			$criteria->compare('area_id', $area);
 		}
 
