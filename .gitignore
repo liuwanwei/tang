@@ -1,5 +1,5 @@
 assets/*
 protected/runtime/*
 .DS_Store
-application.log
+.log
 Thumbs.db

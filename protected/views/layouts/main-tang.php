@@ -69,7 +69,7 @@
 				<a href="#" class="login">登陆</a>
 				<?php } else {
 					?>
-				<a href="/index.php?r=site/logout" class="loginout">登出(<?php echo Yii::app()->user->name; ?>)</a>
+				<a href="/index.php?r=site/logout" class="loginout"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/>登出(<?php echo Yii::app()->user->name; ?>)</a>
 				<?php	
 				}?>
 			
