@@ -95,6 +95,29 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	/**
+	 * 获取当前登录者头像地址
+	 */
+	public function getCurrentUserImageUrl()
+	{
+		if (isset(Yii::app()->session['currentUserImageUrl']))
+		{
+			return Yii::app()->session['currentUserImageUrl'];
+		}
+		else
+		{
+			$user = User::model()->findByPk(Yii::app()->user->id);
+			if ($user != null)
+			{
+				Yii::app()->session->add('currentUserImageUrl',$user->image_url);
+				return $user->image_url;
+			}
+			else 
+			{
+				return "";
+			}
+		}
+	}
 	
 	/**
 	 * 当前用户是否是管理员
