@@ -19,13 +19,19 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 	</div>
 </div>
 
+<div class="layer hide"></div>
+<div id="big_map_clone">
+	<div class="big-map-header">注：地图位置坐标仅供参考，具体情况以实际道路标识信息为准<span class="close">X</span></div>
+<div id="big_map"></div>
+</div>
+
 <div class="comment_detail">
 <ul>
-<li><span>店名</span><span><?php echo $restaurant->name; ?></span></li>
-<li><span>地址</span><span><?php echo $restaurant->address; ?></span></li>
-<li><span>电话</span><span><?php echo $restaurant->phone; ?></span></li>
-<li><span>区域</span><span><?php echo $restaurant->county->name.' '.$restaurant->area->name; ?></span></li>
-<li><span>营业时间</span><span><?php echo $restaurant->business_hour; ?></span></li>
+<li><span class="title">店名:</span><span><?php echo $restaurant->name; ?></span></li>
+<li><span class="title">地址:</span><span><?php echo $restaurant->address; ?></span></li>
+<li><span class="title">电话:</span><span><?php echo $restaurant->phone; ?></span></li>
+<li><span class="title">区域:</span><span><?php echo $restaurant->county->name.' '.$restaurant->area->name; ?></span></li>
+<li><span class="title">营业时间:</span><span><?php echo $restaurant->business_hour; ?></span></li>
 <?php if (!empty($restaurant->features)) {
 			?>
 		<li><span class="title">特色:</span>
@@ -35,7 +41,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		<?php
 		} ?>
 <li >
-	<span class="rating-widget-lable">平均打分:</span>
+	<span class="rating-widget-lable title">平均打分:</span>
 <div class="rating-widget-avg">
 	<div>
 	<?php for ($i=0; $i < $restaurant->average_points/1; $i++) { 
@@ -91,11 +97,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 <?php
  if ($restaurant->latitude==0) {
 	?>
-<div id="map_container hide-visibility"></div><div class="clear"></div>
+<div id="main_small_map"><div id="map_container hide-visibility"></div><div class="main-small-map-footer">点击放大地图</div></div><div class="clear"></div>
 <?php 
 }else{
 	?>
-<div id="map_container"></div><div class="clear"></div>	
+<div id="main_small_map"><div id="map_container"></div><div class="main-small-map-footer">点击放大地图</div></div><div class="clear"></div>	
 <?php } ?>
 </div>
 <div class="user-comment-list">
@@ -154,8 +160,10 @@ var rating_list_dome=$(".rating-widget .rating-list");
 		ratingfnc();
 		//rating_list_dome.eq(0).attr("data-rating-default");
 	},"json");
-function ratingfnc(){
-rating_list_dome.each(function(){	
+
+
+	function ratingfnc(){
+	rating_list_dome.each(function(){	
 	var a_this=$(this);//当前遍历rating-list的jqueryDOM对象
 	var a_arr=$(".rating-stars a",a_this);//取出当前rating-list下的所有a对象
 	var raing_value=$(".rating-rating>.value",a_this);//评分的值
@@ -165,6 +173,15 @@ rating_list_dome.each(function(){
 	ratingInit(a_this,"rating-icon rating-off",Math.round(parseFloat(raing_default)),raing_value);
 
 
+	var tooltip=$(".tooltip");
+					$(".rating-cancel",a_this).hover(function(){
+						var a_offset=$(this).offset();						
+						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
+						tooltip.find('.content').text("你要删除打分吗？");
+						tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
+					},function(){
+						tooltip.hide();
+					});			
 
 		//单击星星时发生
 		a_arr.live("click",function(event){
@@ -190,6 +207,7 @@ rating_list_dome.each(function(){
 		selected_a.addClass("rating-icon rating-off");
 		var rating_cancel=$(".rating-cancel",a_this);
 		rating_cancel.addClass('rating-pending');
+
 		//执行评分的ajax
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
@@ -197,7 +215,7 @@ rating_list_dome.each(function(){
 				//console.log("aa="+resultdata.voteid);
 				if (resultdata.msg==="0") {
 					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
-					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
+					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");					
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
 						$.post("/index.php?r=vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
@@ -224,6 +242,7 @@ rating_list_dome.each(function(){
 	a_arr.hover(function(){
 		var a_offset=$(this).offset();
 		var tooltip=$(".tooltip");
+		$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
 		tooltip.find('.content').text($(this).attr('data-title'));
 		tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
 
@@ -231,18 +250,11 @@ rating_list_dome.each(function(){
 		var i=parseInt($("span",$(this)).text());
 		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
 		selected_a.removeClass();
-		selected_a.addClass("rating-icon rating-hover");
-
-		
+		selected_a.addClass("rating-icon rating-hover");		
 		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
 		no_selected_a.removeClass();
 		no_selected_a.addClass("rating-icon star-on");
-
-		raing_value.text(i);
-
-		
-		
-	
+		raing_value.text(i);	
 	},function(){
 		$(".tooltip").hide();
 		a_this.attr("isclick","flase");
@@ -300,15 +312,45 @@ function ratingInit(e_this,classname,i,evalue)
 	}; ?>
 
 
+
+
+	//地图的点击放大事件
+	$(".main-small-map-footer").bind("click",function(){
+		$(this).parent().addClass("visibility-hidden");
+		var map_clone=$("#big_map_clone");
+		var map_container_offset=$("#map_container").offset();
+		map_clone.css({'left':$("#tang-content").offset().left+20,'top':$("#tang-content").offset().top+10}).show();
+		init("big_map");
+		var layer=$(".layer");
+		layer.show();
+		layer.click(function(){
+			layerhide();
+		});
+
+		$(".big-map-header .close").bind("click",function(){
+			layerhide();
+		});
+
+	});
+	//关闭model层
+	function layerhide()
+	{
+		$("#main_small_map").removeClass('visibility-hidden').addClass('visibility-visible');
+		$(".layer").hide();
+		$("#big_map_clone").hide();
+
+	}
+
+
 });
 
 /*
  *加载地图定位
  */
 var geocoder,map, marker = null;
-var init = function() {
+var init = function(map_id) {
     var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->latitude).','.CHtml::encode($restaurant->longitude); ?>);//(39.916527,116.397128);
-    map = new soso.maps.Map(document.getElementById('map_container'),{
+    map = new soso.maps.Map(document.getElementById(map_id),{
         center: center,
         zoom: 16
     });
@@ -336,7 +378,7 @@ geocoder.getAddress(center);
 function loadScript() {
   var script = document.createElement("script");
   script.type = "text/javascript";
-  script.src = "http://map.soso.com/api/v2/main.js?callback=init";
+  script.src = "http://map.soso.com/api/v2/main.js?callback=init('map_container')";
   document.body.appendChild(script);
 }
 //window.onload = loadScript;

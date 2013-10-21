@@ -23,9 +23,9 @@
 		-->
 		
 <ul>
-	<li><ul>
+	
 		<li><strong>
-		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id)); ?></strong>
+		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id),array('target'=>'_blank')); ?></strong>
 		
 		</li>
 		
@@ -57,10 +57,10 @@
 -->
 		<li>
 		<span  class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
-		<span><?php echo CHtml::encode($data->address); ?></span>
+		<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
 		<?php if ($data->latitude!=0 && $data->longitude!=0) {
 		?>
-			<a href="/index.php?r=comment/index&restaurant_id=<?php echo $data->id; ?>"><img src="../images/icon/map_16.png" alt="地图"  title="看看汤馆的位置"/></a>
+			<a href="/index.php?r=comment/index&restaurant_id=<?php echo $data->id; ?>" target="_blank"><img src="../images/icon/map_16.png" alt="地图"  title="看看汤馆的位置"/></a>
 		<?php 
 		} ?>
 		</li>
@@ -110,16 +110,19 @@
 			</a>
 		</span>
 		</div>
+		<?php if ($data->votes>0) {
+			?>
+			
+		<div class="rating-count-p">
+			<span>共</span> <span><?php echo CHtml::encode($data->votes);?></span>人打分
+		</div>
+		<?php
+		}?>
 		</div>
 			<div class="clear"><!--清除浮动--></div>
 		</li>
-		
-		</ul>
-		<ul>
-			<li><span>投票数:</span> <strong><?php echo CHtml::encode($data->votes);?></strong>人</li>
-			<li><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
-		</ul>
-
+	
+			<li class="hide"><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
 		<div class="clear"></div>
 	</li>
 

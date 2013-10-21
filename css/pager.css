@@ -5,6 +5,7 @@
  {
  	font-family: Arial;
 
+
  }
 ul.yiiPager 
 {
@@ -21,6 +22,7 @@ ul.yiiPager
     -webkit-border-radius: 6px;
     -o-border-radius: 6px;
     cursor: pointer;
+    display: none;
 }
 ul.yiiPager li
 {
