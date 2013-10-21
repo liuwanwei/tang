@@ -334,6 +334,7 @@ class RestaurantController extends Controller
 // 			'countyMenu'=>$this->countyMenu(),
 			'areaMenu'=>$this->areaMenu($county),
 			'typeMenu'=>$this->typeMenu($county, $area),
+			'lastVotes'=>Vote::model()->getLastVotes(),
 		));
 	}
 

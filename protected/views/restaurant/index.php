@@ -48,7 +48,9 @@
 )); ?>
 </div>
 <div class="right-content">
-
+<?php
+	print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
+?> 
 </div>
 <div class="clear"></div>
 </div>
