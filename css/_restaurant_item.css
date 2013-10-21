@@ -4,18 +4,44 @@
 	margin-top: 4px;
 	width: 10%;
 	height: 50px;
+
+}
+.restaurant-content
+{
+
 }
 
 .restaurant-detail{	
-	width: 90%;		
+	width: 430px;		
 	float:left;
 	/*border-left:2px solid #A65900;*/
 	padding-left:5px; 
 	margin-left: 5px;
+
 	
 }
 
+.right-content
+{
+	
+	width: 300px;
+	min-height: 500px;
+	float: right;
+	background: #FFFFFF;
+	box-shadow: 0 0 6px #ccc;
+	border-radius: 6px;
 
+
+}
+.restaurant-left
+{
+	width: 635px;
+	float: left;
+	background: #FFFFFF;
+	box-shadow: 0 0 6px #ccc;
+	padding: 10px;
+	border-radius: 6px;
+}
 
 /*
 *将summaryText输出的内容隐藏
@@ -26,10 +52,17 @@
 }
 
 
+#yw1.list-view
+{
+	width: 100%;
+	
+}
+
+
 div.view-item
 {
 	width: 100%;
-	padding: 5px;
+	padding: 5px 0px;
 	margin: 5px 0px 5px 0px;	
 	display: inline-block;
 	vertical-align: top;
@@ -62,74 +95,48 @@ div.view-item .ranking
 div.view-item .restaurant-detail ul
 {
 	list-style: none;
+	float: left;
 	
 	
 }
 div.view-item .restaurant-detail>ul
 {
-	width: 700px;
+	width: 100%;
 }
 
-div.view-item .restaurant-detail>ul li ul
-{
-	width: 400px;
-	float: left;
-}
-div.view-item .restaurant-detail>ul li ul li
-{
-	width: 100%; 
 
-}
-div.view-item .restaurant-detail>ul li ul li img
+div.view-item .restaurant-detail>ul li img
 {
 	border:0px none;
 }
 
-div.view-item .restaurant-detail>ul li ul li:first-child
-{
 
-	/*border-top:1px solid #555;
-	border-bottom:1px solid #555;
-	*/
-}
-div.view-item .restaurant-detail>ul li ul li span.title
+div.view-item .restaurant-detail>ul  li span.title
 {
 	font-weight: 500;
+	color: #555;
 }
-div.view-item .restaurant-detail>ul li ul li strong
+div.view-item .restaurant-detail>ul  li span.detail-value
+{
+	color: #555;
+}
+div.view-item .restaurant-detail>ul li strong
 {
 	font-size: 1.0em;	
 	margin-right: 10px;
 
 }
 
-div.view-item .restaurant-detail>ul li ul li strong a
+div.view-item .restaurant-detail>ul li strong a
 {
 	color:#555;
 	text-decoration:none;
 }
 
-div.view-item .restaurant-detail>ul li ul li strong a:hover,div.view-item .restaurant-detail>ul li ul li strong a:focus
+div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-detail>ul li strong a:focus
 {
 	color:#000;
 }
-
-div.view-item .restaurant-detail>ul li ul+ul
-{
-	margin-top:20px;
-	float: right;
-	width: 100px; 
-	font-size: 12px;
-
-}
-
-div.view-item .restaurant-detail>ul li ul+ul li strong
-{
-	margin: 0;
-	padding: 0;
-	color:#555;
-}
-
 
 
 

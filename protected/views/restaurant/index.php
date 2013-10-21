@@ -12,6 +12,7 @@
 </div>
 
 
+<div class="restaurant-content">
 <?php if (! empty($areaMenu) &&  count($areaMenu) >= 1) { ?>
 <div class="county-menu-title"><span>区域</span>
 <div id="area-menu">
@@ -29,7 +30,8 @@
 </div>
 <?php } ?>
 
-
+<div>
+	<div class="restaurant-left">
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
@@ -44,8 +46,13 @@
 			'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
 )); ?>
+</div>
+<div class="right-content">
 
-
+</div>
+<div class="clear"></div>
+</div>
+</div>
 <script type="text/javascript">
 
 $(function(){
@@ -108,6 +115,15 @@ rating_list_dome.each(function(){
 				if (resultdata.msg==="0") {
 					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
+					var tooltip=$(".tooltip");
+					rating_cancel.hover(function(){
+						var a_offset=$(this).offset();						
+						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
+						tooltip.find('.content').text("你要删除打分吗？");
+						tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
+					},function(){
+						tooltip.hide();
+					});			
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
 						$.post("/index.php?r=vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
@@ -134,6 +150,7 @@ rating_list_dome.each(function(){
 	a_arr.hover(function(){
 		var a_offset=$(this).offset();
 		var tooltip=$(".tooltip");
+		$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
 		tooltip.find('.content').text($(this).attr('data-title'));
 		tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
 
