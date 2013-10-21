@@ -112,19 +112,19 @@ class CommentController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($restaurant_id)
+	public function actionIndex($restaurantId)
 	{
 		$model = new Comment;
 		
 		if(isset($_POST['Comment']))
 		{
 			$model->attributes=$_POST['Comment'];
-			$model->restaurant_id=$restaurant_id;
+			$model->restaurant_id=$restaurantId;
 			$model->save();
 		}
 		
 		$criteria=new CDbCriteria(array(
-				'condition'=>'restaurant_id='.$restaurant_id,
+				'condition'=>'restaurant_id='.$restaurantId,
 				'order'=>'create_datetime DESC',
 		));
 		$dataProvider=new CActiveDataProvider('Comment',array(
@@ -132,7 +132,7 @@ class CommentController extends Controller
 		));
 		$dataProvider->pagination->pageSize = $dataProvider->totalItemCount;
 		
-		$restaurant = Restaurant::model()->findByPk($restaurant_id);
+		$restaurant = Restaurant::model()->findByPk($restaurantId);
 		 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

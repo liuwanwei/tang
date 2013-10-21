@@ -35,17 +35,20 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			'showScriptName' => false,
 			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				'restaurant/<county:\d+>/*' => 'restaurant/index',
+				'details/<restaurantId:\d+>' => 'comment/index',
+				'logout' => 'site/logout',
+				// '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				// '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+				// '<controller:\w+>/<action:\w+>/<county:\d+>/*'=>'<controller>/<action>/*',
 			),
 		),
-		*/
+
 		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',

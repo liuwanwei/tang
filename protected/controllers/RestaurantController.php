@@ -158,7 +158,6 @@ class RestaurantController extends Controller
 
 				if (!empty($uploadedFile)) {
 					$destPath = Yii::app()->basePath.'/..'.$filename;
-					// print_r($destPath);
 					$uploadedFile->saveAs($destPath);
 				}
 				$this->redirect(array('view','id'=>$model->id));
@@ -195,15 +194,14 @@ class RestaurantController extends Controller
 
 		$menuItems = array();
 		foreach ($counties as $key => $value) {
-			// var_dump($value);
-			$menuItems[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
+			$url =  $this->createUrl('restaurant/index', array('county'=>$key));
+			$menuItems[] = array('label' => $value, 'url' => $url);
 		}
 
 		return $menuItems;
 	}
 
 	private function areaMenu($countyId){
-		
 		if ($countyId == 0) {
 			return null;
 		}
@@ -235,24 +233,21 @@ class RestaurantController extends Controller
 		$dataProvider = new CActiveDataProvider('Area');
 		if ($countyId !== 0) {
 			$criteria = new CDbCriteria();
-// 			$criteria->compare('county_id', $countyId);
 			$criteria->addInCondition('id', $areasId);
 			$criteria->order = 'id desc';
 			$dataProvider->criteria = $criteria;
 		}
 
 		$data = $dataProvider->getData();
-
-		$baseUrl = '/restaurant/index&county='.$countyId;
-
 		$menuItems = array();
+		$urlParams = array('county'=>$countyId);
+
 		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
-// 		if (count($restaurants) > 0) {
-			$menuItems[] = array('label'=>$county->name, 'url'=>array($baseUrl));
-// 		}
+		$menuItems[] = array('label'=>$county->name, 'url'=>$this->createUrl('restaurant/index', array('county' => $countyId)));
 	
 		foreach ($data as $key => $value) {
-			$menuItems[] = array('label' => $value->name, 'url' => array($baseUrl.'&area='.$value->id));
+			$urlParams['area'] = $value->id;
+			$menuItems[] = array('label' => $value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
 		}
 
 		return $menuItems;
@@ -295,10 +290,12 @@ class RestaurantController extends Controller
 
 		$data = $dataProvider->getData();
 		$menuItems = array();
-		$baseUrl = '/restaurant/index&county='.$countyId.'&area='.$areaId;
-		$menuItems[] = array('label'=>'全部', 'url' => array($baseUrl));
+		$urlParams = array('county'=>$countyId, 'area'=>$areaId);
+
+		$menuItems[] = array('label'=>'全部', 'url' => $this->createUrl('restaurant/index', $urlParams));
 		foreach ($data as $key => $value) {
-			$menuItems[] = array('label'=>$value->name, 'url' => array($baseUrl.'&type='.$value->id));
+			$urlParams['type'] = $value->id;
+			$menuItems[] = array('label'=>$value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
 		}
 
 		return $menuItems;
