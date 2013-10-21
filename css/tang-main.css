@@ -875,7 +875,7 @@ div.rating-widget
 	width: auto;
 	height: 25px;
 	padding: 0px 10px;
-	background: rgba(0,0,0,0.8);	
+	background: rgba(128,97,69,0.8);	
 	position: absolute;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -895,7 +895,7 @@ div.rating-widget
 	border-color: transparent;
 	border-width:5px;
 	border-top-width: 0px;
-	border-bottom-color: rgba(0,0,0,0.8); 	
+	border-bottom-color: rgba(128,97,69,0.8); 	
 	display: block;
 	border-style: solid;
 	position: absolute;
@@ -912,7 +912,7 @@ div.rating-widget
 	border-color: transparent;
 	border-width:5px;
 	border-bottom-width: 0px;
-	border-top-color: rgba(0,0,0,0.8); 	
+	border-top-color:rgba(128,97,69,0.8);
 	display: block;
 	border-style: solid;
 	position: absolute;
@@ -928,7 +928,7 @@ div.rating-widget
 	border-color: transparent;
 	border-width:5px;
 	border-left-width: 0px;
-	border-right-color: rgba(0,0,0,0.8); 	
+	border-right-color: rgba(128,97,69,0.8); 	
 	display: block;
 	border-style: solid;
 	position: absolute;
