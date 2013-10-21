@@ -56,6 +56,8 @@ class Vote extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+				'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+				'restaurant' => array(self::BELONGS_TO, 'Restaurant', 'restaurant_id'),
 		);
 	}
 
@@ -91,5 +93,20 @@ class Vote extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function getLastVotes()
+	{
+		$criteria = new CDbCriteria(array(
+				'order'=>'t.id DESC',
+				'limit'=>5,
+				'with'=>array('user','restaurant'),
+		));
+		
+		$lastVotesDataProvider = new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+		)); 
+		
+		return $lastVotesDataProvider->getData();
 	}
 }
