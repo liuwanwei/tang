@@ -98,13 +98,15 @@ class Vote extends CActiveRecord
 	public function getLastVotes()
 	{
 		$criteria = new CDbCriteria(array(
+				'limit'=> 5,
+				'offset'=> 0,
 				'order'=>'t.id DESC',
-				'limit'=>5,
 				'with'=>array('user','restaurant'),
 		));
 		
 		$lastVotesDataProvider = new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
+				'pagination'=>false,
 		)); 
 		
 		return $lastVotesDataProvider->getData();
