@@ -5749,3 +5749,38 @@ Stack trace:
 #29 {main}
 REQUEST_URI=/index.php
 ---
+2013/10/21 02:24:48 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "getCurrentUserImageUrl".' in D:\work\php\wamp\www\yii\framework\base\CComponent.php:265
+Stack trace:
+#0 D:\work\php\wamp\www\yii\framework\db\ar\CActiveRecord.php(225): CComponent->__call('getCurrentUserI...', Array)
+#1 D:\work\php\wamp\www\tang\protected\views\layouts\main-tang.php(72): CActiveRecord->__call('getCurrentUserI...', Array)
+#2 D:\work\php\wamp\www\tang\protected\views\layouts\main-tang.php(72): User->getCurrentUserImageUrl()
+#3 D:\work\php\wamp\www\yii\framework\web\CBaseController.php(126): require('D:\work\php\wam...')
+#4 D:\work\php\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('D:\work\php\wam...', Array, true)
+#5 D:\work\php\wamp\www\yii\framework\web\widgets\CContentDecorator.php(76): CBaseController->renderFile('D:\work\php\wam...', Array, true)
+#6 D:\work\php\wamp\www\yii\framework\web\widgets\CContentDecorator.php(54): CContentDecorator->decorate('<div class="spa...')
+#7 D:\work\php\wamp\www\yii\framework\web\widgets\COutputProcessor.php(44): CContentDecorator->processOutput('<div class="spa...')
+#8 D:\work\php\wamp\www\yii\framework\web\CBaseController.php(206): COutputProcessor->run()
+#9 D:\work\php\wamp\www\yii\framework\web\CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#10 D:\work\php\wamp\www\tang\protected\views\layouts\column2.php(22): CBaseController->endContent()
+#11 D:\work\php\wamp\www\yii\framework\web\CBaseController.php(126): require('D:\work\php\wam...')
+#12 D:\work\php\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('D:\work\php\wam...', Array, true)
+#13 D:\work\php\wamp\www\yii\framework\web\CController.php(784): CBaseController->renderFile('D:\work\php\wam...', Array, true)
+#14 D:\work\php\wamp\www\tang\protected\controllers\RestaurantController.php(340): CController->render('index', Array)
+#15 [internal function]: RestaurantController->actionIndex(0, -1, 0)
+#16 D:\work\php\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(RestaurantController), Array)
+#17 D:\work\php\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(RestaurantController), Object(ReflectionMethod), Array)
+#18 D:\work\php\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#19 D:\work\php\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#20 D:\work\php\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#21 D:\work\php\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#22 D:\work\php\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#23 D:\work\php\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#24 D:\work\php\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#25 D:\work\php\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#26 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#27 D:\work\php\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#28 D:\work\php\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#29 D:\work\php\wamp\www\tang\index.php(13): CApplication->run()
+#30 {main}
+REQUEST_URI=/
+---
