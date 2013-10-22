@@ -39,10 +39,10 @@
 		 //echo count($areas);
 		 foreach ($counties as $key => $value)
 		 {
-		 	$menu[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
+		 	$menu[] = array('label' => $value, 'url' => $this->createUrl('/restaurant/index',array('county'=>$key)));
 		 }
 		 foreach ($areas as $key => $value) {
-		 	$areamenu[]=array('label'=>$value,'url'=>array('/restaurant/index&county='.$key));
+		 	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('/restaurant/index',array('county'=>$key)));
 		 }
 		 $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 // 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
@@ -69,7 +69,7 @@
 				<a href="#" class="login">登陆</a>
 				<?php } else {
 					?>
-				<a href="/index.php?r=site/logout" class="loginout">登出(<?php echo Yii::app()->user->name; ?>)<img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/></a>
+				<a href="<?php echo $this->createUrl('site/logout'); ?>" class="loginout">登出(<?php echo Yii::app()->user->name; ?>)<img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/></a>
 				<?php	
 				}?>
 			
