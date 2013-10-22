@@ -21,7 +21,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 <div class="layer hide"></div>
 <div id="big_map_clone">
-	<div class="big-map-header">注：地图位置坐标仅供参考，具体情况以实际道路标识信息为准<span class="close">X</span></div>
+	<div class="big-map-header">注：地图位置坐标仅供参考，具体情况以实际道路标识信息为准<span class="close" title="关闭">X</span></div>
 <div id="big_map"></div>
 </div>
 
@@ -97,7 +97,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 <?php
  if ($restaurant->latitude==0) {
 	?>
-<div id="main_small_map"><div id="map_container hide-visibility"></div><div class="main-small-map-footer">点击放大地图</div></div><div class="clear"></div>
+<div id="main_small_map  hide-visibility"><div id="map_container"></div><div class="main-small-map-footer  hide-visibility">点击放大地图</div></div><div class="clear"></div>
 <?php 
 }else{
 	?>
@@ -130,6 +130,7 @@ $(function(){
  */
 var rating_list_dome=$(".rating-widget .rating-list");
 	var rating_item1=rating_list_dome.eq(0);
+	<?php if (!yii::app()->user->isGuest) {?>
 	$.get("/index.php?r=vote/query",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
 		
 		if (data.msg) {
@@ -161,6 +162,9 @@ var rating_list_dome=$(".rating-widget .rating-list");
 		//rating_list_dome.eq(0).attr("data-rating-default");
 	},"json");
 
+<?php }else{
+	echo "ratingfnc();";
+} ?>
 
 	function ratingfnc(){
 	rating_list_dome.each(function(){	

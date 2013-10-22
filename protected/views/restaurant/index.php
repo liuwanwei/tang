@@ -32,7 +32,12 @@
 
 <div>
 	<div class="restaurant-left">
-<?php $this->widget('zii.widgets.CListView', array(
+
+
+
+<?php
+
+ $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
@@ -45,7 +50,10 @@
 			'lastPageLabel'=>'末页',
 			'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
-)); ?>
+));
+ ?>
+
+ <button id="next">next</button>
 </div>
 <div class="right-content">
 <?php
@@ -59,6 +67,14 @@
 <script type="text/javascript">
 
 $(function(){
+
+
+	/*$("#next").click(function(){
+	$.get("restaurant/index/Restaurant_page/2",{},function(data){
+		console.log("data="+data);
+		document.body.innerHTML=data;
+	});
+});*/
 
 	tang_main_rating();
 
