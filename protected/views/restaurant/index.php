@@ -56,9 +56,28 @@
  <button id="next">next</button>
 </div>
 <div class="right-content">
+	<div id="last_votes">
+		<span class="title">最近打分</span>
+		<div class="content">
+			<ul>
+			<?php foreach ($lastVotes as $value) {
+			?>
+			<li>
+				<div><img src="<?php echo $value->user->image_url;?>"/></div>
+				<div><span><?php echo $value->user->nick_name; ?></span>
+				<span><?php echo $value->restaurant->name; ?></span></div>
+			</li>
+			<?php
+			} ?>
+			</ul>
+		</div>
+	</div>
+	<div id="last_comments">
+		<span class="title">最近评论</span>
+	</div>
 <?php
-	print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
-	print_r($lastComments[0]->user->nick_name);print_r($lastComments[0]->content);
+	//print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
+	//print_r($lastComments[0]->user->nick_name);print_r($lastComments[0]->content);
 ?> 
 </div>
 <div class="clear"></div>

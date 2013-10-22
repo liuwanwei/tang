@@ -56,7 +56,7 @@
 	<div id="mainmenu">
 		<div class="mainmenu-content">
 		<a href="#" class="tang-logo"><span>老汤馆</span></a>
-		<a href="/index.php?r=restaurant/index" class="mainmenu-home">老汤馆</a>
+		<a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home">老汤馆</a>
 	<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 
