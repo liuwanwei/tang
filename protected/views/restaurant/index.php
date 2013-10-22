@@ -50,6 +50,7 @@
 <div class="right-content">
 <?php
 	print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
+	print_r($lastComments[0]->user->nick_name);print_r($lastComments[0]->content);
 ?> 
 </div>
 <div class="clear"></div>

@@ -113,4 +113,21 @@ class Comment extends CActiveRecord
 			return false;
 		}
 	}
+	
+	public function getLastComments($limit)
+	{
+		$criteria = new CDbCriteria(array(
+				'limit'=> $limit,
+				'offset'=> 0,
+				'order'=>'create_datetime DESC',
+				'with'=>array('user'),
+		));
+		
+		$lastCommentsDataProvider = new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'pagination'=>false,
+		));
+		
+		return $lastCommentsDataProvider->getData();
+	}
 }
