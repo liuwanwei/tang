@@ -32,20 +32,19 @@
 	
 <?php
 		 $menu = array();
-		 $extraCountyMenu=array();
+		 $areamenu=array();
 		 //$menu[] = array('label'=>'老汤馆', 'url'=>array('/restaurant/index'),'linkOptions'=>array('class'=>'mainmenu-home'));
 		 $counties = County::model()->getCountries(0);
-		 $extraCounties =county::model()->getCountries(1);
-		 //echo count($extraCounties);
+		 $areas=county::model()->getCountries(1);
+		 //echo count($areas);
 		 foreach ($counties as $key => $value)
 		 {
-		 	// $menu[] = array('label' => $value, 'url' => array('/restaurant/index&county='.$key));
-		 	$menu[] = array('label' => $value, 'url' => $this->createUrl('restaurant/index', array('county'=>$key)));
+		 	$menu[] = array('label' => $value, 'url' => $this->createUrl('/restaurant/index',array('county'=>$key)));
 		 }
-		 foreach ($extraCounties as $key => $value) {
-		 	$extraCountyMenu[]=array('label'=>$value,'url'=>$this->createUrl('restaurant/index', array('county' => $key)));
+		 foreach ($areas as $key => $value) {
+		 	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('/restaurant/index',array('county'=>$key)));
 		 }
-		 $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$extraCountyMenu);
+		 $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 // 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
 // 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
 // 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
@@ -57,7 +56,7 @@
 	<div id="mainmenu">
 		<div class="mainmenu-content">
 		<a href="#" class="tang-logo"><span>老汤馆</span></a>
-		<a href="/" class="mainmenu-home">老汤馆</a>
+		<a href="/index.php?r=restaurant/index" class="mainmenu-home">老汤馆</a>
 	<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 
@@ -70,7 +69,7 @@
 				<a href="#" class="login">登陆</a>
 				<?php } else {
 					?>
-				<a href=<?php echo $this->createUrl('site/logout'); ?> class="loginout"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/>登出(<?php echo Yii::app()->user->name; ?>)</a>
+				<a href="<?php echo $this->createUrl('site/logout'); ?>" class="loginout">登出(<?php echo Yii::app()->user->name; ?>)<img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/></a>
 				<?php	
 				}?>
 			
@@ -174,9 +173,6 @@ $(".areamenu").hover(function(){
 
 });
 </script>
-
-<!-- 统计 -->
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000119341'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000119341%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
 
 </body>
 </html>
