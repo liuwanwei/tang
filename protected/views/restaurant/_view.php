@@ -25,7 +25,7 @@
 <ul>
 	
 		<li><strong>
-		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurant_id'=>$data->id),array('target'=>'_blank')); ?></strong>
+		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank')); ?></strong>
 		
 		</li>
 		
