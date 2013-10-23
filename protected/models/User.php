@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'user':
  * @property integer $id
- * @property integer $extension_user_id
+ * @property string $extension_user_id
  * @property string $nick_name
  * @property string $image_url
  * @property integer $role
@@ -40,7 +40,8 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('extension_user_id, nick_name, image_url, role, source', 'required'),
-			array('extension_user_id, role, source', 'numerical', 'integerOnly'=>true),
+			array('role, source', 'numerical', 'integerOnly'=>true),
+			array('extension_user_id', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, extension_user_id, nick_name, image_url, role, source', 'safe', 'on'=>'search'),
@@ -85,7 +86,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('extension_user_id',$this->extension_user_id);
+		$criteria->compare('extension_user_id',$this->extension_user_id,true);
 		$criteria->compare('nick_name',$this->nick_name,true);
 		$criteria->compare('image_url',$this->image_url,true);
 		$criteria->compare('role',$this->role);
@@ -95,6 +96,7 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
 	/**
 	 * 获取当前登录者头像地址
 	 */
@@ -112,7 +114,7 @@ class User extends CActiveRecord
 				Yii::app()->session->add('currentUserImageUrl',$user->image_url);
 				return $user->image_url;
 			}
-			else 
+			else
 			{
 				return "";
 			}
