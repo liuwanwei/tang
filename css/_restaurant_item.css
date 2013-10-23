@@ -24,14 +24,126 @@
 .right-content
 {
 	
-	width: 300px;
+	width: 280px;
 	min-height: 500px;
 	float: right;
 	background: #FFFFFF;
 	box-shadow: 0 0 6px #ccc;
 	border-radius: 6px;
+	padding: 10px;
+	font-size: 12px;
+	color:#555;
 
 
+}
+.right-content .title
+{
+	color: #6c6c6c;
+}
+.right-content #last_votes .content ul,.right-content #last_comments .content ul
+{
+	list-style: none;
+	margin: 0px; 
+	padding: 0px;
+	position: relative;
+}
+.right-content #last_votes .content ul li,.right-content #last_comments .content ul li
+{
+	min-height: 30px;
+	height: auto;
+	position: relative;
+	padding:5px 0px;
+	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
+
+}
+.right-content #last_votes .content ul li:first-child,.right-content #last_comments .content ul li:first-child
+{
+	border-top:1px solid rgba(0, 0, 0, 0.1); 
+}
+.right-content #last_votes .content ul li>div,.right-content #last_votes .content ul li>a
+{
+	display: inline-block;
+	
+}
+.right-content #last_votes .content ul li>a
+{
+	position: relative;
+	top: 3px;
+}
+
+.right-content #last_votes .content ul li>a+div
+{
+	width: 230px;
+	position: absolute;
+	left: 35px;
+	line-height: 20px;
+
+}
+
+.right-content #last_votes .content ul li>a+div>span
+{
+	display: block;
+}
+
+
+.right-content #last_votes .content img
+{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 0px;
+	padding: 0px;
+
+}
+.right-content #last_comments
+{
+	margin-top: 20px;
+}
+.right-content #last_votes .content img:hover,.right-content #last_comments .content img:hover
+{
+	box-shadow: 0px 1px 5px #ccc;
+}
+
+.right-content #last_comments .content ul li>a,.right-content #last_comments .content ul li>div
+{
+	display: inline-block;	
+	height: auto;
+
+}
+.right-content #last_comments .content ul li>a
+{
+	width: 30px;	
+	
+}
+.right-content #last_comments .content ul li>a+div
+{
+	width: 230px;
+	left: 35px;
+	min-height: 30px;	
+	line-height: 20px;
+	
+	vertical-align: text-bottom;
+
+}
+.right-content #last_comments .content ul li>a+div>span
+{
+	
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
+
+}
+
+
+.right-content #last_comments .content img
+{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 0px;
+	padding: 0px;	
+	vertical-align: middle;
 }
 .restaurant-left
 {
