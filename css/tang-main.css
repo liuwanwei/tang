@@ -900,6 +900,7 @@ div.rating-widget
 	line-height: 25px;
 	display: none;
 	font-size: 0.9em;
+	z-index: 9999;
 }
 .tooltip .title
 {

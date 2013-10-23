@@ -32,9 +32,6 @@
 
 <div>
 	<div class="restaurant-left">
-
-
-
 <?php
 
  $this->widget('zii.widgets.CListView', array(
@@ -53,7 +50,7 @@
 ));
  ?>
 
- <button id="next">next</button>
+ 
 </div>
 <div class="right-content">
 	<div id="last_votes">
@@ -63,9 +60,42 @@
 			<?php foreach ($lastVotes as $value) {
 			?>
 			<li>
-				<div><img src="<?php echo $value->user->image_url;?>"/></div>
-				<div><span><?php echo $value->user->nick_name; ?></span>
-				<span><?php echo $value->restaurant->name; ?></span></div>
+				<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
+				<div>
+				<span><?php echo $value->restaurant->name; ?></span>
+				<div class="rating-widget">
+		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+		<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?>" 
+			data-clicknum="0" 
+			data-user="<?php echo Yii::app()->user->id ?>"
+			data-id="<?php echo CHtml::encode($value->restaurant->id);?>"
+			data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
+		<span class="rating-stars">
+		<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
+		<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
+		<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
+		<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
+		<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
+		<!--<a class="rating-icon star-on"><span>6</span></a>
+		<a class="rating-icon star-on"><span>7</span></a>
+		<a class="rating-icon star-on"><span>8</span></a>
+		<a class="rating-icon star-on"><span>9</span></a>
+		<a class="rating-icon star-on"><span>10</span></a>-->
+		</span>
+		<span class="rating-rating">
+		<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?></span>
+		<span class="grey">/</span>
+		<span class="grey">5</span>
+		</span>
+		<span class="rating-cancel ">
+			<a title="删除">
+				<span>X</span>
+			</a>
+		</span>
+		</div>		
+		</div>
+			<div class="clear"><!--清除浮动--></div>
+			</div>
 			</li>
 			<?php
 			} ?>
@@ -74,6 +104,19 @@
 	</div>
 	<div id="last_comments">
 		<span class="title">最近评论</span>
+		<div class="content">
+			<ul>
+				<?php foreach ($lastComments as $value) {
+			?>
+			<li>
+				<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
+				<div>
+				<span><?php echo $value->content; ?></span></div>
+			</li>
+			<?php
+			} ?>
+			</ul>
+		</div>
 	</div>
 <?php
 	//print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
@@ -95,21 +138,23 @@ $(function(){
 	});
 });*/
 
-	tang_main_rating();
-
-function tang_main_rating()
+	
+var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
+tang_main_rating(rating_list_dome,true);
+tang_main_rating($(".rating-widget .rating-list",$(".right-content")),false);
+function tang_main_rating(rating_list,ismouseover)
 {
 
 
 /*
- *评分组件
+ *评分组件 @rating_list 为评分组件集，@ismouseover是否加载鼠移上去事件
  *@当鼠标移到星星上（A标签），就给小于等于当前鼠标位置的元素加上选中的样式，
  *大于当前位置的元素为原始样式，同时给class=value的span(评分值)赋值
  *@当鼠标移出rating-list（星星的父容器）时，判断是否评分成功，给给定数量的星星加上评分的样式，
  *如果未评分就还原默认的数字
  */
-var rating_list_dome=$(".rating-widget .rating-list");
-rating_list_dome.each(function(){
+
+rating_list.each(function(){
 
 	var a_this=$(this);//当前遍历rating-list的jqueryDOM对象
 	var a_arr=$(".rating-stars a",a_this);//取出当前rating-list下的所有a对象
@@ -120,6 +165,7 @@ rating_list_dome.each(function(){
 	ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 
 
+	if (ismouseover) {
 
 		//单击星星时发生
 		a_arr.live("click",function(event){
@@ -147,7 +193,7 @@ rating_list_dome.each(function(){
 		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
-		$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
+		$.post("/vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
 				//console.log("aa="+resultdata.voteid);
 				if (resultdata.msg==="0") {
@@ -164,7 +210,7 @@ rating_list_dome.each(function(){
 					});			
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/index.php?r=vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+						$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
 								if (rating_cancel_result.msg==="0") {
 									a_this.removeAttr('voteid');
 									rating_cancel.removeClass('rating-pending');
@@ -233,6 +279,7 @@ rating_list_dome.each(function(){
 		}
 		});
 
+}
 
 });
 
@@ -272,7 +319,7 @@ var btnedit_div=$(".view-edit-btn");
 		d_this.find(".feature-btn").bind("click",function(){
 			var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
 			//ajax加载数据
-			$.get("index.php?r=restaurantFeature/query",{},function(data){
+			$.get("/restaurantFeature/query",{},function(data){
 				
 				var t="<ul>";
 				if (data) {
@@ -327,7 +374,7 @@ $("#feature-edit-submit",btnedit_div).click(function(){
 	});
 	features1=features1.substring(0,features1.length-1);
 	//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
-	$.post("/index.php?r=feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
+	$.post("/feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
 		if (data.success) {
 			//当提交成功时关闭窗体
 			btnedit_div_hide(d_this);
