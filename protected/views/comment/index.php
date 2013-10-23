@@ -131,7 +131,7 @@ $(function(){
 var rating_list_dome=$(".rating-widget .rating-list");
 	var rating_item1=rating_list_dome.eq(0);
 	<?php if (!yii::app()->user->isGuest) {?>
-	$.get("/index.php?r=vote/query",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
+	$.get("/vote/query",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
 		
 		if (data.msg) {
 			rating_item1.attr("data-rating-default",0);
@@ -143,7 +143,7 @@ var rating_list_dome=$(".rating-widget .rating-list");
 			$(".rating-cancel",rating_item1).removeClass('rating-pending').addClass("rating-icon rating-your");
 			$(".rating-cancel",rating_item1).one('click',function(){
 						$(".rating-cancel",rating_item1).removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/index.php?r=vote/delete",{Vote:{id:rating_item1.attr("voteid")}},function(rating_cancel_result){								
+						$.post("/vote/delete",{Vote:{id:rating_item1.attr("voteid")}},function(rating_cancel_result){								
 								if (rating_cancel_result.msg==="0") {
 									rating_item1.removeAttr('voteid');
 									$(".rating-cancel",rating_item1).removeClass('rating-pending');
@@ -214,7 +214,7 @@ var rating_list_dome=$(".rating-widget .rating-list");
 
 		//执行评分的ajax
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
-		$.post("/index.php?r=vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
+		$.post("/vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
 				//console.log("aa="+resultdata.voteid);
 				if (resultdata.msg==="0") {
@@ -222,7 +222,7 @@ var rating_list_dome=$(".rating-widget .rating-list");
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");					
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/index.php?r=vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+						$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
 								if (rating_cancel_result.msg==="0") {
 									a_this.removeAttr('voteid');
 									rating_cancel.removeClass('rating-pending');
