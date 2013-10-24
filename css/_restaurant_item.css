@@ -49,12 +49,17 @@
 }
 .right-content #last_votes .content ul li,.right-content #last_comments .content ul li
 {
-	min-height: 30px;
+	min-height: 25px;
 	height: auto;
 	position: relative;
 	padding:5px 0px;
+	vertical-align: middle;
 	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
 
+}
+.right-content #last_comments .content ul li:last-child
+{
+	border-bottom: 0px none;
 }
 .right-content #last_votes .content ul li:first-child,.right-content #last_comments .content ul li:first-child
 {
@@ -112,16 +117,19 @@
 }
 .right-content #last_comments .content ul li>a
 {
-	width: 30px;	
+	width: 30px;
+	display: inline-block;
+	height: 30px;
 	position: relative;
+	top: 3px;
 }
 .right-content #last_comments .content ul li>a+div
 {
-	width: 230px;
-	left: 35px;
-	min-height: 30px;	
+	width: 230px;	
 	line-height: 20px;
-	position: absolute;	
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
 
 }
 .right-content #last_comments .content ul li>a+div>span
@@ -130,10 +138,9 @@
 	display: block;
 	margin: 0px;
 	padding: 0px;
-	vertical-align: top;
+
 
 }
-
 
 .right-content #last_comments .content img
 {
@@ -141,8 +148,10 @@
 	height: 30px;
 	border-radius: 50%;
 	margin: 0px;
-	padding: 0px;	
+	padding: 0px;
 }
+
+
 .restaurant-left
 {
 	width: 635px;
