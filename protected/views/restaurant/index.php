@@ -110,14 +110,16 @@
 			?>
 			<li>
 				<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
-				<div>
-				<span><?php echo $value->content; ?></span></div>
+				<div>				
+				<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content; ?></span>
+				</div>
 			</li>
 			<?php
 			} ?>
 			</ul>
 		</div>
 	</div>
+
 <?php
 	//print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
 	//print_r($lastComments[0]->user->nick_name);print_r($lastComments[0]->content);
