@@ -114,8 +114,12 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 	-ms-border-radius: 15px;
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
-	-o-border-radius: 15px;
+	-o-border-radius: 15px;	
 	
+}
+#mainmenu .loginuser img:hover
+{
+	box-shadow: 0px 1px 7px rgba(0,0,0,0.8);
 }
 #mainmenu .logout
 {
@@ -215,17 +219,16 @@ li.areamenu ul li
 {
 	height: 30px;
 	line-height: 30px;
-	padding: 0px 0px 0px 10px;
+	padding: 0px;
 
 }
-li.areamenu ul li:hover,li.areamenu ul li:focus
-{
-	background: #9c9c9c;
-}
+
 
 li.areamenu ul li a
 {
+	display: block;
 	color: #555;
+	padding-left:10px;
 	text-decoration: none;
 
 }
@@ -508,7 +511,13 @@ body, input, textarea, select, button {
 }
 
 .feed-item .avatar img {
-	border-radius: 3px;
+	border-radius: 50%;
+	-ms-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
+	margin: 0px;
+	padding: 0px;
 }
 
 .feed-item .avatar {
