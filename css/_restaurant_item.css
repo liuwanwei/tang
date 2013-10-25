@@ -96,6 +96,10 @@
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
+	-ms-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-o-border-radius: 50%;
 	margin: 0px;
 	padding: 0px;
 
@@ -138,7 +142,7 @@
 	display: block;
 	margin: 0px;
 	padding: 0px;
-
+	text-justify:inter-word;
 
 }
 
@@ -188,6 +192,10 @@ div.view-item
 	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
 
 	
+}
+div.view-item:last-child
+{
+	border-bottom:0px none; 
 }
 
 /*排名*/

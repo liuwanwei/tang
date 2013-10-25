@@ -316,6 +316,11 @@ function ratingInit(e_this,classname,i,evalue)
 	}; ?>
 
 
+	//textarea鼠标点击去变大
+
+	$("#comment_content").click(function(){
+		$(this).animate({height:'150px'},200);
+		});
 
 
 	//地图的点击放大事件

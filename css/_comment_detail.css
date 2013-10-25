@@ -135,15 +135,17 @@ textarea
 {
 	border: 1px solid #ccc;
 	width: 775px;
+	height: 60px;
 	padding: 5px;
 }
 textarea:hover,textarea:focus
 {
 	
-	box-shadow: 1px 1px 8px rgba(39,192,112,0.6);
-	-moz-box-shadow: 1px 1px 6px rgba(39,192,112,0.6);
-	-webkit-box-shadow: 1px 1px 6px rgba(39,192,112,0.6);
-	-o-box-shadow: 1px 1px 6px rgba(39,192,112,0.6);
+	box-shadow: 1px 1px 8px rgba(153,34,17,0.6);
+	-moz-box-shadow: 1px 1px 6px rgba(153,34,17,0.6);
+	-webkit-box-shadow: 1px 1px 6px rgba(153,34,17,0.6);
+	-o-box-shadow: 1px 1px 6px rgba(153,34,17,0.6);
+	
 
 }
 
@@ -153,10 +155,10 @@ input[type=submit]
 	height: 40px;
 	border-width:1px;
 	border-style:solid;
-	background-color: rgb(0, 163, 95) !important;
+	background-color: rgb(153,34,17) !important;
 	background-repeat: repeat-x;
-	background-image: linear-gradient(rgb(0, 214, 124), rgb(0, 163, 95));
-	border-color: rgb(0, 163, 95) rgb(0, 163, 95) rgb(0, 150, 87);
+	background-image: linear-gradient( rgb(178, 68, 34),rgb(153,34,17));
+	border-color: rgb(178, 68, 34) rgb(178, 68, 34) rgb(178, 68, 34);
 	color: #FFFFFF !important;
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.16);
 	border-radius: 6px;
@@ -167,10 +169,12 @@ input[type=submit]
 	cursor: pointer;
 
 }
+
+
 input[type=submit]:focus,input[type=submit]:hover
 {
 	
-	background: #02BD70;
+	background: #992211;
 }
 form
 {
