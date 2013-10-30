@@ -67,7 +67,8 @@ class VoteController extends Controller
 			$averagePoints = ($oldVotes * $oldAveragePoints - $model->oldRating + $model->rating) / $oldVotes;
 		}
 		
-		$restaurant->average_points = $averagePoints;
+		// 平均分保留小数点后一位。
+		$restaurant->average_points = number_format($averagePoints, 1);
 
 		if(! $restaurant->save()){
 			die('save restaurant record faild: '.$restaurant->getErrors());
