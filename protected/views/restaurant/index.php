@@ -111,7 +111,7 @@
 			<li>
 				<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
 				<div>				
-				<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content; ?></span>
+				<?php echo CHtml::link('<span>'.strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
 				</div>
 			</li>
 			<?php
