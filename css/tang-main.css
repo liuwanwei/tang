@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 }
+a img{border:0 none;}
 body
 {
 	margin: 0;
@@ -533,7 +534,7 @@ body, input, textarea, select, button {
 }
 
 .feed-item .content {
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .feed-item .time {
@@ -896,7 +897,7 @@ div.rating-widget
 {
 	font-size: 14px;
 	display: inline-block;
-	width: 28px;
+	width: 30px;
 	color: rgb(165, 134, 0);
 	font-family: tahoma;	
 	text-align: right;
