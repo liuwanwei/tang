@@ -119,6 +119,14 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+	public function actionUpVersion(){		
+		$shell_script = Yii::app()->getBasePath() . '/etc/getcode.sh';
+		$output = shell_exec("$shell_script 2>&1");
+		#$output = shell_exec('/usr/bin/git pull origin master 2>&1');
+		echo "<pre>".date('H:i:s')."</pre>";
+		echo "<pre>".$output."</pre>";
+	}
 	
 	public function actionWbLogin()
 	{
