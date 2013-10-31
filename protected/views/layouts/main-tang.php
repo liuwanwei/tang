@@ -62,12 +62,12 @@
 		)); 
 		?>
 
-		
+		<i class="icon-caret-down"></i>
 		<div class="rigth-menu">
 			<?php if (yii::app()->user->isGuest) {?>
 				<a href="#" class="login">登陆</a>
 			<?php } else {?>
-				<a href="http://weibo.com/u/<?php echo User::model()->findByPk(Yii::App()->user->id)->extension_user_id ?>" class="loginuser" target="_blank"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/> <?php echo Yii::app()->user->name; ?></a>
+				<a href="http://weibo.com/u/<?php echo User::model()->findByPk(Yii::App()->user->id)->extension_user_id ?>" class="loginuser" target="_blank"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/><?php echo Yii::app()->user->name; ?></a>
 				<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>
 			<?php	}?>
 			
