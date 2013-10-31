@@ -22,6 +22,35 @@ class SiteController extends Controller
 	}
 
 	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+	
+	public function accessRules()
+	{
+		
+		return array(
+				array('allow',
+						'actions'=>array('login', 'wbLogin', 'logout', 'index', 'error', 'contact'),
+						'users'=>array('*')
+				),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions'=>array('upVersion'),
+						'expression'=>array($this,'isAdmin'),
+				),
+				array('deny',  // deny all usersk
+						'users'=>array('*'),
+				),
+		);
+	}
+
+	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
@@ -72,18 +101,6 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 	
-	public function actionAdmin()
-	{
-		if (parent::isAdmin())
-		{
-			parent::actionAdmin();
-			$this->render('index');
-		}
-		else 
-		{
-			$this->actionLogin();
-		}
-	}
 
 	/**
 	 * Displays the login page
@@ -118,14 +135,6 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
-	}
-
-	public function actionUpVersion(){		
-		$shell_script = Yii::app()->getBasePath() . '/etc/getcode.sh';
-		$output = shell_exec("$shell_script 2>&1");
-		#$output = shell_exec('/usr/bin/git pull origin master 2>&1');
-		echo "<pre>".date('H:i:s')."</pre>";
-		echo "<pre>".$output."</pre>";
 	}
 	
 	public function actionWbLogin()
@@ -177,5 +186,12 @@ class SiteController extends Controller
 			$this->redirect($_REQUEST['state']);
 		}
 	}
-	
+
+	public function actionUpVersion(){	
+		$shell_script = Yii::getPathOfAlias('webroot') . '/etc/getcode.sh';
+		$output = shell_exec("$shell_script 2>&1");
+		#$output = shell_exec('/usr/bin/git pull origin master 2>&1');
+		echo "<pre>".date('H:i:s')."</pre>";
+		echo "<pre>".$output."</pre>";
+	}
 }
