@@ -99,18 +99,18 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 }
 #mainmenu .loginuser
 {
-	font-size: 14px;
 	color: #aa2105;
-	display: inline-block;
-	height: 30px;	
-	text-decoration: none;	
+	text-decoration: none;
+	display: block;
+	padding: 5px 0px;	
+	
+	
 }
 #mainmenu .loginuser img
 {
 	width: 30px;
 	height: 30px;
 	margin-left: 5px;
-	vertical-align: middle;
 	border-radius: 15px;
 	-ms-border-radius: 15px;
 	-moz-border-radius: 15px;
@@ -118,32 +118,92 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 	-o-border-radius: 15px;	
 	
 }
-#mainmenu .loginuser img:hover
+#mainmenu .loginuser:hover img
 {
+	-moz-box-shadow: 0px 1px 7px rgba(0,0,0,0.8);
+	--webkit-box-shadow: 0px 1px 7px rgba(0,0,0,0.8);
+	-ms-box-shadow: 0px 1px 7px rgba(0,0,0,0.8);
+	-o-box-shadow: 0px 1px 7px rgba(0,0,0,0.8);
 	box-shadow: 0px 1px 7px rgba(0,0,0,0.8);
+
+}
+#mainmenu .loginuser:hover span
+{
+	border-top-color: #666;
 }
 #mainmenu .logout
 {
-	font-size: 14px;
-	color: #000000f;
-	display: inline-block;
-	margin-left: 10px;
-	height: 30px;
+	
+
+}
+
+#mainmenu .user-panel
+{
+	width: 70px;
+	font-size: 12px;
+	
+	display:block;
+	margin-top: 5px;
+	
+}
+
+#mainmenu .user-panel:hover
+{
+	background: #FFFFFF;
+	border-radius: 5px 0px 5px 0px;
+	box-shadow: 0px 0px 6px #cccc99;
+}
+
+#mainmenu .user-panel:hover ul
+{
+	display: block;
+}
+
+
+
+#mainmenu .user-panel ul
+{
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	list-style: none;
+}
+#mainmenu .user-panel ul li
+{
+	height: 25px;
+	line-height: 25px;
+	padding: 0px 5px;
+	border-bottom: 1px dotted #ddd;
+}
+#mainmenu .user-panel ul li:first-child
+{
+	border-top: 1px dotted #ddd;
+}
+#mainmenu .user-panel ul li:last-child
+{
+	border-bottom: 0px none;
+}
+
+#mainmenu .user-panel ul li a
+{
+	color: #666;
 	text-decoration: none;
 }
 .icon-caret-down
 {
-	color: #666;
-	font-size: 12px;
-	border:0px none;
-	display: inline; 
-	font-family: FontAwesome;
-	font-weight: normal;
-	font-style: normal;
-	text-decoration: inherit;
+	width: 0px;
+	height: 0px;
+	border-color: transparent;
+	border-width:5px;
+	border-bottom-width: 0px;
+	border-top-color:rgba(128,97,69,0.8);
+	border-style: solid;
+	margin-left: 3px;
+
+
 }
 
-.icon-caret-down:before{content:"\f0d7"}
 
 #mainmenu .mainmenu-content
 {
@@ -159,6 +219,8 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 {
 	width: auto;
 	float: right;
+	height: 100%;
+	line-height: 100%;
 	margin-right:28%;
 }
 
