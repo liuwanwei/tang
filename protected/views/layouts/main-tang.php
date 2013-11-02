@@ -62,13 +62,18 @@
 		)); 
 		?>
 
-		
 		<div class="rigth-menu">
 			<?php if (yii::app()->user->isGuest) {?>
 				<a href="#" class="login">登陆</a>
 			<?php } else {?>
-				<a href="http://weibo.com/u/<?php echo User::model()->findByPk(Yii::App()->user->id)->extension_user_id ?>" class="loginuser" target="_blank"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/> <?php echo Yii::app()->user->name; ?></a>
-				<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>
+				<div class="user-panel show">
+				<a href="javascript:void(0);" class="loginuser" target="_blank"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/><span class="icon-caret-down"></span></a>
+				<!--<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>-->
+				<ul>
+					<li><a href="#">个人中心</a></li>
+					<li><a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a></li>
+				</ul>
+		</div>
 			<?php	}?>
 			
 		</div>
@@ -145,6 +150,13 @@ $(function(){
 //点击登陆弹出模态窗口
 $(".login").click(function(){
 	loginModal();
+});
+$(".loginuser").bind("mouseover",function(){
+	/*$(this).parent().addClass('show').bind("mouseout",function(){
+
+		$(this).removeClass('show');
+	});*/
+
 });
 
 $(".modal-backdrop").click(function(){

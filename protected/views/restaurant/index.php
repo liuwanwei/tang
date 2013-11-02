@@ -62,7 +62,8 @@
 			<li>
 				<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
 				<div>
-				<span><?php echo $value->restaurant->name; ?></span>
+				<!--<span><?php echo $value->restaurant->name; ?></span>-->
+				<?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
 				<div class="rating-widget">
 		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 		<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?>" 

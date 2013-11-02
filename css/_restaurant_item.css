@@ -38,10 +38,13 @@
 }
 .right-content a{
 	color: #555;
+	text-decoration: none;
 }
 .right-content a:hover
 {
-	color:#922;
+	/*color:#922;*/
+	text-decoration: underline;
+
 }
 .right-content .title
 {
