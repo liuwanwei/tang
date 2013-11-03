@@ -41,7 +41,7 @@ class SiteController extends Controller
 						'users'=>array('*')
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('upVersion'),
+						'actions'=>array('upVersion,admin'),
 						'expression'=>array($this,'isAdmin'),
 				),
 				array('deny',  // deny all usersk
@@ -72,6 +72,19 @@ class SiteController extends Controller
 				echo $error['message'];
 			else
 				$this->render('error', $error);
+		}
+	}
+
+	public function actionAdmin()
+	{
+		if (parent::isAdmin())
+		{
+			parent::actionAdmin();
+			$this->render('index');
+		}
+		else 
+		{
+			$this->actionLogin();
 		}
 	}
 
