@@ -41,7 +41,7 @@ class SiteController extends Controller
 						'users'=>array('*')
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('upVersion,admin'),
+						'actions'=>array('upVersion','admin'),
 						'expression'=>array($this,'isAdmin'),
 				),
 				array('deny',  // deny all usersk
