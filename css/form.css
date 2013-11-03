@@ -162,3 +162,15 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 	clear: left;
 	padding-left: 110px;
 }
+.form-row-one
+{
+	width: 100%;
+}
+.form-row-one div
+{
+	display: inline-block;
+}
+.form-row-one input
+{
+	width: 187px;
+}

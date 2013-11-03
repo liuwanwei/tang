@@ -27,7 +27,7 @@
 		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
-
+	<div class="form-row-one">
 	<div class="row">
 		<?php echo $form->labelEx($model,'type_id'); ?>
 		<!--<?php echo $form->textField($model,'type_id'); ?> -->
@@ -48,7 +48,8 @@
 		<?php echo $form->dropDownList($model, 'area_id', $selectors['areas']); ?>
 		<?php echo $form->error($model,'area_id'); ?>
 	</div>
-
+</div>
+<div class="form-row-one">
 	<div class="row">
 		<?php echo $form->labelEx($model,'latitude'); ?>
 		<?php echo $form->textField($model,'latitude'); ?>
@@ -60,13 +61,13 @@
 		<?php echo $form->textField($model,'longitude'); ?>
 		<?php echo $form->error($model,'longitude'); ?>
 	</div>
-
+</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'address'); ?>
 		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>256)); ?>
 		<?php echo $form->error($model,'address'); ?>
 	</div>
-	
+	<div class="form-row-one">
 	<div class="row">
 		<?php echo $form->labelEx($model,'phone'); ?>
 		<?php echo $form->textField($model,'phone',array('size'=>60,'maxlength'=>64)); ?>
@@ -78,7 +79,8 @@
 		<?php echo $form->textField($model,'business_hour',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'business_hour'); ?>
 	</div>
-
+	</div>
+<div class="form-row-one">
 	<div class="row">
 		<?php echo $form->labelEx($model,'is_shutdown'); ?>
 		<!--<?php echo $form->textField($model,'is_shutdown'); ?>-->
@@ -99,6 +101,7 @@
 		<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
 	</div>
 	<?php } ?>
+</div>
 <!-- 
 	<div class="row">
 		<?php echo $form->labelEx($model,'weighted_points'); ?>
