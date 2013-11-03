@@ -71,6 +71,8 @@
 				<!--<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>-->
 				<ul>
 					<li><a href="#">个人中心</a></li>
+					<li><a href="#">添加汤馆</a></li>
+					<li><a href="#">审核</a></li>
 					<li><a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a></li>
 				</ul>
 		</div>
@@ -115,6 +117,9 @@
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
+<div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"></a></div>
+
+
 <script type="text/javascript">
 $(function(){
 							var footerHeight = 0,
@@ -179,6 +184,25 @@ $(".areamenu").hover(function(){
 },function(){
 	$(this).find('ul').hide(100);
 });
+
+
+//回到顶部ＪＳ
+	$(window).scroll(function(){
+		
+		if($(window).scrollTop()>($(document.body).height()/4))
+		{
+			$("#right_float_panel").show();
+		}else
+		{
+			$("#right_float_panel").hide();
+		}
+
+	});
+
+	$(".top_up").click(function(){
+	$('html,body').animate({scrollTop:'0px'},800);
+	});
+
 
 
 });

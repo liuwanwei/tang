@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Restaurant', 'url'=>array('index')),
-	array('label'=>'Manage Restaurant', 'url'=>array('admin')),
+	array('label'=>'汤馆列表', 'url'=>array('index')),
+	array('label'=>'汤馆管理', 'url'=>array('admin')),
 );
 ?>
 
