@@ -31,9 +31,9 @@
 
 	
 <?php
+
 		 $menu = array();
 		 $areamenu=array();
-		 //$menu[] = array('label'=>'老汤馆', 'url'=>array('/restaurant/index'),'linkOptions'=>array('class'=>'mainmenu-home'));
 		 $counties = County::model()->getCountries(0);
 		 $areas=county::model()->getCountries(1);
 		 //echo count($areas);
@@ -45,12 +45,6 @@
 		 	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('/restaurant/index',array('county'=>$key)));
 		 }
 		 $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
-// 		 $menu[] = array('label'=>'状态', 'url'=>array('/restaurantstatus/index'));
-// 		 $menu[] = array('label'=>'评分测试', 'url'=>array('/vote/create'));
-// 		 $menu[] = array('label'=>'gii',    'url'=>array('/gii/'));
-		// $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
-		 //$menu[] = array('label'=>'登陆','url'=>'','visible'=>yii::app()->user->isGuest, 
-		 //	'linkOptions'=>array('class'=>'login'));
 	?>
 
 	<div id="mainmenu">
@@ -70,7 +64,7 @@
 				<a href="javascript:void(0);" class="loginuser" target="_blank"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/><span class="icon-caret-down"></span></a>
 				<!--<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>-->
 				<ul>
-					<li><a href="#">个人中心</a></li>
+					<li><a href="http://weibo.com/u/<?php echo User::model()->findByPk(Yii::App()->user->id)->extension_user_id ?>">个人中心</a></li>
 					<li><a href="#">添加汤馆</a></li>
 					<li><a href="#">审核</a></li>
 					<li><a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a></li>
