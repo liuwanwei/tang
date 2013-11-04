@@ -49,24 +49,20 @@
 		<?php echo $form->error($model,'area_id'); ?>
 	</div>
 </div>
-<div class="form-row-one">
+	<div class="form-row-one">
 	<div class="row">
-		<?php echo $form->labelEx($model,'latitude'); ?>
-		<?php echo $form->textField($model,'latitude'); ?>
-		<?php echo $form->error($model,'latitude'); ?>
+		<?php echo $form->labelEx($model,'coordinate'); ?>
+		<?php echo $form->textField($model,'coordinate',  array('readonly' => 'readonly')); ?>
+		<?php echo $form->error($model,'coordinate'); ?>
 	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'longitude'); ?>
-		<?php echo $form->textField($model,'longitude'); ?>
-		<?php echo $form->error($model,'longitude'); ?>
 	</div>
-</div>
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'address'); ?>
 		<?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>256)); ?>
 		<?php echo $form->error($model,'address'); ?>
 	</div>
+
 	<div class="form-row-one">
 	<div class="row">
 		<?php echo $form->labelEx($model,'phone'); ?>
@@ -80,29 +76,32 @@
 		<?php echo $form->error($model,'business_hour'); ?>
 	</div>
 	</div>
-<div class="form-row-one">
-	<div class="row">
-		<?php echo $form->labelEx($model,'is_shutdown'); ?>
-		<!--<?php echo $form->textField($model,'is_shutdown'); ?>-->
-		<?php echo $form->dropDownList($model, 'is_shutdown', $selectors['statuses']);?>
-		<?php echo $form->error($model,'is_shutdown'); ?>
-	</div>
 
-	<!-- 图像文件上传框 -->
-	<div class="row">
-		<?php echo $form->labelEx($model,'image_url'); ?>
-		<?php echo CHtml::activeFileField($model, 'image_url'); ?>
-		<?php echo $form->error($model,'image_url'); ?>
-	</div>
+		<!--
+		<div class="form-row-one">
+		<div class="row">
+			<?php echo $form->labelEx($model,'is_shutdown'); ?>
+			<?php echo $form->dropDownList($model, 'is_shutdown', $selectors['statuses']);?>
+			<?php echo $form->error($model,'is_shutdown'); ?>
+		</div>
+		-->
 
-	<!-- 已有图像显示框 -->
-	<?php if($model->isNewRecord!='1' &&  !empty($model->image_url)){ ?>
-	<div class="row">
-		<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
-	</div>
-	<?php } ?>
-</div>
-<!-- 
+		<!-- 图像文件上传框 
+		<div class="row">
+			<?php echo $form->labelEx($model,'image_url'); ?>
+			<?php echo CHtml::activeFileField($model, 'image_url'); ?>
+			<?php echo $form->error($model,'image_url'); ?>
+		</div>-->
+
+		<!-- 已有图像显示框 
+		<?php if($model->isNewRecord!='1' &&  !empty($model->image_url)){ ?>
+		<div class="row">
+			<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
+		</div>
+		<?php } ?>
+		</div>-->
+
+	<!-- 
 	<div class="row">
 		<?php echo $form->labelEx($model,'weighted_points'); ?>
 		<?php echo $form->textField($model,'weighted_points'); ?>
@@ -119,13 +118,13 @@
 		<?php echo $form->labelEx($model,'average_points'); ?>
 		<?php echo $form->textField($model,'average_points'); ?>
 		<?php echo $form->error($model,'average_points'); ?>
-	</div> -->
+	</div> 
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>256)); ?>
 		<?php echo $form->error($model,'description'); ?>
-	</div>
+	</div>-->
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

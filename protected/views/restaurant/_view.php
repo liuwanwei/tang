@@ -58,7 +58,7 @@
 		<li>
 		<span  class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
 		<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
-		<?php if ($data->latitude!=0 && $data->longitude!=0) {
+		<?php if (! empty($data->coornidate)) {
 			echo CHtml::link('<img src="'.Yii::app()->request->baseUrl.'/images/icon/map_16.png" alt="地图"  title="看看汤馆的位置"/>',  array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank'));
 		} ?>
 		</li>

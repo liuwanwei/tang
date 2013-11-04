@@ -94,13 +94,9 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 </ul>
 
-<?php
- if ($restaurant->latitude==0) {
-	?>
+<?php if (empty($restaurant->coordinate)) { ?>
 <div id="main_small_map  hide-visibility"><div id="map_container"></div><div class="main-small-map-footer  hide-visibility">点击放大地图</div></div><div class="clear"></div>
-<?php 
-}else{
-	?>
+<?php }else{ ?>
 <div id="main_small_map"><div id="map_container"></div><div class="main-small-map-footer">点击放大地图</div></div><div class="clear"></div>	
 <?php } ?>
 </div>
@@ -311,7 +307,7 @@ function ratingInit(e_this,classname,i,evalue)
 	}
 
 	//异步加载SOSO地图JS库
-	<?php if ($restaurant->latitude!=0 && $restaurant->longitude!=0) {
+	<?php if (!empty($restaurant->coordinate)) {
 		echo 'loadScript();';
 	}; ?>
 
@@ -358,7 +354,7 @@ function ratingInit(e_this,classname,i,evalue)
  */
 var geocoder,map, marker = null;
 var init = function(map_id) {
-    var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->latitude).','.CHtml::encode($restaurant->longitude); ?>);//(39.916527,116.397128);
+    var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->coordinate); ?>);//(39.916527,116.397128);
     map = new soso.maps.Map(document.getElementById(map_id),{
         center: center,
         zoom: 16
