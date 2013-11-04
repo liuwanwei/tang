@@ -71,7 +71,7 @@
 				<!--<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>-->
 				<ul>
 					<li><a href="#">个人中心</a></li>
-					<li><a href="#">添加汤馆</a></li>
+					<li><a href="<?php echo $this->createUrl('restaurant/create'); ?>">添加汤馆</a></li>
 					<li><a href="#">审核</a></li>
 					<li><a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a></li>
 				</ul>
