@@ -22,43 +22,16 @@
 		<br />
 		-->
 		
-<ul>
+	<ul>
 	
 		<li><strong>
 		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank')); ?></strong>
 		
 		</li>
-		
-		<!--
-		<b><?php echo CHtml::encode($data->getAttributeLabel('county_id')); ?>:</b>
-		<?php echo CHtml::encode($data->county['name']); ?>
-		<br />
-
-		<b><?php echo CHtml::encode($data->getAttributeLabel('area_id')); ?>:</b>
-		<?php echo CHtml::encode($data->area['name']); ?>
-		<br />
-		-->
-		
-
-		<!--<li>
-		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('business_hour')); ?>:</span>
-		<span><?php echo CHtml::encode($data->business_hour); ?></span>
-		</li>
-
-		<li>
-		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('phone')); ?>:</span>
-		<span><?php echo CHtml::encode($data->phone); ?></span>
-		</li>
-
-		<li>
-		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('is_shutdown')); ?>:</span>
-		<span><?php echo CHtml::encode($data->status['name']); ?></span>
-		</li>
--->
 		<li>
 		<span  class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
 		<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
-		<?php if ($data->latitude!=0 && $data->longitude!=0) {
+		<?php if (! empty($data->coordinate)) {
 			echo CHtml::link('<img src="'.Yii::app()->request->baseUrl.'/images/icon/map_16.png" alt="地图"  title="看看汤馆的位置"/>',  array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank'));
 		} ?>
 		</li>
@@ -91,11 +64,6 @@
 		<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
 		<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
 		<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
-		<!--<a class="rating-icon star-on"><span>6</span></a>
-		<a class="rating-icon star-on"><span>7</span></a>
-		<a class="rating-icon star-on"><span>8</span></a>
-		<a class="rating-icon star-on"><span>9</span></a>
-		<a class="rating-icon star-on"><span>10</span></a>-->
 		</span>
 		<span class="rating-rating">
 		<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?></span>
@@ -126,12 +94,7 @@
 
 		</ul>
 
-		<?php /*
-		<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-		<?php echo CHtml::encode($data->description); ?>
-		<br />
-
-		*/ ?>
+		
 
 	</div>
 

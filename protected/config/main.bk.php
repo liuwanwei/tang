@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Tang',
+	'timeZone'=>'Asia/Chongqing',
 	'defaultController' => 'restaurant',
 
 	// preloading 'log' component
@@ -43,6 +44,7 @@ return array(
 				'restaurant/<county:\d+>/*' => 'restaurant/index',
 				'details/<restaurantId:\d+>' => 'comment/index',
 				'logout' => 'site/logout',
+				'up' => 'site/upversion',
 				// '<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				// '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				// '<controller:\w+>/<action:\w+>/<county:\d+>/*'=>'<controller>/<action>/*',

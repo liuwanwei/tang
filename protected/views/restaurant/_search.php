@@ -57,16 +57,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'latitude'); ?>
-		<?php echo $form->textField($model,'latitude'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'longitude'); ?>
-		<?php echo $form->textField($model,'longitude'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'description'); ?>
 		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>256)); ?>
 	</div>

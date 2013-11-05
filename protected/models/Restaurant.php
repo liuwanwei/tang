@@ -13,9 +13,8 @@
  * @property integer $county_id
  * @property integer $area_id
  * @property integer $is_shutdown
+ * @property string $coordinate
  * @property string $image_url
- * @property double $latitude
- * @property double $longitude
  * @property string $description
  * @property integer $votes
  * @property double $average_points
@@ -51,7 +50,7 @@ class Restaurant extends CActiveRecord
 		return array(
 			array('name, address, county_id, area_id', 'required'),
 			array('county_id, type_id, area_id, is_shutdown, votes', 'numerical', 'integerOnly'=>true),
-			array('latitude, longitude, average_points, weighted_points', 'numerical'),
+			array('average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
 			array('image_url, description', 'length', 'max'=>256),
@@ -99,8 +98,7 @@ class Restaurant extends CActiveRecord
 			'county.name'	=> '区域',
 			'area.name' => '商圈',
 			'image_url' => '店面图片',
-			'latitude' => '经度',
-			'longitude' => '纬度',
+			'coordinate' => '维经度',
 			'description' => '描述',
 			'votes' => '投票数',
 			'average_points' => '平均得分',
@@ -129,8 +127,6 @@ class Restaurant extends CActiveRecord
 		$criteria->compare('area_id',$this->area_id);
 		$criteria->compare('is_shutdown',$this->is_shutdown);
 		$criteria->compare('image_url',$this->image_url,true);
-		$criteria->compare('latitude',$this->latitude);
-		$criteria->compare('longitude',$this->longitude);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('votes',$this->votes);
 		$criteria->compare('average_points',$this->average_points);
