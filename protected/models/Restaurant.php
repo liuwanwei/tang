@@ -57,7 +57,7 @@ class Restaurant extends CActiveRecord
 			array('image_url', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, phone, business_hour, address, county_id, area_id, is_shutdown, image_url, latitude, longitude, description', 'safe', 'on'=>'search'),
+			array('id, name, phone, business_hour, address, county_id, area_id, is_shutdown, image_url, coordinate, description', 'safe', 'on'=>'search'),
 		);
 	}
 
