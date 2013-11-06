@@ -24,10 +24,10 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index'),
+						'actions'=>array('index', 'create', 'update'),
 						'users'=>array('*')),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('admin','delete','create','update','view'),
+						'actions'=>array('admin','delete','view'),
 						'expression'=>array($this,'isAdmin'),
 				),
 				array('deny',  // deny all users
@@ -312,6 +312,7 @@ class RestaurantController extends Controller
 		$dataProvider=new CActiveDataProvider('Restaurant');
 
 		$criteria = new CDbCriteria();
+		$criteria->compare('is_checked', 1);
 		$criteria->order = 'weighted_points DESC';
 
 		if (!empty($county)) {
