@@ -78,11 +78,8 @@ class SiteController extends Controller
 	public function actionAdmin()
 	{
 		if (parent::isAdmin())
-		{
-			parent::actionAdmin();
-
+		{			
 			$this->redirect($this->createUrl('/restaurant/admin'));
-			// $this->render('index');
 		}
 		else 
 		{

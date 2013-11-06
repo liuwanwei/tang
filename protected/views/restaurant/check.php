@@ -27,7 +27,7 @@
 ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchUnchecked(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
@@ -36,6 +36,7 @@
 		// 'business_hour',
 		'address',
 		'county_id',	// TODO 直接显示中文的“区”，如涧西区。
+		'is_checked',	// TODO 直接显示中文的‘通过’或“未通过'。
 		/*
 		'area',
 		'is_shutdown',

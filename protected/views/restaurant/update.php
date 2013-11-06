@@ -16,9 +16,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Restaurant <?php echo $model->id; ?></h1>
+<h1>修改: <?php echo $model->name; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors)); ?>
+
 <div style="text-align:right; width:900px;">
 <input id="address" type="textbox" value="" style="width:300px;">
 <button onclick="codeAddress()">search</button>

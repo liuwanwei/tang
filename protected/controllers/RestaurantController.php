@@ -27,7 +27,7 @@ class RestaurantController extends Controller
 						'actions'=>array('index', 'create', 'update'),
 						'users'=>array('*')),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('admin','delete','view'),
+						'actions'=>array('admin','delete','view', 'check'),
 						'expression'=>array($this,'isAdmin'),
 				),
 				array('deny',  // deny all users
@@ -155,7 +155,6 @@ class RestaurantController extends Controller
 			}
 			
 			if($model->save())
-
 				if (!empty($uploadedFile)) {
 					$destPath = Yii::app()->basePath.'/..'.$filename;
 					$uploadedFile->saveAs($destPath);
@@ -341,10 +340,15 @@ class RestaurantController extends Controller
 	}
 
 	/**
-	 * Manages all models.
+	 * 汤馆审核功能-从导航栏”个人中心“进入。管理员才有。
 	 */
 	public function actionAdmin()
 	{
+		if (! parent::isAdmin()) {
+			// TODO 重定向到404。
+			die("404");
+		}
+
 		parent::actionAdmin();
 		
 		$model=new Restaurant('search');
@@ -353,6 +357,24 @@ class RestaurantController extends Controller
 			$model->attributes=$_GET['Restaurant'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionCheck(){
+		if (! parent::isAdmin()) {
+			// TODO 重定向到404。
+			die("404");
+		}
+
+		parent::actionAdmin();
+		
+		$model=new Restaurant('search');	// TODO 'search' 有什么用？
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Restaurant']))
+			$model->attributes=$_GET['Restaurant'];
+
+		$this->render('check', array(
 			'model'=>$model,
 		));
 	}
