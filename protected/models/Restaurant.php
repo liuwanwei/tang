@@ -159,4 +159,25 @@ class Restaurant extends CActiveRecord
 			'criteria'=>$criteria,
 		));	
 	}
+
+	/*
+	 * 搜索当前登录用户添加的所有汤馆。所有人都有。
+	 */
+	public function searchCreatedByMe($is_checked){
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('address',$this->address,true);
+		$criteria->compare('county_id',$this->county_id);
+		$criteria->compare('area_id',$this->area_id);
+		$criteria->compare('is_shutdown',$this->is_shutdown);
+		$criteria->compare('is_checked', $is_checked);
+
+		$criteria->compare('creator', Yii::App()->user->id);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));	
+	}
 }

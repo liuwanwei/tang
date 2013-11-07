@@ -37,7 +37,7 @@ class SiteController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('login', 'wbLogin', 'logout', 'index', 'error', 'contact'),
+						'actions'=>array('login', 'wbLogin', 'logout', 'index', 'error', 'contact', 'userCenter'),
 						'users'=>array('*')
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -197,6 +197,19 @@ class SiteController extends Controller
 		{
 			$this->redirect($_REQUEST['state']);
 		}
+	}
+
+	public function actionUserCenter(){
+		$this->layout='//layouts/column_admin';
+		
+		$model=new Restaurant('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Restaurant']))
+			$model->attributes=$_GET['Restaurant'];
+
+		$this->render('userCenter', array(
+			'model'=>$model,
+		));
 	}
 
 	public function actionUpVersion(){	

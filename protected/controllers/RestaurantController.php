@@ -15,7 +15,7 @@ class RestaurantController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			// 'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 	
@@ -24,10 +24,10 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index', 'create', 'update'),
+						'actions'=>array('index', 'create', 'update', 'view', 'delete'),
 						'users'=>array('*')),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('admin','delete','view', 'check'),
+						'actions'=>array('admin','view', 'check'),
 						'expression'=>array($this,'isAdmin'),
 				),
 				array('deny',  // deny all users
@@ -103,6 +103,7 @@ class RestaurantController extends Controller
 		if(isset($_POST['Restaurant']))
 		{
 			$model->attributes=$_POST['Restaurant'];
+			$model->creator = Yii::app()->user->id;
 
 			// 获取汤馆图片的地址，转换成服务器存储路径。
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
@@ -176,12 +177,18 @@ class RestaurantController extends Controller
 	public function actionDelete($id)
 	{
 		parent::actionAdmin();
+
+		if (Yii::app()->user->id != $id  && ! parent::isAdmin()) {
+			// TODO 403 not permitted.
+			die('403');
+		}
 		
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		if(!isset($_GET['ajax'])){
+			// $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('site/userCenter'));
+		}
 	}
 
 	/**
@@ -369,7 +376,7 @@ class RestaurantController extends Controller
 
 		parent::actionAdmin();
 		
-		$model=new Restaurant('search');	// TODO 'search' 有什么用？
+		$model=new Restaurant('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Restaurant']))
 			$model->attributes=$_GET['Restaurant'];

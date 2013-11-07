@@ -2,32 +2,8 @@
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
 
-// $this->breadcrumbs=array(
-// 	'Restaurants'=>array('index'),
-// 	'Manage',
-// );
-
-// $this->menu=array(
-// 	array('label'=>'List Restaurant', 'url'=>array('index')),
-// 	array('label'=>'Create Restaurant', 'url'=>array('create')),
-// );
-
-// Yii::app()->clientScript->registerScript('search', "
-// $('.search-button').click(function(){
-// 	$('.search-form').toggle();
-// 	return false;
-// });
-// $('.search-form form').submit(function(){
-// 	$('#restaurant-grid').yiiGridView('update', {
-// 		data: $(this).serialize()
-// 	});
-// 	return false;
-// });
-// ");
-?>
-<?php 
 $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'restaurant-grid',
+	'id'=>'restaurant-grid-unchecked',
 	'dataProvider'=>$model->searchCreatedByMe(0),
 	'filter'=>$model,
 	'columns'=>array(
@@ -63,7 +39,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 )); 
 
 $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'restaurant-grid',
+	'id'=>'restaurant-grid-checked',
 	'dataProvider'=>$model->searchCreatedByMe(1),
 	'filter'=>$model,
 	'columns'=>array(
