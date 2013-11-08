@@ -38,7 +38,7 @@
 		 $menu[] = array('label'=>'登出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest);
 	?>
 
-	<div id="mainmenu">
+	<div id="area-menu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>$menu
 		)); 

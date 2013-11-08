@@ -13,6 +13,7 @@
  * @property integer $county_id
  * @property integer $area_id
  * @property integer $is_shutdown
+ * @property integer $is_checked
  * @property string $coordinate
  * @property string $image_url
  * @property string $description
@@ -48,8 +49,8 @@ class Restaurant extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, address, county_id, area_id', 'required'),
-			array('county_id, type_id, area_id, is_shutdown, votes', 'numerical', 'integerOnly'=>true),
+			array('name, address, type_id, county_id, area_id, coordinate', 'required'),
+			array('county_id, type_id, area_id, is_shutdown,  is_checked, votes', 'numerical', 'integerOnly'=>true),
 			array('average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
@@ -93,12 +94,13 @@ class Restaurant extends CActiveRecord
 			'address' => '地址',
 			'county_id' => '区域',
 			'area_id' => '位置',
-			'is_shutdown' => '状态',
+			'is_shutdown' => '经营状态',
+			'is_checked' => '审核状态',
 			'status.name' => '服务状态',
 			'county.name'	=> '区域',
 			'area.name' => '商圈',
 			'image_url' => '店面图片',
-			'coordinate' => '维经度',
+			'coordinate' => '坐标',
 			'description' => '描述',
 			'votes' => '投票数',
 			'average_points' => '平均得分',
@@ -126,15 +128,56 @@ class Restaurant extends CActiveRecord
 		$criteria->compare('county_id',$this->county_id);
 		$criteria->compare('area_id',$this->area_id);
 		$criteria->compare('is_shutdown',$this->is_shutdown);
-		$criteria->compare('image_url',$this->image_url,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('votes',$this->votes);
-		$criteria->compare('average_points',$this->average_points);
-		$criteria->compare('weighted_points',$this->weighted_points);
+		// $criteria->compare('image_url',$this->image_url,true);
+		// $criteria->compare('description',$this->description,true);
+		// $criteria->compare('votes',$this->votes);
+		// $criteria->compare('average_points',$this->average_points);
+		// $criteria->compare('weighted_points',$this->weighted_points);
 
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/*
+	 * 搜索未审核过的汤馆。管理员专有。
+	 */
+	public function searchUnchecked(){
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('address',$this->address,true);
+		$criteria->compare('county_id',$this->county_id);
+		$criteria->compare('area_id',$this->area_id);
+		$criteria->compare('is_shutdown',$this->is_shutdown);		
+
+		$criteria->compare('is_checked', 0);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));	
+	}
+
+	/*
+	 * 搜索当前登录用户添加的所有汤馆。所有人都有。
+	 */
+	public function searchCreatedByMe($is_checked){
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('address',$this->address,true);
+		$criteria->compare('county_id',$this->county_id);
+		$criteria->compare('area_id',$this->area_id);
+		$criteria->compare('is_shutdown',$this->is_shutdown);
+		$criteria->compare('is_checked', $is_checked);
+
+		$criteria->compare('creator', Yii::App()->user->id);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));	
 	}
 }

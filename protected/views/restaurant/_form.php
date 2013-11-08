@@ -77,6 +77,14 @@
 	</div>
 	</div>
 
+	<?php  if(User::isAdmin()) {
+		echo '<div class="row">';		
+		echo $form->labelEx($model, "is_checked");
+		echo $form->dropDownList($model, 'is_checked', array('0'=>'未审核', '1'=>'已审核'));
+		echo $form->error($model, 'is_checked');
+		echo '</div>';
+	}
+	?>
 		<!--
 		<div class="form-row-one">
 		<div class="row">

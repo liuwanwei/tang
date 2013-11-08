@@ -64,10 +64,14 @@
 				<a href="javascript:void(0);" class="loginuser" target="_blank"><img src="<?php echo User::model()->getCurrentUserImageUrl(); ?>"/><span class="icon-caret-down"></span></a>
 				<!--<a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a>-->
 				<ul>
-					<li><a href="http://weibo.com/u/<?php echo User::model()->findByPk(Yii::App()->user->id)->extension_user_id ?>">个人中心</a></li>
+					<!-- <li><a href="http://weibo.com/u/<?php echo User::model()->findByPk(Yii::App()->user->id)->extension_user_id ?>">个人中心</a></li> -->
+					<li><a href="<?php echo $this->createUrl('site/userCenter'); ?>">个人中心</a></li>
 					<li><a href="<?php echo $this->createUrl('restaurant/create'); ?>">添加汤馆</a></li>
-					<li><a href="#">审核</a></li>
-					<li><a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a></li>
+					<?php if(User::isAdmin()){ ?>
+					<li><a href="<?php echo $this->createUrl('restaurant/check'); ?>">审核汤馆</a></li>
+					<li><a href="<?php echo $this->createUrl('restaurant/admin'); ?>">管理汤馆</a></li>
+					<?php } ?>
+					<li><a href="<?php echo $this->createUrl('site/logout'); ?>" class="logout">退出</a></li>					
 				</ul>
 		</div>
 			<?php	}?>
