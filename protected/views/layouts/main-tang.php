@@ -85,7 +85,7 @@
 	</div><!-- mainmenu -->
 
 <!--登陆的模态窗口-->
-<div id="myModal" class="modal hide fade in" aria-hidden="true">
+<div id="myModal" class="modal1 fade in " aria-hidden="true">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <h3 id="myModalLabel">选择登陆</h3>
@@ -101,7 +101,7 @@
 		<a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a>
 </div>
 </div>
-<div class="modal-backdrop hide"></div>
+<div class="modal-backdrop"></div>
 	<!--主体内容部分-->
 	<div class="tang-content" id="tang-content">
 	<?php echo $content; ?>
