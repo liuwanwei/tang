@@ -2,18 +2,18 @@
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
 
-$this->breadcrumbs=array(
-	'Restaurants'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+// $this->breadcrumbs=array(
+// 	'Restaurants'=>array('index'),
+// 	$model->name=>array('view','id'=>$model->id),
+// 	'Update',
+// );
 
-$this->menu=array(
-	array('label'=>'List Restaurant', 'url'=>array('index')),
-	array('label'=>'Create Restaurant', 'url'=>array('create')),
-	array('label'=>'View Restaurant', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Restaurant', 'url'=>array('admin')),
-);
+// $this->menu=array(
+// 	array('label'=>'List Restaurant', 'url'=>array('index')),
+// 	array('label'=>'Create Restaurant', 'url'=>array('create')),
+// 	array('label'=>'View Restaurant', 'url'=>array('view', 'id'=>$model->id)),
+// 	array('label'=>'Manage Restaurant', 'url'=>array('admin')),
+// );
 ?>
 
 <h1>修改: <?php echo $model->name; ?></h1>

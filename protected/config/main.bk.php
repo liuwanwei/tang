@@ -41,7 +41,7 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName' => false,
 			'rules'=>array(
-				'restaurant/<county:\d+>/*' => 'restaurant/index',
+				'county/<county:\d+>/*' => 'restaurant/index',
 				'details/<restaurantId:\d+>' => 'comment/index',
 				'logout' => 'site/logout',
 				'up' => 'site/upversion',
