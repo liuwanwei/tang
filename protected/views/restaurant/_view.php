@@ -27,14 +27,13 @@
 		<li>
 		<strong>
 		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank')); ?></strong>
-		
-		<?php if (! empty($data->coordinate)) { 
-			echo CHtml::link('<i class="fa fa-map-marker"></i>',  array('comment/index', 'restaurantId'=>$data->id), array('alt'=>"地图",'title'=>"看看汤馆的位置"));
-		} ?>
 		</li>
 		<li>
 		<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
-		<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>		
+		<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
+		<?php if (! empty($data->coordinate)) { 
+			echo CHtml::link('<i class="fa fa-map-marker"></i>',  array('comment/index', 'restaurantId'=>$data->id), array('alt'=>"地图",'title'=>"看看汤馆的位置"));
+		} ?>
 		</li>
 
 		<?php if (!empty($data->features)) {

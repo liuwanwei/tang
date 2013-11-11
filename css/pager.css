@@ -1,10 +1,10 @@
 /*
  *分页控件的样式
  */
- div.page
+ .tang-pager
  {
  	font-family: Arial;
-
+ 	display: none;
 
  }
 ul.yiiPager 
@@ -62,12 +62,12 @@ ul.yiiPager li a
 	text-decoration: none;
 }
 
-.page.selected
+.tang-pager.selected
 {
 	background:#9c9c9c;
 
 }
-.page.selected a
+.tang-pager.selected a
 {
 	color: #FFFFFF;
 }

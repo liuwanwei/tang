@@ -19,6 +19,7 @@
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
 </div><!-- area-menu -->
 </div>
+<div class="clear"></div>
 <?php } ?>
 
 
@@ -27,7 +28,7 @@
 <div id="area-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$typeMenu)); ?>
 </div><!-- type-menu -->
-</div>
+</div><div class="clear"></div>
 <?php } ?>
 
 <div>
@@ -40,6 +41,7 @@
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 	'template' => "{pager}\n{summary}\n{items}\n{pager}",
 	'ajaxUpdate'=> false,
+	'pagerCssClass'=>'tang-pager',
 	'pager'=>array('header'=>'',
 			'prevPageLabel'=>'«',
 			'nextPageLabel'=>'»',
@@ -111,8 +113,9 @@
 			?>
 			<li>
 				<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
-				<div>				
-				<?php echo CHtml::link('<span>'.strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
+				<div>
+				<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
+				<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content;?></span>
 				</div>
 			</li>
 			<?php
@@ -132,7 +135,6 @@
 <script type="text/javascript">
 
 $(function(){
-
 
 	/*$("#next").click(function(){
 	$.get("restaurant/index/Restaurant_page/2",{},function(data){

@@ -34,9 +34,12 @@ var init = function() {
     soso.maps.Event.addListener(map, 'click', function(event) {
         //alert('您点击的位置为: [' + event.latLng.getLat() + ', ' +
         //event.latLng.getLng() + ']');
-
-    	document.getElementById("Restaurant_latitude").value=event.latLng.getLat();//维度
-    	document.getElementById("Restaurant_longitude").value=event.latLng.getLng();//经度
+    var latLng = event.latLng,
+            lat = latLng.getLat().toFixed(5),
+            lng = latLng.getLng().toFixed(5);
+        document.getElementById("Restaurant_coordinate").value=lat+","+lng;
+    	//document.getElementById("Restaurant_latitude").value=event.latLng.getLat();//维度
+    	//document.getElementById("Restaurant_longitude").value=event.latLng.getLng();//经度
     });
     soso.maps.Event.addListener(map,'mousemove',function(event) {
         var latLng = event.latLng,

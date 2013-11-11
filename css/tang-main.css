@@ -330,10 +330,10 @@ li.areamenu ul li a
 			
 	text-align:left;	
 	margin-top:10px;
-	margin-bottom: 10px;
 	color: rgb(34, 34, 34);
-	line-height:40px;
 	padding-left:5px;
+	border:1px solid transparent;
+	height: 30px;
 	/*background: url(../images/icon/area_32.png) no-repeat left top;*/
 
 }
@@ -677,10 +677,11 @@ body, input, textarea, select, button {
     z-index: 1040;
     background-color: rgb(0, 0, 0);
     opacity: 0.7;
+    display: none;
 }
 
 
-.modal {
+.modal1 {
     position: fixed;
     top: 10%;
     left: 50%;
@@ -705,14 +706,15 @@ body, input, textarea, select, button {
     transition: opacity 0.15s linear 0s;
 }*/
 
-.modal.fade.in {
-    top: 10%;
+.modal1.fade.in {
+    top: 10%;display: none;
 }
-.modal.fade {
+
+/*.modal1.fade {
     top: -25%;
     transition: opacity 0.3s linear 0s, top 0.3s ease-out 0s;
 }
-/*.fade.in {
+.fade.in {
     opacity: 1;
 }*/
 .hide {
