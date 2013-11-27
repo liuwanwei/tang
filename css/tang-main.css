@@ -256,12 +256,16 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);*/
 }
 #mainmenu .mainmenu-content .mainmenu-home
 {
-	font-size: 26px;
+	/*font-size: 26px;
 	float: left;
 	margin-right:10px;
 	color: #3D0605;
 	font-weight: none;
-	text-decoration: none;
+	text-decoration: none;*/
+	font-size: 0px;
+	display: block;
+	float: left;
+	margin-top: 15px;
 }
 
 #mainmenu .mainmenu-content>ul>li>a
