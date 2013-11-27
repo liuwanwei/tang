@@ -130,21 +130,24 @@ class VoteController extends Controller
 	public function actionVote(){
 		$model=new Vote;
 
-	   	if(isset($_POST['Vote']))
-		{
+	   	if(isset($_POST['Vote'])){
 
 		    $model->attributes=$_POST['Vote'];
-		    if($model->validate())
-		    {
+		    if($this->checkActionFrequency() && $model->validate()){
 		    	// 保存本次投票记录。
 		    	$model = $this->saveVoteRecord($model);
 
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
+
+		    	// 更新最后操作时间戳。
+		    	$this->updateLastActionTime();
+		    }else{
+		    	// TODO 展示投票频率过快页面。
 		    }
-	    	}
+		}
 	    	
-	    	$this->render('create', array('model' => $model));
+	    $this->render('create', array('model' => $model));
 	}
 
 	// 删除餐馆的一个投票。

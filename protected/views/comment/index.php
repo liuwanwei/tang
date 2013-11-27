@@ -125,10 +125,9 @@ $(function(){
  *如果未评分就还原默认的数字
  */
 var rating_list_dome=$(".rating-widget .rating-list");
-	var rating_item1=rating_list_dome.eq(0);
+	var rating_item1=rating_list_dome.eq(0); 
 	<?php if (!yii::app()->user->isGuest) {?>
-	$.get("/vote/query",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
-		
+	$.get("<?php echo $this->createUrl('vote/query'); ?>",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
 		if (data.msg) {
 			rating_item1.attr("data-rating-default",0);
 			$(".rating-rating>.value",rating_item1).text("-");
