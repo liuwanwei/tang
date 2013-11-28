@@ -13,15 +13,15 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 ?>
 <div class="tooltip">
-	<div class="bottomtitle"></div>
-	<div class="content">
+<div class="bottomtitle"></div>
+<div class="content">
 
-	</div>
+</div>
 </div>
 
 <div class="layer hide"></div>
 <div id="big_map_clone">
-	<div class="big-map-header">注：地图位置坐标仅供参考，具体情况以实际道路标识信息为准<span class="close" title="关闭">X</span></div>
+<div class="big-map-header">注：地图位置坐标仅供参考，具体情况以实际道路标识信息为准<span class="close" title="关闭">X</span></div>
 <div id="big_map"></div>
 </div>
 
@@ -32,66 +32,57 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 <li><span class="title">电话:</span><span><?php echo $restaurant->phone; ?></span></li>
 <li><span class="title">区域:</span><span><?php echo $restaurant->county->name.' '.$restaurant->area->name; ?></span></li>
 <li><span class="title">营业时间:</span><span><?php echo $restaurant->business_hour; ?></span></li>
-<?php if (!empty($restaurant->features)) {
-			?>
-		<li><span class="title">特色:</span>
-			<?php  foreach ($restaurant->features as $value) {
-			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
-		} ?></li>
-		<?php
-		} ?>
+	<?php if (!empty($restaurant->features)) {
+	?>
+	<li><span class="title">特色:</span>
+	<?php  foreach ($restaurant->features as $value) {
+	echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
+	} ?></li>
+	<?php
+	} ?>
 <li >
-	<span class="rating-widget-lable title">平均打分:</span>
+<span class="rating-widget-lable title">平均打分:</span>
 <div class="rating-widget-avg">
-	<div>
+<div>
 	<?php for ($i=0; $i < $restaurant->average_points/1; $i++) { 
-		echo '<a href="#" class="rating-icon rating-avg-init"></a>';
+	echo '<a href="#" class="rating-icon rating-avg-init"></a>';
 	} ?>
 </div>
-	<span class="rating-avg"><?php echo $restaurant->average_points==0?"-":$restaurant->average_points; ?></span>
-	
+<span class="rating-avg"><?php echo $restaurant->average_points==0?"-":$restaurant->average_points; ?></span>
+
 </div>
 
 </li>
 <li>
-
-
-
-<!--详细页评分组件-->
-<div class="rating-widget">
-	
-	
-		<span class="rating-widget-lable">我的评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-		<div class="rating-list m" data-rating-default="0" 
-			data-clicknum="0" 
-			data-user="<?php echo Yii::app()->user->id ?>"
-			data-id="<?php echo CHtml::encode($restaurant->id);?>"
-			>
-		<span class="rating-stars">
-		<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
-		<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
-		<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
-		<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
-		<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>		
-		</span>
-		<span class="rating-rating"><!-- echo sprintf("%.1f",CHtml::encode($restaurant->average_points)); -->
-		<span class="fonttext-shadow-2-3-5-000 value">-</span>
-		<span class="grey">/</span>
-		<span class="grey">5</span>
-		</span>
-		<span class="rating-cancel ">
-			<a title="删除">
-				<span>X</span>
-			</a>
-		</span>
-		</div>
-		</div>
-		
-			<div class="clear"><!--清除浮动--></div>
-
-
+	<!--详细页评分组件-->
+	<div class="rating-widget">
+	<span class="rating-widget-lable">我的评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+	<div class="rating-list m" data-rating-default="0" 
+	data-clicknum="0" 
+	data-user="<?php echo Yii::app()->user->id ?>"
+	data-id="<?php echo CHtml::encode($restaurant->id);?>"
+	>
+	<span class="rating-stars">
+	<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
+	<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
+	<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
+	<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
+	<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>		
+	</span>
+	<span class="rating-rating"><!-- echo sprintf("%.1f",CHtml::encode($restaurant->average_points)); -->
+	<span class="fonttext-shadow-2-3-5-000 value">-</span>
+	<span class="grey">/</span>
+	<span class="grey">5</span>
+	</span>
+	<span class="rating-cancel ">
+	<a title="删除">
+	<span>X</span>
+	</a>
+	</span>
+	</div>
+	</div>
+	<div class="clear"><!--清除浮动--></div>
 </li>
-
 </ul>
 
 <?php if (empty($restaurant->coordinate)) { ?>
@@ -128,34 +119,34 @@ var rating_list_dome=$(".rating-widget .rating-list");
 	var rating_item1=rating_list_dome.eq(0);
 	<?php if (!yii::app()->user->isGuest) {?>
 	$.get("/vote/query",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
-		
-		if (data.msg) {
-			rating_item1.attr("data-rating-default",0);
-			$(".rating-rating>.value",rating_item1).text("-");
-		}else{
-			rating_item1.attr("data-rating-default",data.rating);
-			$(".rating-rating>.value",rating_item1).text(data.rating);
-			rating_item1.attr('voteid',data.id);//将voteid邦定到dom对象上
-			$(".rating-cancel",rating_item1).removeClass('rating-pending').addClass("rating-icon rating-your");
-			$(".rating-cancel",rating_item1).one('click',function(){
-						$(".rating-cancel",rating_item1).removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/vote/delete",{Vote:{id:rating_item1.attr("voteid")}},function(rating_cancel_result){								
-								if (rating_cancel_result.msg==="0") {
-									rating_item1.removeAttr('voteid');
-									$(".rating-cancel",rating_item1).removeClass('rating-pending');
-									rating_item1.attr("data-clicknum","0");
-									$(".rating-rating>.value",rating_item1).text(rating_item1.attr("data-rating-default"));
-									//console.log(rating_cancel_result+"abc");
-									ratingInit(rating_item1,"rating-icon star-on",1,$(".rating-rating>.value",rating_item1));
-								}else{
-									//服务器出错
-								}
-							},"json");
-					});
-		}
 
-		ratingfnc();
-		//rating_list_dome.eq(0).attr("data-rating-default");
+	if (data.msg) {
+	rating_item1.attr("data-rating-default",0);
+	$(".rating-rating>.value",rating_item1).text("-");
+	}else{
+	rating_item1.attr("data-rating-default",data.rating);
+	$(".rating-rating>.value",rating_item1).text(data.rating);
+	rating_item1.attr('voteid',data.id);//将voteid邦定到dom对象上
+	$(".rating-cancel",rating_item1).removeClass('rating-pending').addClass("rating-icon rating-your");
+	$(".rating-cancel",rating_item1).one('click',function(){
+	$(".rating-cancel",rating_item1).removeClass('rating-icon rating-your').addClass("rating-pending");
+	$.post("/vote/delete",{Vote:{id:rating_item1.attr("voteid")}},function(rating_cancel_result){								
+	if (rating_cancel_result.msg==="0") {
+	rating_item1.removeAttr('voteid');
+	$(".rating-cancel",rating_item1).removeClass('rating-pending');
+	rating_item1.attr("data-clicknum","0");
+	$(".rating-rating>.value",rating_item1).text(rating_item1.attr("data-rating-default"));
+	//console.log(rating_cancel_result+"abc");
+	ratingInit(rating_item1,"rating-icon star-on",1,$(".rating-rating>.value",rating_item1));
+	}else{
+	//服务器出错
+	}
+	},"json");
+	});
+	}
+
+	ratingfnc();
+	//rating_list_dome.eq(0).attr("data-rating-default");
 	},"json");
 
 <?php }else{
@@ -174,34 +165,34 @@ var rating_list_dome=$(".rating-widget .rating-list");
 
 
 	var tooltip=$(".tooltip");
-					$(".rating-cancel",a_this).hover(function(){
-						var a_offset=$(this).offset();						
-						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
-						tooltip.find('.content').text("你要删除打分吗？");
-						tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
-					},function(){
-						tooltip.hide();
-					});			
+		$(".rating-cancel",a_this).hover(function(){
+		var a_offset=$(this).offset();						
+		$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
+		tooltip.find('.content').text("你要删除打分吗？");
+		tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
+		},function(){
+		tooltip.hide();
+		});			
 
 		//单击星星时发生
 		a_arr.live("click",function(event){
 
-			if (a_this.attr("isclick")=="true") {
-				return false;
-			}
-			var i=parseInt($("span",$(this)).text());
+		if (a_this.attr("isclick")=="true") {
+		return false;
+		}
+		var i=parseInt($("span",$(this)).text());
 		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
-			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
-			//event.preventDefault()
-			//event.stopPropagation();
-			console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
+		//event.preventDefault()
+		//event.stopPropagation();
+		console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 
-			if (a_this.attr('data-user')=="") {
-				//点击登陆弹出模态窗口
-				loginModal();
+		if (a_this.attr('data-user')=="") {
+		//点击登陆弹出模态窗口
+		loginModal();
 
-				return false;
-			}
+		return false;
+		}
 		a_this.attr("data-clicknum",parseInt($("span",$(this)).text()));
 		selected_a.removeClass();
 		selected_a.addClass("rating-icon rating-off");
@@ -211,35 +202,35 @@ var rating_list_dome=$(".rating-widget .rating-list");
 		//执行评分的ajax
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("/vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
-			rating:raing_value.text()}},function(resultdata){
-				//console.log("aa="+resultdata.voteid);
-				if (resultdata.msg==="0") {
-					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
-					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");					
-					rating_cancel.one('click',function(){
-						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
-								if (rating_cancel_result.msg==="0") {
-									a_this.removeAttr('voteid');
-									rating_cancel.removeClass('rating-pending');
-									a_this.attr("data-clicknum","0");
-									raing_value.text("-");
-									//console.log(rating_cancel_result+"abc");
-									ratingInit(a_this,"rating-icon star-on",1,raing_value);
-								}else{
-									//服务器出错
-								}
-							},"json");
-					});
-				}else{
-					//服务器出错
-				}
+		rating:raing_value.text()}},function(resultdata){
+		//console.log("aa="+resultdata.voteid);
+		if (resultdata.msg==="0") {
+		a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
+		rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");					
+		rating_cancel.one('click',function(){
+		rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
+		$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+		if (rating_cancel_result.msg==="0") {
+		a_this.removeAttr('voteid');
+		rating_cancel.removeClass('rating-pending');
+		a_this.attr("data-clicknum","0");
+		raing_value.text("-");
+		//console.log(rating_cancel_result+"abc");
+		ratingInit(a_this,"rating-icon star-on",1,raing_value);
+		}else{
+		//服务器出错
+		}
 		},"json");
-	
+		});
+		}else{
+		//服务器出错
+		}
+		},"json");
+
 		a_this.attr("isclick","true");
 		});
 
-	a_arr.hover(function(){
+		a_arr.hover(function(){
 		var a_offset=$(this).offset();
 		var tooltip=$(".tooltip");
 		$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
@@ -255,16 +246,16 @@ var rating_list_dome=$(".rating-widget .rating-list");
 		no_selected_a.removeClass();
 		no_selected_a.addClass("rating-icon star-on");
 		raing_value.text(i);	
-	},function(){
+		},function(){
 		$(".tooltip").hide();
 		a_this.attr("isclick","flase");
-	});
+		});
 
 	
 
 	//当鼠标移出rating-list的矩形时根据状态还原星星的样式
 		$(".rating-stars",a_this).bind("mouseout",function(){	
-			var clicknum=a_this.attr("data-clicknum");
+		var clicknum=a_this.attr("data-clicknum");
 		if (clicknum=="0" && parseInt(raing_default)==0) {
 		a_arr.removeClass();
 		a_arr.addClass("rating-icon star-on");
@@ -295,8 +286,8 @@ function ratingInit(e_this,classname,i,evalue)
 	selected_a.removeClass();
 	selected_a.addClass(classname);
 	var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",e_this);
-		no_selected_a.removeClass();
-		no_selected_a.addClass("rating-icon star-on");
+	no_selected_a.removeClass();
+	no_selected_a.addClass("rating-icon star-on");
 
 }
 
@@ -315,8 +306,8 @@ function ratingInit(e_this,classname,i,evalue)
 	//textarea鼠标点击去变大
 
 	$("#comment_content").click(function(){
-		$(this).animate({height:'150px'},200);
-		});
+	$(this).animate({height:'150px'},200);
+	});
 
 
 	//地图的点击放大事件
@@ -354,30 +345,28 @@ function ratingInit(e_this,classname,i,evalue)
  */
 var geocoder,map, marker = null;
 var init = function(map_id) {
-    var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->coordinate); ?>);//(39.916527,116.397128);
-    map = new soso.maps.Map(document.getElementById(map_id),{
-        center: center,
-        zoom: 16
-    });
-    var info = new soso.maps.InfoWindow({map: map});
-    geocoder = new soso.maps.Geocoder({
-        complete : function(result){
-            map.setCenter(result.detail.location);
-            var marker = new soso.maps.Marker({
-                map:map,
-                position: result.detail.location
-            });
-            soso.maps.event.addListener(marker, 'click', function() {
-                info.open();
-                info.setContent('<div style="width:150px;height:40px;"><?php echo $restaurant->name;  ?></div>');//'+result.detail.address+'
-                info.setPosition(result.detail.location);
-            });
-        }
-    });
-
-geocoder.getAddress(center);
-    
-}
+	var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->coordinate); ?>);//(39.916527,116.397128);
+	map = new soso.maps.Map(document.getElementById(map_id),{
+	center: center,
+	zoom: 16
+	});
+	var info = new soso.maps.InfoWindow({map: map});
+	geocoder = new soso.maps.Geocoder({
+	complete : function(result){
+	map.setCenter(result.detail.location);
+	var marker = new soso.maps.Marker({
+	map:map,
+	position: result.detail.location
+	});
+	soso.maps.event.addListener(marker, 'click', function() {
+	info.open();
+	info.setContent('<div style="width:150px;height:40px;"><?php echo $restaurant->name;  ?></div>');//'+result.detail.address+'
+	info.setPosition(result.detail.location);
+	});
+	}
+	});
+	geocoder.getAddress(center);
+	}
 
 
 function loadScript() {
