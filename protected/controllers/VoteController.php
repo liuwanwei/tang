@@ -71,7 +71,7 @@ class VoteController extends Controller
 		$restaurant->average_points = number_format($averagePoints, 1);
 
 		if(! $restaurant->save()){
-			die('save restaurant record faild: '.$restaurant->getErrors());
+			die($restaurant->getErrors());
 		}else{
 			$this->setCalculateRankFlag(true);
 		}
@@ -106,7 +106,6 @@ class VoteController extends Controller
 
 	   	if(isset($_POST['Vote']))
 		{
-
 		    $model->attributes=$_POST['Vote'];
 		    if($model->validate())
 		    {
@@ -116,12 +115,12 @@ class VoteController extends Controller
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
 
-		        	// 提交成功向前台输出JSON。
-		        	echo json_encode(array('msg' =>"0",'voteid'=>$model->id));
-		        	return;
+	        	// 提交成功向前台输出JSON。
+	        	echo json_encode(array('msg' =>"0",'voteid'=>$model->id));
+	        	return;
 		    }
-	    	}
-	    	echo json_encode(array('msg' =>"1" ));
+	    }
+	    echo json_encode(array('msg' =>"1" ));
 	}
 
 	/**
