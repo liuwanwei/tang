@@ -53,4 +53,24 @@ class Controller extends CController
 		$this->layout='//layouts/column_admin';
 	}
 
+
+	public function checkActionFrequency(){
+		$user = User::model()->findByPk(Yii::app()->user->id);
+		if ($user !== null) {
+			$now = time();
+			$last = strtotime($user->last_action_time);
+			if (($now  - $last) > Yii::app()->params['actionInterval']) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public function updateLastActionTime(){
+		$user = User::model()->findByPk(Yii::app()->user->id);
+		$user->last_action_time = new CDbExpression('NOW()');
+		$user->save();
+	}
+
 }

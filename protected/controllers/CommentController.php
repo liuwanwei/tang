@@ -58,11 +58,17 @@ class CommentController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Comment']))
-		{	
-			$model->attributes=$_POST['Comment'];
-			$model->restaurant_id=$restaurant_id;
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		{
+			if ($this->checkActionFrequency()) {
+				$model->attributes=$_POST['Comment'];
+				$model->restaurant_id=$restaurant_id;
+				if($model->save()){
+					$this->updateLastActionTime();
+					$this->redirect(array('view','id'=>$model->id));
+				}
+			}else{
+				// TODO 显示投票/评论频率过高警告页面。
+			}
 		}
 
 		$this->render('create',array(
@@ -116,11 +122,14 @@ class CommentController extends Controller
 	{
 		$model = new Comment;
 		
-		if(isset($_POST['Comment']))
+		if(isset($_POST['Comment']) && $this->checkActionFrequency())
 		{
 			$model->attributes=$_POST['Comment'];
 			$model->restaurant_id=$restaurantId;
 			$model->save();
+
+			// 更新最后操作时间戳。
+			$this->updateLastActionTime();
 		}
 		
 		$criteria=new CDbCriteria(array(

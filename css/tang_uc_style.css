@@ -1,0 +1,34 @@
+.summary
+{
+	display: none;
+}
+
+.table-uc thead tr th a
+{
+	color:#aa2105;
+	text-decoration:none;
+}
+
+.table-uc thead tr th a:hover
+{
+	color:#c43838;
+}
+
+.table-uc tbody tr td a:hover
+{
+	text-decoration: none;
+}
+
+.table-uc input[type=text]
+{
+	border:1px solid #ccc;
+	border-radius: 5px;
+}
+
+.table-uc input[type=text]:hover,.table-uc input[type=text]:focus
+{
+	box-shadow: 0px 0px 6px #888;
+}
+
+
+

@@ -671,7 +671,7 @@ body, input, textarea, select, button {
 
 
 
-.modal-backdrop
+.modal-backdrop1
 {
 	position: fixed;
     top: 0px;
@@ -766,7 +766,7 @@ body, input, textarea, select, button {
     max-height: 400px;
     min-height: 50px;
     padding: 15px;
-    
+
 }
 .modal-body a
 {
@@ -1068,9 +1068,8 @@ div.rating-widget
 	margin-top: -5px;
 }
 
-#right_float_panel{border:1px solid #ccc; width: 50px; height: 50px; display: none;position:fixed;z-index: 9999;left: 95%; top: 80%; border-radius:50%; text-align: center; background:#f0f0f0;}
-#right_float_panel .top_up{display: block;width: 50px;height: 50px; background:url(../images/icon/top_up_32.png) 50% 50% no-repeat;border-radius:50%;}
-#right_float_panel .top_up:hover{background: #ccc url(../images/icon/top_up_32.png) 50% 50% no-repeat;border-radius:50%;}
+#right_float_panel{ font-size: 40px; height: auto; display: none;position:fixed;z-index: 9999;left: 95%; top: 80%; border-radius:50%;}
+#right_float_panel .top_up:hover{}
 
 
 
@@ -1092,6 +1091,18 @@ div.rating-widget
 	white-space: nowrap;	
 	color:#555;
 	cursor: pointer;
+}
+
+/*******添加汤馆*******/
+
+.aligin-c
+{
+	text-align: center;
+}
+a.a-text-none
+{
+	
+	font-size: 30px;
 }
 
 

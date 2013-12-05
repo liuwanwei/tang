@@ -7,21 +7,16 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'汤馆列表', 'url'=>array('index')),
-	array('label'=>'汤馆管理', 'url'=>array('admin')),
-);
+// $this->menu=array(
+// 	array('label'=>'汤馆列表', 'url'=>array('index')),
+// 	array('label'=>'汤馆管理', 'url'=>array('admin')),
+// );
 ?>
 
-<h1>Create Restaurant</h1>
+
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors)); ?>
-<div style="text-align:right; width:900px;">
-<input id="address" type="textbox" value="" style="width:300px;">
-<button onclick="codeAddress()">search</button>
-</div>
-<div style="width:900px;height:400px;" id="container"></div>
-<div style="width:603px;" id="latLng"></div>
+
 <script charset="utf-8" src="http://api.map.soso.com/v1.0/main.js"></script>
 <script>
 var geocoder,map,marker = null;
@@ -40,6 +35,8 @@ var init = function() {
         document.getElementById("Restaurant_coordinate").value=lat+","+lng;
     	//document.getElementById("Restaurant_latitude").value=event.latLng.getLat();//维度
     	//document.getElementById("Restaurant_longitude").value=event.latLng.getLng();//经度
+
+        $('#mapModal').modal('hide');
     });
     soso.maps.Event.addListener(map,'mousemove',function(event) {
         var latLng = event.latLng,

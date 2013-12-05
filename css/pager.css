@@ -4,37 +4,39 @@
  .tang-pager
  {
  	font-family: Arial;
- 	display: none;
+ 	
 
  }
 ul.yiiPager 
 {
-    font-size: 11px;
-    border: 1px solid #9d9d9d;
-    margin: 0px 0px 0px 10px;
-    padding: 0px;
-    display: inline-block;
+	display: inline-block;
+	margin: 0px 0px 0px 10px;
+    padding: 0 3px;
     line-height: 100%;    
     list-style: none;
-    height: 20px;
+     height: 25px;
+    line-height: 25px;
+   /* font-size: 11px;
+    border: 1px solid #9d9d9d;
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     -o-border-radius: 6px;
-    cursor: pointer;
-    display: none;
+    cursor: pointer;*/
 }
 ul.yiiPager li
 {
 	float: left;
 	font-size: 13px;
 	text-align: center;
-	line-height: 20px;
+	line-height: 25px;
 	min-width: 25px;
 	height: 100%;	
-	border-left: 1px solid #9d9d9d;
+	margin:0 2px;
+	padding:0px 2px;
+	border: 1px solid #9d9d9d;
 }
-ul.yiiPager li:first-child
+/*ul.yiiPager li:first-child
 {
 	text-align: center;
 	padding: 0px 5px;
@@ -46,6 +48,7 @@ ul.yiiPager li:first-child,ul.yiiPager li:first-child+li
 	border-left:0px none;
 	
 }
+*/
 ul.yiiPager li:hover,ul.yiiPager li:focus
 {
 	background:#ccc;
@@ -62,12 +65,12 @@ ul.yiiPager li a
 	text-decoration: none;
 }
 
-.tang-pager.selected
+.page.selected
 {
 	background:#9c9c9c;
 
 }
-.tang-pager.selected a
+.page.selected a
 {
 	color: #FFFFFF;
 }

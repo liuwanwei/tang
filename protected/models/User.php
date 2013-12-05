@@ -10,6 +10,7 @@
  * @property string $image_url
  * @property integer $role
  * @property integer $source
+ * @property string $last_action_time
  */
 class User extends CActiveRecord
 {
@@ -135,4 +136,5 @@ class User extends CActiveRecord
 	
 		return false;
 	}
+
 }

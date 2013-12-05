@@ -16,16 +16,16 @@
 // );
 ?>
 
-<h1>修改: <?php echo $model->name; ?></h1>
+<h4><?php echo $model->name; ?></h4>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors)); ?>
 
-<div style="text-align:right; width:900px;">
+<!-- <div style="text-align:right; width:900px;">
 <input id="address" type="textbox" value="" style="width:300px;">
 <button onclick="codeAddress()">search</button>
 </div>
 <div style="width:900px;height:400px;" id="container"></div>
-<div style="width:603px;" id="latLng"></div>
+<div style="width:603px;" id="latLng"></div> -->
 <script charset="utf-8" src="http://api.map.soso.com/v1.0/main.js"></script>
 <script>
 var geocoder,map,marker = null;
@@ -43,14 +43,14 @@ var init = function() {
             lat = latLng.getLat().toFixed(5),
             lng = latLng.getLng().toFixed(5);
         document.getElementById("Restaurant_coordinate").value=lat+","+lng;
+
+         $('#mapModal').modal('hide');
     });
     soso.maps.Event.addListener(map,'mousemove',function(event) {
         var latLng = event.latLng,
             lat = latLng.getLat().toFixed(5),
             lng = latLng.getLng().toFixed(5);
         document.getElementById("latLng").innerHTML = lat+','+lng;
-
-
 
     });
 

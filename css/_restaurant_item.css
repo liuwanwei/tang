@@ -6,6 +6,11 @@
 	height: 50px;
 
 }
+
+.pager
+{
+	display: none;
+}
 .restaurant-content
 {
 
@@ -177,7 +182,7 @@
 
 .restaurant-left
 {
-	width: 635px;
+	width: 655px;
 	float: left;
 	background: #FFFFFF;
 	box-shadow: 0 0 6px #ccc;

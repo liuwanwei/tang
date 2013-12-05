@@ -41,13 +41,13 @@
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 	'template' => "{pager}\n{summary}\n{items}\n{pager}",
 	'ajaxUpdate'=> false,
-	'pagerCssClass'=>'tang-pager',
-	'pager'=>array('header'=>'',
-			'prevPageLabel'=>'«',
-			'nextPageLabel'=>'»',
-			'firstPageLabel'=>'首页',
-			'lastPageLabel'=>'末页',
-			'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
+	// 'pagerCssClass'=>'tang-pager',
+	// 'pager'=>array('header'=>'',
+	// 		'prevPageLabel'=>'«',
+	// 		'nextPageLabel'=>'»',
+	// 		'firstPageLabel'=>'首页',
+	// 		'lastPageLabel'=>'末页',
+	// 		'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
 ));
  ?>
