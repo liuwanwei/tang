@@ -24,7 +24,7 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index', 'create', 'update', 'view', 'delete'),
+						'actions'=>array('index', 'create', 'update', 'view', 'delete','searchCheckedByPage'),
 						'users'=>array('*')),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
 						'actions'=>array('admin','view', 'check'),
@@ -312,33 +312,18 @@ class RestaurantController extends Controller
 	 */
 	public function actionIndex($county = 0, $area = -1, $type = 0)
 	{
-		// $rankFilePath = Yii::app()->basePath . "/../ranks.db";
-		// $ranks = unserialize($rankFilePath);
-
-		$dataProvider=new CActiveDataProvider('Restaurant');
-
-		$criteria = new CDbCriteria();
-		$criteria->compare('is_checked', 1);
-		$criteria->order = 'weighted_points DESC';
-
-		if (!empty($county)) {
-			$criteria->compare('county_id', $county);
-		}
-
-		if ($area != -1) {
-			$criteria->compare('area_id', $area);
-		}
-
-		if (! empty($type)) {
-			$criteria->compare('type_id', $type);
-		}
-
-		$dataProvider->criteria = $criteria;
-
-		$data = $dataProvider->getData();
+		$restaurant = new Restaurant();
+		$restaurant->county_id = $county;
+		$restaurant->area_id = $area;
+		$restaurant->type_id = $type;
+	
+		$restaurantProvider = $restaurant->searchCheckedByPage();
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider, 
-// 			'countyMenu'=>$this->countyMenu(),
+			'dataProvider'=>$restaurantProvider, 
+			'count'=>$restaurantProvider->getTotalItemCount(),
+			'county'=>$county,
+			'area'=>$area,
+			'type'=>$type,
 			'areaMenu'=>$this->areaMenu($county),
 			'typeMenu'=>$this->typeMenu($county, $area),
 			'lastVotes'=>Vote::model()->getLastVotes(),
@@ -412,5 +397,19 @@ class RestaurantController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	/**
+	* 根据县区、区域、汤类型、页码不同的条件，返回相关的餐馆数据
+	* @param  $county:县区Id；$area:区域Id；$type:汤类型; $page:当前页号(从0开始); $limit：每页显示的数量
+	* @return 餐馆数组
+	*/
+	public function actionSearchCheckedByPage($county = 0, $area = -1, $type = 0, $page = 0, $limit = 10) {
+		$restaurant = new Restaurant();
+		$restaurant->county_id = $county;
+		$restaurant->area_id = $area;
+		$restaurant->type_id = $type;
+
+		return $restaurant->searchCheckedByPage($page)->getData();
 	}
 }

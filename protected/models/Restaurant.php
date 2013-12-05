@@ -180,4 +180,34 @@ class Restaurant extends CActiveRecord
 			'criteria'=>$criteria,
 		));	
 	}
+
+	/*
+	* 根据前台不同的过滤条件，搜索当前页的汤馆。
+	*/
+	public function searchCheckedByPage($page = 0, $limit = 10) {
+		$criteria = new CDbCriteria(array(
+				'condition'=> 'is_checked = 1',
+				'order'=> 'weighted_points DESC',
+		));
+
+		if (! empty($this->country_id)) {
+			$criteria->compare('county_id',$this->county_id);
+		}
+
+		if ($this->area_id != -1) {
+			$criteria->compare('area_id', $this->area_id);
+		}
+		
+		if (! empty($this->type_id)) {
+			$criteria->compare('type_id', $this->type_id);
+		}
+
+		return new CActiveDataProvider($this, array(
+			'criteria' => $criteria,
+			'pagination'=>array(  
+            	'pageSize'=>$limit,
+            	'currentPage'=>$page,
+        	),  
+		));	
+	}
 }
