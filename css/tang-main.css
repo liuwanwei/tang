@@ -680,10 +680,11 @@ body, input, textarea, select, button {
 	-o-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
 	background-clip: padding-box;
 }
-	/*.fade {
-    opacity: 0;
-    transition: opacity 0.15s linear 0s;
-    }*/
+/*.fade 
+{
+opacity: 0;
+transition: opacity 0.15s linear 0s;
+}*/
 
 .modal1.fade.in {
 	top: 10%;display: none;
@@ -1076,7 +1077,6 @@ div.rating-widget
 }
 a.a-text-none
 {
-	
 	font-size: 30px;
 }
 
