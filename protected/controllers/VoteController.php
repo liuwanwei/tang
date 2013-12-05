@@ -6,6 +6,37 @@ class VoteController extends Controller
 	private $_new_vote_exist 	= '1';
 	private $_new_vote_not_exist 	= '0';
 
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			// 'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+	
+	public function accessRules()
+	{
+		
+		return array(
+				array('allow',
+					'actions'=>array('calculateRank'),
+					'users'=>array('*'),
+				),
+				array('allow',
+					'actions'=>array('index', 'create', 'vote', 'delete', 'query'),
+					'users'=>array('@')
+				),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions'=>array('flush'),
+						'expression'=>array($this,'isAdmin'),
+				),
+		);
+	}
+
 	// 更新（计算）所有参观的权重排名。
 	public function actionCalculateRank(){
 		// 获取“计算标记”。
@@ -40,7 +71,7 @@ class VoteController extends Controller
 		die('Update rank success!');
 	}
 
-	private function setCalculateRankFlag($flag){
+	public function setCalculateRankFlag($flag = true){
 		$model = Setting::model()->findByPk($this->_get_new_vote_key);
 
 		$value = $flag == true ? $this->_new_vote_exist : $this->_new_vote_not_exist;
@@ -64,7 +95,7 @@ class VoteController extends Controller
 		$oldVotes = $restaurant->votes;
 		$oldAveragePoints = $restaurant->average_points;
 
-		if (! isset($model->old_rating_value) {
+		if (! isset($model->old_rating_value)) {
 			// 新的投票。
 			$averagePoints = ($oldVotes * $oldAveragePoints + $model->rating ) / ($oldVotes + 1);
 			$restaurant->votes = $oldVotes + 1;
@@ -242,6 +273,36 @@ class VoteController extends Controller
 		}
 		
 		return;
+	}
+
+		/*
+	 * 重新计算每个汤馆的平均分。
+	 * 有时候，计算平均分的结果会出问题，比如今天遇到平均分计算得到5.05分的问题（可能是代码版本兼容性问题），
+	 * 而我们不能让用户看到这样的情况，一旦发现，除了排错之外，还需要一种机制来修正这个问题。so……
+	 */
+	public function actionFlush(){
+		$restaurants = array();
+
+		$allVotes = Vote::model()->findAll();
+		foreach ($allVotes as $key => $vote) {
+			$id = $vote->restaurant_id;
+			if (isset($restaurants[$id])) {
+				$restaurants[$id]['count'] = $restaurants[$id]['count'] + 1;
+				$restaurants[$id]['points'] = $restaurants[$id]['points'] + $vote->rating;
+			}else{
+				$restaurants[$id]['count'] = 1;
+				$restaurants[$id]['points'] = $vote->rating;
+			}			
+		}
+
+		foreach ($restaurants as $id => $value) {
+			$average_points = $value['points'] / $value['count'];
+			$model = Restaurant::model()->findByPk($id);
+			$model->average_points = number_format($average_points, 1);
+			$model->save();	
+		}
+
+		$this->setCalculateRankFlag();
 	}
 
 	/**
