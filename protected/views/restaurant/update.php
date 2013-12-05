@@ -30,26 +30,25 @@
 <script>
 var geocoder,map,marker = null;
 var init = function() {
-     map = new soso.maps.Map(document.getElementById("container"),{
-        center: new soso.maps.LatLng(39.916527,116.397128),
-        zoomLevel: 13
+    map = new soso.maps.Map(document.getElementById("container"),{
+    center: new soso.maps.LatLng(39.916527,116.397128),
+    zoomLevel: 13
     });
     geocoder = new soso.maps.Geocoder();
     soso.maps.Event.addListener(map, 'click', function(event) {
         //alert('您点击的位置为: [' + event.latLng.getLat() + ', ' +
         //event.latLng.getLng() + ']');
-
-    	var latLng = event.latLng,
-            lat = latLng.getLat().toFixed(5),
-            lng = latLng.getLng().toFixed(5);
+        var latLng = event.latLng,
+        lat = latLng.getLat().toFixed(5),
+        lng = latLng.getLng().toFixed(5);
         document.getElementById("Restaurant_coordinate").value=lat+","+lng;
 
-         $('#mapModal').modal('hide');
+        $('#mapModal').modal('hide');
     });
     soso.maps.Event.addListener(map,'mousemove',function(event) {
         var latLng = event.latLng,
-            lat = latLng.getLat().toFixed(5),
-            lng = latLng.getLng().toFixed(5);
+        lat = latLng.getLat().toFixed(5),
+        lng = latLng.getLng().toFixed(5);
         document.getElementById("latLng").innerHTML = lat+','+lng;
 
     });
