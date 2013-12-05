@@ -317,7 +317,7 @@ class RestaurantController extends Controller
 		$restaurant->area_id = $area;
 		$restaurant->type_id = $type;
 	
-		$restaurantProvider = $restaurant->searchCheckedByPage();
+		$restaurantProvider = $restaurant->indexByPage();
 		$this->render('index',array(
 			'dataProvider'=>$restaurantProvider, 
 			'count'=>$restaurantProvider->getTotalItemCount(),
