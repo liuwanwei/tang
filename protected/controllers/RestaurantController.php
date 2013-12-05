@@ -24,7 +24,7 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index', 'create', 'update', 'view', 'delete','searchCheckedByPage'),
+						'actions'=>array('index', 'create', 'update', 'view', 'delete','indexByPage'),
 						'users'=>array('*')),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
 						'actions'=>array('admin','view', 'check'),
@@ -404,12 +404,12 @@ class RestaurantController extends Controller
 	* @param  $county:县区Id；$area:区域Id；$type:汤类型; $page:当前页号(从0开始); $limit：每页显示的数量
 	* @return 餐馆数组
 	*/
-	public function actionSearchCheckedByPage($county = 0, $area = -1, $type = 0, $page = 0, $limit = 10) {
+	public function actionIndexByPage($county = 0, $area = -1, $type = 0, $page = 0, $limit = 10) {
 		$restaurant = new Restaurant();
 		$restaurant->county_id = $county;
 		$restaurant->area_id = $area;
 		$restaurant->type_id = $type;
 
-		return $restaurant->searchCheckedByPage($page)->getData();
+		return $restaurant->indexByPage($page)->getData();
 	}
 }

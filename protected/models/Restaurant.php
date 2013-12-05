@@ -184,7 +184,7 @@ class Restaurant extends CActiveRecord
 	/*
 	* 根据前台不同的过滤条件，搜索当前页的汤馆。
 	*/
-	public function searchCheckedByPage($page = 0, $limit = 10) {
+	public function indexByPage($page = 0, $limit = 10) {
 		$criteria = new CDbCriteria(array(
 				'condition'=> 'is_checked = 1',
 				'order'=> 'weighted_points DESC',
