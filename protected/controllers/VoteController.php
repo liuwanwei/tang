@@ -49,7 +49,13 @@ class VoteController extends Controller
 	}
 
 
-	// 更新餐厅记录，由此引发餐厅排名的重新计算。
+	/* 更新餐厅平均得分（会引发餐厅排名的重新计算）。
+	 * 分两种情况：
+	 * 1，当前用户第一次对餐厅评分。此时将总得分加上新评分，总评分次数加一。最后将总评分除以总评分次数
+	 * 后得到平均分。
+	 * 2，当期用户修改对餐厅的评分。此时要先从餐厅总得分中减去用户上次评分值（$old_rating_value)，
+	 * 再加上新的评分值后，除以总评分次数，得到平均分。
+	 */
 	private function updateRestaurant($model){
 		$rating = $model->rating;
 
@@ -58,25 +64,32 @@ class VoteController extends Controller
 		$oldVotes = $restaurant->votes;
 		$oldAveragePoints = $restaurant->average_points;
 
-		if (! isset($model->oldRating)) {
+		if (! isset($model->old_rating_value) {
 			// 新的投票。
 			$averagePoints = ($oldVotes * $oldAveragePoints + $model->rating ) / ($oldVotes + 1);
 			$restaurant->votes = $oldVotes + 1;
 		}else{
 			// 更新旧投票。
-			$averagePoints = ($oldVotes * $oldAveragePoints - $model->oldRating + $model->rating) / $oldVotes;
+			$averagePoints = ($oldVotes * $oldAveragePoints - $model->old_rating_value + $model->rating) / $oldVotes;
 		}
 		
 		// 平均分保留小数点后一位。
 		$restaurant->average_points = number_format($averagePoints, 1);
 
 		if(! $restaurant->save()){
-			die($restaurant->getErrors());
+			print_r($restaurant->getErrors());
+			die('save restaurant failed');
 		}else{
 			$this->setCalculateRankFlag(true);
 		}
 	}
 
+	/*
+	 * 保存评分。
+	 * 分两种情况：
+	 * 1，用户第一次对餐馆评分。在评分表中新建一条记录。
+	 * 2，用户修改对餐馆的评分。此时要找出上次打分记录，修改成新的打分值。
+	 */
 	private function saveVoteRecord($model){
 		$criteria = new CDbCriteria();
 		$criteria->compare('user_id', $model->attributes['user_id']);
@@ -85,7 +98,7 @@ class VoteController extends Controller
 		$oldModel = $model->find($criteria);
 
 		if ($oldModel != null) {
-			$oldModel->oldRating = $oldModel->rating;
+			$oldModel->old_rating_value = $oldModel->rating;
 			$oldModel->rating = $model->attributes['rating'];
 			$oldModel->save();
 			return $oldModel;

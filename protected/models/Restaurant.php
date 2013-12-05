@@ -49,7 +49,7 @@ class Restaurant extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, address, type_id, county_id, area_id, coordinate', 'required'),
+			array('name, address, type_id, county_id, area_id', 'required'),
 			array('county_id, type_id, area_id, is_shutdown,  is_checked, votes', 'numerical', 'integerOnly'=>true),
 			array('average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),

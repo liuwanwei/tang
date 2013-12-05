@@ -12,7 +12,7 @@
  */
 class Vote extends CActiveRecord
 {
-	public $oldRating;
+	public $old_rating_value;
 	
 	/**
 	 * Returns the static model of the specified AR class.
