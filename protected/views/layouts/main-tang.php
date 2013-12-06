@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
+	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
 	<!-- blueprint CSS framework -->
