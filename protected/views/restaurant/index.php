@@ -41,13 +41,13 @@
 	'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 	'template' => "{pager}\n{summary}\n{items}\n{pager}",
 	'ajaxUpdate'=> false,
-	'pagerCssClass'=>'tang-pager',
-	'pager'=>array('header'=>'',
-			'prevPageLabel'=>'«',
-			'nextPageLabel'=>'»',
-			'firstPageLabel'=>'首页',
-			'lastPageLabel'=>'末页',
-			'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
+	// 'pagerCssClass'=>'tang-pager',
+	// 'pager'=>array('header'=>'',
+	// 		'prevPageLabel'=>'«',
+	// 		'nextPageLabel'=>'»',
+	// 		'firstPageLabel'=>'首页',
+	// 		'lastPageLabel'=>'末页',
+	// 		'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
 ));
  ?>
@@ -56,78 +56,68 @@
 </div>
 <div class="right-content">
 	<div id="last_votes">
-		<span class="title">最近打分</span>
-		<div class="content">
-			<ul>
-			<?php foreach ($lastVotes as $value) {
-			?>
-			<li>
-				<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
-				<div>
-				<!--<span><?php echo $value->restaurant->name; ?></span>-->
-				<?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
-				<div class="rating-widget">
-		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-		<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?>" 
-			data-clicknum="0" 
-			data-user="<?php echo Yii::app()->user->id ?>"
-			data-id="<?php echo CHtml::encode($value->restaurant->id);?>"
-			data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
-		<span class="rating-stars">
-		<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
-		<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
-		<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
-		<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
-		<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
-		<!--<a class="rating-icon star-on"><span>6</span></a>
-		<a class="rating-icon star-on"><span>7</span></a>
-		<a class="rating-icon star-on"><span>8</span></a>
-		<a class="rating-icon star-on"><span>9</span></a>
-		<a class="rating-icon star-on"><span>10</span></a>-->
-		</span>
-		<span class="rating-rating">
-		<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?></span>
-		<span class="grey">/</span>
-		<span class="grey">5</span>
-		</span>
-		<span class="rating-cancel ">
-			<a title="删除">
-				<span>X</span>
-			</a>
-		</span>
-		</div>		
-		</div>
-			<div class="clear"><!--清除浮动--></div>
-			</div>
-			</li>
-			<?php
-			} ?>
-			</ul>
-		</div>
+	<span class="title">最近打分</span>
+	<div class="content">
+	<ul>
+	<?php foreach ($lastVotes as $value) {
+	?>
+	<li>
+	<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
+	<div>
+	<!--<span><?php echo $value->restaurant->name; ?></span>-->
+	<?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
+	<div class="rating-widget">
+	<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+	<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?>" 
+	data-clicknum="0" 
+	data-user="<?php echo Yii::app()->user->id ?>"
+	data-id="<?php echo CHtml::encode($value->restaurant->id);?>"
+	data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
+	<span class="rating-stars">
+	<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
+	<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
+	<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
+	<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
+	<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
+	</span>
+	<span class="rating-rating">
+	<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?></span>
+	<span class="grey">/</span>
+	<span class="grey">5</span>
+	</span>
+	<span class="rating-cancel ">
+	<a title="删除">
+	<span>X</span>
+	</a>
+	</span>
+	</div>		
+	</div>
+	<div class="clear"><!--清除浮动--></div>
+	</div>
+	</li>
+	<?php
+	} ?>
+	</ul>
+	</div>
 	</div>
 	<div id="last_comments">
-		<span class="title">最近评论</span>
-		<div class="content">
-			<ul>
-				<?php foreach ($lastComments as $value) {
-			?>
-			<li>
-				<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
-				<div>
-				<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-				<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content;?></span>
-				</div>
-			</li>
-			<?php
-			} ?>
-			</ul>
-		</div>
+	<span class="title">最近评论</span>
+	<div class="content">
+	<ul>
+	<?php foreach ($lastComments as $value) {
+	?>
+	<li>
+	<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
+	<div>
+	<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
+	<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content;?></span>
 	</div>
-
-<?php
-	//print_r($lastVotes[0]->user->nick_name);print_r($lastVotes[0]->restaurant->name);
-	//print_r($lastComments[0]->user->nick_name);print_r($lastComments[0]->content);
-?> 
+	</li>
+	<?php
+	} ?>
+	</ul>
+	</div>
+	</div>
 </div>
 <div class="clear"></div>
 </div>
@@ -136,11 +126,11 @@
 
 $(function(){
 
-	/*$("#next").click(function(){
-	$.get("restaurant/index/Restaurant_page/2",{},function(data){
-		console.log("data="+data);
-		document.body.innerHTML=data;
-	});
+/*$("#next").click(function(){
+$.get("restaurant/index/Restaurant_page/2",{},function(data){
+	console.log("data="+data);
+	document.body.innerHTML=data;
+});
 });*/
 
 	
@@ -149,7 +139,6 @@ tang_main_rating(rating_list_dome,true);
 tang_main_rating($(".rating-widget .rating-list",$(".right-content")),false);
 function tang_main_rating(rating_list,ismouseover)
 {
-
 
 /*
  *评分组件 @rating_list 为评分组件集，@ismouseover是否加载鼠移上去事件
@@ -174,23 +163,22 @@ rating_list.each(function(){
 
 		//单击星星时发生
 		a_arr.live("click",function(event){
-
-			if (a_this.attr("isclick")=="true") {
-				return false;
-			}
-			var i=parseInt($("span",$(this)).text());
+		if (a_this.attr("isclick")=="true") {
+			return false;
+		}
+		var i=parseInt($("span",$(this)).text());
 		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
-			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
-			//event.preventDefault()
-			//event.stopPropagation();
-			//console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
+		//event.preventDefault()
+		//event.stopPropagation();
+		//console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 
-			if (a_this.attr('data-user')=="") {
-				//点击登陆弹出模态窗口
-				loginModal();
+		if (a_this.attr('data-user')=="") {
+			//点击登陆弹出模态窗口
+			loginModal();
 
-				return false;
-			}
+			return false;
+		}
 		a_this.attr("data-clicknum",parseInt($("span",$(this)).text()));
 		selected_a.removeClass();
 		selected_a.addClass("rating-icon rating-off");
@@ -198,7 +186,7 @@ rating_list.each(function(){
 		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
-		$.post("/vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
+		$.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
 				//console.log("aa="+resultdata.voteid);
 				if (resultdata.msg==="0") {
@@ -206,27 +194,27 @@ rating_list.each(function(){
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
 					var tooltip=$(".tooltip");
 					rating_cancel.hover(function(){
-						var a_offset=$(this).offset();						
-						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
-						tooltip.find('.content').text("你要删除打分吗？");
-						tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
+					var a_offset=$(this).offset();						
+					$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
+					tooltip.find('.content').text("你要删除打分吗？");
+					tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
 					},function(){
 						tooltip.hide();
 					});			
 					rating_cancel.one('click',function(){
-						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
-								if (rating_cancel_result.msg==="0") {
-									a_this.removeAttr('voteid');
-									rating_cancel.removeClass('rating-pending');
-									a_this.attr("data-clicknum","0");
-									raing_value.text(raing_default);
-									//console.log(rating_cancel_result+"abc");
-									ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
-								}else{
-									//服务器出错
-								}
-							},"json");
+					rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
+					$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+					if (rating_cancel_result.msg==="0") {
+					a_this.removeAttr('voteid');
+					rating_cancel.removeClass('rating-pending');
+					a_this.attr("data-clicknum","0");
+					raing_value.text(raing_default);
+					//console.log(rating_cancel_result+"abc");
+					ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+					}else{
+						//服务器出错
+					}
+					},"json");
 					});
 				}else{
 					//服务器出错
@@ -270,9 +258,9 @@ rating_list.each(function(){
 		$(".rating-stars",a_this).bind("mouseout",function(){	
 			var clicknum=a_this.attr("data-clicknum");
 		if (clicknum=="0" && parseInt(raing_default)==0) {
-		a_arr.removeClass();
-		a_arr.addClass("rating-icon star-on");
-		raing_value.text(parseInt(raing_default)==0?'-':raing_default);		
+			a_arr.removeClass();
+			a_arr.addClass("rating-icon star-on");
+			raing_value.text(parseInt(raing_default)==0?'-':raing_default);		
 		}else if(clicknum=="0" && parseInt(raing_default)>0)
 		{
 			ratingInit(a_this,"rating-icon rating-init",Math.round(raing_default),raing_value);
@@ -322,40 +310,40 @@ var btnedit_div=$(".view-edit-btn");
 		var d_this=$(this),p_this=d_this.parent();
 		d_this.find("ul").show();
 		d_this.find(".feature-btn").bind("click",function(){
-			var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
-			//ajax加载数据
-			$.get("/restaurantFeature/query",{},function(data){
-				
-				var t="<ul>";
-				if (data) {
+		var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
+		//ajax加载数据
+		$.get("/restaurantFeature/query",{},function(data){
 
-					$.each(data,function(a){
-						
-						if (isContain(feature_selected_items,data[a].id)) {
-							t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" />'+data[a].name+'</label> </li>';
-						}
-						else{
-							t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
-						}
-					});
-				}
-				t+="</ul>";
+		var t="<ul>";
+		if (data) {
 
-				$(".feature-content .feature-content-content",p_this).html(t);
+		$.each(data,function(a){
 
-			},"json");
+		if (isContain(feature_selected_items,data[a].id)) {
+		t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" />'+data[a].name+'</label> </li>';
+		}
+		else{
+		t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
+		}
+		});
+		}
+		t+="</ul>";
+
+		$(".feature-content .feature-content-content",p_this).html(t);
+
+		},"json");
 
 
-			$(".feature-content",p_this).css({'display':'block',
-				'top':p_this.offset().top+25,
-				'left':p_this.offset().left}).animate(
-				{	
-					width:'200px',
-					minHeight:'200px',
-					left:$(this).offset().left-$(this).width()-200,
-					top:$(this).offset().top-25
-					
-				},200);
+		$(".feature-content",p_this).css({'display':'block',
+		'top':p_this.offset().top+25,
+		'left':p_this.offset().left}).animate(
+		{	
+		width:'200px',
+		minHeight:'200px',
+		left:$(this).offset().left-$(this).width()-200,
+		top:$(this).offset().top-25
+
+		},200);
 		});
 	},function(){
 	$(this).find("ul").hide();
@@ -380,30 +368,30 @@ $("#feature-edit-submit",btnedit_div).click(function(){
 	features1=features1.substring(0,features1.length-1);
 	//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
 	$.post("/feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
-		if (data.success) {
-			//当提交成功时关闭窗体
-			btnedit_div_hide(d_this);
-			//刷新页面
-			location="/index.php"+window.location.search;
-			//当提交成功时动态更新特色数据
+	if (data.success) {
+	//当提交成功时关闭窗体
+	btnedit_div_hide(d_this);
+	//刷新页面
+	location="/index.php"+window.location.search;
+	//当提交成功时动态更新特色数据
 
 
-			//console.log("className="+$(".restaurant-detail>ul>li>ul:eq(0) li",parent_edit_dom.parent().parent()).eq(0).text());
+	//console.log("className="+$(".restaurant-detail>ul>li>ul:eq(0) li",parent_edit_dom.parent().parent()).eq(0).text());
 
-			//$("<li>adfsadf</li>").appendTo($(".restaurant-detail>ul>li>ul:eq(0) li:eq(1)",parent_edit_dom.parent().parent()));
-		}else
-		{
-			//提示错误信息
-		}
+	//$("<li>adfsadf</li>").appendTo($(".restaurant-detail>ul>li>ul:eq(0) li:eq(1)",parent_edit_dom.parent().parent()));
+	}else
+	{
+	//提示错误信息
+	}
 	},"json");
 });
 
 
 function btnedit_div_hide(a)
 {
-a.parent().parent().hide(100,function(){
-		$(this).css({'width':'100px','min-height':'50px','left':$(this).parent().offset().left,'top':$(this).parent().offset().top+25});
-		$(".feature-content-content").html('');
+	a.parent().parent().hide(100,function(){
+	$(this).css({'width':'100px','min-height':'50px','left':$(this).parent().offset().left,'top':$(this).parent().offset().top+25});
+	$(".feature-content-content").html('');
 	});
 }
 
@@ -412,9 +400,9 @@ function isContain(a,b)
 {
 	for(var i in a)
 	{
-		if (a[i]==b) {
-			return true;
-		}
+	if (a[i]==b) {
+	return true;
+	}
 	}
 	return false;
 }

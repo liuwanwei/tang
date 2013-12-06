@@ -6,6 +6,11 @@
 	height: 50px;
 
 }
+
+.pager
+{
+	display: none;
+}
 .restaurant-content
 {
 
@@ -17,8 +22,6 @@
 	/*border-left:2px solid #A65900;*/
 	padding-left:5px; 
 	margin-left: 5px;
-
-	
 }
 
 .right-content
@@ -177,7 +180,7 @@
 
 .restaurant-left
 {
-	width: 635px;
+	width: 655px;
 	float: left;
 	background: #FFFFFF;
 	box-shadow: 0 0 6px #ccc;
