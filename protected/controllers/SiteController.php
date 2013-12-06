@@ -218,5 +218,6 @@ class SiteController extends Controller
 		#$output = shell_exec('/usr/bin/git pull origin master 2>&1');
 		echo "<pre>".date('H:i:s')."</pre>";
 		echo "<pre>".$output."</pre>";
+		echo '<pre><h3><a href="http://www.laotangguan.com">老汤馆</a></h3></pre>';
 	}
 }
