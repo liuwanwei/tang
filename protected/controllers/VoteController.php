@@ -30,14 +30,17 @@ class VoteController extends Controller
 					'actions'=>array('index', 'create', 'vote', 'delete', 'query'),
 					'users'=>array('@')
 				),
-				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('flush'),
-						'expression'=>array($this,'isAdmin'),
+				array('allow',
+					'actions'=>array('flush'),
+					'expression'=>array($this,'isAdmin'),
+				),
+				array('deny',  // deny all users
+						'users'=>array('*'),
 				),
 		);
 	}
 
-	// 更新（计算）所有参观的权重排名。
+	// 更新（计算）所有餐厅的权重排名。
 	public function actionCalculateRank(){
 		// 获取“计算标记”。
 		$model = Setting::model()->findByPk($this->_get_new_vote_key);
@@ -275,7 +278,7 @@ class VoteController extends Controller
 		return;
 	}
 
-		/*
+	/*
 	 * 重新计算每个汤馆的平均分。
 	 * 有时候，计算平均分的结果会出问题，比如今天遇到平均分计算得到5.05分的问题（可能是代码版本兼容性问题），
 	 * 而我们不能让用户看到这样的情况，一旦发现，除了排错之外，还需要一种机制来修正这个问题。so……
@@ -310,6 +313,8 @@ class VoteController extends Controller
 		}
 
 		$this->setCalculateRankFlag();
+
+		echo "重新计算每个汤馆的平均分！";
 	}
 
 	/**
