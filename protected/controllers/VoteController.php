@@ -2,10 +2,10 @@
 
 class VoteController extends Controller
 {
-	private $_get_new_vote_key 	= 'get_new_vote';
-	private $_new_vote_exist 	= '1';
+	private $_max_rating_point		= 5;
+	private $_get_new_vote_key 		= 'get_new_vote';
+	private $_new_vote_exist 		= '1';
 	private $_new_vote_not_exist 	= '0';
-
 
 	/**
 	 * @return array action filters
@@ -297,8 +297,15 @@ class VoteController extends Controller
 
 		foreach ($restaurants as $id => $value) {
 			$average_points = $value['points'] / $value['count'];
+			$average_points = number_format($average_points, 1);
+			if ($average_points > $this->_max_rating_point) {
+				$average_points = $this->_max_rating_point;
+				// TODO: 平均分超出打分最大值，某个打分被hacked，向管理员发提醒。
+				print_r("汤馆（$id） average_points 计算错误： $average_points");
+			}
+
 			$model = Restaurant::model()->findByPk($id);
-			$model->average_points = number_format($average_points, 1);
+			$model->average_points = $average_points;
 			$model->save();	
 		}
 
