@@ -410,6 +410,7 @@ class RestaurantController extends Controller
 		$restaurant->area_id = $area;
 		$restaurant->type_id = $type;
 
-		return $restaurant->indexByPage($page)->getData();
+		$restaurants = $restaurant->indexByPage($page)->getData();
+		echo CJSON::encode($restaurants);
 	}
 }
