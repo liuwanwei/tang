@@ -1073,6 +1073,9 @@ a.a-text-none
 {
 	font-size: 30px;
 }
+.modal-body{
+	padding:5px!important;
+}
 
 
 

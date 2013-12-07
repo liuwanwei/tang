@@ -26,52 +26,73 @@
 </div>
 <div style="width:900px;height:400px;" id="container"></div>
 <div style="width:603px;" id="latLng"></div> -->
-<script charset="utf-8" src="http://api.map.soso.com/v1.0/main.js"></script>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script>
-var geocoder,map,marker = null;
+var geocoder,citylocation,map,marker = null;
 var init = function() {
-    map = new soso.maps.Map(document.getElementById("container"),{
-    center: new soso.maps.LatLng(39.916527,116.397128),
-    zoomLevel: 13
+    var center = new qq.maps.LatLng(39.916527,116.397128);
+    map = new qq.maps.Map(document.getElementById('mapcontainer'),{
+        center: center,
+        zoom: 13
     });
-    geocoder = new soso.maps.Geocoder();
-    soso.maps.Event.addListener(map, 'click', function(event) {
-        //alert('您点击的位置为: [' + event.latLng.getLat() + ', ' +
-        //event.latLng.getLng() + ']');
+    qq.maps.event.addListener(map,'mousemove',function(event) {
         var latLng = event.latLng,
-        lat = latLng.getLat().toFixed(5),
-        lng = latLng.getLng().toFixed(5);
-        document.getElementById("Restaurant_coordinate").value=lat+","+lng;
-
-        $('#mapModal').modal('hide');
-    });
-    soso.maps.Event.addListener(map,'mousemove',function(event) {
-        var latLng = event.latLng,
-        lat = latLng.getLat().toFixed(5),
-        lng = latLng.getLng().toFixed(5);
+            lat = latLng.getLat().toFixed(5),
+            lng = latLng.getLng().toFixed(5);
         document.getElementById("latLng").innerHTML = lat+','+lng;
+        });
+        var info = new qq.maps.InfoWindow({map: map});
+        geocoder = new qq.maps.Geocoder({
+            complete : function(result)
+            {
+                map.setCenter(result.detail.location);
+                var marker = new qq.maps.Marker({
+                    map:map,
+                    position: result.detail.location
+                });
+                qq.maps.event.addListener(marker, 'click', function() {
+                info.open();
+                info.setContent('<div style="width:280px;height:100px;">'+
+                    result.detail.address+'</div>');
+                info.setPosition(result.detail.location);
+                });
+            }
+        });
+        qq.maps.event.addListener(map,'click',function(event) {
+            var latLng = event.latLng,
+                lat = latLng.getLat().toFixed(5),
+                lng = latLng.getLng().toFixed(5);
+            document.getElementById("Restaurant_coordinate").value=lat+","+lng;
+            $('#mapModal').modal('hide');
+        });
 
-    });
+        citylocation = new qq.maps.CityService({
+            complete : function(result)
+            {
+                map.setCenter(result.detail.latLng);
+            }
+        });
+            citylocation.searchLocalCity();
 
-    codeAddress();
+        <?php if($model->coordinate!=0){ 
+            echo 'codeLatLng("'.$model->coordinate.'");';
+        }?>
 }
 
 function codeAddress() {
-    var address = '洛阳市';//document.getElementById("address").value;
-    geocoder.geocode({'address': address}, function(results, status) {
-        if (status == soso.maps.GeocoderStatus.OK) {
-            map.setCenter(results.location);
-            if (marker != null) {
-                marker.setMap(null);
-            }
-            marker = new soso.maps.Marker({
-                map: map,
-                position:results.location
-            });
-        } else {
-            alert("检索没有结果，原因: " + status);
-        }
-    });
+    var address = document.getElementById("mapaddress").value;
+    geocoder.getLocation(address);
+    
+}
+
+function codeLatLng(coordinate) {
+    var input = coordinate;
+    var latlngStr = input.split(",",2);
+    var lat = parseFloat(latlngStr[0]);
+    var lng = parseFloat(latlngStr[1]);
+    var latLng = new qq.maps.LatLng(lat, lng);
+    var info = new qq.maps.InfoWindow({map: map});
+    geocoder.getAddress(latLng);
 }
 
 window.onload=init;
