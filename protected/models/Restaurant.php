@@ -188,6 +188,7 @@ class Restaurant extends CActiveRecord
 		$criteria = new CDbCriteria(array(
 				'condition'=> 'is_checked = 1',
 				'order'=> 'weighted_points DESC',
+				'with'=>array('features.details'),
 		));
 
 		if (! empty($this->country_id)) {
@@ -203,7 +204,7 @@ class Restaurant extends CActiveRecord
 		}
 
 		return new CActiveDataProvider($this, array(
-			'criteria' => $criteria,
+			'criteria'=>$criteria,
 			'pagination'=>array(  
             	'pageSize'=>$limit,
             	'currentPage'=>$page,

@@ -318,6 +318,7 @@ class RestaurantController extends Controller
 		$restaurant->type_id = $type;
 	
 		$restaurantProvider = $restaurant->indexByPage();
+	
 		$this->render('index',array(
 			'dataProvider'=>$restaurantProvider, 
 			'count'=>$restaurantProvider->getTotalItemCount(),
@@ -410,7 +411,20 @@ class RestaurantController extends Controller
 		$restaurant->area_id = $area;
 		$restaurant->type_id = $type;
 
-		$restaurants = $restaurant->indexByPage($page)->getData();
-		echo CJSON::encode($restaurants);
+		$restaurants = $restaurant->indexByPage($page,$limit)->getData();
+
+		$result = array();
+		foreach ($restaurants as $key => $value) {
+			$data = array();
+			$data['restaurant'] = $value;
+			if(count($value->features) > 0) {
+				foreach($value->features as $keyFeature => $valueFeature)
+				$data['features'][] =  $valueFeature->details;
+			}
+			
+			$result[] = $data;
+		}
+
+		echo CJSON::encode($result);
 	}
 }

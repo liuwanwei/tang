@@ -21,7 +21,7 @@ $this->breadcrumbs=array(
     var init = function() {
         map = new soso.maps.Map(document.getElementById("container"),{
         center: new soso.maps.LatLng(39.916527,116.397128),
-        zoomLevel: 13
+        zoomLevel: 16
         });
         geocoder = new soso.maps.Geocoder();
         soso.maps.Event.addListener(map, 'click', function(event) {
@@ -62,6 +62,13 @@ $this->breadcrumbs=array(
             }
         });
     }
+
+// function loadScript() {
+//     var script = document.createElement("script");
+//     script.type = "text/javascript";
+//     script.src = "http://map.soso.com/api/v2/main.js?callback=init";
+//     document.body.appendChild(script);
+// }
 
 window.onload=init;
 </script>
