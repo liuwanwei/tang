@@ -190,8 +190,8 @@ class Restaurant extends CActiveRecord
 				'order'=> 'weighted_points DESC',
 				'with'=>array('features.details'),
 		));
-
-		if (! empty($this->country_id)) {
+		
+		if (! empty($this->county_id)) {
 			$criteria->compare('county_id',$this->county_id);
 		}
 
