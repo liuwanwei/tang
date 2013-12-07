@@ -2,6 +2,10 @@
 {
 	display: none;
 }
+.table-uc
+{
+	font-size: 12px;
+}
 
 .table-uc thead tr th a
 {

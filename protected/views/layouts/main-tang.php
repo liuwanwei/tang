@@ -22,6 +22,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css">
+
 	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js">
 	</script>
 </head>
@@ -109,7 +110,7 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 	<?php echo Yii::powered(); ?>
 </div><!-- footer -->
 <div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"><i class="fa fa-arrow-circle-up" ></i></a></div>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -153,7 +154,7 @@ $(this).removeClass('show');
 
 });
 
-$(".modal-backdrop").click(function(){
+$(".modal-backdrop1").click(function(){
 	$("#myModal").hide();
 	$(this).hide();
 });
@@ -162,7 +163,7 @@ $(document.body).keyup(function(event){
 //alert("按了ctrl+回车键!")
 if(event.keyCode==27)
 	$("#myModal").hide();
-$(".modal-backdrop").hide();
+$(".modal-backdrop1").hide();
 });
 
 
@@ -186,9 +187,23 @@ $(window).scroll(function(){
 
 });
 
+//回到顶部功能
 $(".top_up").click(function(){
 	$('html,body').animate({scrollTop:'0px'},800);
 });
+
+/*
+ *类型、区域的A标签加上点击激活状态的样式
+ */
+// var currentItem=null;
+// $("#area-menu>ul>li>a").click(function(){
+// 	if (currentItem) {
+// 		currentItem.removeClass('active');
+// 	}
+// 	$(this).addClass('active');
+// 	currentItem=$(this);
+
+// });
 
 });
 </script>

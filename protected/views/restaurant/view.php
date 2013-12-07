@@ -16,12 +16,11 @@ $this->breadcrumbs=array(
 // );
 ?>
 
-<h1>View Restaurant #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
+		//'id',
 		'name',
 		'phone',
 		'type.name',
@@ -30,7 +29,7 @@ $this->breadcrumbs=array(
 		'county.name',
 		'area.name',
 		'status.name',
-		'image_url',
+		//'image_url',
 		'weighted_points',
 		'votes',
 		'average_points',

@@ -2,6 +2,8 @@
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
 /* @var $form CActiveForm */
+
+Yii::app()->clientScript->registerScriptFile('//code.jquery.com/jquery-1.10.2.min.js');
 ?>
 
 <div class="form">

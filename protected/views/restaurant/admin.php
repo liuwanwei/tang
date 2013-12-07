@@ -51,6 +51,7 @@
 			'viewButtonImageUrl'=>false,
 			'viewButtonLabel'=>'',
 			'viewButtonOptions'=>array('class'=>'fa fa-search'),
+			'viewButtonUrl'=>'Yii::app()->createUrl("details/$data->id")',
 			'updateButtonImageUrl'=>false,
 			'updateButtonLabel'=>'',
 			'updateButtonOptions'=>array('class'=>'fa fa-pencil'),
