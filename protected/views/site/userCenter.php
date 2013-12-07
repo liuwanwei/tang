@@ -6,7 +6,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-unchecked',
 	'dataProvider'=>$model->searchCreatedByMe(0),
 	'filter'=>$model,
-	'columns'=>array(
+	'itemsCssClass'=>'table table-hover table-uc',
+	'emptyText'=>'没有数据',
+		'columns'=>array(
 		'id',
 		'name',
 		// 'phone',
@@ -24,6 +26,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		*/
 		array(
 			'class'=>'CButtonColumn',
+			'updateButtonImageUrl'=>false,
+			'updateButtonLabel'=>'',
+			'updateButtonOptions'=>array('class'=>'fa fa-pencil'),
+			'deleteButtonImageUrl'=>false,
+			'deleteButtonLabel'=>'',
+			'deleteButtonOptions'=>array('class'=>'fa fa-times-circle'),
 			'template'=>'{update}{delete}',
 			'buttons'=>array(
 				'update'=>array(
@@ -41,6 +49,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-checked',
 	'dataProvider'=>$model->searchCreatedByMe(1),
+	'cssFile' => Yii::app()->request->baseUrl. '/css/tang_uc_style.css',
+	'itemsCssClass'=>'table table-hover table-uc',
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
@@ -60,6 +70,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		*/
 		array(
 			'class'=>'CButtonColumn',
+			'viewButtonImageUrl'=>false,
+			'viewButtonLabel'=>'',
+			'viewButtonOptions'=>array('class'=>'fa fa-search'),
 			'template'=>'{view}',
 			'buttons'=>array(
 				'view'=>array(
@@ -69,6 +82,15 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			
 		),
 	),
+
+	'pagerCssClass'=>'tang-pager',
+	'pager'=>array('header'=>'',
+			'prevPageLabel'=>'«',
+			'nextPageLabel'=>'»',
+			'firstPageLabel'=>'首页',
+			'lastPageLabel'=>'末页',
+			'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'
+			),
 ));
 
 ?>

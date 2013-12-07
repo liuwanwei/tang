@@ -4,26 +4,9 @@
 ?>
 
 <div class="view-item">
-<!-- 	<div class="restaurant-profile">
-		<?php 
-		if (! empty($data->image_url)) {
-			echo CHtml::image(Yii::app()->baseUrl.$data->image_url, $data->name,array("width"=>75, 'height'=>75));
-		}else{
-			echo CHtml::image('images/default_profile.jpg'); 
-		}
-		?>
-	</div> -->
-
 	<span class="ranking"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?>.</span>
 	<div class="restaurant-detail">
-		<!--
-		<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-		<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-		<br />
-		-->
-		
-	<ul>
-	
+		<ul>
 		<li>
 		<strong>
 		<?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank')); ?></strong>
@@ -42,15 +25,12 @@
 			<?php 			
 			 foreach ($data->features as $value) {			 	
 			echo '<span class="feature">'.CHtml::encode($value->details->name).'</span>';
-		} ?></li>
+		} ?>
+		</li>
 		<?php
 		} ?>
 
 		<li>
-		<!--<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('votes')); ?>:</span>
-		<span><?php echo CHtml::encode($data->votes); ?></span>
-		-->
-		
 		<div class="rating-widget">
 		<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 		<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
@@ -79,8 +59,8 @@
 		<?php if ($data->votes>0) {
 			?>
 			
-		<div class="rating-count-p">
-			<span>共</span> <span><?php echo CHtml::encode($data->votes);?></span>人打分
+		<div class="rating-count-p"  style="color:#888;">
+			<!-- <span>共</span>  --><span><?php echo CHtml::encode($data->votes);?></span>人打分
 		</div>
 		<?php
 		}?>
@@ -90,23 +70,18 @@
 	
 			<li class="hide"><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
 		<div class="clear"></div>
-	</li>
-
 		</ul>
-
-		
-
 	</div>
 
 	<?php if (User::model()->isAdmin()) {
 	?>	
 	<!--编辑功能-->
-<div class="view-edit-btn" ><div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
-<ul>
-<li class="feature-btn">贴标</li>
-
-</ul>
-</div>
+<div class="view-edit-btn" >
+	<div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
+	<ul>
+	<li class="feature-btn">贴标</li>
+	</ul>
+	</div>
 
 <div class="feature-content" data-item-id="<?php echo $data->id; ?>" data-selected-items="<?php
 				foreach ($data->features as $value) {
@@ -114,9 +89,8 @@
 			 	} ?>">
 <div class="feature-content-content"></div>
 <div class="feature-content-footer"><button id="feature-edit-submit">提交</button><button id="feature-edit-close">关闭</button></div>
-			 </div>
+</div>
 </div>
 <?php } ?>
-	<div style="clear:both;"></div>
-
+<div style="clear:both;"></div>
 </div>

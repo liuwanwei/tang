@@ -76,6 +76,14 @@ body
 	font-size: 200%;
 
 }
+.list-footer-load
+{
+	text-align:center;
+}
+.list-footer-load>span
+{
+	display: none;
+}
 
 #mainmenu
 {
@@ -331,42 +339,14 @@ li.areamenu ul li a
 }
 
 /*区域-----------------------------start*/
-#county-menu
-{
-	/*border-left:2px solid #A65900;*/
-}
 
-#county-menu li{
-	display: inline-table;
-	width: 100px;
-	height: 25px;
-	line-height: 25px;
-	text-align: center;
-	background:#30353F;
-	margin-right:10px;
-	/*box-shadow:3px 2px rgba(0,52,118,.6);
-	-moz-box-shadow:3px 2px rgba(0,52,118,.6);
-	-webkit-box-shadow:3px 2px rgba(0,52,118,.6);
-	-o-box-shadow:3px 2px rgba(0,52,118,.6);*/
-}
-#county-menu li:hover,#county-menu li:focus
-{
-	box-shadow:3px 2px 5px rgba(0,52,118,.6);
-	-moz-box-shadow:3px 2px 5px  rgba(0,52,118,.6);
-	-webkit-box-shadow:3px 2px 5px  rgba(0,52,118,.6);
-	-o-box-shadow:3px 2px 5px  rgba(0,52,118,.6);
-	border-radius: 5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-}
-
-#area-menu
+#area-menu,#county-menu
 {
 	padding-left: 10px;
 	display: inline-block;
 }
 
-#area-menu li{
+#area-menu li,#county-menu li{
 	display: inline-block;
 	font-size: 12px;
 	height: 25px;
@@ -383,7 +363,7 @@ li.areamenu ul li a
 	-webkit-border-radius:5px;
 	-o-border-radius:5px;*/
 }
-#area-menu li:hover,#area-menu li:focus
+#area-menu li:hover,#area-menu li:focus,#county-menu li:hover,#county-menu li:focus
 {
 	box-shadow:3px 2px 5px rgba(143, 130, 117,.6);
 	-moz-box-shadow:3px 2px 5px  rgba(143, 130, 117,.6);
@@ -398,8 +378,16 @@ li.areamenu ul li a
 	color:#666;/*FFFFFF*/
 }
 
-#county-menu li a:hover,#county-menu li a:focus, #area-menu li a:hover,#area-menu li a:focus
+.area-menu a.active,.county-menu a.active{
+	box-shadow:3px 2px 5px rgba(143, 130, 117,.6);
+	-moz-box-shadow:3px 2px 5px  rgba(143, 130, 117,.6);
+	-webkit-box-shadow:3px 2px 5px rgba(143, 130, 117,.6);
+	-o-box-shadow:3px 2px 5px  rgba(143, 130, 117,.6);
+	background: #AA2104;
+}
 
+#county-menu li a:hover,#county-menu li a:focus, #area-menu li a:hover,#area-menu li a:focus
+{
 	color:#FFFFFF;
 }
 
@@ -1047,8 +1035,14 @@ div.rating-widget
  	top: 80%; 
  	border-radius:50%;
  }
+ #right_float_panel .top_up
+ {
+ 	color:#e9e4df;
+ }
  #right_float_panel .top_up:hover
- {}
+ {
+ 	color: rgb(159, 46, 24);
+ }
 
  /****************评分组件***end*********************/
 

@@ -15,7 +15,7 @@
 <div class="restaurant-content">
 <?php if (! empty($areaMenu) &&  count($areaMenu) >= 1) { ?>
 <div class="county-menu-title"><span>区域</span>
-<div id="area-menu">
+<div id="county-menu">
 	<?php $this->widget('zii.widgets.CMenu',array('items'=>$areaMenu)); ?>
 </div><!-- area-menu -->
 </div>
@@ -51,8 +51,9 @@
 
 ));
  ?>
-
- 
+<div class="list-footer-load"><span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在加载中...</span>
+ <button class="btn btn-block" id="next" <?php echo $count<=10? 'style="display:none;"':'' ?>>加载更多</button>
+</div>
 </div>
 <div class="right-content">
 	<div id="last_votes">
@@ -125,14 +126,154 @@
 <script type="text/javascript">
 
 $(function(){
+/*
+ *分页
+ *@pageCurrent 从1开始是第二页，0是第一页已经在面页加载时加载过
+ */
 
-/*$("#next").click(function(){
-$.get("restaurant/index/Restaurant_page/2",{},function(data){
-	console.log("data="+data);
-	document.body.innerHTML=data;
+var count=<?php echo $count;?>,
+	area=<?php echo $area;?>,
+	type=<?php echo $type;?>,
+   	county=<?php echo $county;?>,
+   	pageCurrent=1,
+   	itemIndex=10;
+
+$("#next").click(function(){
+$(".list-footer-load>span").show();
+$("#next").hide();
+$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:10},function(data)
+{
+	//console.log("data="+data);
+	//document.body.innerHTML=data;
+	if (count<10 || data.length<10) 
+	{
+		if(data!=null)
+		{
+		 	loadData(data);
+		 	$(".list-footer-load>span").hide();
+		}
+		pageCurrent++;
+		$("#next").hide();
+ 	}
+
+},"json");
+
 });
-});*/
 
+//加载分页时，动态DOM
+function loadData(data)
+{
+var strData='';
+	for(var i in data)
+	{
+		itemIndex++;
+		var item=data[i];
+		//console.log("a="+item["name"]);
+		 strData+=	'<div class="view-item">'+
+					'<span class="ranking">'+itemIndex+'.</span>'+
+					'<div class="restaurant-detail">'+
+					'<ul>'+
+					'<li>'+
+					'<strong>'+
+					'<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["id"]+'" target="_blank">'+item["name"]+'</a>'+
+					'</strong>'+
+					'</li>'+
+					'<li>'+
+					'<span class="title">地址:</span>'+
+					'<span class="detail-value">'+item["address"]+'</span> ';
+					if (item["coordinate"]) 
+					{
+						strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["id"]+'" title="看看汤馆的位置"><i class="fa fa-map-marker"></i></a>';
+					}
+					strData+='</li>';
+					console.log("features="+(item["features"]));
+					if(item["features"]){
+						strData+='<li><span class="title">特色:</span>';
+					for(var b in item["features"])
+					{
+							strData+='<span class="feature">'+item["features"][b]["details"]["name"]+'</span>';
+					}
+					strData+='</li>';
+					}
+
+					strData+='<li>'+
+					'<div class="rating-widget">'+
+					'<span class="rating-widget-lable">平均分:</span>'+
+					'<div class="rating-list m" isclick="false" data-rating-default="'+item["average_points"]+'" '+
+					'data-clicknum="0" '+
+					'data-user="<?php echo Yii::app()->user->id ?>"'+
+					'data-id="'+item["id"]+'"'+
+					'data-userlogin="<?php echo Yii::app()->user->isGuest ?>">'+
+					'<span class="rating-stars">'+
+					'<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>'+
+					'<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>'+
+					'<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>'+
+					'<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>'+
+					'<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>'+
+					'</span>'+
+					'<span class="rating-rating">'+
+					'<span class="fonttext-shadow-2-3-5-000 value">'+item["average_points"]+'</span>'+
+					'<span class="grey">/</span>'+
+					'<span class="grey">5</span>'+
+					'</span>'+
+					'<span class="rating-cancel ">'+
+					'<a title="删除">'+
+						'<span>X</span>'+
+					'</a>'+
+					'</span>'+
+					'</div>';
+
+					if (item["votes"]>0) 
+					{
+					strData+='<div class="rating-count-p">'+
+							 '<span>共</span> <span>'+item["votes"]+'</span>人打分'+
+							 '</div>';
+					}
+					strData+='</div>'+
+							 '<div class="clear"><!--清除浮动--></div>'+
+							 '</li>'+
+							 '<li class="hide"><span>评论数:</span> <strong>'+item["comment_count"]+'"</strong>人</li>'+
+							 '<div class="clear"></div>'+
+							 '</ul>'+
+							 '</div>';
+
+					<?php if (User::model()->isAdmin()) {
+					?>	
+					strData+='<!--编辑功能-->';
+					strData+='<div class="view-edit-btn" >'+
+					'<div class="view-edit-header"><a title="编辑 '+item["name"]+'">编辑</a>'+
+					'<ul>'+
+					'<li class="feature-btn">贴标</li>'+
+					'</ul>'+
+					'</div>'+
+					'<div class="feature-content" data-item-id="'+item["id"]+'" data-selected-items="';
+					for(var a in item["features"])
+					{
+						strData+=item["features"][a]["feature_id"]+',';
+					}
+					strData+='">'+
+					'<div class="feature-content-content"></div>'+
+					'<div class="feature-content-footer"><button id="feature-edit-submit">提交</button><button id="feature-edit-close">关闭</button></div>'+
+					'</div>'+
+					'</div>';
+					<?php } ?>
+					strData+='<div style="clear:both;"></div>'+
+					'</div>';
+	}
+
+	//console.log(strData);
+	$("#yw1 .items").append(strData);
+	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
+	tang_main_rating(rating_list_dome1,true);
+	<?php if (User::model()->isAdmin()) 
+	{
+	?>
+	editbutton();
+	<?php 
+	}
+	?>
+	
+}
 	
 var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 tang_main_rating(rating_list_dome,true);
@@ -297,13 +438,14 @@ function ratingInit(e_this,classname,i,evalue)
 	//清除评分
 	function ratingCancelClick(event)
 	{
-		console.log("a="+event.data.rating);
+		//console.log("a="+event.data.rating);
 	}
 
 <?php if (User::model()->isAdmin()) {
 ?>
+editbutton();
 /*当用户角色是管理员，就显示编辑功能*/
-
+function editbutton(){
 var btnedit_div=$(".view-edit-btn");
 
 	$(".view-edit-header",btnedit_div).hover(function(){
@@ -386,6 +528,7 @@ $("#feature-edit-submit",btnedit_div).click(function(){
 	},"json");
 });
 
+}
 
 function btnedit_div_hide(a)
 {
@@ -408,6 +551,7 @@ function isContain(a,b)
 }
 
 <?php } ?>
+
 });
 
 </script>

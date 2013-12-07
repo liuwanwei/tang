@@ -207,8 +207,8 @@
 div.view-item
 {
 	width: 100%;
-	padding: 5px 0px;
-	margin: 5px 0px 5px 0px;	
+	padding: 5px 5px;
+	margin: 5px 0px 5px 5px;	
 	display: inline-block;
 	vertical-align: top;
 	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
@@ -228,9 +228,6 @@ div.view-item .ranking
 	font-family: Arial;	
 	float:left;	
 	margin:0px 5px 0px 0px;
-
-	
-	
 }
 
 /*div.view-item:hover,div.view-item:focus
@@ -245,8 +242,6 @@ div.view-item .restaurant-detail ul
 {
 	list-style: none;
 	float: left;
-	
-	
 }
 div.view-item .restaurant-detail>ul
 {
@@ -316,11 +311,12 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
 }
 .view-edit-btn a
 {
-	text-decoration: none;
+	text-decoration: none!important;
+	color: #8F8275;
 }
 .view-edit-btn .view-edit-header>a:hover,.view-edit-btn .view-edit-header>a:focus
 {
-	color: #8F8275;
+	color:#aa2105;
 }
 .view-edit-btn .view-edit-header ul
 {
