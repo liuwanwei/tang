@@ -41,13 +41,13 @@
 				'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 				'template' => "{pager}\n{summary}\n{items}\n{pager}",
 				'ajaxUpdate'=> false,
-	// 'pagerCssClass'=>'tang-pager',
-	// 'pager'=>array('header'=>'',
-	// 		'prevPageLabel'=>'«',
-	// 		'nextPageLabel'=>'»',
-	// 		'firstPageLabel'=>'首页',
-	// 		'lastPageLabel'=>'末页',
-	// 		'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
+		// 'pagerCssClass'=>'tang-pager',
+		// 'pager'=>array('header'=>'',
+		// 		'prevPageLabel'=>'«',
+		// 		'nextPageLabel'=>'»',
+		// 		'firstPageLabel'=>'首页',
+		// 		'lastPageLabel'=>'末页',
+		// 		'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
 				));
 				?>
@@ -139,8 +139,9 @@ $(function(){
  limit=10,
  itemIndex=10;
  var isdataload=true;
-
+//console.log("a="+$(document).height());
 //$(window).scrollTop(0);
+
 $(document).scrollTop(0);
 $(window).scroll(function(event){
 	event.preventDefault();
@@ -275,11 +276,11 @@ function loadData(data)
 
 	//console.log(strData);
 	$("#yw1 .items").append(strData);
-		var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
-		tang_main_rating(rating_list_dome1,true);
-		<?php if (User::model()->isAdmin()){?>
-		editbutton();
-		<?php } ?>
+	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
+	tang_main_rating(rating_list_dome1,true);
+	<?php if (User::model()->isAdmin()){?>
+	editbutton();
+	<?php } ?>
 	
 }
 
