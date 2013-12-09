@@ -411,18 +411,22 @@ class RestaurantController extends Controller
 		$restaurant->area_id = $area;
 		$restaurant->type_id = $type;
 
-		$restaurants = $restaurant->indexByPage($page,$limit)->getData();
+		$restaurantsProviver = $restaurant->indexByPage($page,$limit);
+		$restaurants = $restaurantsProviver->getData();
+		$totalItemCount = $restaurantsProviver->getTotalItemCount();
 
 		$result = array();
-		foreach ($restaurants as $key => $value) {
-			$data = array();
-			$data['restaurant'] = $value;
-			if(count($value->features) > 0) {
-				foreach($value->features as $keyFeature => $valueFeature)
-				$data['features'][] =  $valueFeature->details;
-			}
+		if ($page * $limit <= $totalItemCount) {
+			foreach ($restaurants as $key => $value) {
+				$data = array();
+				$data['restaurant'] = $value;
+				if(count($value->features) > 0) {
+					foreach($value->features as $keyFeature => $valueFeature)
+					$data['features'][] =  $valueFeature->details;
+				}
 			
-			$result[] = $data;
+				$result[] = $data;
+			}
 		}
 
 		echo CJSON::encode($result);
