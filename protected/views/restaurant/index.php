@@ -4,7 +4,7 @@
 ?>
 
 
-<div class="tooltip">
+<div class="tang-tooltip">
 	<div class="bottomtitle"></div>
 	<div class="content">
 
@@ -143,18 +143,18 @@
  	$("#next").hide();
  	$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:10},function(data)
  	{
-	//console.log("data="+data);
-	//document.body.innerHTML=data;
-	if (count<10 || data.length<10) 
-	{
-		if(data!=null)
+		//console.log("data="+data);
+		//document.body.innerHTML=data;
+		if (count<10 || data.length<10) 
 		{
-			loadData(data);
-			$(".list-footer-load>span").hide();
+			if(data!=null)
+			{
+				loadData(data);
+				$(".list-footer-load>span").hide();
+			}
+			pageCurrent++;
+			$("#next").hide();
 		}
-		pageCurrent++;
-		$("#next").hide();
-	}
 
 },"json");
 
@@ -164,8 +164,7 @@
 function loadData(data)
 {
 	var strData='';
-	for(var i in data)
-	{
+	for(var i in data){
 		itemIndex++;
 		var item=data[i];
 		//console.log("a="+item["name"]);
@@ -181,16 +180,14 @@ function loadData(data)
 		'<li>'+
 		'<span class="title">地址:</span>'+
 		'<span class="detail-value">'+item["restaurant"]["address"]+'</span> ';
-		if (item["restaurant"]["coordinate"]) 
-		{
+		if (item["restaurant"]["coordinate"]){
 			strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" title="看看汤馆的位置"><i class="fa fa-map-marker"></i></a>';
 		}
 		strData+='</li>';
 		//console.log("features="+(item["features"]));
 		if(item["features"]){
 			strData+='<li><span class="title">特色:</span>';
-			for(var b in item["features"])
-			{
+			for(var b in item["features"]){
 				strData+='<span class="feature">'+item["features"][b]["name"]+'</span>';
 			}
 			strData+='</li>';
@@ -223,8 +220,7 @@ function loadData(data)
 		'</span>'+
 		'</div>';
 
-		if (item["restaurant"]["votes"]>0) 
-		{
+		if (item["restaurant"]["votes"]>0){
 			strData+='<div class="rating-count-p">'+
 			'<span>共</span> <span>'+item["restaurant"]["votes"]+'</span>人打分'+
 			'</div>';
@@ -247,8 +243,7 @@ function loadData(data)
 			'</ul>'+
 			'</div>'+
 			'<div class="feature-content" data-item-id="'+item["restaurant"]["id"]+'" data-selected-items="';
-			for(var a in item["features"])
-			{
+			for(var a in item["features"]){
 				strData+=item["features"][a]["id"]+',';
 			}
 			strData+='">'+
@@ -263,15 +258,11 @@ function loadData(data)
 
 	//console.log(strData);
 	$("#yw1 .items").append(strData);
-	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
-	tang_main_rating(rating_list_dome1,true);
-	<?php if (User::model()->isAdmin()) 
-	{
-	?>
-	editbutton();
-	<?php 
-	}
-	?>
+		var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
+		tang_main_rating(rating_list_dome1,true);
+		<?php if (User::model()->isAdmin()){?>
+		editbutton();
+		<?php } ?>
 	
 }
 
@@ -333,7 +324,7 @@ function tang_main_rating(rating_list,ismouseover)
 				if (resultdata.msg==="0") {
 					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
-					var tooltip=$(".tooltip");
+					var tooltip=$(".tang-tooltip"); 
 					rating_cancel.hover(function(){
 						var a_offset=$(this).offset();						
 						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
@@ -367,7 +358,7 @@ a_this.attr("isclick","true");
 
 a_arr.hover(function(){
 	var a_offset=$(this).offset();
-	var tooltip=$(".tooltip");
+	var tooltip=$(".tang-tooltip");
 	$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
 	tooltip.find('.content').text($(this).attr('data-title'));
 	tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
@@ -389,7 +380,7 @@ a_arr.hover(function(){
 		
 
 	},function(){
-		$(".tooltip").hide();
+		$(".tang-tooltip").hide();
 		a_this.attr("isclick","flase");
 	});
 
