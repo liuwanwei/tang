@@ -114,7 +114,7 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
-var footerHeight = 0,
+/*var footerHeight = 0,
 footerTop = 0,
 $footer = $("#footer");
 positionFooter();
@@ -130,9 +130,6 @@ if ( ($(document.body).height()+footerHeight) < $(window).height()) {
 	position: "absolute"
 	,top: footerTop
 	});
-	/*.stop().animate({
-	top: footerTop
-	});*/
 } else {
 	$footer.css({
 	position: "static"
@@ -140,7 +137,7 @@ if ( ($(document.body).height()+footerHeight) < $(window).height()) {
 
 }
 }
-$(window).scroll(positionFooter).resize(positionFooter);
+$(window).scroll(positionFooter).resize(positionFooter);*/
 
 //点击登陆弹出模态窗口
 $(".login").click(function(){
@@ -189,7 +186,7 @@ $(window).scroll(function(){
 
 //回到顶部功能
 $(".top_up").click(function(){
-	$('html,body').animate({scrollTop:'0px'},800);
+	$('html,body').animate({scrollTop:'0px'},500);
 });
 
 /*
