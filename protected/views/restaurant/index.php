@@ -52,7 +52,6 @@
 				));
 				?>
 				<div class="list-footer-load"><span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在加载中...</span>
-					<button class="btn btn-block" id="next" <?php echo $count<=10? 'style="display:none;"':'' ?>>加载更多</button>
 				</div>
 			</div>
 			<div class="right-content">
@@ -123,9 +122,10 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<script type="text/javascript">
+<script type="text/javascript" src="js/scrollpagination.js"></script>
+<script type="text/javascript">
 
-	$(function(){
+$(function(){
 /*
  *分页
  *@pageCurrent 从1开始是第二页，0是第一页已经在面页加载时加载过
@@ -136,29 +136,46 @@
  type=<?php echo $type;?>,
  county=<?php echo $county;?>,
  pageCurrent=1,
+ limit=10,
  itemIndex=10;
+ var isdataload=true;
 
- $("#next").click(function(){
- 	$(".list-footer-load>span").show();
- 	$("#next").hide();
- 	$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:10},function(data)
- 	{
-		//console.log("data="+data);
-		//document.body.innerHTML=data;
-		if (count<10 || data.length<10) 
-		{
-			if(data!=null)
-			{
-				loadData(data);
-				$(".list-footer-load>span").hide();
-			}
-			pageCurrent++;
-			$("#next").hide();
+//$(window).scrollTop(0);
+$(document).scrollTop();
+$(window).scroll(function(event){
+	event.preventDefault();
+	if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
+		if (isdataload) {
+			isdataload=false;
+		    nextPage();
 		}
+	}
 
-},"json");
+});
 
- });
+function nextPage(){
+	if (count>limit) 
+	{
+		$(".list-footer-load>span").show();
+		$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:limit},function(data){
+			if (data.length<limit){
+			    if(data!=null){
+			        loadData(data);
+			        $(".list-footer-load>span").hide();
+			    }
+			    isdataload=false;
+			    pageCurrent++;
+			}else{
+			    if(data!=null){
+			        loadData(data);
+			        $(".list-footer-load>span").hide();
+			        isdataload=true;
+			    }
+			    pageCurrent++;
+			}
+		},"json");
+	}
+}
 
 //加载分页时，动态DOM
 function loadData(data)
