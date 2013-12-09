@@ -4,7 +4,7 @@
 ?>
 
 
-<div class="tooltip">
+<div class="tang-tooltip">
 	<div class="bottomtitle"></div>
 	<div class="content">
 
@@ -52,7 +52,6 @@
 				));
 				?>
 				<div class="list-footer-load"><span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在加载中...</span>
-					<button class="btn btn-block" id="next" <?php echo $count<=10? 'style="display:none;"':'' ?>>加载更多</button>
 				</div>
 			</div>
 			<div class="right-content">
@@ -111,7 +110,7 @@
 									<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
 									<div>
 										<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-										<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content;?></span>
+										<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420, "UTF-8").'...':$value->content;?></span>
 									</div>
 								</li>
 								<?php
@@ -123,9 +122,10 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<script type="text/javascript">
+<script type="text/javascript" src="js/scrollpagination.js"></script>
+<script type="text/javascript">
 
-	$(function(){
+$(function(){
 /*
  *分页
  *@pageCurrent 从1开始是第二页，0是第一页已经在面页加载时加载过
@@ -136,36 +136,52 @@
  type=<?php echo $type;?>,
  county=<?php echo $county;?>,
  pageCurrent=1,
+ limit=10,
  itemIndex=10;
+ var isdataload=true;
 
- $("#next").click(function(){
- 	$(".list-footer-load>span").show();
- 	$("#next").hide();
- 	$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:10},function(data)
- 	{
-	//console.log("data="+data);
-	//document.body.innerHTML=data;
-	if (count<10 || data.length<10) 
-	{
-		if(data!=null)
-		{
-			loadData(data);
-			$(".list-footer-load>span").hide();
+//$(window).scrollTop(0);
+$(document).scrollTop(0);
+$(window).scroll(function(event){
+	event.preventDefault();
+	if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
+		if (isdataload) {
+			isdataload=false;
+		    nextPage();
 		}
-		pageCurrent++;
-		$("#next").hide();
 	}
 
-},"json");
+});
 
- });
+function nextPage(){
+	if (count>limit) 
+	{
+		$(".list-footer-load>span").show();
+		$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:limit},function(data){
+			if (data.length<limit){
+			    if(data!=null){
+			        loadData(data);
+			        $(".list-footer-load>span").hide();
+			    }
+			    isdataload=false;
+			    pageCurrent++;
+			}else{
+			    if(data!=null){
+			        loadData(data);
+			        $(".list-footer-load>span").hide();
+			        isdataload=true;
+			    }
+			    pageCurrent++;
+			}
+		},"json");
+	}
+}
 
 //加载分页时，动态DOM
 function loadData(data)
 {
 	var strData='';
-	for(var i in data)
-	{
+	for(var i in data){
 		itemIndex++;
 		var item=data[i];
 		//console.log("a="+item["name"]);
@@ -181,16 +197,14 @@ function loadData(data)
 		'<li>'+
 		'<span class="title">地址:</span>'+
 		'<span class="detail-value">'+item["restaurant"]["address"]+'</span> ';
-		if (item["restaurant"]["coordinate"]) 
-		{
+		if (item["restaurant"]["coordinate"]!=0){
 			strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" title="看看汤馆的位置"><i class="fa fa-map-marker"></i></a>';
 		}
 		strData+='</li>';
 		//console.log("features="+(item["features"]));
 		if(item["features"]){
 			strData+='<li><span class="title">特色:</span>';
-			for(var b in item["features"])
-			{
+			for(var b in item["features"]){
 				strData+='<span class="feature">'+item["features"][b]["name"]+'</span>';
 			}
 			strData+='</li>';
@@ -223,8 +237,7 @@ function loadData(data)
 		'</span>'+
 		'</div>';
 
-		if (item["restaurant"]["votes"]>0) 
-		{
+		if (item["restaurant"]["votes"]>0){
 			strData+='<div class="rating-count-p">'+
 			'<span>共</span> <span>'+item["restaurant"]["votes"]+'</span>人打分'+
 			'</div>';
@@ -247,8 +260,7 @@ function loadData(data)
 			'</ul>'+
 			'</div>'+
 			'<div class="feature-content" data-item-id="'+item["restaurant"]["id"]+'" data-selected-items="';
-			for(var a in item["features"])
-			{
+			for(var a in item["features"]){
 				strData+=item["features"][a]["id"]+',';
 			}
 			strData+='">'+
@@ -263,15 +275,11 @@ function loadData(data)
 
 	//console.log(strData);
 	$("#yw1 .items").append(strData);
-	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
-	tang_main_rating(rating_list_dome1,true);
-	<?php if (User::model()->isAdmin()) 
-	{
-	?>
-	editbutton();
-	<?php 
-	}
-	?>
+		var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
+		tang_main_rating(rating_list_dome1,true);
+		<?php if (User::model()->isAdmin()){?>
+		editbutton();
+		<?php } ?>
 	
 }
 
@@ -333,7 +341,7 @@ function tang_main_rating(rating_list,ismouseover)
 				if (resultdata.msg==="0") {
 					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
 					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
-					var tooltip=$(".tooltip");
+					var tooltip=$(".tang-tooltip"); 
 					rating_cancel.hover(function(){
 						var a_offset=$(this).offset();						
 						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
@@ -367,7 +375,7 @@ a_this.attr("isclick","true");
 
 a_arr.hover(function(){
 	var a_offset=$(this).offset();
-	var tooltip=$(".tooltip");
+	var tooltip=$(".tang-tooltip");
 	$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
 	tooltip.find('.content').text($(this).attr('data-title'));
 	tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
@@ -389,7 +397,7 @@ a_arr.hover(function(){
 		
 
 	},function(){
-		$(".tooltip").hide();
+		$(".tang-tooltip").hide();
 		a_this.attr("isclick","flase");
 	});
 

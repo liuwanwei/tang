@@ -119,7 +119,7 @@ class RestaurantController extends Controller
 					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
 				
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect("admin");
 		}
 
 
@@ -160,7 +160,7 @@ class RestaurantController extends Controller
 					$destPath = Yii::app()->basePath.'/..'.$filename;
 					$uploadedFile->saveAs($destPath);
 				}
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect("/restaurant/admin");
 		}
 
 		$this->render('update',array(
