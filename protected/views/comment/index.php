@@ -12,7 +12,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 
 ?>
-<div class="tooltip">
+<div class="tang-tooltip">
 	<div class="bottomtitle"></div>
 	<div class="content">
 
@@ -189,7 +189,7 @@ function ratingfnc(){
 		ratingInit(a_this,"rating-icon rating-off",Math.round(parseFloat(raing_default)),raing_value);
 
 
-		var tooltip=$(".tooltip");
+		var tooltip=$(".tang-tooltip");
 		$(".rating-cancel",a_this).hover(function(){
 			var a_offset=$(this).offset();						
 			$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
@@ -257,7 +257,7 @@ function ratingfnc(){
 
 a_arr.hover(function(){
 	var a_offset=$(this).offset();
-	var tooltip=$(".tooltip");
+	var tooltip=$(".tang-tooltip");
 	$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
 	tooltip.find('.content').text($(this).attr('data-title'));
 	tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
@@ -272,7 +272,7 @@ a_arr.hover(function(){
 		no_selected_a.addClass("rating-icon star-on");
 		raing_value.text(i);	
 	},function(){
-		$(".tooltip").hide();
+		$(".tang-tooltip").hide();
 		a_this.attr("isclick","flase");
 	});
 
@@ -368,7 +368,7 @@ function ratingInit(e_this,classname,i,evalue)
 /*
  *加载地图定位
  */
- var geocoder,map, marker = null;
+ var geoCoder,map, marker = null;
  var init = function(map_id) {
 	var center = new soso.maps.LatLng(<?php echo CHtml::encode($restaurant->coordinate); ?>);//(39.916527,116.397128);
 	map = new soso.maps.Map(document.getElementById(map_id),{
@@ -376,7 +376,7 @@ function ratingInit(e_this,classname,i,evalue)
 		zoom: 16
 	});
 	var info = new soso.maps.InfoWindow({map: map});
-	geocoder = new soso.maps.Geocoder({
+	geoCoder = new soso.maps.geoCoder({
 		complete : function(result){
 			map.setCenter(result.detail.location);
 			var marker = new soso.maps.Marker({
@@ -390,7 +390,7 @@ function ratingInit(e_this,classname,i,evalue)
 });
 		}
 	});
-	geocoder.getAddress(center);
+	geoCoder.getAddress(center);
 }
 
 

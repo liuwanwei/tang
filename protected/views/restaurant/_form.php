@@ -180,8 +180,8 @@ Yii::app()->clientScript->registerScriptFile('//code.jquery.com/jquery-1.10.2.mi
       </div>
       <div class="modal-body">
 		<div style="text-align:right; width:100%;margin-bottom:5px;">
-		<input id="mapaddress" type="textbox" value="中国,洛阳," style="width:300px;">
-		<button onclick="codeAddress()">查询城市</button>
+			<input id="mapaddress" type="textbox" value="中国,洛阳," style="width:300px;">
+			<button onclick="codeAddress()">查询城市</button>
 		</div>
 		<div style="width:100%;height:380px;" id="mapcontainer"></div>
 		<div style="width:303px;" id="latLng"></div>

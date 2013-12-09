@@ -959,7 +959,7 @@ div.rating-widget
  	text-align: left;
  	margin-left: 24px;
  }
- .tooltip
+ .tang-tooltip
  {
  	width: auto;
  	height: 25px;
@@ -976,7 +976,7 @@ div.rating-widget
  	font-size: 0.9em;
  	z-index: 9999;
  }
- .tooltip .title
+ .tang-tooltip .title
  {
  	width: 0px;
  	height: 0px;
@@ -992,7 +992,7 @@ div.rating-widget
  	margin-left: -5px;
  }
 
- .tooltip .bottomtitle
+ .tang-tooltip .bottomtitle
  {
  	width: 0px;
  	height: 0px;
@@ -1008,7 +1008,7 @@ div.rating-widget
  	margin-left: -5px;
  }
 
- .tooltip .lefttitle
+ .tang-tooltip .lefttitle
  {
  	width: 0px;
  	height: 0px;

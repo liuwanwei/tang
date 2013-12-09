@@ -17,22 +17,21 @@ $this->breadcrumbs=array(
 
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script>
-var geocoder,citylocation,map,marker = null;
+var geoCoder,cityLocation,map,marker = null;
 var init = function() {
     var center = new qq.maps.LatLng(39.916527,116.397128);
-    map = new qq.maps.Map(document.getElementById('mapcontainer'),{
+    map = new qq.maps.Map(document.getElementById('mapContainer'),{
         center: center,
         zoom: 13
     });
     qq.maps.event.addListener(map,'mousemove',function(event) {
-        var latLng = event.latLng,
-            lat = latLng.getLat().toFixed(5),
-            lng = latLng.getLng().toFixed(5);
+        var latLng = event.latLng;
+        var lat = latLng.getLat().toFixed(5);
+        var lng = latLng.getLng().toFixed(5);
         document.getElementById("latLng").innerHTML = lat+','+lng;
     });
-    geocoder = new qq.maps.Geocoder({
-        complete : function(result)
-        {
+    geoCoder = new qq.maps.geoCoder({
+        complete : function(result){
             map.setCenter(result.detail.location);
             var marker = new qq.maps.Marker({
                 map:map,
@@ -42,26 +41,24 @@ var init = function() {
     });
 
     qq.maps.event.addListener(map,'click',function(event) {
-        var latLng = event.latLng,
-            lat = latLng.getLat().toFixed(5),
-            lng = latLng.getLng().toFixed(5);
+        var latLng = event.latLng;
+        var lat = latLng.getLat().toFixed(5);
+        var lng = latLng.getLng().toFixed(5);
         document.getElementById("Restaurant_coordinate").value=lat+","+lng;
         $('#mapModal').modal('hide');
     });
 
-    citylocation = new qq.maps.CityService({
-        complete : function(result)
-        {
+    cityLocation = new qq.maps.CityService({
+        complete : function(result){
             map.setCenter(result.detail.latLng);
         }
     });
-        citylocation.searchLocalCity();
-
+    cityLocation.searchLocalCity();
 }
 
 function codeAddress() {
-    var address = document.getElementById("mapaddress").value;
-    geocoder.getLocation(address);
+    var address = document.getElementById("mapAddress").value;
+    geoCoder.getLocation(address);
 }
 
 window.onload=init;
