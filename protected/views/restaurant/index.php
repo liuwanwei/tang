@@ -141,7 +141,7 @@ $(function(){
  var isdataload=true;
 
 //$(window).scrollTop(0);
-$(document).scrollTop();
+$(document).scrollTop(0);
 $(window).scroll(function(event){
 	event.preventDefault();
 	if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
@@ -197,7 +197,7 @@ function loadData(data)
 		'<li>'+
 		'<span class="title">地址:</span>'+
 		'<span class="detail-value">'+item["restaurant"]["address"]+'</span> ';
-		if (item["restaurant"]["coordinate"]){
+		if (item["restaurant"]["coordinate"]!=0){
 			strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" title="看看汤馆的位置"><i class="fa fa-map-marker"></i></a>';
 		}
 		strData+='</li>';
