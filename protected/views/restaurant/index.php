@@ -110,7 +110,7 @@
 									<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
 									<div>
 										<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-										<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420).'...':$value->content;?></span>
+										<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420,'utf-8').'...':$value->content;?></span>
 									</div>
 								</li>
 								<?php
@@ -141,19 +141,20 @@ $(function(){
  var isdataload=true;
 //console.log("a="+$(document).height());
 //$(window).scrollTop(0);
+if (count>limit) {
 
-$(document).scrollTop(0);
-$(window).scroll(function(event){
-	event.preventDefault();
-	if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
-		if (isdataload) {
-			isdataload=false;
-		    nextPage();
+	$(window).scrollTop(0);
+	$(window).scroll(function(event){
+		event.preventDefault();
+		if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
+			if (isdataload) {
+				isdataload=false;
+			    nextPage();
+			}
 		}
-	}
 
-});
-
+	});
+}
 function nextPage(){
 	if (count>limit) 
 	{
