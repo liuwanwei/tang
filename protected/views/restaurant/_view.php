@@ -4,7 +4,7 @@
 ?>
 
 <div class="view-item">
-	<span class="ranking"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?>.</span>
+	<span class="ranking badge1"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?></span>
 	<div class="restaurant-detail">
 		<ul>
 			<li>

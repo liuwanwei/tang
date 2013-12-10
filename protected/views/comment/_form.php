@@ -17,7 +17,7 @@
 		<?php echo $form->error($model,'content'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton('发布评论',array('id'=>'commit')); ?>
 	</div>
 

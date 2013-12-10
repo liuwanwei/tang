@@ -91,20 +91,22 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 	<div id="main_small_map"><div id="map_container"></div><div class="main-small-map-footer">点击放大地图</div></div><div class="clear"></div>	
 	<?php } ?>
 </div>
+
 <div class="user-comment-list">
+	<div class="comment-list-title">汤馆评论</div>
 	<?php
 	$this->widget('zii.widgets.CListView', array(
 		'dataProvider'=>$dataProvider,
 		'itemView'=>'_view',
+		'cssFile' => '',
 		'enablePagination'=>true,
 		'emptyText'=>'还没有人评论，客官您先来吐个槽吧.',
-		'summaryText' => '共 {count} 条评论, 显示 {start} - {end}',
+		'summaryText' => '共收到 {count} 条评论',
 		)); 
 		?>
 
 		<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-
-
+</div>
 		<script type="text/javascript">
 		$(function(){
 

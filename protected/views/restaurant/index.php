@@ -67,8 +67,8 @@
 										<!--<span><?php echo $value->restaurant->name; ?></span>-->
 										<?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
 										<div class="rating-widget">
-											<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-											<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?>" 
+											<span class="rating-widget-lable">评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+											<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->rating)); ?>" 
 												data-clicknum="0" 
 												data-user="<?php echo Yii::app()->user->id ?>"
 												data-id="<?php echo CHtml::encode($value->restaurant->id);?>"
@@ -81,7 +81,7 @@
 													<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
 												</span>
 												<span class="rating-rating">
-													<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($value->restaurant->average_points)); ?></span>
+													<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($value->rating)); ?></span>
 													<span class="grey">/</span>
 													<span class="grey">5</span>
 												</span>
@@ -131,25 +131,23 @@ $(function(){
  *@pageCurrent 从1开始是第二页，0是第一页已经在面页加载时加载过
  */
 
- var count=<?php echo $count;?>,
- area=<?php echo $area;?>,
- type=<?php echo $type;?>,
- county=<?php echo $county;?>,
- pageCurrent=1,
- limit=10,
- itemIndex=10;
- var isdataload=true;
-//console.log("a="+$(document).height());
-//$(window).scrollTop(0);
-if (count>limit) {
+var count=<?php echo $count;?>,
+area=<?php echo $area;?>,
+type=<?php echo $type;?>,
+county=<?php echo $county;?>,
+pageCurrent=1,
+limit=10,
+itemIndex=10;
+var isdataload=true;
 
+if (count>limit) {
 	$(window).scrollTop(0);
 	$(window).scroll(function(event){
 		event.preventDefault();
 		if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
 			if (isdataload) {
 				isdataload=false;
-			    nextPage();
+					nextPage();
 			}
 		}
 
@@ -162,18 +160,24 @@ function nextPage(){
 		$.get("<?php echo $this->createUrl('restaurant/indexByPage');?>",{county:county,area:area,type:type,page:pageCurrent,limit:limit},function(data){
 			if (data.length<limit){
 			    if(data!=null){
-			        loadData(data);
-			        $(".list-footer-load>span").hide();
+			    	setTimeout(function(){
+			    		loadData(data);
+			    		$(".list-footer-load>span").hide();
+			    		isdataload=false;
+			    		pageCurrent++;
+			    	},1000);
 			    }
-			    isdataload=false;
-			    pageCurrent++;
+			    
 			}else{
 			    if(data!=null){
-			        loadData(data);
-			        $(".list-footer-load>span").hide();
-			        isdataload=true;
+			        setTimeout(function(){
+			    		loadData(data);
+			    		$(".list-footer-load>span").hide();
+				        isdataload=true;
+				        pageCurrent++;
+			    	},1000);
 			    }
-			    pageCurrent++;
+			    
 			}
 		},"json");
 	}
@@ -182,13 +186,14 @@ function nextPage(){
 //加载分页时，动态DOM
 function loadData(data)
 {
+	
 	var strData='';
 	for(var i in data){
 		itemIndex++;
 		var item=data[i];
 		//console.log("a="+item["name"]);
 		strData+=	'<div class="view-item">'+
-		'<span class="ranking">'+itemIndex+'.</span>'+
+		'<span class="ranking badge1">'+itemIndex+'</span>'+
 		'<div class="restaurant-detail">'+
 		'<ul>'+
 		'<li>'+
@@ -215,7 +220,7 @@ function loadData(data)
 		strData+='<li>'+
 		'<div class="rating-widget">'+
 		'<span class="rating-widget-lable">平均分:</span>'+
-		'<div class="rating-list m" isclick="false" data-rating-default="'+item["restaurant"]["average_points"]+'" '+
+		'<div class="rating-list m" isclick="false" data-rating-default="'+(new Number(item["restaurant"]["average_points"])).toFixed(1)+'" '+
 		'data-clicknum="0" '+
 		'data-user="<?php echo Yii::app()->user->id ?>"'+
 		'data-id="'+item["restaurant"]["id"]+'"'+
@@ -228,7 +233,7 @@ function loadData(data)
 		'<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>'+
 		'</span>'+
 		'<span class="rating-rating">'+
-		'<span class="fonttext-shadow-2-3-5-000 value">'+item["restaurant"]["average_points"]+'</span>'+
+		'<span class="fonttext-shadow-2-3-5-000 value">'+(new Number(item["restaurant"]["average_points"])).toFixed(1)+'</span>'+
 		'<span class="grey">/</span>'+
 		'<span class="grey">5</span>'+
 		'</span>'+
@@ -276,7 +281,8 @@ function loadData(data)
 		}
 
 	//console.log(strData);
-	$("#yw1 .items").append(strData);
+	$(".list-view .items").append(strData);
+	//var rating_list_dome1=$(strData).find(".rating-widget .rating-list");alert(rating_list_dome1.eq(0).html());
 	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
 	tang_main_rating(rating_list_dome1,true);
 	<?php if (User::model()->isAdmin()){?>
@@ -288,9 +294,9 @@ function loadData(data)
 var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 tang_main_rating(rating_list_dome,true);
 tang_main_rating($(".rating-widget .rating-list",$(".right-content")),false);
+$(".restaurant-left .view-item>.ranking:lt(3)").removeClass('badge1').addClass('badge2');//removeClass('badge1').
 function tang_main_rating(rating_list,ismouseover)
 {
-
 /*
  *评分组件 @rating_list 为评分组件集，@ismouseover是否加载鼠移上去事件
  *@当鼠标移到星星上（A标签），就给小于等于当前鼠标位置的元素加上选中的样式，
@@ -302,24 +308,23 @@ function tang_main_rating(rating_list,ismouseover)
  rating_list.each(function(){
 
 	var a_this=$(this);//当前遍历rating-list的jqueryDOM对象
-	var a_arr=$(".rating-stars a",a_this);//取出当前rating-list下的所有a对象
+	var a_arr=$(".rating-stars a",a_this);//取出当前rating-list下的所有a对象 
 	var raing_value=$(".rating-rating>.value",a_this);//评分的值
 	var raing_default=a_this.attr("data-rating-default");//评分的默认值
-		//raing_default=parseFloat(raing_default)==0? '-':raing_default;
+	//raing_default=parseFloat(raing_default)==0? '-':raing_default;
 
-		ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+	ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 
-
-		if (ismouseover) {
+	if (ismouseover) {
 
 		//单击星星时发生
 		a_arr.live("click",function(event){
-			if (a_this.attr("isclick")=="true") {
-				return false;
-			}
-			var i=parseInt($("span",$(this)).text());
-			var selected_a=$(".rating-stars a:lt("+i+")",a_this);
-			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
+		if (a_this.attr("isclick")=="true") {
+			return false;
+		}
+		var i=parseInt($("span",$(this)).text());
+		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
+		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
 		//event.preventDefault()
 		//event.stopPropagation();
 		//console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
@@ -327,7 +332,6 @@ function tang_main_rating(rating_list,ismouseover)
 		if (a_this.attr('data-user')=="") {
 			//点击登陆弹出模态窗口
 			loginModal();
-
 			return false;
 		}
 		a_this.attr("data-clicknum",parseInt($("span",$(this)).text()));
@@ -338,90 +342,84 @@ function tang_main_rating(rating_list,ismouseover)
 		//执行评分的ajax
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
-			rating:raing_value.text()}},function(resultdata){
-				//console.log("aa="+resultdata.voteid);
-				if (resultdata.msg==="0") {
-					a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
-					rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
-					var tooltip=$(".tang-tooltip"); 
-					rating_cancel.hover(function(){
-						var a_offset=$(this).offset();						
-						$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
-						tooltip.find('.content').text("你要删除打分吗？");
-						tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
-					},function(){
-						tooltip.hide();
-					});			
-					rating_cancel.one('click',function(){
-						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
-							if (rating_cancel_result.msg==="0") {
-								a_this.removeAttr('voteid');
-								rating_cancel.removeClass('rating-pending');
-								a_this.attr("data-clicknum","0");
-								raing_value.text(raing_default);
+		rating:raing_value.text()}},function(resultdata){
+		//console.log("aa="+resultdata.voteid);
+		if (resultdata.msg==="0") {
+			a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
+			rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
+			var tooltip=$(".tang-tooltip"); 
+			rating_cancel.hover(function(){
+				var a_offset=$(this).offset();						
+				$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
+				tooltip.find('.content').text("你要删除打分吗？");
+				tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
+			},function(){
+				tooltip.hide();
+			});			
+			rating_cancel.one('click',function(){
+				rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
+				$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+				if (rating_cancel_result.msg==="0") {
+					a_this.removeAttr('voteid');
+					rating_cancel.removeClass('rating-pending');
+					a_this.attr("data-clicknum","0");
+					raing_value.text(raing_default);
 					//console.log(rating_cancel_result+"abc");
 					ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 				}else{
-						//服务器出错
-					}
-				},"json");
-					});
-				}else{
-					//服务器出错
+				//服务器出错
+
 				}
-			},"json");
-
-a_this.attr("isclick","true");
-});
-
-a_arr.hover(function(){
-	var a_offset=$(this).offset();
-	var tooltip=$(".tang-tooltip");
-	$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
-	tooltip.find('.content').text($(this).attr('data-title'));
-	tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
-
-		//当鼠标移到a标签上时的事件
-		var i=parseInt($("span",$(this)).text());
-		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
-		selected_a.removeClass();
-		selected_a.addClass("rating-icon rating-hover");
-
-		
-		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
-		no_selected_a.removeClass();
-		no_selected_a.addClass("rating-icon star-on");
-
-		raing_value.text(i);
-
-		
-		
-
-	},function(){
-		$(".tang-tooltip").hide();
-		a_this.attr("isclick","flase");
-	});
-
-
-
-	//当鼠标移出rating-list的矩形时根据状态还原星星的样式
-	$(".rating-stars",a_this).bind("mouseout",function(){	
-		var clicknum=a_this.attr("data-clicknum");
-		if (clicknum=="0" && parseInt(raing_default)==0) {
-			a_arr.removeClass();
-			a_arr.addClass("rating-icon star-on");
-			raing_value.text(parseInt(raing_default)==0?'-':raing_default);		
-		}else if(clicknum=="0" && parseInt(raing_default)>0)
-		{
-			ratingInit(a_this,"rating-icon rating-init",Math.round(raing_default),raing_value);
-			raing_value.text(raing_default);
+				},"json");
+			});
+		}else{
+		//服务器出错
 		}
-		else{
-			ratingInit(a_this,"rating-icon rating-off",parseInt(clicknum),raing_value);
-			raing_value.text(clicknum);
-		}
-	});
+		},"json");
+
+		a_this.attr("isclick","true");
+		});
+
+		a_arr.hover(function(){
+			var a_offset=$(this).offset();
+			var tooltip=$(".tang-tooltip");
+			$("div:eq(0)",tooltip).removeClass().addClass("bottomtitle");
+			tooltip.find('.content').text($(this).attr('data-title'));
+			tooltip.css({'top':a_offset.top-30,'left':a_offset.left-$(this).width()/2-20}).show();
+
+			//当鼠标移到a标签上时的事件
+			var i=parseInt($("span",$(this)).text());
+			var selected_a=$(".rating-stars a:lt("+i+")",a_this);
+			selected_a.removeClass();
+			selected_a.addClass("rating-icon rating-hover");
+
+
+			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
+			no_selected_a.removeClass();
+			no_selected_a.addClass("rating-icon star-on");
+
+			raing_value.text(i);
+		},function(){
+			$(".tang-tooltip").hide();
+			a_this.attr("isclick","flase");
+		});
+
+		//当鼠标移出rating-list的矩形时根据状态还原星星的样式
+		$(".rating-stars",a_this).bind("mouseout",function(){	
+			var clicknum=a_this.attr("data-clicknum");
+			if (clicknum=="0" && parseInt(raing_default)==0) {
+				a_arr.removeClass();
+				a_arr.addClass("rating-icon star-on");
+				raing_value.text(parseInt(raing_default)==0?'-':raing_default);		
+			}else if(clicknum=="0" && parseInt(raing_default)>0){
+				ratingInit(a_this,"rating-icon rating-init",Math.round(raing_default),raing_value);
+				raing_value.text(raing_default);
+			}
+			else{
+				ratingInit(a_this,"rating-icon rating-off",parseInt(clicknum),raing_value);
+				raing_value.text(clicknum);
+			}
+		});
 
 }
 
@@ -431,7 +429,6 @@ a_arr.hover(function(){
 
 function ratingInit(e_this,classname,i,evalue)
 {	
-
 	if (i==0) {
 		evalue.text("-");
 	}
@@ -468,9 +465,7 @@ function ratingInit(e_this,classname,i,evalue)
 
 			var t="<ul>";
 			if (data) {
-
 				$.each(data,function(a){
-
 					if (isContain(feature_selected_items,data[a].id)) {
 						t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" />'+data[a].name+'</label> </li>';
 					}
@@ -480,9 +475,7 @@ function ratingInit(e_this,classname,i,evalue)
 				});
 			}
 			t+="</ul>";
-
 			$(".feature-content .feature-content-content",p_this).html(t);
-
 		},"json");
 
 
