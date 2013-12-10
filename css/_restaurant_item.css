@@ -41,7 +41,7 @@
 }
 .right-content a{
 	color: #555;
-	text-decoration: none;
+	text-decoration: none!important;
 }
 .right-content a:hover
 {
@@ -212,22 +212,52 @@ div.view-item
 	display: inline-block;
 	vertical-align: top;
 	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
-
-	
 }
 div.view-item:last-child
 {
 	border-bottom:0px none; 
 }
 
+
 /*排名*/
+
 div.view-item .ranking
 {
 	color:#555;
-	font-size: 1.0em;
+	/*font-size: 1.0em;*/
 	font-family: Arial;	
+	display: block;
+	width: 30px;
+	margin:0px;
 	float:left;	
-	margin:0px 5px 0px 0px;
+}
+
+div.view-item .ranking.badge1
+{
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #e9e4df;
+	border-radius: 10px;
+}
+div.view-item .ranking.badge2
+{
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: rgba(159, 46, 24,0.8);
+	border-radius: 10px;
+	
 }
 
 /*div.view-item:hover,div.view-item:focus
