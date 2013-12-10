@@ -110,7 +110,7 @@
 									<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
 									<div>
 										<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-										<span><?php echo strlen($value->content)>420? mb_substr($value->content,0,420,'utf-8').'...':$value->content;?></span>
+										<span><?php echo strlen($value->content)>140? mb_substr($value->content,0,140, "UTF-8").'...':$value->content;?></span>
 									</div>
 								</li>
 								<?php
