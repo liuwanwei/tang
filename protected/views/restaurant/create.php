@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
 
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script>
-var geoCoder,cityLocation,map,marker = null;
+var geoCoder,map,marker = null;
 var init = function() {
     var center = new qq.maps.LatLng(39.916527,116.397128);
     map = new qq.maps.Map(document.getElementById('mapContainer'),{
@@ -30,7 +30,14 @@ var init = function() {
         var lng = latLng.getLng().toFixed(5);
         document.getElementById("latLng").innerHTML = lat+','+lng;
     });
-    geoCoder = new qq.maps.geoCoder({
+    qq.maps.event.addListener(map,'click',function(event) {
+        var latLng = event.latLng;
+        var lat = latLng.getLat().toFixed(5);
+        var lng = latLng.getLng().toFixed(5);
+        document.getElementById("Restaurant_coordinate").value=lat+","+lng;
+        $('#mapModal').modal('hide');
+    });
+    geoCoder = new qq.maps.Geocoder({
         complete : function(result){
             map.setCenter(result.detail.location);
             var marker = new qq.maps.Marker({
@@ -39,27 +46,14 @@ var init = function() {
             });
         }
     });
-
-    qq.maps.event.addListener(map,'click',function(event) {
-        var latLng = event.latLng;
-        var lat = latLng.getLat().toFixed(5);
-        var lng = latLng.getLng().toFixed(5);
-        document.getElementById("Restaurant_coordinate").value=lat+","+lng;
-        $('#mapModal').modal('hide');
-    });
-
-    cityLocation = new qq.maps.CityService({
-        complete : function(result){
-            map.setCenter(result.detail.latLng);
-        }
-    });
-    cityLocation.searchLocalCity();
+    geoCoder.getLocation("洛阳");
 }
 
 function codeAddress() {
     var address = document.getElementById("mapAddress").value;
     geoCoder.getLocation(address);
 }
+
 
 window.onload=init;
 </script>

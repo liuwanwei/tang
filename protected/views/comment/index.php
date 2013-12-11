@@ -19,7 +19,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 	</div>
 </div>
 
-<div class="layer hide"></div>
+<div class="layer1"></div>
 <div id="big_map_clone">
 	<div class="big-map-header">注：地图位置坐标仅供参考，具体情况以实际道路标识信息为准<span class="close" title="关闭">X</span></div>
 	<div id="big_map"></div>
@@ -212,14 +212,14 @@ function ratingfnc(){
 			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
 		//event.preventDefault()
 		//event.stopPropagation();
-		console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+		//console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 
 		if (a_this.attr('data-user')=="") {
 		//点击登陆弹出模态窗口
 		loginModal();
 
 		return false;
-	}
+		}
 	a_this.attr("data-clicknum",parseInt($("span",$(this)).text()));
 	selected_a.removeClass();
 	selected_a.addClass("rating-icon rating-off");
@@ -324,10 +324,7 @@ function ratingInit(e_this,classname,i,evalue)
 		console.log("a="+event.data.rating);
 	}
 
-	//异步加载SOSO地图JS库
-	<?php if (!empty($restaurant->coordinate)) {
-		echo 'loadScript();';
-	}; ?>
+	
 
 
 	//textarea鼠标点击去变大
@@ -343,23 +340,23 @@ function ratingInit(e_this,classname,i,evalue)
 		var map_clone=$("#big_map_clone");
 		var map_container_offset=$("#map_container").offset();
 		map_clone.css({'left':$("#tang-content").offset().left+20,'top':$("#tang-content").offset().top+10}).show();
-		init("big_map");
-		var layer=$(".layer");
-		layer.show();
-		layer.click(function(){
+		
+		var layer1=$(".layer1");
+		layer1.show();
+		layer1.click(function(){
 			layerhide();
 		});
 
 		$(".big-map-header .close").bind("click",function(){
 			layerhide();
 		});
-
+		init("big_map");
 	});
 	//关闭model层
 	function layerhide()
 	{
 		$("#main_small_map").removeClass('visibility-hidden').addClass('visibility-visible');
-		$(".layer").hide();
+		$(".layer1").hide();
 		$("#big_map_clone").hide();
 
 	}
@@ -367,6 +364,10 @@ function ratingInit(e_this,classname,i,evalue)
 
 });
 
+//异步加载SOSO地图JS库
+	<?php if (!empty($restaurant->coordinate)) {
+		echo 'loadScript();';
+	}; ?>
 /*
  *加载地图定位
  */
@@ -378,20 +379,21 @@ function ratingInit(e_this,classname,i,evalue)
 		zoom: 16
 	});
 	var info = new soso.maps.InfoWindow({map: map});
-	geoCoder = new soso.maps.geoCoder({
-		complete : function(result){
-			map.setCenter(result.detail.location);
-			var marker = new soso.maps.Marker({
-				map:map,
-				position: result.detail.location
-			});
-			soso.maps.event.addListener(marker, 'click', function() {
-				info.open();
-	info.setContent('<div style="width:150px;height:40px;"><?php echo $restaurant->name;  ?></div>');//'+result.detail.address+'
-	info.setPosition(result.detail.location);
-});
-		}
-	});
+	geoCoder = new soso.maps.Geocoder({
+        complete : function(result){
+            map.setCenter(result.detail.location);
+            var marker = new soso.maps.Marker({
+                map:map,
+                position: result.detail.location
+            });
+            soso.maps.event.addListener(marker, 'click', function() {
+                info.open();
+                info.setContent('<div style="width:150px;height:40px;"><?php echo $restaurant->name;  ?></div>');//'+result.detail.address+'
+                info.setPosition(result.detail.location);
+            });
+        }
+    });
+
 	geoCoder.getAddress(center);
 }
 
