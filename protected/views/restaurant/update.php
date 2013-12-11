@@ -26,7 +26,7 @@ var init = function() {
     var center = new qq.maps.LatLng(39.916527,116.397128);
     map = new qq.maps.Map(document.getElementById('mapContainer'),{
         center: center,
-        zoom: 13
+        zoom: 16
     });
     
     qq.maps.event.addListener(map,'mousemove',function(event) {
@@ -37,7 +37,7 @@ var init = function() {
     });
 
     var info = new qq.maps.InfoWindow({map: map});
-    geoCoder = new qq.maps.geoCoder({
+    geoCoder = new qq.maps.Geocoder({
         complete : function(result){
             map.setCenter(result.detail.location);
             var marker = new qq.maps.Marker({
