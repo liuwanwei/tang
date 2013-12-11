@@ -13,7 +13,6 @@
 			}	
 		?>
 	</div>
-
 	<div class="feed-main">
 		<div class="source"> 
 			<?php echo CHtml::encode($data->user->nick_name); ?>
@@ -21,8 +20,8 @@
 		</div>
 		
 		<div class="content">
-			<?php echo CHtml::encode($data->content); ?>
-		</div>	
+			<pre><?php echo $data->content ?></pre>
+		</div>
 		<?php if (User::model()->isAdmin()) {
 			$actionUrl = $this->createUrl('comment/delete', array('id'=>$data->id));
 			echo CHtml::link('<i class="fa fa-times" style="color:#999;"></i>', $actionUrl);
