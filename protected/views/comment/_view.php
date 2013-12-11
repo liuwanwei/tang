@@ -13,7 +13,6 @@
 			}	
 		?>
 	</div>
-
 	<div class="feed-main">
 		<div class="source"> 
 			<?php echo CHtml::encode($data->user->nick_name); ?>
@@ -21,7 +20,7 @@
 		</div>
 		
 		<div class="content">
-			<?php echo CHtml::encode($data->content); ?>
+			<pre><?php echo $data->content ?></pre>
 		</div>
 	</div>
 </div>

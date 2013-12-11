@@ -242,7 +242,7 @@ div.view-item .ranking.badge1
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: baseline;
-	background-color: #e9e4df;
+	background-color: rgb(233, 228, 223);
 	border-radius: 10px;
 }
 div.view-item .ranking.badge2
