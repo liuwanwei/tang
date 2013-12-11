@@ -56,7 +56,7 @@
 			</div>
 			<div class="right-content">
 				<div id="last_votes">
-					<span class="title">最近打分</span>
+					<span class="header">最新评分</span>
 					<div class="content">
 						<ul>
 							<?php foreach ($lastVotes as $value) {
@@ -64,8 +64,7 @@
 								<li>
 									<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
 									<div>
-										<!--<span><?php echo $value->restaurant->name; ?></span>-->
-										<?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?>
+										<span class="title"><?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
 										<div class="rating-widget">
 											<span class="rating-widget-lable">评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 											<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->rating)); ?>" 
@@ -101,7 +100,7 @@
 					</div>
 				</div>
 				<div id="last_comments">
-					<span class="title">最近评论</span>
+					<span class="header">最新评论</span>
 					<div class="content">
 						<ul>
 							<?php foreach ($lastComments as $value) {
@@ -109,8 +108,9 @@
 								<li>
 									<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
 									<div>
+										<span class="source"><?php echo $value->user->nick_name; ?> 添加了评论</span>
 										<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-										<span><?php echo strlen($value->content)>140? mb_substr($value->content,0,140, "UTF-8").'...':$value->content;?></span>
+										<span><?php echo mb_strlen($value->content, "UTF-8") >= 71 ? mb_substr($value->content,0,71, "UTF-8").'...':$value->content;?></span>
 									</div>
 								</li>
 								<?php
@@ -219,7 +219,7 @@ function loadData(data)
 
 		strData+='<li>'+
 		'<div class="rating-widget">'+
-		'<span class="rating-widget-lable">平均分:</span>'+
+		'<span class="rating-widget-lable">平均得分:</span>'+
 		'<div class="rating-list m" isclick="false" data-rating-default="'+(new Number(item["restaurant"]["average_points"])).toFixed(1)+'" '+
 		'data-clicknum="0" '+
 		'data-user="<?php echo Yii::app()->user->id ?>"'+
@@ -246,7 +246,7 @@ function loadData(data)
 
 		if (item["restaurant"]["votes"]>0){
 			strData+='<div class="rating-count-p">'+
-			'<span>共</span> <span>'+item["restaurant"]["votes"]+'</span>人打分'+
+			'<span>'+item["restaurant"]["votes"]+'</span>个评分'+
 			'</div>';
 		}
 		strData+='</div>'+

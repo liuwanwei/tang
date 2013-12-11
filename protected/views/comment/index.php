@@ -41,7 +41,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 				<?php
 			} ?>
 			<li >
-				<span class="rating-widget-lable title">平均打分:</span>
+				<span class="rating-widget-lable title">平均得分:</span>
 				<div class="rating-widget-avg">
 					<div>
 						<?php for ($i=0; $i < $restaurant->average_points/1; $i++) { 

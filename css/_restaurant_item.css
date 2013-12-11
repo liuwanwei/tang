@@ -52,7 +52,24 @@
 .right-content .title
 {
 	color: #6c6c6c;
+	font-weight: bold;
+	font-size: 13px;
 }
+
+/* 最近评分、评论头部信息 */
+.right-content .header
+{
+	color:#999;
+	font-size: 13px;
+}
+
+/* 最近评分、评论来源信息 */
+.right-content .source
+{
+	color:#999;
+	font-size:10px;
+}
+
 .right-content #last_votes .content ul,.right-content #last_comments .content ul
 {
 	list-style: none;
@@ -71,6 +88,7 @@
 	z-index: 1;
 
 }
+
 .right-content #last_comments .content ul li:last-child
 {
 	border-bottom: 0px none;

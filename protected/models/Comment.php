@@ -8,6 +8,7 @@
  * @property integer $user_id
  * @property string $content
  * @property integer $restaurant_id
+ * @property integer $hidden
  * @property string $create_datetime
  */
 class Comment extends CActiveRecord

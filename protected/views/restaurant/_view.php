@@ -11,11 +11,11 @@
 				<strong><?php echo CHtml::link(CHtml::encode($data->name), array('comment/index', 'restaurantId'=>$data->id),array('target'=>'_blank')); ?></strong>
 			</li>
 			<li>
-				<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>
+				<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>				
 				<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
 				<?php if (! empty($data->coordinate)) { 
 					echo CHtml::link('<i class="fa fa-map-marker"></i>',  array('comment/index', 'restaurantId'=>$data->id), array('alt'=>"地图",'title'=>"看看汤馆的位置"));
-				} ?>
+				} ?>				
 			</li>
 
 			<?php if (!empty($data->features)) {
@@ -30,7 +30,7 @@
 
 			<li>
 				<div class="rating-widget">
-					<span class="rating-widget-lable">平均分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+					<span class="rating-widget-lable">平均得分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 					<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
 						data-clicknum="0" 
 						data-user="<?php echo Yii::app()->user->id ?>"
@@ -56,7 +56,7 @@
 					</div>
 					<?php if ($data->votes>0) {?>
 					<div class="rating-count-p">
-						<!-- <span>共</span>  --><span><?php echo CHtml::encode($data->votes);?></span>人打分
+						<span><?php echo CHtml::encode($data->votes);?></span>个评分
 					</div>
 						<?php } ?>
 				</div>
@@ -71,7 +71,8 @@
 			?>	
 			<!--编辑功能-->
 			<div class="view-edit-btn" >
-				<div class="view-edit-header"><a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
+				<div class="view-edit-header">
+					<a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
 					<ul>
 						<li class="feature-btn">贴标</li>
 					</ul>
