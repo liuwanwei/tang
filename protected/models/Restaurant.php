@@ -54,7 +54,7 @@ class Restaurant extends CActiveRecord
 			array('average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
-			array('image_url, description', 'length', 'max'=>256),
+			array('image_url, description, coordinate', 'length', 'max'=>256),
 			array('image_url', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
