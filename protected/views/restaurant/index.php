@@ -56,7 +56,7 @@
 			</div>
 			<div class="right-content">
 				<div id="last_votes">
-					<span class="header">最近打分</span>
+					<span class="header">最新评分</span>
 					<div class="content">
 						<ul>
 							<?php foreach ($lastVotes as $value) {
@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<div id="last_comments">
-					<span class="header">最近评论</span>
+					<span class="header">最新评论</span>
 					<div class="content">
 						<ul>
 							<?php foreach ($lastComments as $value) {
@@ -219,7 +219,7 @@ function loadData(data)
 
 		strData+='<li>'+
 		'<div class="rating-widget">'+
-		'<span class="rating-widget-lable">平均分:</span>'+
+		'<span class="rating-widget-lable">平均得分:</span>'+
 		'<div class="rating-list m" isclick="false" data-rating-default="'+(new Number(item["restaurant"]["average_points"])).toFixed(1)+'" '+
 		'data-clicknum="0" '+
 		'data-user="<?php echo Yii::app()->user->id ?>"'+
@@ -246,7 +246,7 @@ function loadData(data)
 
 		if (item["restaurant"]["votes"]>0){
 			strData+='<div class="rating-count-p">'+
-			'<span>共</span> <span>'+item["restaurant"]["votes"]+'</span>人打分'+
+			'<span>'+item["restaurant"]["votes"]+'</span>个评分'+
 			'</div>';
 		}
 		strData+='</div>'+
