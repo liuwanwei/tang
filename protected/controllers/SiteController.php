@@ -37,7 +37,7 @@ class SiteController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('login', 'wbLogin', 'logout', 'index', 'error', 'contact', 'userCenter'),
+						'actions'=>array('login', 'wbLogin', 'logout', 'index', 'error', 'contact', 'userCenter','redirectLogin','redirectError'),
 						'users'=>array('*')
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -70,7 +70,7 @@ class SiteController extends Controller
 		{
 			if(Yii::app()->request->isAjaxRequest)
 				echo $error['message'];
-			else
+			else 
 				$this->render('error', $error);
 		}
 	}
@@ -219,5 +219,18 @@ class SiteController extends Controller
 		echo "<pre>".date('H:i:s')."</pre>";
 		echo "<pre>".$output."</pre>";
 		echo '<pre><h3><a href="http://www.laotangguan.com">老汤馆</a></h3></pre>';
+	}
+
+	public function actionRedirectLogin() {
+		$this->redirectPrompt(ERROR_CODE_LOGIN_REQUIRE, ERROR_CODE_LOGIN_REQUIRE_MESSAGE);
+	}
+
+	public function actionRedirectError() {
+		$error = Yii::app()->errorHandler->error;	
+		$code = $error['code'];
+		$message = $error['message'];
+		$url = Yii::app()->request->urlReferrer;
+		
+		$this->redirectPrompt($code, $message, $url);
 	}
 }
