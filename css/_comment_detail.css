@@ -195,7 +195,7 @@ form
 	color: #555;
 	font-weight: bold;
 	margin:0px 0px 0px 5px;
-	border-bottom:2px solid #ccc;
+	border-bottom:2px solid #ebe9e7;
 }
 .list-view .empty
 {
@@ -204,19 +204,18 @@ form
 	line-height: 50px;
 	color: #9c9c9c;
 }
-#mapAddress
+pre
 {
-height: 34px;
-padding: 6px 12px;
-font-size: 14px;
-line-height: 1.428571429;
-color: #555;
-background-color: #fff;
-background-image: none;
-border: 1px solid #ccc;
-border-radius: 4px;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
--webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	border:0 none!important;
+	background-color: transparent!important;
+	margin:0px!important;
+	padding: 9px 5px 9px 0px!important;
+}
+.comment-del
+{
+	color:#999;
+}
+.comment-del:hover
+{
+	color: rgb(159, 46, 24);
 }

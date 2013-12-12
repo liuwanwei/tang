@@ -15,7 +15,7 @@ class CommentController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			// 'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 	
@@ -108,7 +108,18 @@ class CommentController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
+		if ($model) {
+			$model->hidden = true;
+			$model->save();
+
+			$this->redirect($this->createUrl('comment/index', array('restaurantId' => $model->restaurant_id)));
+		}else{
+			// TODO: 评论不存在，显示错误信息。
+			die('');
+		}
+
+		// $this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -138,9 +149,10 @@ class CommentController extends Controller
 		}
 		
 		$criteria=new CDbCriteria(array(
-				'condition'=>'restaurant_id='.$restaurantId,
+				'condition'=>'restaurant_id='.$restaurantId . ' AND hidden=0',
 				'order'=>'create_datetime DESC',
 		));
+
 		$dataProvider=new CActiveDataProvider('Comment',array(
 			'criteria'=>$criteria,
 		));

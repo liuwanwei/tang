@@ -144,6 +144,9 @@ if (count>limit) {
 	$(window).scrollTop(0);
 	$(window).scroll(function(event){
 		event.preventDefault();
+		if (itemIndex>=count) {
+			return false;
+		}
 		if (isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
 			if (isdataload) {
 				isdataload=false;

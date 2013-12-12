@@ -6,6 +6,7 @@
 	<meta name="language" content="en" />
 	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+	 <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
 
 	<!-- blueprint CSS framework -->
 	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
@@ -114,7 +115,7 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
-/*var footerHeight = 0,
+var footerHeight = 0,
 footerTop = 0,
 $footer = $("#footer");
 positionFooter();
@@ -137,7 +138,7 @@ if ( ($(document.body).height()+footerHeight) < $(window).height()) {
 
 }
 }
-$(window).scroll(positionFooter).resize(positionFooter);*/
+$(window).scroll(positionFooter).resize(positionFooter);
 
 //点击登陆弹出模态窗口
 $(".login").click(function(){

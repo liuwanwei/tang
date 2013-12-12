@@ -56,18 +56,19 @@ body
 
 #footer
 { 
-	display:none;
-	padding: 0;
-	margin: 0;	
+	display:block;
+	padding: 5px 0px;
+	margin: 10px 0px 0px 0px;	
 	width: 100%;
 	font-size: 0.8em;
 	text-align: center;		
-	background: #8F8275;
+	/*background: #8F8275;
 	box-shadow: inset 0 0 30px #5A5249;
 	-moz-box-shadow: inset 0 0 30px #5A5249;
 	-webkit-box-shadow: inset 0 0 30px #5A5249;
-	-o-box-shadow: inset 0 0 30px #5A5249;
-	color: white;
+	-o-box-shadow: inset 0 0 30px #5A5249;*/
+	color: #666;
+	border-top:1px solid rgba(218, 214, 208, 1);
 }
 
 #logo
@@ -839,7 +840,7 @@ div.rating-widget
 {
 
 	width: 14px;	
-	height:13px;
+	height:12px;
 	display:block;
 	float:left;			
 	margin: 0px;
@@ -960,17 +961,23 @@ div.rating-widget
  {
  	display: inline-block;
  	width: 14px;
- 	height: 13px;
+ 	height: 12px;
+ 	cursor: default!important;
  }
- .rating-icon.rating-avg-init
- {
+.rating-icon.rating-avg-init
+{
 
  	background-position: 0px -41px;
- }
+}
+ .rating-icon.star-avg-on
+{
+	background-position: 0px -27px;
+}
+
 
  .rating-avg 
  {
- 	font-size: 14px;
+ 	font-size: 11px;
  	display: inline-block;
  	width: 30px;
  	color: rgb(165, 134, 0);
