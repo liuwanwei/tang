@@ -44,9 +44,15 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 				<span class="rating-widget-lable title">平均得分:</span>
 				<div class="rating-widget-avg">
 					<div>
-						<?php for ($i=0; $i < $restaurant->average_points/1; $i++) { 
+						<?php $ratingSelectedCount=(int)$restaurant->average_points;
+						for ($i=0; $i < $ratingSelectedCount; $i++) { 
 							echo '<a href="#" class="rating-icon rating-avg-init"></a>';
-						} ?>
+						}
+						for ($j=0; $j < 5-$ratingSelectedCount; $j++) { 
+							echo '<a href="#" class="rating-icon star-avg-on"></a>';
+						}
+						?>
+
 					</div>
 					<span class="rating-avg"><?php echo $restaurant->average_points==0?"-":$restaurant->average_points; ?></span>
 

@@ -840,7 +840,7 @@ div.rating-widget
 {
 
 	width: 14px;	
-	height:13px;
+	height:12px;
 	display:block;
 	float:left;			
 	margin: 0px;
@@ -961,17 +961,23 @@ div.rating-widget
  {
  	display: inline-block;
  	width: 14px;
- 	height: 13px;
+ 	height: 12px;
+ 	cursor: default!important;
  }
- .rating-icon.rating-avg-init
- {
+.rating-icon.rating-avg-init
+{
 
  	background-position: 0px -41px;
- }
+}
+ .rating-icon.star-avg-on
+{
+	background-position: 0px -27px;
+}
+
 
  .rating-avg 
  {
- 	font-size: 14px;
+ 	font-size: 11px;
  	display: inline-block;
  	width: 30px;
  	color: rgb(165, 134, 0);
