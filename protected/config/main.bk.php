@@ -9,6 +9,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Tang',
 	'timeZone'=>'Asia/Chongqing',
+	'language'=>'zh_cn',
 	'defaultController' => 'restaurant',
 
 	// preloading 'log' component
@@ -35,7 +36,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			'loginUrl'=>'/restaurant/index',
+			'loginUrl'=>'site/redirectLogin',
 		),
 		
 		'urlManager'=>array(
@@ -69,7 +70,7 @@ return array(
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
+			'errorAction'=>'site/redirectError',
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',
