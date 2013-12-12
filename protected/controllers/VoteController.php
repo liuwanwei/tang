@@ -300,15 +300,23 @@ class VoteController extends Controller
 
 		foreach ($restaurants as $id => $value) {
 			$average_points = $value['points'] / $value['count'];
+
 			$average_points = number_format($average_points, 1);
+
 			if ($average_points > $this->_max_rating_point) {
 				$average_points = $this->_max_rating_point;
 				// TODO: 平均分超出打分最大值，某个打分被hacked，向管理员发提醒。
 				print_r("汤馆（$id） average_points 计算错误： $average_points");
 			}
 
+			// if ($id == 3) {
+			// 	var_dump($value);
+			// 	var_dump($average_points);
+			// }
+
 			$model = Restaurant::model()->findByPk($id);
 			$model->average_points = $average_points;
+			$model->votes = $value['count'];
 			$model->save();	
 		}
 
