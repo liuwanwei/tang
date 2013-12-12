@@ -260,7 +260,7 @@ div.view-item .ranking.badge1
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: baseline;
-	background-color: rgb(233, 228, 223);
+	background-color: rgba(218, 214, 208, 1);
 	border-radius: 10px;
 }
 div.view-item .ranking.badge2

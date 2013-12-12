@@ -195,7 +195,7 @@ form
 	color: #555;
 	font-weight: bold;
 	margin:0px 0px 0px 5px;
-	border-bottom:2px solid #ccc;
+	border-bottom:2px solid #ebe9e7;
 }
 .list-view .empty
 {
@@ -210,4 +210,12 @@ pre
 	background-color: transparent!important;
 	margin:0px!important;
 	padding: 9px 5px 9px 0px!important;
+}
+.comment-del
+{
+	color:#999;
+}
+.comment-del:hover
+{
+	color: rgb(159, 46, 24);
 }
