@@ -129,18 +129,23 @@ class CommentController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($restaurantId)
-	{
+	public function actionIndex($restaurantId) {
 		$model = new Comment;
 		
-		if(isset($_POST['Comment']) && $this->checkActionFrequency())
-		{
-			$model->attributes=$_POST['Comment'];
-			$model->restaurant_id=$restaurantId;
-			$model->save();
+		if(isset($_POST['Comment'])) {
 
-			// 更新最后操作时间戳。
-			$this->updateLastActionTime();
+			if($this->checkActionFrequency()) {
+				$model->attributes=$_POST['Comment'];
+				$model->restaurant_id=$restaurantId;
+				$model->save();
+
+				// 更新最后操作时间戳。
+				$this->updateLastActionTime();	
+			}else {
+				$url = Yii::app()->request->url;
+				$this->redirectPrompt(ERROR_CODE_FREQUENCY,ERROR_CODE_FREQUENCY_MESSAGE,$url);
+				return;
+			}
 		}
 		
 		$criteria=new CDbCriteria(array(
