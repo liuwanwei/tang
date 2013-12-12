@@ -62,11 +62,16 @@ class VoteController extends Controller
 		// 计算每个店铺的权重得分。
 		$ranks = array();
 		$minVotes = 10;
-		foreach ($records as $key => $value) {			
-			$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->average_points + 
+		foreach ($records as $key => $value) {		
+			if ($value->votes > 0) {
+				$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->average_points + 
 						($minVotes  / ($value->votes + $minVotes)) * $totalAveragePoints;
-		
-			$value->weighted_points = $weightedPoints;
+			}else{
+				// 没有评分时，权重得分为0，排名垫底.
+				$weightedPoints = 0;
+			}	
+				
+			$value->weighted_points = $weightedPoints;			
 			$value->save();
 		}
 
