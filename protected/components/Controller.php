@@ -76,7 +76,7 @@ class Controller extends CController
 	public function redirectPrompt($code = 0, $message = '', $url = '') {
 		$url = empty($url) ? $this->createUrl('/'.Yii::app()->defaultController) : $url;
 		
-		return $this->render('//layouts/redirect', array(
+		return $this->render('/site/redirect', array(
 			'code'=> $code,
         	'message'=> $message,
         	'url'=> $url,
