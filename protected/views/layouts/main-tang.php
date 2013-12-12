@@ -6,6 +6,7 @@
 	<meta name="language" content="en" />
 	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+	 <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
 
 	<!-- blueprint CSS framework -->
 	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
