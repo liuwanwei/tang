@@ -49,7 +49,8 @@ class VoteController extends Controller
 		}
 
 		// 计算所有店铺平均分的算术平均值。
-		$dataProvider = new CActiveDataProvider('Restaurant');
+		// 初始化CActiveDataProvider时要禁用分页，或使用Restaurant::model()->findAll().
+		$dataProvider = new CActiveDataProvider('Restaurant', array('pagination'=>false));
 		$records = $dataProvider->getData();
 		$totalPoints = 0;
 		foreach ($records as $key => $value) {
@@ -61,9 +62,10 @@ class VoteController extends Controller
 		// 计算每个店铺的权重得分。
 		$ranks = array();
 		$minVotes = 10;
-		foreach ($records as $key => $value) {
+		foreach ($records as $key => $value) {			
 			$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->average_points + 
 						($minVotes  / ($value->votes + $minVotes)) * $totalAveragePoints;
+		
 			$value->weighted_points = $weightedPoints;
 			$value->save();
 		}
