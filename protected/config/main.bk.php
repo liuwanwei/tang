@@ -36,7 +36,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			'loginUrl'=>'site/redirectLogin',
+			'loginUrl'=>'/site/redirectLogin',
 		),
 		
 		'urlManager'=>array(
