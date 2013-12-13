@@ -122,7 +122,6 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-<script type="text/javascript" src="js/scrollpagination.js"></script>
 <script type="text/javascript">
 
 $(function(){
