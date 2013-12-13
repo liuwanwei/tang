@@ -49,7 +49,8 @@ class VoteController extends Controller
 		}
 
 		// 计算所有店铺平均分的算术平均值。
-		$dataProvider = new CActiveDataProvider('Restaurant');
+		// 初始化CActiveDataProvider时要禁用分页，或使用Restaurant::model()->findAll().
+		$dataProvider = new CActiveDataProvider('Restaurant', array('pagination'=>false));
 		$records = $dataProvider->getData();
 		$totalPoints = 0;
 		foreach ($records as $key => $value) {
@@ -61,10 +62,16 @@ class VoteController extends Controller
 		// 计算每个店铺的权重得分。
 		$ranks = array();
 		$minVotes = 10;
-		foreach ($records as $key => $value) {
-			$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->average_points + 
+		foreach ($records as $key => $value) {		
+			if ($value->votes > 0) {
+				$weightedPoints = ($value->votes  / ($value->votes + $minVotes)) * $value->average_points + 
 						($minVotes  / ($value->votes + $minVotes)) * $totalAveragePoints;
-			$value->weighted_points = $weightedPoints;
+			}else{
+				// 没有评分时，权重得分为0，排名垫底.
+				$weightedPoints = 0;
+			}	
+				
+			$value->weighted_points = $weightedPoints;			
 			$value->save();
 		}
 
@@ -300,15 +307,23 @@ class VoteController extends Controller
 
 		foreach ($restaurants as $id => $value) {
 			$average_points = $value['points'] / $value['count'];
+
 			$average_points = number_format($average_points, 1);
+
 			if ($average_points > $this->_max_rating_point) {
 				$average_points = $this->_max_rating_point;
 				// TODO: 平均分超出打分最大值，某个打分被hacked，向管理员发提醒。
 				print_r("汤馆（$id） average_points 计算错误： $average_points");
 			}
 
+			// if ($id == 3) {
+			// 	var_dump($value);
+			// 	var_dump($average_points);
+			// }
+
 			$model = Restaurant::model()->findByPk($id);
 			$model->average_points = $average_points;
+			$model->votes = $value['count'];
 			$model->save();	
 		}
 

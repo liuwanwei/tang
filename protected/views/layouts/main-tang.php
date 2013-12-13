@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/tang-main.css" />
 	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />-->
 
-	<title><?php echo CHtml::encode("老汤馆-品尝洛阳老滋味"); ?></title>
+	<title><?php echo CHtml::encode("老汤馆-分享洛阳老滋味"); ?></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
@@ -129,9 +129,11 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
 </div><!-- page -->
 <div id="footer">
-	Copyright &copy; <?php echo date('Y'); ?> 曦光科技.<br/>
-	All Rights Reserved.<br/>
-	<?php echo Yii::powered(); ?>
+	<a href="http://blog.laotangguan.com/?p=5" target="_blank">排名算法</a>
+	<span class='dot'>•</span>
+	<a href="http://blog.laotangguan.com/?p=9" target="_blank">建议反馈</a>
+	<span class='dot'>•</span>
+	<span>&copy; <?php echo date('Y'); ?>点滴科技</span>
 </div><!-- footer -->
 <div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"><i class="fa fa-arrow-circle-up" ></i></a></div>
 
