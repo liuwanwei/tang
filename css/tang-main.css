@@ -14,19 +14,6 @@ body
 	background: radial-gradient(ellipse at center, #ffffff 0%,#F5F3EF 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#F5F3EF',GradientType=1 );
 }
-.tang-logo
-{
-	background: url(../images/icon/tang_logo_64.png) no-repeat left -10px;
-	width: 64px;
-	height: 64px;
-	display: none;
-	float: left;
-	margin-left: 10px;
-}
-.tang-logo span
-{
-	visibility: hidden;
-}
 
 #page
 {
@@ -339,7 +326,6 @@ li.areamenu ul li a
 	padding-left:5px;
 	border:1px solid transparent;
 	height: 30px;
-	/*background: url(../images/icon/area_32.png) no-repeat left top;*/
 }
 .county-menu-title>span
 {
@@ -1112,8 +1098,8 @@ a.a-text-none
 .alertModal-dialog
 {
 	width: 300px;
-	position: relative;
-	background-color: #fff;
+	position: fixed;
+	background-color: #FFFFFF;
 	border: 1px solid #999;
 	border: 1px solid rgba(0,0,0,0.2);
 	border-radius: 6px;
@@ -1121,11 +1107,19 @@ a.a-text-none
 	-webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.5);
 	box-shadow: 0 3px 9px rgba(0,0,0,0.5);
 	background-clip: padding-box;
+	left:40%;
+	top: 40%;
+	z-index: 1045;
+	display: none;
 }
 .alertModal-header
 {
 	border-bottom: 1px solid #e5e5e5;
 	padding:0px 10px;
+}
+.alertModal-header .alertModal-title
+{
+
 }
 .alertModal-footer
 {
@@ -1133,11 +1127,13 @@ a.a-text-none
 	padding:10px 10px;
 }
 .alertModal-content {
-
+	background: #FFFFFF;
+	position: relative;
 }
 .alertModal-body
 {
 	padding: 10px;
+	min-height: 40px;
 }
 
 /*****警告页样式********/

@@ -49,7 +49,6 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 
 <div id="mainmenu">
 <div class="mainmenu-content">
-	<a href="#" class="tang-logo"><span>老汤馆</span></a>
 	<a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a>
 	<?php $this->widget('zii.widgets.CMenu',array(	
 		'items'=>$menu
@@ -82,18 +81,18 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 
 <!--公共的模态窗口，提示信息用-->
 <!-- Modal -->
-  <div class="alertModal-dialog" style="display:none;">
+  <div class="alertModal-dialog">
     <div class="alertModal-content">
       <div class="alertModal-header">
         <button type="button" class="close"  aria-hidden="true">&times;</button>
-        <h4 class="alertModal-title" id="alertModalLabel">Modal title</h4>
+        <h4 class="alertModal-title" id="alertModalLabel">提示信息</h4>
       </div>
       <div class="alertModal-body">
-        ...
+        你对这个汤馆打了5分，确定吗？
       </div>
       <div class="alertModal-footer">
-        <button type="button" class="btn btn-default">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="alertModalClose" class="btn btn-default">取消</button>
+        <button type="button" id="alertModalSubmit" class="btn btn-primary">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
