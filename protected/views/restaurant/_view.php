@@ -34,7 +34,8 @@
 					<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($data->average_points)); ?>" 
 						data-clicknum="0" 
 						data-user="<?php echo Yii::app()->user->id ?>"
-						data-id="<?php echo CHtml::encode($data->id);?>"
+						data-id="<?php echo CHtml::encode($data->id);?>" 
+						data-name="<?php echo CHtml::encode($data->name);?>" 
 						data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
 						<span class="rating-stars">
 							<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>

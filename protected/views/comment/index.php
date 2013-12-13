@@ -62,7 +62,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 			<li>
 				<!--详细页评分组件-->
 				<div class="rating-widget">
-					<span class="rating-widget-lable">我的评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
+					<span class="rating-widget-lable"><?php echo !yii::app()->user->isGuest? '我的评分' :'我要打分'?>:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
 					<div class="rating-list m" data-rating-default="0" 
 					data-clicknum="0" 
 					data-user="<?php echo Yii::app()->user->id ?>"
