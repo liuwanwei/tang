@@ -78,6 +78,29 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 	</div>
 	</div>
 	</div><!-- mainmenu -->
+
+
+<!--公共的模态窗口，提示信息用-->
+<!-- Modal -->
+  <div class="alertModal-dialog" style="display:none;">
+    <div class="alertModal-content">
+      <div class="alertModal-header">
+        <button type="button" class="close"  aria-hidden="true">&times;</button>
+        <h4 class="alertModal-title" id="alertModalLabel">Modal title</h4>
+      </div>
+      <div class="alertModal-body">
+        ...
+      </div>
+      <div class="alertModal-footer">
+        <button type="button" class="btn btn-default">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+
+
+
 <!--登陆的模态窗口-->
 <div id="myModal" class="modal1 fade in " >
 	<div class="modal-header">
