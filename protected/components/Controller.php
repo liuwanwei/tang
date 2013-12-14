@@ -83,4 +83,8 @@ class Controller extends CController
         	'delay'=> DELAY,
       	));
 	}
+
+	public function clearCacheFile($expire) {
+		Yii::app()->cache->gc($expire);
+	}
 }

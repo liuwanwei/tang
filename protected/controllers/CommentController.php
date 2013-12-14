@@ -112,7 +112,9 @@ class CommentController extends Controller
 		if ($model) {
 			$model->hidden = true;
 			$model->save();
-
+			//清空所有缓存文件
+			$this->clearCacheFile(false);
+			
 			$this->redirect($this->createUrl('comment/index', array('restaurantId' => $model->restaurant_id)));
 		}else{
 			// TODO: 评论不存在，显示错误信息。
@@ -141,6 +143,8 @@ class CommentController extends Controller
 
 				// 更新最后操作时间戳。
 				$this->updateLastActionTime();	
+				//清空所有缓存文件
+				$this->clearCacheFile(false);
 			}else {
 				$url = Yii::app()->request->url;
 				$this->redirectPrompt(ERROR_CODE_FREQUENCY,ERROR_CODE_FREQUENCY_MESSAGE,$url);

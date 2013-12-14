@@ -142,6 +142,9 @@ public function accessRules()
 		
 		if ($result)
 		{
+			//清空所有缓存文件
+			$this->clearCacheFile(false);
+			
 			echo json_encode(array('success' =>"success" ));
 		}
 		else

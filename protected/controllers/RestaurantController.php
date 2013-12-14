@@ -16,6 +16,12 @@ class RestaurantController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// 'postOnly + delete', // we only allow deletion via POST request
+			array(
+				'COutputCache + index + indexByPage',
+				'duration'=>3600,
+				'varyByParam'=>array('county','area','type'),
+				'varyByExpression'=>Yii::app()->user->id
+			),
 		);
 	}
 	
@@ -119,6 +125,9 @@ class RestaurantController extends Controller
 					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
 				
+				//清空所有缓存文件
+				$this->clearCacheFile(false);
+
 				$this->redirect("admin");
 		}
 
@@ -160,6 +169,9 @@ class RestaurantController extends Controller
 					$destPath = Yii::app()->basePath.'/..'.$filename;
 					$uploadedFile->saveAs($destPath);
 				}
+				//清空所有缓存文件
+				$this->clearCacheFile(false);
+
 				$this->redirect("/restaurant/admin");
 		}
 
@@ -184,6 +196,9 @@ class RestaurantController extends Controller
 		}
 		
 		$this->loadModel($id)->delete();
+
+		//清空所有缓存文件
+		$this->clearCacheFile(false);
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax'])){
@@ -312,6 +327,10 @@ class RestaurantController extends Controller
 	 */
 	public function actionIndex($county = 0, $area = -1, $type = 0)
 	{
+		// Yii::app()->cache->set('1','55');
+		// $value=Yii::app()->cache->get('1');
+		// echo $value;
+	
 		$restaurant = new Restaurant();
 		$restaurant->county_id = $county;
 		$restaurant->area_id = $area;
