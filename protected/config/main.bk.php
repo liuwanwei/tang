@@ -77,6 +77,20 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/redirectError',
 		),
+
+		'clientScript' => array(
+        	'packages' => array(
+            	'jquery' => array(
+              		'baseUrl' => '//lib.sinaapp.com/js/jquery/1.10.2/',
+              		'js' => array('jquery-1.10.2.min.js'),
+            	),
+            ),
+
+            'scriptMap'=> array(
+            	'jquery.ba-bbq.js'=> false,
+            )
+        ),
+
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(

@@ -327,10 +327,6 @@ class RestaurantController extends Controller
 	 */
 	public function actionIndex($county = 0, $area = -1, $type = 0)
 	{
-		// Yii::app()->cache->set('1','55');
-		// $value=Yii::app()->cache->get('1');
-		// echo $value;
-	
 		$restaurant = new Restaurant();
 		$restaurant->county_id = $county;
 		$restaurant->area_id = $area;
