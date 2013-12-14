@@ -53,6 +53,11 @@ return array(
 			),
 		),
 
+		'cache'=>array(
+            'class'=>'system.caching.CFileCache',
+            'directoryLevel'=> 2,
+		),
+
 		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',

@@ -169,8 +169,11 @@ class VoteController extends Controller
 		    	// 更新餐厅记录。
 		    	$this->updateRestaurant($model);
 
+		    	//清空所有缓存文件
+		    	$this->clearCacheFile(false);
 	        	// 提交成功向前台输出JSON。
 	        	echo json_encode(array('msg' =>"0",'voteid'=>$model->id));
+	        
 	        	return;
 		    }
 	    }
