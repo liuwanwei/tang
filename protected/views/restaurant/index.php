@@ -40,7 +40,6 @@
 				'itemView'=>'_view',
 				'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 				'template' => "{pager}\n{summary}\n{items}\n{pager}",
-				'baseScriptUrl'=>'',
 				'ajaxUpdate'=> false,
 				'pager'=>array(
 						 'cssFile'=>false
