@@ -88,6 +88,7 @@ return array(
 
             'scriptMap'=> array(
             	'jquery.ba-bbq.js'=> false,
+            	'jquery.yiilistview.js'=> false
             )
         ),
 
