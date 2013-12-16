@@ -1,7 +1,29 @@
 <?php
 
-class SiteController extends Controller{
-	public function actionLinkin($signature, $timestamp, $nonce, $echostr){
+class WechatController extends Controller{
+
+	public $layout = '//layouts/column2'; 
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters(){
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+
+	public function accessRules(){
+        return array(
+            array(
+                'allow',
+                'actions' => array('linkin'),
+                'users' => array('*'),
+            ),                
+        );
+    }
+
+	public function actionLinkin($signature = null, $timestamp = null, $nonce = null, $echostr = null){
 
 		$token = "laotangguan";
 		$tmpArr = array($token, $timestamp, $nonce);
@@ -10,9 +32,9 @@ class SiteController extends Controller{
 		$tmpStr = sha1( $tmpStr );
 	
 		if( $tmpStr == $signature ){
-			return echo $echostr;
-		}else{
-			return false;
-		}	
+			echo $echostr;
+		}
 	}
+
+
 }
