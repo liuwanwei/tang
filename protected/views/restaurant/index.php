@@ -118,8 +118,8 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+<script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
-
 $(function(){
 /*
  *分页
