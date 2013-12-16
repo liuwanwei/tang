@@ -80,10 +80,7 @@ return array(
 
 		'clientScript' => array(
         	'packages' => array(
-            	'jquery' => array(
-              		'baseUrl' => '//lib.sinaapp.com/js/jquery/1.8.3/',
-              		'js' => array('jquery.min.js'),
-            	),
+            	'jquery'=>false
             ),
 
             'scriptMap'=> array(
