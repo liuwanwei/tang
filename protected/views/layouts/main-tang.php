@@ -86,11 +86,26 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
         <h4 class="alertModal-title" id="alertModalLabel">提示信息</h4>
       </div>
       <div class="alertModal-body">
-        你对这个汤馆打了5分，确定吗？
+        <div class="rating-confirm">
+        	<span class="title">我的评分：</span>
+        	<span class="rating-list">
+			<a class="rating-icon star-on" data-title="不推荐"></a>
+			<a class="rating-icon star-on" data-title="聊胜于无"></a>
+			<a class="rating-icon star-on" data-title="日常饮食"></a>
+			<a class="rating-icon star-on" data-title="值得品尝"></a>
+			<a class="rating-icon star-on" data-title="汤中一绝"></a>
+			</span>
+			<span class="rating-value fonttext-shadow-2-3-5-000">0</span>
+			<span class="value-desc"></span>
+			<div class="clear"></div>
+		</div>
+		<form class="form-horizontal" role="form">
+			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧"></textarea>
+		</form>
       </div>
       <div class="alertModal-footer">
         <button type="button" id="alertModalClose" class="btn btn-default">取消</button>
-        <button type="button" id="alertModalSubmit" class="btn btn-primary">提交</button>
+        <button type="button" id="alertModalSubmit"  class="btn btn-red">提交<span class="btn-loading"><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在加载中...</span></button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -41,9 +41,13 @@
 				'cssFile' => Yii::app()->request->baseUrl. '/css/_restaurant_item.css',
 				'template' => "{pager}\n{summary}\n{items}\n{pager}",
 				'ajaxUpdate'=> false,
-				'pager'=>array(
-						 'cssFile'=>false
-						 ),
+		// 'pagerCssClass'=>'tang-pager',
+		// 'pager'=>array('header'=>'',
+		// 		'prevPageLabel'=>'«',
+		// 		'nextPageLabel'=>'»',
+		// 		'firstPageLabel'=>'首页',
+		// 		'lastPageLabel'=>'末页',
+		// 		'cssFile'=>Yii::app()->request->baseUrl.'/css/pager.css'),
 
 				));
 				?>
@@ -118,8 +122,8 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-
 <script type="text/javascript">
+
 $(function(){
 /*
  *分页
@@ -221,7 +225,8 @@ function loadData(data)
 		'<div class="rating-list m" isclick="false" data-rating-default="'+(new Number(item["restaurant"]["average_points"])).toFixed(1)+'" '+
 		'data-clicknum="0" '+
 		'data-user="<?php echo Yii::app()->user->id ?>"'+
-		'data-id="'+item["restaurant"]["id"]+'"'+
+		'data-id="'+item["restaurant"]["id"]+'" '+
+		'data-name="'+item["restaurant"]["name"]+'" '+
 		'data-userlogin="<?php echo Yii::app()->user->isGuest ?>">'+
 		'<span class="rating-stars">'+
 		'<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>'+
@@ -317,6 +322,7 @@ function tang_main_rating(rating_list,ismouseover)
 
 		//单击星星时发生
 		a_arr.live("click",function(event){
+			event.preventDefault();
 		if (a_this.attr("isclick")=="true") {
 			return false;
 		}
@@ -338,44 +344,113 @@ function tang_main_rating(rating_list,ismouseover)
 		var rating_cancel=$(".rating-cancel",a_this);
 		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
+			
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
-		$.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
-		rating:raing_value.text()}},function(resultdata){
-		//console.log("aa="+resultdata.voteid);
-		if (resultdata.msg==="0") {
-			a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
-			rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
-			var tooltip=$(".tang-tooltip"); 
-			rating_cancel.hover(function(){
-				var a_offset=$(this).offset();						
-				$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
-				tooltip.find('.content').text("你要删除打分吗？");
-				tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
-			},function(){
-				tooltip.hide();
-			});			
-			rating_cancel.one('click',function(){
-				rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-				$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
-				if (rating_cancel_result.msg==="0") {
-					a_this.removeAttr('voteid');
-					rating_cancel.removeClass('rating-pending');
-					a_this.attr("data-clicknum","0");
-					raing_value.text(raing_default);
-					//console.log(rating_cancel_result+"abc");
-					ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
-				}else{
-				//服务器出错
+		
+		//增加过渡窗口
+		var alertModalDialog=$(".alertModal-dialog");
+		var alertModalTitle=$(".alertModal-header .alertModal-title");
+		var alertModalBody=$(".alertModal-dialog .alertModal-body");
+		var alertModalBody_ratinglist=alertModalBody.find(".rating-list");
+		var content=$("#commentContent",alertModalBody);
+			content.val("");
+		//alert(alertModalBody_ratinglist.find("a").length);
+		var selected_a=$("a:lt("+i+")",alertModalBody_ratinglist);
+		selected_a.removeClass();
+		selected_a.addClass("rating-icon rating-off");
+		alertModalBody.find(".rating-value").text(i);
+		alertModalBody.find(".value-desc").text($(this).attr('data-title'));
+		var no_selected_a=$("a:gt("+(i-1)+")",alertModalBody_ratinglist);
+		no_selected_a.removeClass();
+		no_selected_a.addClass("rating-icon star-on");
 
-				}
-				},"json");
-			});
-		}else{
-		//服务器出错
-		}
-		},"json");
+		alertModalTitle.text(a_this.attr('data-name'));
+		//alertModalBody.text('您将对'+a_this.attr('data-name')+'打'+raing_value.text()+'分('+$(this).attr('data-title')+')');
 
-		a_this.attr("isclick","true");
+		alertModalDialog.show();
+		$(".alertModal-footer #alertModalClose").click(function(){
+			alertModalDialog.hide();
+			rating_cancel.removeClass('rating-pending');
+			a_this.attr("data-clicknum","0");
+			raing_value.text(raing_default);
+			//console.log(rating_cancel_result+"abc");
+			ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+		});
+
+		$(".alertModal-header .close").click(function(){
+			alertModalDialog.hide();
+			rating_cancel.removeClass('rating-pending');
+			a_this.attr("data-clicknum","0");
+			raing_value.text(raing_default);
+			ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+			
+			$(".alertModal-footer #alertModalSubmit").removeAttr('disabled');
+			$(".alertModal-footer #alertModalSubmit").find(".btn-loading").hide();
+		});
+		alert(1);
+		$(".alertModal-footer #alertModalSubmit").live("click",function(event){
+			event.preventDefault();
+			alert(content.val());return false;
+			// var btnsubmit_this=$(this);
+			// btnsubmit_this.attr("disabled","disabled");//增加按钮状态锁定
+			// btnsubmit_this.find(".btn-loading").show();
+			
+			// //提交评分的开始
+			// $.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
+			// rating:raing_value.text()}},function(resultdata){
+			// //console.log("aa="+resultdata.voteid);
+			// if (resultdata.msg==="0") {
+			// 	a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
+			// 	rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
+			// 	var tooltip=$(".tang-tooltip"); 
+			// 	rating_cancel.hover(function(){
+			// 		var a_offset=$(this).offset();						
+			// 		$("div:eq(0)",tooltip).removeClass().addClass("lefttitle");
+			// 		tooltip.find('.content').text("你要删除打分吗？");
+			// 		tooltip.css({'top':a_offset.top-$(this).height()/2,'left':a_offset.left+$(this).width()+10}).show();
+			// 	},function(){
+			// 		tooltip.hide();
+			// 	});			
+			// 	rating_cancel.one('click',function(){
+			// 		rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
+			// 		$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+			// 			if (rating_cancel_result.msg==="0") {
+			// 				a_this.removeAttr('voteid');
+			// 				rating_cancel.removeClass('rating-pending');
+			// 				a_this.attr("data-clicknum","0");
+			// 				raing_value.text(raing_default);
+			// 				//console.log(rating_cancel_result+"abc");
+			// 				ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+			// 			}else{
+			// 			//服务器出错
+
+			// 			}
+			// 		},"json");
+			// 	});
+			// }else{
+			// //服务器出错
+			// }
+			// },"json");
+			// //提交评分的结束
+			// a_this.attr("isclick","true");
+			
+			// if (content!="") {
+			// 	//提交评论
+			// 	$.post("<?php echo $this->createUrl('comment/create',array('restaurant_id'=>''))?>/"+a_this.attr("data-id"),{Comment:{content:content.val()},json:'1'},function(data){
+			// 		if (data.code==0) {
+			// 			btnsubmit_this.removeAttr('disabled');
+			// 			btnsubmit_this.find(".btn-loading").hide();
+			// 			alertModalDialog.hide();
+			// 		}
+			// 	},"json");
+			// }else{
+			// 	btnsubmit_this.removeAttr('disabled');
+			// 	btnsubmit_this.find(".btn-loading").hide();
+			// 	alertModalDialog.hide();
+			// }
+
+		});
+		
 		});
 
 		a_arr.hover(function(){
@@ -419,7 +494,7 @@ function tang_main_rating(rating_list,ismouseover)
 			}
 		});
 
-}
+	}
 
 });
 
@@ -439,6 +514,7 @@ function ratingInit(e_this,classname,i,evalue)
 	no_selected_a.addClass("rating-icon star-on");
 
 }
+
 
 	//清除评分
 	function ratingCancelClick(event)
