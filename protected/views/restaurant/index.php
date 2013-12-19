@@ -387,20 +387,19 @@ function tang_main_rating(rating_list,ismouseover)
 			ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 			
 			$(".alertModal-footer #alertModalSubmit").removeAttr('disabled');
-			$(".alertModal-footer #alertModalSubmit").find(".btn-loading").hide();
+			$(".alertModal-footer #alertModalSubmit").html('提交');
 		});
 		$(".alertModal-footer #alertModalSubmit").unbind('click');
 		$(".alertModal-footer #alertModalSubmit").one("click",function(event){
 			event.stopPropagation();
 			var btnsubmit_this=$(this);
 			btnsubmit_this.attr("disabled","disabled");//增加按钮状态锁定
-			btnsubmit_this.find(".btn-loading").show();
+			btnsubmit_this.html('<span class="btn-loading"><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在提交中...</span>');
 			
 			//提交评分的开始
 			$.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()},Comment:commentContent.val()},function(resultdata){
 			//console.log("aa="+resultdata.voteid);
-			alert(resultdata);
 
 			if (resultdata.code==0) {//0：成功，-2：频率过快,点评失败：-3
 				a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
@@ -432,34 +431,29 @@ function tang_main_rating(rating_list,ismouseover)
 				});
 				//还原默认值
 				btnsubmit_this.removeAttr('disabled');
-				btnsubmit_this.find(".btn-loading").hide();
+				btnsubmit_this.html('提交');
 				alertModalDialog.hide();
 
 			}else if(resultdata.code==-2){
-				alert(resultdata.msg);
+				var i=resultdata.delay;
+				var votetime=setInterval(function(){
+					btnsubmit_this.html('<span class="btn-loading">'+resultdata.msg+'('+i+')秒</span>');
+					i--;
+					if (i==0) {
+						clearInterval(votetime);
+						btnsubmit_this.removeAttr('disabled');
+						btnsubmit_this.html('提交');
+					};
+				},1000);
+
+			
+
 			}else{
 			//服务器出错
 			}
-			},"html");
+			},"json");
 			//提交评分的结束
 			a_this.attr("isclick","true");
-			
-			// if (commentContent.val()!="") {
-			// 	//提交评论
-			// 	$.post("<?php echo $this->createUrl('comment/create',array('restaurant_id'=>''))?>/"+a_this.attr("data-id"),{Comment:{content:commentContent.val()},json:'1'},function(data){
-			// 		if (data.code==0) {
-			// 			btnsubmit_this.removeAttr('disabled');
-			// 			btnsubmit_this.find(".btn-loading").hide();
-			// 			alertModalDialog.hide();
-			// 		}
-			// 	},"json");
-			// }else{
-			// 	btnsubmit_this.removeAttr('disabled');
-			// 	btnsubmit_this.find(".btn-loading").hide();
-			// 	alertModalDialog.hide();
-			// }
-			
-
 		});
 		
 		

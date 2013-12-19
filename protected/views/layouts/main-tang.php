@@ -105,7 +105,7 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
       </div>
       <div class="alertModal-footer">
         <button type="button" id="alertModalClose" class="btn btn-default">取消</button>
-        <button type="button" id="alertModalSubmit"  class="btn btn-red">提交<span class="btn-loading"><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在加载中...</span></button>
+        <button type="button" id="alertModalSubmit"  class="btn btn-red">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
