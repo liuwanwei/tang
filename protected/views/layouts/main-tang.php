@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title><?php echo CHtml::encode("老汤馆-分享洛阳老滋味"); ?></title>
+	<title><?php echo CHtml::encode("老汤馆-分享洛阳好滋味"); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
@@ -34,11 +34,12 @@ $menu = array();
 $areamenu=array();
 $counties = County::model()->getCountries(0);
 $areas=county::model()->getCountries(1);
- //echo count($areas);
+$menu[] = array('label' => '首页', 'url' => $this->createUrl('restaurant/index'));
 foreach ($counties as $key => $value)
 {
 	$menu[] = array('label' => $value, 'url' => array($this->createUrl('restaurant/index'),'county'=>$key));
 }
+
 foreach ($areas as $key => $value) {
 	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
 }
@@ -46,8 +47,8 @@ $menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=
 ?>
 
 <div id="mainmenu">
-<div class="mainmenu-content">
-	<a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a>
+<div class="mainmenu-content">	
+	<!-- <a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a> -->
 	<?php $this->widget('zii.widgets.CMenu',array(	
   		//'firstItemCssClass'=>'active',
 		'items'=>$menu,
@@ -76,8 +77,8 @@ $menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=
 		</div>
 		<?php	}?>
 	</div>
-	</div>
-	</div><!-- mainmenu -->
+</div>
+</div><!-- mainmenu -->
 
 
 <!--公共的模态窗口，提示信息用-->
