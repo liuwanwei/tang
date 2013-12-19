@@ -90,7 +90,7 @@ class Controller extends CController
 		return json_encode($data);
 	}
 
-	public function makeResultMessage($code = 0, $msg = '', $others = array(), $json = false) {
+	public function makeResultMessage($code = 0, $msg = '', $others = array(), $json = true) {
 		$baseData = array('code'=>$code, 'msg'=>$msg);
 		$result = array_merge($baseData, $others);
 		if ($json) {

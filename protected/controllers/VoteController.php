@@ -153,7 +153,7 @@ class VoteController extends Controller
 		if (isset($_POST['Comment'])) {
 			$model = new Comment;
 			$model->restaurant_id = $restaurantId;
-			$model->content = $comment;
+			$model->content = $_POST['Comment'];
 
 			$model->save();
 		}
@@ -172,30 +172,31 @@ class VoteController extends Controller
 			if($delay >= 0) {
 				$model->attributes=$_POST['Vote'];
 		    	if($model->validate()) {
-		    	// 保存本次投票记录。
-		    	$model = $this->saveVoteRecord($model);
+		    		// 保存本次投票记录。
+		    		$model = $this->saveVoteRecord($model);
 
-		    	// 更新餐厅记录。
-		    	$this->updateRestaurant($model);
+			    	// 更新餐厅记录。
+			    	$this->updateRestaurant($model);
 
-		    	// 保存评论信息
-		    	
-		    	$this->saveCommentRecord($model->restaurant_id;
-		    	
-		    	// 更新最后操作时间戳。
-		    	$this->updateLastActionTime();
+			    	// 保存评论信息
+			    	
+			    	$this->saveCommentRecord($model->restaurant_id);
+			    	
+			    	// 更新最后操作时间戳。
+			    	$this->updateLastActionTime();
 
-		    	//清空所有缓存文件
-		    	$this->clearCacheFile(false);
-	        	// 提交成功向前台输出JSON。
-	        	$others = array('voteid'=>$model->id);
-	        	echo $this->makeResultMessage(SUCCESS_CODE,SUCCESS_CODE_MESSAGE_VOTE_CREATE,$others);
-		    }else {
-		    	$others = array('delay'=>abs($delay));
+			    	//清空所有缓存文件
+			    	$this->clearCacheFile(false);
+		        	// 提交成功向前台输出JSON。
+		        	$others = array('voteid'=>$model->id);
+		        	echo $this->makeResultMessage(SUCCESS_CODE,SUCCESS_CODE_MESSAGE_VOTE_CREATE,$others);
+		    	}else {
+		    		echo $this->makeResultMessage(ERROR_CODE_VOTE_CREATE,ERROR_CODE_MESSAGE_VOTE_CREATE);
+		    	}
+			}else {
+				$others = array('delay'=>abs($delay));
 		    	echo $this->makeResultMessage(ERROR_CODE_FREQUENCY,ERROR_CODE_MESSAGE_FREQUENCY,$others);
-		    }
-		}else {
-			echo $this->makeResultMessage(ERROR_CODE_VOTE_CREATE,ERROR_CODE_MESSAGE_VOTE_CREATE,$others);
+			}
 		}
 	}
 
