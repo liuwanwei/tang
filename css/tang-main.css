@@ -264,7 +264,7 @@ body
 	padding:5px 8px;
 }
 
-#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a
+#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a,#county-menu>ul>li.active a
 {
 	cursor: pointer;
 	background-color:#AA2104;
@@ -730,6 +730,10 @@ opacity: 1;
 	padding: 15px;
 
 }
+#myModal .modal-body
+{
+	padding: 15px!important;
+}
 .modal-body a
 {
 	display: block;
@@ -811,7 +815,7 @@ div.rating-widget
 	background-repeat: no-repeat;
 }
 
-.rating-list .rating-stars a
+.rating-list .rating-stars a,.rating-confirm a
 {
 
 	width: 14px;	
@@ -822,7 +826,8 @@ div.rating-widget
 
 }
 
-.rating-list .rating-stars .star-on
+/*.rating-list .rating-stars .star-on,*/
+.rating-icon.star-on
 {
 	background-position: 0px -27px;
 }
@@ -848,18 +853,21 @@ div.rating-widget
 
 }
 
-.rating-list .rating-hover
+/*.rating-list .rating-hover*/
+.rating-icon.rating-hover
 {
 	background-position: 0px -69px;
 	cursor: pointer;
 
 }
 
-.rating-list .rating-off
+/*.rating-list .rating-off*/
+.rating-icon.rating-off
 {
 	background-position: 0px -55px;
 }
-.rating-list .rating-init
+/*.rating-list .rating-init*/
+.rating-icon.rating-init
 {
 	background-position: 0px -41px;
 }
@@ -874,13 +882,15 @@ div.rating-widget
 
 }
 
-.rating-list .rating-your
+/*.rating-list .rating-your*/
+.rating-icon.rating-your
 {
 	background-position: 0px 0px;
 	display: inline-block;
 }
 
-.rating-list .rating-your:hover
+/*.rating-list .rating-your:hover*/
+.rating-icon.rating-your:hover
 {
 	background-position:0px -13px;
 	cursor: pointer;
@@ -1109,6 +1119,7 @@ a.a-text-none
 {
 	border-top: 1px solid #e5e5e5;
 	padding:10px 10px;
+	text-align: center;
 }
 .alertModal-content {
 	background: #FFFFFF;
@@ -1151,6 +1162,55 @@ a.a-text-none
 	width: 20px;
 	margin-left: 60px;
 }
+
+.rating-confirm span
+{
+	float:left;
+}
+.rating-confirm
+{
+	line-height: 13px;
+	margin-bottom: 15px;
+}
+.rating-confirm .rating-value
+{
+	font-size: 11px;
+	color: rgb(165, 134, 0);
+	font-family: tahoma;
+	margin-left: 15px;
+}
+.rating-confirm .title
+{
+	color:#666;
+}
+.value-desc
+{
+	color:#666;
+	margin-left:10px;
+}
+
+.btn-red
+{
+	background: rgba(159, 46, 24,0.9);
+	border:1px solid rgb(153,34,17);
+	color:#FFFFFF!important;
+}
+.btn-red:hover
+{
+	background: rgb(178, 68, 34);
+
+}
+#alertModalClose
+{
+	display: none;
+}
+.btn-loading
+{
+	color:#ccc;
+	margin-left:10px;
+}
+
+
 
 
 

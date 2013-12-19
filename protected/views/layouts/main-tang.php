@@ -34,23 +34,26 @@ $menu = array();
 $areamenu=array();
 $counties = County::model()->getCountries(0);
 $areas=county::model()->getCountries(1);
-
 $menu[] = array('label' => '首页', 'url' => $this->createUrl('restaurant/index'));
-foreach ($counties as $key => $value){
-	$menu[] = array('label' => $value, 'url' => $this->createUrl('restaurant/index',array('county'=>$key)));
+foreach ($counties as $key => $value)
+{
+	$menu[] = array('label' => $value, 'url' => array($this->createUrl('restaurant/index'),'county'=>$key));
 }
 
 foreach ($areas as $key => $value) {
-	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('restaurant/index',array('county'=>$key)));
+	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
 }
-$menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
+$menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 ?>
 
 <div id="mainmenu">
 <div class="mainmenu-content">	
 	<!-- <a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a> -->
 	<?php $this->widget('zii.widgets.CMenu',array(	
-		'items'=>$menu
+  		//'firstItemCssClass'=>'active',
+		'items'=>$menu,
+		'activeCssClass'=>'active',
+  		
 		)); 
 	?>
 
@@ -87,11 +90,26 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
         <h4 class="alertModal-title" id="alertModalLabel">提示信息</h4>
       </div>
       <div class="alertModal-body">
-        你对这个汤馆打了5分，确定吗？
+        <div class="rating-confirm">
+        	<span class="title">我的评分：</span>
+        	<span class="rating-list">
+			<a class="rating-icon star-on" data-title="不推荐"></a>
+			<a class="rating-icon star-on" data-title="聊胜于无"></a>
+			<a class="rating-icon star-on" data-title="日常饮食"></a>
+			<a class="rating-icon star-on" data-title="值得品尝"></a>
+			<a class="rating-icon star-on" data-title="汤中一绝"></a>
+			</span>
+			<span class="rating-value fonttext-shadow-2-3-5-000">0</span>
+			<span class="value-desc"></span>
+			<div class="clear"></div>
+		</div>
+		<form class="form-horizontal" role="form">
+			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧"></textarea>
+		</form>
       </div>
       <div class="alertModal-footer">
         <button type="button" id="alertModalClose" class="btn btn-default">取消</button>
-        <button type="button" id="alertModalSubmit" class="btn btn-primary">提交</button>
+        <button type="button" id="alertModalSubmit"  class="btn btn-red">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -149,61 +149,55 @@ class VoteController extends Controller
 		}
 	}
 
+	private function saveCommentRecord($restaurantId) {
+		if (isset($_POST['Comment'])) {
+			$model = new Comment;
+			$model->restaurant_id = $restaurantId;
+			$model->content = $_POST['Comment'];
+
+			$model->save();
+		}
+	}
+
 	public function actionIndex()
 	{
 		$this->render('index');
 	}
 
-	public function actionCreate()
-	{
+	public function actionCreate() {
 		$model=new Vote;
 
-	   	if(isset($_POST['Vote']))
-		{
-		    $model->attributes=$_POST['Vote'];
-		    if($model->validate())
-		    {
-		    	// 保存本次投票记录。
-		    	$model = $this->saveVoteRecord($model);
+	   	if(isset($_POST['Vote'])) {
+	   		$delay = $this->checkActionFrequency();
+			if($delay >= 0) {
+				$model->attributes=$_POST['Vote'];
+		    	if($model->validate()) {
+		    		// 保存本次投票记录。
+		    		$model = $this->saveVoteRecord($model);
 
-		    	// 更新餐厅记录。
-		    	$this->updateRestaurant($model);
+			    	// 更新餐厅记录。
+			    	$this->updateRestaurant($model);
 
-		    	//清空所有缓存文件
-		    	$this->clearCacheFile(false);
-	        	// 提交成功向前台输出JSON。
-	        	echo json_encode(array('msg' =>"0",'voteid'=>$model->id));
-	        
-	        	return;
-		    }
-	    }
-	    echo json_encode(array('msg' =>"1" ));
-	}
+			    	// 保存评论信息
+			    	
+			    	$this->saveCommentRecord($model->restaurant_id);
+			    	
+			    	// 更新最后操作时间戳。
+			    	$this->updateLastActionTime();
 
-	/**
-	* 测试用投票接口。正式投票使用voteCreate接口.
-	*/
-	public function actionVote(){
-		$model=new Vote;
-
-	   	if(isset($_POST['Vote'])){
-
-		    $model->attributes=$_POST['Vote'];
-		    if($this->checkActionFrequency() && $model->validate()){
-		    	// 保存本次投票记录。
-		    	$model = $this->saveVoteRecord($model);
-
-		    	// 更新餐厅记录。
-		    	$this->updateRestaurant($model);
-
-		    	// 更新最后操作时间戳。
-		    	$this->updateLastActionTime();
-		    }else{
-		    	// TODO 展示投票频率过快页面。
-		    }
+			    	//清空所有缓存文件
+			    	$this->clearCacheFile(false);
+		        	// 提交成功向前台输出JSON。
+		        	$others = array('voteid'=>$model->id);
+		        	echo $this->makeResultMessage(SUCCESS_CODE,SUCCESS_CODE_MESSAGE_VOTE_CREATE,$others);
+		    	}else {
+		    		echo $this->makeResultMessage(ERROR_CODE_VOTE_CREATE,ERROR_CODE_MESSAGE_VOTE_CREATE);
+		    	}
+			}else {
+				$others = array('delay'=>abs($delay));
+		    	echo $this->makeResultMessage(ERROR_CODE_FREQUENCY,ERROR_CODE_MESSAGE_FREQUENCY,$others);
+			}
 		}
-	    	
-	    $this->render('create', array('model' => $model));
 	}
 
 	// 删除餐馆的一个投票。
