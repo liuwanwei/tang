@@ -222,7 +222,7 @@ class SiteController extends Controller
 	}
 
 	public function actionRedirectLogin() {
-		$this->redirectPrompt(ERROR_CODE_LOGIN_REQUIRE, ERROR_CODE_LOGIN_REQUIRE_MESSAGE);
+		$this->redirectPrompt(ERROR_CODE_LOGIN_REQUIRE, ERROR_CODE_MESSAGE_LOGIN_REQUIRE);
 	}
 
 	public function actionRedirectError() {

@@ -219,3 +219,8 @@ pre
 {
 	color: rgb(159, 46, 24);
 }
+.rating-error-loading
+{
+	color:#aa2105;
+	position: absolute;
+}
