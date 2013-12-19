@@ -37,19 +37,22 @@ $areas=county::model()->getCountries(1);
  //echo count($areas);
 foreach ($counties as $key => $value)
 {
-	$menu[] = array('label' => $value, 'url' => $this->createUrl('/restaurant/index',array('county'=>$key)));
+	$menu[] = array('label' => $value, 'url' => array($this->createUrl('restaurant/index'),'county'=>$key));
 }
 foreach ($areas as $key => $value) {
-	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('/restaurant/index',array('county'=>$key)));
+	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
 }
-$menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
+$menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 ?>
 
 <div id="mainmenu">
 <div class="mainmenu-content">
 	<a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a>
 	<?php $this->widget('zii.widgets.CMenu',array(	
-		'items'=>$menu
+  		//'firstItemCssClass'=>'active',
+		'items'=>$menu,
+		'activeCssClass'=>'active',
+  		
 		)); 
 	?>
 

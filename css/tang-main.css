@@ -264,7 +264,7 @@ body
 	padding:5px 8px;
 }
 
-#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a
+#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a,#county-menu>ul>li.active a
 {
 	cursor: pointer;
 	background-color:#AA2104;
