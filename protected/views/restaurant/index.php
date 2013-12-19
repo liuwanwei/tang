@@ -398,9 +398,11 @@ function tang_main_rating(rating_list,ismouseover)
 			
 			//提交评分的开始
 			$.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
-			rating:raing_value.text()}},function(resultdata){
+			rating:raing_value.text()},Comment:commentContent.val()},function(resultdata){
 			//console.log("aa="+resultdata.voteid);
-			if (resultdata.msg==="0") {
+			alert(resultdata);
+
+			if (resultdata.code==0) {//0：成功，-2：频率过快,点评失败：-3
 				a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
 				rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");
 				var tooltip=$(".tang-tooltip"); 
@@ -428,14 +430,17 @@ function tang_main_rating(rating_list,ismouseover)
 						}
 					},"json");
 				});
-				// btnsubmit_this.removeAttr('disabled');
-				// btnsubmit_this.find(".btn-loading").hide();
-				// alertModalDialog.hide();
+				//还原默认值
+				btnsubmit_this.removeAttr('disabled');
+				btnsubmit_this.find(".btn-loading").hide();
+				alertModalDialog.hide();
 
+			}else if(resultdata.code==-2){
+				alert(resultdata.msg);
 			}else{
 			//服务器出错
 			}
-			},"json");
+			},"html");
 			//提交评分的结束
 			a_this.attr("isclick","true");
 			

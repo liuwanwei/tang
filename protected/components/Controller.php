@@ -59,12 +59,10 @@ class Controller extends CController
 		if ($user !== null) {
 			$now = time();
 			$last = strtotime($user->last_action_time);
-			if (($now  - $last) > Yii::app()->params['actionInterval']) {
-				return true;
-			}
+			return $now  - $last - Yii::app()->params['actionInterval'];
 		}
 
-		return false;
+		return -Yii::app()->params['actionInterval'];
 	}
 
 	public function updateLastActionTime(){
@@ -86,5 +84,19 @@ class Controller extends CController
 
 	public function clearCacheFile($expire) {
 		Yii::app()->cache->gc($expire);
+	}
+
+	private function encodeJsonData($data) {
+		return json_encode($data);
+	}
+
+	public function makeResultMessage($code = 0, $msg = '', $others = array(), $json = false) {
+		$baseData = array('code'=>$code, 'msg'=>$msg);
+		$result = array_merge($baseData, $others);
+		if ($json) {
+			return $this->encodeJsonData($result);
+		}
+		
+		return $result;
 	}
 }
