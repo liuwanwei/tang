@@ -354,8 +354,8 @@ function tang_main_rating(rating_list,ismouseover)
 		var alertModalTitle=$(".alertModal-header .alertModal-title");
 		var alertModalBody=$(".alertModal-dialog .alertModal-body");
 		var alertModalBody_ratinglist=alertModalBody.find(".rating-list");
-		var content=$("#commentContent",alertModalBody);
-			content.val("");
+		var commentContent=$("#commentContent",alertModalBody);
+			commentContent.val("");
 		//alert(alertModalBody_ratinglist.find("a").length);
 		var selected_a=$("a:lt("+i+")",alertModalBody_ratinglist);
 		selected_a.removeClass();
@@ -439,20 +439,20 @@ function tang_main_rating(rating_list,ismouseover)
 			//提交评分的结束
 			a_this.attr("isclick","true");
 			
-			if (content!="") {
-				//提交评论
-				$.post("<?php echo $this->createUrl('comment/create',array('restaurant_id'=>''))?>/"+a_this.attr("data-id"),{Comment:{content:content.val()},json:'1'},function(data){
-					if (data.code==0) {
-						btnsubmit_this.removeAttr('disabled');
-						btnsubmit_this.find(".btn-loading").hide();
-						alertModalDialog.hide();
-					}
-				},"json");
-			}else{
-				btnsubmit_this.removeAttr('disabled');
-				btnsubmit_this.find(".btn-loading").hide();
-				alertModalDialog.hide();
-			}
+			// if (commentContent.val()!="") {
+			// 	//提交评论
+			// 	$.post("<?php echo $this->createUrl('comment/create',array('restaurant_id'=>''))?>/"+a_this.attr("data-id"),{Comment:{content:commentContent.val()},json:'1'},function(data){
+			// 		if (data.code==0) {
+			// 			btnsubmit_this.removeAttr('disabled');
+			// 			btnsubmit_this.find(".btn-loading").hide();
+			// 			alertModalDialog.hide();
+			// 		}
+			// 	},"json");
+			// }else{
+			// 	btnsubmit_this.removeAttr('disabled');
+			// 	btnsubmit_this.find(".btn-loading").hide();
+			// 	alertModalDialog.hide();
+			// }
 			
 
 		});
