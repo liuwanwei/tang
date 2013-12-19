@@ -459,11 +459,8 @@ function tang_main_rating(rating_list,ismouseover)
 			//提交评分的结束
 			a_this.attr("isclick","true");
 		});
-		
-		
 			event.stopPropagation();
 		});
-
 
 			a_arr.hover(function(){
 				var a_offset=$(this).offset();
@@ -504,7 +501,6 @@ function tang_main_rating(rating_list,ismouseover)
 					raing_value.text(clicknum);
 				}
 			});
-
 	}
 
 	});
