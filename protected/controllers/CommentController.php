@@ -59,7 +59,7 @@ class CommentController extends Controller
 
 		if(isset($_POST['Comment']))
 		{
-			if ($this->checkActionFrequency()) {
+			if ($this->checkActionFrequency() >= 0) {
 				$model->attributes=$_POST['Comment'];
 				$model->restaurant_id=$restaurant_id;
 				if($model->save()){
@@ -136,7 +136,7 @@ class CommentController extends Controller
 		
 		if(isset($_POST['Comment'])) {
 
-			if($this->checkActionFrequency()) {
+			if($this->checkActionFrequency() >= 0) {
 				$model->attributes=$_POST['Comment'];
 				$model->restaurant_id=$restaurantId;
 				$model->save();
@@ -147,7 +147,7 @@ class CommentController extends Controller
 				$this->clearCacheFile(false);
 			}else {
 				$url = Yii::app()->request->url;
-				$this->redirectPrompt(ERROR_CODE_FREQUENCY,ERROR_CODE_FREQUENCY_MESSAGE,$url);
+				$this->redirectPrompt(ERROR_CODE_FREQUENCY,ERROR_CODE_MESSAGE_FREQUENCY,$url);
 				return;
 			}
 		}
