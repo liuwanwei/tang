@@ -56,14 +56,15 @@ class CommentController extends Controller
 		$model=new Comment;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-		
+		// echo $_POST["json"];
 		if(isset($_POST['Comment']))
 		{ 
+
 			if ($this->checkActionFrequency()) {
 				$model->attributes=$_POST['Comment'];
 				$model->restaurant_id=$restaurant_id;
 				if($model->save()){
-					$this->updateLastActionTime();
+					//$this->updateLastActionTime();
 					if (isset($_POST['json']) && $_POST['json']=='1') {
 						echo json_encode(array('code'=>"0",'msg' =>"评论成功"));
 					}else{
