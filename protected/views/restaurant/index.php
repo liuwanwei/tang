@@ -270,7 +270,7 @@ if (count>limit) {
 				?>	
 				strData+='<!--编辑功能-->';
 				strData+='<div class="view-edit-btn" >'+
-				'<div class="view-edit-header"><a title="编辑 '+item["restaurant"]["name"]+'" class="fa fa-pencil">编辑</a>'+
+				'<div class="view-edit-header"><a title="'+item["restaurant"]["name"]+'" class="fa fa-pencil"></a>'+
 				'<ul>'+
 				'<li class="feature-btn">贴标</li>'+
 				'<li class="itemEdit-btn" data-item-url="/restaurant/update/id/'+item["restaurant"]["id"]+'">修改</li>'+
