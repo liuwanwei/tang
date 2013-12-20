@@ -137,7 +137,7 @@ class RestaurantController extends Controller
 					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
 				
-				//当新添加的餐馆状态为审核通过时，清空所有缓存文件
+				//清空所有缓存文件，让用户添加的餐馆能显示在首页
 				if ($model->is_checked == 1) {
 					$this->clearCacheFile(false);	
 				}
