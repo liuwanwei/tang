@@ -270,9 +270,10 @@ if (count>limit) {
 				?>	
 				strData+='<!--编辑功能-->';
 				strData+='<div class="view-edit-btn" >'+
-				'<div class="view-edit-header"><a title="编辑 '+item["restaurant"]["name"]+'">编辑</a>'+
+				'<div class="view-edit-header"><a title="编辑 '+item["restaurant"]["name"]+'" class="fa fa-pencil">编辑</a>'+
 				'<ul>'+
 				'<li class="feature-btn">贴标</li>'+
+				'<li class="itemEdit-btn" data-item-url="/restaurant/update/id/'+item["restaurant"]["id"]+'">修改</li>'+
 				'</ul>'+
 				'</div>'+
 				'<div class="feature-content" data-item-id="'+item["restaurant"]["id"]+'" data-selected-items="';
@@ -539,36 +540,42 @@ function tang_main_rating(rating_list,ismouseover)
 					d_this.find("ul").show();
 					d_this.find(".feature-btn").bind("click",function(){
 						var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
-			//ajax加载数据
-			$.get("/restaurantFeature/query",{},function(data){
+						//ajax加载数据
+						$.get("/restaurantFeature/query",{},function(data){
 
-				var t="<ul>";
-				if (data) {
-					$.each(data,function(a){
-						if (isContain(feature_selected_items,data[a].id)) {
-							t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" />'+data[a].name+'</label> </li>';
-						}
-						else{
-							t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
-						}
+							var t="<ul>";
+							if (data) {
+								$.each(data,function(a){
+									if (isContain(feature_selected_items,data[a].id)) {
+										t+='<li><label><input type="checkbox" value='+data[a].id+' checked="true" />'+data[a].name+'</label> </li>';
+									}
+									else{
+										t+='<li><label><input type="checkbox" value='+data[a].id+' />'+data[a].name+'</label> </li>';
+									}
+								});
+							}
+							t+="</ul>";
+							$(".feature-content .feature-content-content",p_this).html(t);
+						},"json");
+
+
+						$(".feature-content",p_this).css({'display':'block',
+							'top':p_this.offset().top+25,
+							'left':p_this.offset().left}).animate(
+							{	
+								width:'200px',
+								minHeight:'200px',
+								left:$(this).offset().left-$(this).width()-200,
+								top:$(this).offset().top-25
+
+							},200);
 					});
-				}
-				t+="</ul>";
-				$(".feature-content .feature-content-content",p_this).html(t);
-			},"json");
+					
+					//编辑导航
+					d_this.find(".itemEdit-btn").bind("click",function(){
+						window.location=$(this).attr('data-item-url');
+					});
 
-
-			$(".feature-content",p_this).css({'display':'block',
-				'top':p_this.offset().top+25,
-				'left':p_this.offset().left}).animate(
-				{	
-					width:'200px',
-					minHeight:'200px',
-					left:$(this).offset().left-$(this).width()-200,
-					top:$(this).offset().top-25
-
-				},200);
-			});
 				},function(){
 					$(this).find("ul").hide();
 					$(this).find(".feature-btn").unbind("click");
