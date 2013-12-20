@@ -20,7 +20,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$user = USer::model()->getUser($this->username);
+		$user = User::model()->getUser($this->username);
 		if ($user !== null) {
 			$this->userId = $user->id;
 			$this->errorCode=self::ERROR_NONE;
