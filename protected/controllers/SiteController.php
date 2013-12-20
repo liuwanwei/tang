@@ -220,7 +220,7 @@ class SiteController extends Controller
 
 		// 代码更新成功后，清除缓存。
 		$error_prefix = "error:";
-		if (strncasecmp($output, $error_prefix, count($error_prefix)) !== 0) {
+		if (strpos($output, $error_prefix) === false) {
 			$success = Yii::app()->cache->flush();
 			if ($success) {
 				echo "<pre>缓存刷新成功</pre>";
