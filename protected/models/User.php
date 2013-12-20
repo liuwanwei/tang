@@ -137,4 +137,14 @@ class User extends CActiveRecord
 		return false;
 	}
 
+
+	public function getUser($extension_user_id) {
+		if(!empty($extension_user_id)) {
+			$user = $this->find('extension_user_id = :extension_user_id',array(':extension_user_id' => $extension_user_id));
+			return $user;
+		}
+
+		return null;
+	}
+
 }

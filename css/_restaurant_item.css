@@ -368,7 +368,7 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
 }
 .view-edit-btn .view-edit-header ul
 {
-	width: 100%;
+	width: 40px;
 	list-style: none;
 	background: #FFFFFF;
     border-radius: 6px 6px 6px 6px;
@@ -380,7 +380,7 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
     -moz-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
     -o-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
-    position: relative;
+    position: absolute;
     z-index: 1060;
     display: none;
 

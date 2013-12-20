@@ -30,8 +30,12 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index', 'create', 'update', 'view', 'delete','indexByPage'),
+						'actions'=>array('index', 'update', 'view', 'delete','indexByPage'),
 						'users'=>array('*')),
+				array('allow',
+						'actions'=>array('create'),
+						'users'=>array('@'),
+				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
 						'actions'=>array('admin','view', 'check'),
 						'expression'=>array($this,'isAdmin'),
@@ -89,8 +93,17 @@ class RestaurantController extends Controller
 		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses, 'types'=>$types);
 	}
 
-	private function urlImagePath($model, $extension){
-		return '/images/restaurant/profile_'.$model->id.'.'.$extension;
+	private function randomFilename() {
+        $str = '';
+        for($i = 0; $i < 9; $i++) {
+            $str .= mt_rand(0, 9);
+        }
+
+        return date('Y-m-d-H-i-s') . $str;
+    }
+
+	private function urlImagePath($extension){
+		return '/images/restaurant/profile_'.$this->randomFilename().'.'.$extension;
 	}
 
 	/**
@@ -105,7 +118,6 @@ class RestaurantController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Restaurant']))
 		{
 			$model->attributes=$_POST['Restaurant'];
@@ -115,20 +127,28 @@ class RestaurantController extends Controller
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
 			if (!empty($uploadedFile)) {
 				$extension = $uploadedFile->getExtensionName();
-				$filename = $this->urlImagePath($model, $extension);
+				$filename = $this->urlImagePath($extension);
 				$model->image_url = $filename;
 			}
 
-			if($model->save())
+			if($model->save()) {
 				if (isset($filename)) {
 					// 保存汤馆图片到服务器存储路径。
 					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
 				
-				//清空所有缓存文件
-				$this->clearCacheFile(false);
-
-				$this->redirect("admin");
+				//清空所有缓存文件，让用户添加的餐馆能显示在首页
+				if ($model->is_checked == 1) {
+					$this->clearCacheFile(false);	
+				}
+				
+				if (isset($_POST['Json'])){
+					echo $this->makeResultMessage(SUCCESS_CODE,SUCCESS_CODE_MESSAGE_RESTAURANT_CREATE);
+					return;
+				}else {
+					$this->redirect("admin");
+				}
+			}
 		}
 
 
@@ -261,14 +281,12 @@ class RestaurantController extends Controller
 
 		$data = $dataProvider->getData();
 		$menuItems = array();
-		$urlParams = array('county'=>$countyId);
 
 		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
-		$menuItems[] = array('label'=>$county->name, 'url'=>$this->createUrl('restaurant/index', array('county' => $countyId)));
+		$menuItems[] = array('label'=>$county->name, 'url'=>array($this->createUrl('restaurant/index'), 'county' => $countyId));
 	
 		foreach ($data as $key => $value) {
-			$urlParams['area'] = $value->id;
-			$menuItems[] = array('label' => $value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
+			$menuItems[] = array('label' => $value->name, 'url' => array($this->createUrl('restaurant/index'), 'county'=>$countyId,'area'=>$value->id));
 		}
 
 		return $menuItems;
@@ -326,7 +344,7 @@ class RestaurantController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex($county = 0, $area = -1, $type = 0)
-	{
+	{		 
 		$restaurant = new Restaurant();
 		$restaurant->county_id = $county;
 		$restaurant->area_id = $area;

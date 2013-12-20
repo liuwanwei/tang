@@ -219,3 +219,17 @@ pre
 {
 	color: rgb(159, 46, 24);
 }
+.rating-error-loading
+{
+	color:#aa2105;
+	position: absolute;
+}
+.comment-item-info-edit
+{
+	float: right;
+}
+.comment-item-info-edit .comment-item-index
+{
+	color:#999;
+	font-size: 12px!important;
+}

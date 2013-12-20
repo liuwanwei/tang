@@ -17,11 +17,12 @@
 		<div class="info">
 			<span class="source"><?php echo CHtml::encode($data->user->nick_name);?></span>
 			<span class="time"><?php echo CHtml::encode($data->create_datetime);?></span>
-			<div style="float:right;">
-			<?php if (User::model()->isAdmin()) {
-				$actionUrl = $this->createUrl('comment/delete', array('id'=>$data->id));
-				echo CHtml::link('<i class="fa fa-times comment-del" title="删除评论"></i>', $actionUrl);
-			}?>
+			<div class="comment-item-info-edit">
+				<span class="comment-item-index"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?>楼</span>
+				<?php if (User::model()->isAdmin()) {
+					$actionUrl = $this->createUrl('comment/delete', array('id'=>$data->id));
+					echo CHtml::link('<i class="fa fa-times comment-del" title="删除评论"></i>', $actionUrl);
+				}?>
 			</div>
 		</div>
 		<div class="content">			

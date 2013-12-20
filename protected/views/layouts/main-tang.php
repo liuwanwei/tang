@@ -34,23 +34,26 @@ $menu = array();
 $areamenu=array();
 $counties = County::model()->getCountries(0);
 $areas=county::model()->getCountries(1);
-
 $menu[] = array('label' => '首页', 'url' => $this->createUrl('restaurant/index'));
-foreach ($counties as $key => $value){
-	$menu[] = array('label' => $value, 'url' => $this->createUrl('restaurant/index',array('county'=>$key)));
+foreach ($counties as $key => $value)
+{
+	$menu[] = array('label' => $value, 'url' => array($this->createUrl('restaurant/index'),'county'=>$key));
 }
 
 foreach ($areas as $key => $value) {
-	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('restaurant/index',array('county'=>$key)));
+	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
 }
-$menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
+$menu[] = array('label'=>'县区','url'=>'#','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 ?>
 
 <div id="mainmenu">
 <div class="mainmenu-content">	
 	<!-- <a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a> -->
 	<?php $this->widget('zii.widgets.CMenu',array(	
-		'items'=>$menu
+  		//'firstItemCssClass'=>'active',
+		'items'=>$menu,
+		'activeCssClass'=>false,
+  		
 		)); 
 	?>
 
@@ -87,11 +90,26 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
         <h4 class="alertModal-title" id="alertModalLabel">提示信息</h4>
       </div>
       <div class="alertModal-body">
-        你对这个汤馆打了5分，确定吗？
+        <div class="rating-confirm">
+        	<span class="title">我的评分：</span>
+        	<span class="rating-list">
+			<a class="rating-icon star-on" data-title="不推荐"></a>
+			<a class="rating-icon star-on" data-title="聊胜于无"></a>
+			<a class="rating-icon star-on" data-title="日常饮食"></a>
+			<a class="rating-icon star-on" data-title="值得品尝"></a>
+			<a class="rating-icon star-on" data-title="汤中一绝"></a>
+			</span>
+			<span class="rating-value fonttext-shadow-2-3-5-000">0</span>
+			<span class="value-desc"></span>
+			<div class="clear"></div>
+		</div>
+		<form class="form-horizontal" role="form">
+			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧"></textarea>
+		</form>
       </div>
       <div class="alertModal-footer">
         <button type="button" id="alertModalClose" class="btn btn-default">取消</button>
-        <button type="button" id="alertModalSubmit" class="btn btn-primary">提交</button>
+        <button type="button" id="alertModalSubmit"  class="btn btn-red">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -113,7 +131,7 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 	));
 	}?>
 
-	<a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a>
+	<!-- <a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a> -->
 	</div>
 </div>
 <div class="modal-backdrop1"></div>
@@ -139,94 +157,93 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js"></script>
 <script type="text/javascript">
 $(function(){
-var footerHeight = 0,
-footerTop = 0,
-$footer = $("#footer");
-positionFooter();
-//定义positionFooter function
-function positionFooter() {
-//取到div#footer高度
-footerHeight = $footer.height();
-//div#footer离屏幕顶部的距离
-footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";								
-//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
-if ( ($(document.body).height()+footerHeight) < $(window).height()) {
-	$footer.css({
-	position: "absolute"
-	,top: footerTop
-	});
-} else {
-	$footer.css({
-	position: "static"
-	});
+	var footerHeight = 0,
+	footerTop = 0,
+	$footer = $("#footer");
+	positionFooter();
+	//定义positionFooter function
+	function positionFooter() {
+	//取到div#footer高度
+	footerHeight = $footer.height();
+	//div#footer离屏幕顶部的距离
+	footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";								
+	//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
+	if ( ($(document.body).height()+footerHeight) < $(window).height()) {
+		$footer.css({
+		position: "absolute"
+		,top: footerTop
+		});
+	} else {
+		$footer.css({
+		position: "static"
+		});
 
-}
-}
-$(window).scroll(positionFooter).resize(positionFooter);
-
-//点击登陆弹出模态窗口
-$(".login").click(function(){
-	loginModal();
-});
-$(".loginuser").bind("mouseover",function(){
-/*$(this).parent().addClass('show').bind("mouseout",function(){
-
-$(this).removeClass('show');
-});*/
-
-});
-
-$(".modal-backdrop1").click(function(){
-	$("#myModal").hide();
-	$(this).hide();
-});
-$(document.body).keyup(function(event){
-//if(event.ctrlKey && event.which == 13)       //13等于回车键(Enter)键值,ctrlKey 等于 Ctrl
-//alert("按了ctrl+回车键!")
-if(event.keyCode==27)
-	$("#myModal").hide();
-$(".modal-backdrop1").hide();
-});
-
-
-//县菜单鼠标放上去显示下级菜单
-$(".areamenu").hover(function(){
-	$(this).find('ul').show(100);
-},function(){
-	$(this).find('ul').hide(100);
-});
-
-//回到顶部ＪＳ
-$(window).scroll(function(){
-
-	if($(window).scrollTop()>($(document.body).height()/4))
-	{
-		$("#right_float_panel").show();
-	}else
-	{
-		$("#right_float_panel").hide();
 	}
+	}
+	$(window).scroll(positionFooter).resize(positionFooter);
 
-});
 
-//回到顶部功能
-$(".top_up").click(function(){
-	$('html,body').animate({scrollTop:'0px'},500);
-});
+	//菜单选中效果
+	var hostUrl=window.location.href.split(window.location.hostname);
+	if (hostUrl[1]=='/') {
+		hostUrl[1]="<?php echo $this->createUrl('restaurant/index'); ?>";
+	}
+	$("#mainmenu .mainmenu-content>ul>li>a").each(function(){
+		if ($(this).attr('href')==hostUrl[1]) {
+			$(this).parent().attr('class','active');
+		}
+	});
 
-/*
- *类型、区域的A标签加上点击激活状态的样式
- */
-// var currentItem=null;
-// $("#area-menu>ul>li>a").click(function(){
-// 	if (currentItem) {
-// 		currentItem.removeClass('active');
-// 	}
-// 	$(this).addClass('active');
-// 	currentItem=$(this);
 
-// });
+	//点击登陆弹出模态窗口
+	$(".login").click(function(){
+		loginModal();
+	});
+	$(".loginuser").bind("mouseover",function(){
+	/*$(this).parent().addClass('show').bind("mouseout",function(){
 
+	$(this).removeClass('show');
+	});*/
+
+	});
+
+	$(".modal-backdrop1").click(function(){
+		$("#myModal").hide();
+		$(this).hide();
+	});
+	$(document.body).keyup(function(event){
+	//if(event.ctrlKey && event.which == 13)       //13等于回车键(Enter)键值,ctrlKey 等于 Ctrl
+	//alert("按了ctrl+回车键!")
+	if(event.keyCode==27)
+		$("#myModal").hide();
+	$(".modal-backdrop1").hide();
+	});
+
+
+	//县菜单鼠标放上去显示下级菜单
+	$(".areamenu").hover(function(){
+		$(this).find('ul').show(100);
+	},function(){
+		$(this).find('ul').hide(100);
+	});
+
+	//回到顶部ＪＳ
+	$(window).scroll(function(){
+
+		if($(window).scrollTop()>($(document.body).height()/4))
+		{
+			$("#right_float_panel").show();
+		}else
+		{
+			$("#right_float_panel").hide();
+		}
+
+	});
+
+	//回到顶部功能
+	$(".top_up").click(function(){
+		$('html,body').animate({scrollTop:'0px'},500);
+	});
 });
 </script>
 </body>
