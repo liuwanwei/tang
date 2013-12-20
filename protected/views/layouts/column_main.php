@@ -30,20 +30,20 @@
 
 <div class="t-container" id="page">
 <?php
-$menu = array();
-$areamenu=array();
-$counties = County::model()->getCountries(0);
-$areas=county::model()->getCountries(1);
-$menu[] = array('label' => '首页', 'url' => $this->createUrl('restaurant/index'));
-foreach ($counties as $key => $value)
-{
-	$menu[] = array('label' => $value, 'url' => array($this->createUrl('restaurant/index'),'county'=>$key));
-}
+	$menu = array(
+		array('label' => '首页', 'url' => $this->createUrl('restaurant/index'))
+	);
 
-foreach ($areas as $key => $value) {
-	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
-}
-$menu[] = array('label'=>'县区','url'=>'#','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
+	$countyGroup = array(
+		County::model()->getCountyWithType(0), 	// 获取所有的“区”。
+		County::model()->getCountyWithType(1)	// 获取所有的“县”。
+	);
+
+	foreach ($countyGroup as $counties) {
+		foreach ($counties as $id => $name){
+			$menu[] = array('label' => $name, 'url' => array($this->createUrl('restaurant/index'),'county'=>$id));
+		}
+	}
 ?>
 
 <div id="mainmenu">
