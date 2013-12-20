@@ -35,6 +35,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
+			'class'=>'WebUser',
 			'allowAutoLogin'=>true,
 			'loginUrl'=>'/site/redirectLogin',
 		),
@@ -114,6 +115,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
-		'actionInterval'=>30,
+		'actionInterval'=>5,
 	),
 );
