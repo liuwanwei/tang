@@ -282,14 +282,12 @@ class RestaurantController extends Controller
 
 		$data = $dataProvider->getData();
 		$menuItems = array();
-		$urlParams = array('county'=>$countyId);
 
 		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
-		$menuItems[] = array('label'=>$county->name, 'url'=>$this->createUrl('restaurant/index', array('county' => $countyId)));
+		$menuItems[] = array('label'=>$county->name, 'url'=>array($this->createUrl('restaurant/index'), 'county' => $countyId));
 	
 		foreach ($data as $key => $value) {
-			$urlParams['area'] = $value->id;
-			$menuItems[] = array('label' => $value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
+			$menuItems[] = array('label' => $value->name, 'url' => array($this->createUrl('restaurant/index'), 'county'=>$countyId,'area'=>$value->id));
 		}
 
 		return $menuItems;

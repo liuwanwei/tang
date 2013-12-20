@@ -85,8 +85,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 							<span>X</span>
 						</a>
 					</span>
+
 				</div>
+				
 			</div>
+			<span class="rating-error-loading"></span>
 			<div class="clear"><!--清除浮动--></div>
 		</li>
 	</ul>
@@ -216,9 +219,8 @@ function ratingfnc(){
 			var i=parseInt($("span",$(this)).text());
 			var selected_a=$(".rating-stars a:lt("+i+")",a_this);
 			var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
-		//event.preventDefault()
-		//event.stopPropagation();
-		//console.log("tagname="+$(this)[0].tagName+" user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
+			//event.preventDefault()
+			//event.stopPropagation();
 
 		if (a_this.attr('data-user')=="") {
 		//点击登陆弹出模态窗口
@@ -233,34 +235,45 @@ function ratingfnc(){
 	rating_cancel.addClass('rating-pending');
 
 		//执行评分的ajax
-		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
 		$.post("/vote/create",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()}},function(resultdata){
-		//console.log("aa="+resultdata.voteid);
-		if (resultdata.msg==="0") {
-		a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
-		rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");					
-		rating_cancel.one('click',function(){
-			rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-			$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
-				if (rating_cancel_result.msg==="0") {
-					a_this.removeAttr('voteid');
+
+		if (resultdata.code===0) {
+			a_this.attr('voteid',resultdata.voteid);//将voteid邦定到dom对象上
+			rating_cancel.removeClass('rating-pending').addClass("rating-icon rating-your");					
+			rating_cancel.one('click',function(){
+				rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
+				$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+					if (rating_cancel_result.msg==="0") {
+						a_this.removeAttr('voteid');
+						rating_cancel.removeClass('rating-pending');
+						a_this.attr("data-clicknum","0");
+						raing_value.text("-");
+						//console.log(rating_cancel_result+"abc");
+						ratingInit(a_this,"rating-icon star-on",1,raing_value);
+					}else{
+					//服务器出错
+					}
+				},"json");
+			});
+	}else if(resultdata.code===-2){
+			var i=resultdata.delay;
+			var votetime=setInterval(function(){
+				i--;
+				$(".rating-error-loading").html(resultdata.msg+'('+i+')秒');
+				if (i<=0) {
+					clearInterval(votetime);
+					$(".rating-error-loading").html('');
 					rating_cancel.removeClass('rating-pending');
-					a_this.attr("data-clicknum","0");
-					raing_value.text("-");
-		//console.log(rating_cancel_result+"abc");
-		ratingInit(a_this,"rating-icon star-on",1,raing_value);
-	}else{
-		//服务器出错
-	}
-},"json");
-		});
+				};
+			},1000);
+
 	}else{
 		//服务器出错
 	}
 },"json");
 
-		a_this.attr("isclick","true");
+	a_this.attr("isclick","true");
 	});
 
 a_arr.hover(function(){

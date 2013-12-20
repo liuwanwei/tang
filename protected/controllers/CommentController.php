@@ -56,24 +56,28 @@ class CommentController extends Controller
 		$model=new Comment;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		// echo $_POST["json"];
 		if(isset($_POST['Comment']))
-		{
+		{ 
 			if ($this->checkActionFrequency() >= 0) {
 				$model->attributes=$_POST['Comment'];
 				$model->restaurant_id=$restaurant_id;
 				if($model->save()){
-					$this->updateLastActionTime();
-					$this->redirect(array('view','id'=>$model->id));
+					//$this->updateLastActionTime();
+					if (isset($_POST['json']) && $_POST['json']=='1') {
+						echo json_encode(array('code'=>"0",'msg' =>"评论成功"));
+					}else{
+						$this->redirect(array('view','id'=>$model->id));
+					}
 				}
 			}else{
 				// TODO 显示投票/评论频率过高警告页面。
 			}
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		// $this->render('create',array(
+		// 	'model'=>$model,
+		// ));
 	}
 	
 

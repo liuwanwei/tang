@@ -1,31 +1,29 @@
 <?php /* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
+	<title><?php echo CHtml::encode("老汤馆-分享洛阳好滋味"); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
-	 <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
-
-	<!-- blueprint CSS framework -->
-	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />-->
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
+	<!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
+ 	<!-- Bootstrap -->
+	<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/tang-main.css" />
 	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />-->
-
-	<title><?php echo CHtml::encode("老汤馆-分享洛阳老滋味"); ?></title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-	<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css">
-
-	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js">
-	</script>
+	
+	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css"> 
+	<script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -36,22 +34,26 @@ $menu = array();
 $areamenu=array();
 $counties = County::model()->getCountries(0);
 $areas=county::model()->getCountries(1);
- //echo count($areas);
+$menu[] = array('label' => '首页', 'url' => $this->createUrl('restaurant/index'));
 foreach ($counties as $key => $value)
 {
-	$menu[] = array('label' => $value, 'url' => $this->createUrl('/restaurant/index',array('county'=>$key)));
+	$menu[] = array('label' => $value, 'url' => array($this->createUrl('restaurant/index'),'county'=>$key));
 }
+
 foreach ($areas as $key => $value) {
-	$areamenu[]=array('label'=>$value,'url'=>$this->createUrl('/restaurant/index',array('county'=>$key)));
+	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
 }
-$menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
+$menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 ?>
 
 <div id="mainmenu">
-<div class="mainmenu-content">
-	<a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a>
+<div class="mainmenu-content">	
+	<!-- <a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a> -->
 	<?php $this->widget('zii.widgets.CMenu',array(	
-		'items'=>$menu
+  		//'firstItemCssClass'=>'active',
+		'items'=>$menu,
+		'activeCssClass'=>'active',
+  		
 		)); 
 	?>
 
@@ -75,8 +77,8 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 		</div>
 		<?php	}?>
 	</div>
-	</div>
-	</div><!-- mainmenu -->
+</div>
+</div><!-- mainmenu -->
 
 
 <!--公共的模态窗口，提示信息用-->
@@ -88,11 +90,26 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
         <h4 class="alertModal-title" id="alertModalLabel">提示信息</h4>
       </div>
       <div class="alertModal-body">
-        你对这个汤馆打了5分，确定吗？
+        <div class="rating-confirm">
+        	<span class="title">我的评分：</span>
+        	<span class="rating-list">
+			<a class="rating-icon star-on" data-title="不推荐"></a>
+			<a class="rating-icon star-on" data-title="聊胜于无"></a>
+			<a class="rating-icon star-on" data-title="日常饮食"></a>
+			<a class="rating-icon star-on" data-title="值得品尝"></a>
+			<a class="rating-icon star-on" data-title="汤中一绝"></a>
+			</span>
+			<span class="rating-value fonttext-shadow-2-3-5-000">0</span>
+			<span class="value-desc"></span>
+			<div class="clear"></div>
+		</div>
+		<form class="form-horizontal" role="form">
+			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧"></textarea>
+		</form>
       </div>
       <div class="alertModal-footer">
         <button type="button" id="alertModalClose" class="btn btn-default">取消</button>
-        <button type="button" id="alertModalSubmit" class="btn btn-primary">提交</button>
+        <button type="button" id="alertModalSubmit"  class="btn btn-red">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -137,6 +154,7 @@ $menu[] = array('label'=>'县区','url'=>'','itemOptions'=>array('class'=>'aream
 <div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"><i class="fa fa-arrow-circle-up" ></i></a></div>
 
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js"></script>
 <script type="text/javascript">
 $(function(){
 var footerHeight = 0,
