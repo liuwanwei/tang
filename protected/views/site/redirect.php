@@ -1,5 +1,5 @@
 <?php 
-$this->layout="main-tang";
+$this->layout="column_main";
 Yii::app()->clientScript->registerScriptFile('//code.jquery.com/jquery-1.10.2.min.js');
 ?>
 <div class="g-alert">
