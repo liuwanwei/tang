@@ -43,7 +43,7 @@ foreach ($counties as $key => $value)
 foreach ($areas as $key => $value) {
 	$areamenu[]=array('label'=>$value,'url'=>array($this->createUrl('restaurant/index'),'county'=>$key));
 }
-$menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
+$menu[] = array('label'=>'县区','url'=>'#','itemOptions'=>array('class'=>'areamenu'),'items'=>$areamenu);
 ?>
 
 <div id="mainmenu">
@@ -52,7 +52,7 @@ $menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=
 	<?php $this->widget('zii.widgets.CMenu',array(	
   		//'firstItemCssClass'=>'active',
 		'items'=>$menu,
-		'activeCssClass'=>'active',
+		'activeCssClass'=>false,
   		
 		)); 
 	?>
@@ -131,7 +131,7 @@ $menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=
 	));
 	}?>
 
-	<a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a>
+	<!-- <a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a> -->
 	</div>
 </div>
 <div class="modal-backdrop1"></div>
@@ -157,94 +157,93 @@ $menu[] = array('label'=>'县区','url'=>array(''),'itemOptions'=>array('class'=
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js"></script>
 <script type="text/javascript">
 $(function(){
-var footerHeight = 0,
-footerTop = 0,
-$footer = $("#footer");
-positionFooter();
-//定义positionFooter function
-function positionFooter() {
-//取到div#footer高度
-footerHeight = $footer.height();
-//div#footer离屏幕顶部的距离
-footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";								
-//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
-if ( ($(document.body).height()+footerHeight) < $(window).height()) {
-	$footer.css({
-	position: "absolute"
-	,top: footerTop
-	});
-} else {
-	$footer.css({
-	position: "static"
-	});
+	var footerHeight = 0,
+	footerTop = 0,
+	$footer = $("#footer");
+	positionFooter();
+	//定义positionFooter function
+	function positionFooter() {
+	//取到div#footer高度
+	footerHeight = $footer.height();
+	//div#footer离屏幕顶部的距离
+	footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";								
+	//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
+	if ( ($(document.body).height()+footerHeight) < $(window).height()) {
+		$footer.css({
+		position: "absolute"
+		,top: footerTop
+		});
+	} else {
+		$footer.css({
+		position: "static"
+		});
 
-}
-}
-$(window).scroll(positionFooter).resize(positionFooter);
-
-//点击登陆弹出模态窗口
-$(".login").click(function(){
-	loginModal();
-});
-$(".loginuser").bind("mouseover",function(){
-/*$(this).parent().addClass('show').bind("mouseout",function(){
-
-$(this).removeClass('show');
-});*/
-
-});
-
-$(".modal-backdrop1").click(function(){
-	$("#myModal").hide();
-	$(this).hide();
-});
-$(document.body).keyup(function(event){
-//if(event.ctrlKey && event.which == 13)       //13等于回车键(Enter)键值,ctrlKey 等于 Ctrl
-//alert("按了ctrl+回车键!")
-if(event.keyCode==27)
-	$("#myModal").hide();
-$(".modal-backdrop1").hide();
-});
-
-
-//县菜单鼠标放上去显示下级菜单
-$(".areamenu").hover(function(){
-	$(this).find('ul').show(100);
-},function(){
-	$(this).find('ul').hide(100);
-});
-
-//回到顶部ＪＳ
-$(window).scroll(function(){
-
-	if($(window).scrollTop()>($(document.body).height()/4))
-	{
-		$("#right_float_panel").show();
-	}else
-	{
-		$("#right_float_panel").hide();
 	}
+	}
+	$(window).scroll(positionFooter).resize(positionFooter);
 
-});
 
-//回到顶部功能
-$(".top_up").click(function(){
-	$('html,body').animate({scrollTop:'0px'},500);
-});
+	//菜单选中效果
+	var hostUrl=window.location.href.split(window.location.hostname);
+	if (hostUrl[1]=='/') {
+		hostUrl[1]="<?php echo $this->createUrl('restaurant/index'); ?>";
+	}
+	$("#mainmenu .mainmenu-content>ul>li>a").each(function(){
+		if ($(this).attr('href')==hostUrl[1]) {
+			$(this).parent().attr('class','active');
+		}
+	});
 
-/*
- *类型、区域的A标签加上点击激活状态的样式
- */
-// var currentItem=null;
-// $("#area-menu>ul>li>a").click(function(){
-// 	if (currentItem) {
-// 		currentItem.removeClass('active');
-// 	}
-// 	$(this).addClass('active');
-// 	currentItem=$(this);
 
-// });
+	//点击登陆弹出模态窗口
+	$(".login").click(function(){
+		loginModal();
+	});
+	$(".loginuser").bind("mouseover",function(){
+	/*$(this).parent().addClass('show').bind("mouseout",function(){
 
+	$(this).removeClass('show');
+	});*/
+
+	});
+
+	$(".modal-backdrop1").click(function(){
+		$("#myModal").hide();
+		$(this).hide();
+	});
+	$(document.body).keyup(function(event){
+	//if(event.ctrlKey && event.which == 13)       //13等于回车键(Enter)键值,ctrlKey 等于 Ctrl
+	//alert("按了ctrl+回车键!")
+	if(event.keyCode==27)
+		$("#myModal").hide();
+	$(".modal-backdrop1").hide();
+	});
+
+
+	//县菜单鼠标放上去显示下级菜单
+	$(".areamenu").hover(function(){
+		$(this).find('ul').show(100);
+	},function(){
+		$(this).find('ul').hide(100);
+	});
+
+	//回到顶部ＪＳ
+	$(window).scroll(function(){
+
+		if($(window).scrollTop()>($(document.body).height()/4))
+		{
+			$("#right_float_panel").show();
+		}else
+		{
+			$("#right_float_panel").hide();
+		}
+
+	});
+
+	//回到顶部功能
+	$(".top_up").click(function(){
+		$('html,body').animate({scrollTop:'0px'},500);
+	});
 });
 </script>
 </body>
