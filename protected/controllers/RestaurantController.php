@@ -93,8 +93,7 @@ class RestaurantController extends Controller
 		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses, 'types'=>$types);
 	}
 
-	private function randomFilename()
-    {
+	private function randomFilename() {
         $str = '';
         for($i = 0; $i < 9; $i++) {
             $str .= mt_rand(0, 9);
@@ -138,7 +137,7 @@ class RestaurantController extends Controller
 					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
 				
-				//清空所有缓存文件
+				//当新添加的餐馆状态为审核通过时，清空所有缓存文件
 				if ($model->is_checked == 1) {
 					$this->clearCacheFile(false);	
 				}
