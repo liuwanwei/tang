@@ -11,10 +11,7 @@
 	$('.fancybox').fancybox();
 </script>
 
-<div style="height:120px;">
-	<p><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="100px" height="100px" alt="" /></a></p>
-	<span></span>
-</div>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -32,6 +29,19 @@
 		<?php echo $form->textField($model,'id'); ?>
 		<?php echo $form->error($model,'id'); ?>
 	</div> -->
+<div style="height:10px;clear:both;"></div>
+<div class="form-group">
+	<?php echo $form->labelEx($model,'image_url',array('class'=>"col-sm-2 control-label")); ?>
+	<div class="col-sm-8">
+		<?php if (!empty($model->image_url)) { ?>
+		<span class="upload-image"><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="100px" height="100px" alt="" /></a></span>
+		<?php } ?>
+		<a href="javascript:;" class="a-upload fa fa-plus-square-o">
+			<?php echo $form->fileField($model,'image_url');?>
+		</a>
+	</div>
+
+</div>
 <div style="width:100%;clear:both;">
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'name',array('class'=>"col-sm-2 control-label")); ?>
