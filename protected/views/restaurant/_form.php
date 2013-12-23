@@ -3,9 +3,18 @@
 /* @var $model Restaurant */
 /* @var $form CActiveForm */
 //http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js
-Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js');
+//Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js');
 ?>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
+<script type="text/javascript">
+	$('.fancybox').fancybox();
+</script>
 
+<div style="height:120px;">
+	<p><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="100px" height="100px" alt="" /></a></p>
+	<span></span>
+</div>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -85,7 +94,7 @@ Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1
 	</div>
 	</div>
 
-	<div class="form-row-one">
+	<!-- <div class="form-row-one">
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'phone',array('class'=>"col-sm-2 control-label")); ?>
 		<div class="col-sm-8">
@@ -101,7 +110,7 @@ Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1
 		<?php echo $form->error($model,'business_hour'); ?>
 	</div>
 	</div>
-	</div>
+	</div> -->
 
 	<?php  if(User::isAdmin()) {
 		echo '<div class="form-group">';		
