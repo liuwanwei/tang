@@ -180,17 +180,20 @@ class RestaurantController extends Controller
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
 			if (!empty($uploadedFile)) {
 				$extension = $uploadedFile->getExtensionName();				
-				$filename = $this->urlImagePath($model, $extension);
+				$filename = $this->urlImagePath($extension);
 				$model->image_url = $filename;
 			}
 			
 			if($model->save())
-				if (!empty($uploadedFile)) {
-					$destPath = Yii::app()->basePath.'/..'.$filename;
-					$uploadedFile->saveAs($destPath);
+				if (isset($filename)) {
+					// 保存汤馆图片到服务器存储路径。
+					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
 				}
-				//清空所有缓存文件
-				$this->clearCacheFile(false);
+				
+				//清空所有缓存文件，让用户添加的餐馆能显示在首页
+				if ($model->is_checked == 1) {
+					$this->clearCacheFile(false);	
+				}
 
 				$this->redirect("/restaurant/admin");
 		}
