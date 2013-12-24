@@ -93,7 +93,7 @@ class County extends CActiveRecord
 	 * @param  $type 0 区； 1 县
 	 * @return array
 	 */
-	public function getCountries($type)
+	public function getCountyWithType($type)
 	{
 		$criteria=new CDbCriteria(array(
 				'condition'=>'type='.$type,

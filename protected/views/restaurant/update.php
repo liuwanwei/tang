@@ -15,8 +15,8 @@
 // 	array('label'=>'Manage Restaurant', 'url'=>array('admin')),
 // );
 ?>
-
-<h4><?php echo $model->name; ?></h4>
+<div class="clear"></div>
+<h4 style="text-align:center;"><?php echo $model->name; ?></h4>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors)); ?>
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>

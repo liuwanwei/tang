@@ -3,8 +3,14 @@
 /* @var $model Restaurant */
 /* @var $form CActiveForm */
 //http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js
-Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js');
+//Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js');
 ?>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
+<script type="text/javascript">
+	$('.fancybox').fancybox();
+</script>
+
 
 <div class="form">
 
@@ -23,6 +29,19 @@ Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1
 		<?php echo $form->textField($model,'id'); ?>
 		<?php echo $form->error($model,'id'); ?>
 	</div> -->
+<div style="height:10px;clear:both;"></div>
+<div class="form-group">
+	<?php echo $form->labelEx($model,'image_url',array('class'=>"col-sm-2 control-label")); ?>
+	<div class="col-sm-8">
+		<?php if (!empty($model->image_url)) { ?>
+		<span class="upload-image"><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="100px" height="100px" alt="" /></a></span>
+		<?php } ?>
+		<a href="javascript:;" class="a-upload fa fa-plus-square-o">
+			<?php echo $form->fileField($model,'image_url');?>
+		</a>
+	</div>
+
+</div>
 <div style="width:100%;clear:both;">
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'name',array('class'=>"col-sm-2 control-label")); ?>
@@ -85,7 +104,7 @@ Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1
 	</div>
 	</div>
 
-	<div class="form-row-one">
+	<!-- <div class="form-row-one">
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'phone',array('class'=>"col-sm-2 control-label")); ?>
 		<div class="col-sm-8">
@@ -101,7 +120,7 @@ Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1
 		<?php echo $form->error($model,'business_hour'); ?>
 	</div>
 	</div>
-	</div>
+	</div> -->
 
 	<?php  if(User::isAdmin()) {
 		echo '<div class="form-group">';		

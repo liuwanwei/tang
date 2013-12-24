@@ -215,10 +215,19 @@ class SiteController extends Controller
 	public function actionUpVersion(){	
 		$shell_script = Yii::getPathOfAlias('webroot') . '/etc/getcode.sh';
 		$output = shell_exec("$shell_script 2>&1");
-		#$output = shell_exec('/usr/bin/git pull origin master 2>&1');
 		echo "<pre>".date('H:i:s')."</pre>";
-		echo "<pre>".$output."</pre>";
-		echo '<pre><h3><a href="http://www.laotangguan.com">老汤馆</a></h3></pre>';
+		echo "<pre>".$output."</pre>";		
+
+		// 代码更新成功后，清除缓存。
+		$error_prefix = "error:";
+		if (strpos($output, $error_prefix) === false) {
+			$success = Yii::app()->cache->flush();
+			if ($success) {
+				echo "<pre>缓存刷新成功</pre>";
+			}
+		}
+
+		echo '<pre><h1><a href="http://www.laotangguan.com">老汤馆</a></h1></pre>';
 	}
 
 	public function actionRedirectLogin() {

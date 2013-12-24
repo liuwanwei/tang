@@ -73,9 +73,10 @@
 			<!--编辑功能-->
 			<div class="view-edit-btn" >
 				<div class="view-edit-header">
-					<a title="编辑 <?php echo CHtml::encode($data->name); ?>">编辑</a>
+					<a title="<?php echo CHtml::encode($data->name); ?>" class="fa fa-pencil"></a>
 					<ul>
 						<li class="feature-btn">贴标</li>
+						<li class="itemEdit-btn" data-item-url="<?php echo $this->createUrl('restaurant/update',array('id'=>$data->id)); ?>">修改</li>
 					</ul>
 				</div>
 

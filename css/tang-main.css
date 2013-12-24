@@ -66,6 +66,7 @@ body
 #footer a
 {
 	font-size: 14px;
+	color:#999!important;
 }
 
 
@@ -1208,6 +1209,49 @@ a.a-text-none
 {
 	color:#ccc;
 	margin-left:10px;
+}
+/*******form******/
+/*a  upload */
+.a-upload {
+	/*padding: 4px 10px;
+	height: 30px;
+	line-height: 20px;
+	background: #fafafa;
+	border: 1px solid #ddd;
+	*/
+	margin-left:5px;
+	float:left;
+	position: relative;
+	cursor: pointer;
+	color: #999;
+	border-radius: 4px;
+	overflow: hidden;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	font-weight: bold;
+	font-size: 7em;
+}
+ 
+.a-upload  input {
+	position: absolute;
+	font-size: 100px;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	cursor: pointer
+}
+ 
+.a-upload:hover {
+	color: #888;
+	text-decoration: none
+}
+
+.upload-image
+{
+	float:left;
+	*display: inline;
 }
 
 

@@ -2,7 +2,7 @@
 /* @var $this CommentController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->layout="main-tang";
+$this->layout="column_main";
 
 $attribute = $restaurant->attributeLabels();
 
