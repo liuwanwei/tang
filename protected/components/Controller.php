@@ -99,4 +99,18 @@ class Controller extends CController
 		
 		return $result;
 	}
+
+	/** 移除组件默认加载的JS
+	* $script js文件名
+	*/
+	protected function removeDefaultJS($script) {
+		$scriptMap = Yii::app()->clientScript->scriptMap;
+		if (is_array($scriptMap) !== true) {
+			$scriptMap = array();
+		}
+
+		$scriptMap[$script] = false;
+		
+		Yii::app()->clientScript->scriptMap = $scriptMap;
+	}
 }

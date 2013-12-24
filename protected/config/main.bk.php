@@ -84,10 +84,10 @@ return array(
             	'jquery'=>false
             ),
 
-            'scriptMap'=> array(
-            	'jquery.ba-bbq.js'=> false,
-            	'jquery.yiilistview.js'=> false
-            )
+            // 'scriptMap'=> array(
+            // 	'jquery.ba-bbq.js'=> false,
+            // 	'jquery.yiilistview.js'=> false
+            // )
         ),
 
 		'log'=>array(
