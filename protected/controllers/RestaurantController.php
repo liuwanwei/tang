@@ -348,7 +348,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionIndex($county = 0, $area = -1, $type = 0)
 	{		 
-        $this->cancelDefaultJS('CListView');
+        $this->removeDefaultJS('jquery.yiilistview.js');
+        $this->removeDefaultJS('jquery.ba-bbq.js');
 
 		$restaurant = new Restaurant();
 		$restaurant->county_id = $county;

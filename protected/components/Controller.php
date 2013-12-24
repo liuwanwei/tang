@@ -100,13 +100,16 @@ class Controller extends CController
 		return $result;
 	}
 
-	protected function cancelDefaultJS($widget) {
-		$scriptMap['jquery.ba-bbq.js'] = false;
-
-		if (strcmp($widget,'CListView') == 0) {
-			
-			$scriptMap['jquery.yiilistview.js'] = false;
+	/** 移除组件默认加载的JS
+	* $script js文件名
+	*/
+	protected function removeDefaultJS($script) {
+		$scriptMap = Yii::app()->clientScript->scriptMap;
+		if (is_array($scriptMap) !== TRUE) {
+			$scriptMap = array();
 		}
+
+		$scriptMap[$script] = false;
 		
 		Yii::app()->clientScript->scriptMap = $scriptMap;
 	}
