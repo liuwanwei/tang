@@ -105,7 +105,7 @@ class Controller extends CController
 	*/
 	protected function removeDefaultJS($script) {
 		$scriptMap = Yii::app()->clientScript->scriptMap;
-		if (is_array($scriptMap) !== TRUE) {
+		if (is_array($scriptMap) !== true) {
 			$scriptMap = array();
 		}
 
