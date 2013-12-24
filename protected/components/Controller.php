@@ -99,4 +99,15 @@ class Controller extends CController
 		
 		return $result;
 	}
+
+	protected function cancelDefaultJS($widget) {
+		$scriptMap['jquery.ba-bbq.js'] = false;
+
+		if (strcmp($widget,'CListView') == 0) {
+			
+			$scriptMap['jquery.yiilistview.js'] = false;
+		}
+		
+		Yii::app()->clientScript->scriptMap = $scriptMap;
+	}
 }

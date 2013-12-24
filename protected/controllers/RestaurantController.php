@@ -348,6 +348,8 @@ class RestaurantController extends Controller
 	 */
 	public function actionIndex($county = 0, $area = -1, $type = 0)
 	{		 
+        $this->cancelDefaultJS('CListView');
+
 		$restaurant = new Restaurant();
 		$restaurant->county_id = $county;
 		$restaurant->area_id = $area;
