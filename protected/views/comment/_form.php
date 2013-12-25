@@ -8,6 +8,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'comment-form',
 	'enableAjaxValidation'=>false,
+	'action'=>Yii::app()->createUrl('/comment/create',array('restaurantId'=>$restaurantId))
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
