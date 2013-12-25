@@ -114,7 +114,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		)); 
 		?>
 
-		<?php echo $this->renderPartial('_form', array('restaurantId'=>$restaurant->id,'model'=>new Comment)); ?>
+		<?php echo $this->renderPartial('_form', array('restaurantId'=>$restaurant->id,'model'=>$model)); ?>
 </div>
 		<script type="text/javascript">
 		$(function(){
