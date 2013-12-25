@@ -119,6 +119,7 @@ class Comment extends CActiveRecord
 	public function getLastComments($limit)
 	{
 		$criteria = new CDbCriteria(array(
+				'condition'=> 'hidden = false',
 				'limit'=> $limit,
 				'offset'=> 0,
 				'order'=>'create_datetime DESC',
