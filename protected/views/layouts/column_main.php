@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+	<script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
 	<title><?php echo CHtml::encode("老汤馆-分享洛阳好滋味"); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
@@ -23,7 +24,6 @@
 	
 	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css"> 
-	<script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -104,7 +104,7 @@
 			<div class="clear"></div>
 		</div>
 		<form class="form-horizontal" role="form">
-			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧"></textarea>
+			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧[选填]"></textarea>
 		</form>
       </div>
       <div class="alertModal-footer">
