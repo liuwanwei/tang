@@ -135,9 +135,7 @@ class CommentController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex($restaurantId) {
-		//Yii CActiveForm需要使用Comment对象
-		$model = new Comment;
-		
+
 		$criteria=new CDbCriteria(array(
 				'condition'=>'restaurant_id='.$restaurantId . ' AND hidden=0',
 				'order'=>'create_datetime DESC',
@@ -153,7 +151,7 @@ class CommentController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			'restaurant'=>$restaurant,
-			'model'=>$model
+			'model'=>new Comment //Yii CActiveForm需要使用Comment对象
 		));
 	}
 
