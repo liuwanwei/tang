@@ -74,10 +74,6 @@ class CommentController extends Controller
 				// TODO 显示投票/评论频率过高警告页面。
 			}
 		}
-
-		// $this->render('create',array(
-		// 	'model'=>$model,
-		// ));
 	}
 	
 
@@ -146,7 +142,8 @@ class CommentController extends Controller
 				$model->save();
 
 				// 更新最后操作时间戳。
-				$this->updateLastActionTime();	
+				$this->updateLastActionTime();
+				
 				//清空所有缓存文件
 				$this->clearCacheFile(false);
 			}else {
