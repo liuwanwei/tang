@@ -104,7 +104,7 @@
 			<div class="clear"></div>
 		</div>
 		<form class="form-horizontal" role="form">
-			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧"></textarea>
+			<textarea class="form-control" id="commentContent" rows="3" placeholder="发表评论吧[选填]"></textarea>
 		</form>
       </div>
       <div class="alertModal-footer">

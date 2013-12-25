@@ -23,8 +23,12 @@ class CommentController extends Controller
 	{
 		return array(
 				array('allow',
-						'actions'=>array('index','create'),
+						'actions'=>array('index'),
 						'users'=>array('*')
+				),
+				array('allow',
+						'actions'=>array('create'),
+						'users'=>array('@')
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
 						'actions'=>array('admin','delete','update','view'),
@@ -51,29 +55,28 @@ class CommentController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate($restaurant_id)
-	{
-		$model=new Comment;
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-		// echo $_POST["json"];
-		if(isset($_POST['Comment']))
-		{ 
-			if ($this->checkActionFrequency() >= 0) {
+	public function actionCreate($restaurantId) {	
+		$url = $this->createUrl('comment/index', array('restaurantId' => $restaurantId));
+
+		if(isset($_POST['Comment'])) {
+
+			if($this->checkActionFrequency() >= 0) {
+				$model = new Comment;
 				$model->attributes=$_POST['Comment'];
-				$model->restaurant_id=$restaurant_id;
-				if($model->save()){
-					//$this->updateLastActionTime();
-					if (isset($_POST['json']) && $_POST['json']=='1') {
-						echo json_encode(array('code'=>"0",'msg' =>"评论成功"));
-					}else{
-						$this->redirect(array('view','id'=>$model->id));
-					}
-				}
-			}else{
-				// TODO 显示投票/评论频率过高警告页面。
+				$model->restaurant_id=$restaurantId;
+				$model->save();
+
+				// 更新最后操作时间戳。
+				$this->updateLastActionTime();	
+				//清空所有缓存文件,为了返回首页时及时显示最新评论
+				$this->clearCacheFile(false);
+			}else {
+				$this->redirectPrompt(ERROR_CODE_FREQUENCY,ERROR_CODE_MESSAGE_FREQUENCY,$url);
+				return;
 			}
 		}
+
+		$this->redirect($url);		
 	}
 	
 
@@ -132,27 +135,6 @@ class CommentController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex($restaurantId) {
-		$model = new Comment;
-		
-		if(isset($_POST['Comment'])) {
-
-			if($this->checkActionFrequency() >= 0) {
-				$model->attributes=$_POST['Comment'];
-				$model->restaurant_id=$restaurantId;
-				$model->save();
-
-				// 更新最后操作时间戳。
-				$this->updateLastActionTime();
-				
-				//清空所有缓存文件
-				$this->clearCacheFile(false);
-			}else {
-				$url = Yii::app()->request->url;
-				$this->redirectPrompt(ERROR_CODE_FREQUENCY,ERROR_CODE_MESSAGE_FREQUENCY,$url);
-				return;
-			}
-		}
-		
 		$criteria=new CDbCriteria(array(
 				'condition'=>'restaurant_id='.$restaurantId . ' AND hidden=0',
 				'order'=>'create_datetime DESC',
@@ -167,8 +149,8 @@ class CommentController extends Controller
 		 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-			'model'=>$model,
 			'restaurant'=>$restaurant,
+			'model'=>new Comment //Yii CActiveForm需要使用Comment对象
 		));
 	}
 
