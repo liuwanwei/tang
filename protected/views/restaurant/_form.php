@@ -20,15 +20,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<!-- <p class="note">带<span class="required">*</span>必填</p> -->
-
-	<?php echo $form->errorSummary($model); ?>
-
-	<!-- <div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div> -->
+<!-- <p class="note">带<span class="required">*</span>必填</p> -->
 <div style="height:10px;clear:both;"></div>
 <div class="form-group">
 	<?php echo $form->labelEx($model,'image_url',array('class'=>"col-sm-2 control-label")); ?>
