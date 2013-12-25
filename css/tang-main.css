@@ -1260,6 +1260,21 @@ a.a-text-none
 	margin:5px 0px 0px 5px;
 }
 
+.user-header
+{
+	color:#888;
+	text-align: left;
+	clear:both;
+	margin-bottom: 0px!important;
+	padding: 10px!important;
+}
+.big-fontcss
+{
+	font-size:18px;
+	margin:0px 2px!important;
+}
+
+
 
 
 

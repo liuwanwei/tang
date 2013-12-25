@@ -33,13 +33,30 @@
 	'emptyText'=>'没有数据',
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
+		array(
+			'name'=>'id',
+			'value'=>'$data->id',
+			'filter'=>false,
+			),
 		'name',
 		// 'phone',
 		// 'business_hour',
-		'address',
-		'county_id',	// TODO 直接显示中文的“区”，如涧西区。
-		'is_checked',	// TODO 直接显示中文的‘通过’或“未通过'。
+		array(
+			'name'=>'address',
+			'value'=>'$data->address',
+			'filter'=>false,
+			),
+		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
+		array(
+			'name'=>'county_id',
+			'value'=>'$data->county->name',
+			'filter'=>false,
+		),
+		array(
+			'name'=>'is_checked',
+			'value'=>'$data->is_checked==1?"通过":"未通过"',
+			'filter'=>false,
+		),	// TODO 直接显示中文的‘通过’或“未通过'。
 		/*
 		'area',
 		'is_shutdown',
@@ -52,14 +69,14 @@
 			'class'=>'CButtonColumn',
 			'viewButtonImageUrl'=>false,
 			'viewButtonLabel'=>'',
-			'viewButtonOptions'=>array('class'=>'fa fa-search'),
+			'viewButtonOptions'=>array('class'=>'fa fa-search big-fontcss'),
 			'viewButtonUrl'=>'Yii::app()->createUrl("details/$data->id")',
 			'updateButtonImageUrl'=>false,
 			'updateButtonLabel'=>'',
-			'updateButtonOptions'=>array('class'=>'fa fa-pencil'),
+			'updateButtonOptions'=>array('class'=>'fa fa-pencil big-fontcss'),
 			'deleteButtonImageUrl'=>false,
 			'deleteButtonLabel'=>'',
-			'deleteButtonOptions'=>array('class'=>'fa fa-times-circle'),
+			'deleteButtonOptions'=>array('class'=>'fa fa-times-circle big-fontcss'),
 		),
 	),
 	'pagerCssClass'=>'tang-pager',
