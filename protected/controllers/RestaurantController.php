@@ -176,7 +176,6 @@ class RestaurantController extends Controller
 		{
 			$model->attributes=$_POST['Restaurant'];
 
-			$filename = '';
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
 			if (!empty($uploadedFile)) {
 				$extension = $uploadedFile->getExtensionName();				
