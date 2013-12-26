@@ -112,6 +112,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'loginExpireTime'=>3600*24*7,
 		'actionInterval'=>5,
 	),
 );

@@ -186,6 +186,10 @@ class SiteController extends Controller
 	
 					Yii::app()->user->id = $user->id;
 					Yii::app()->user->name = $user->nick_name;
+
+					// 由于我们通过微博授权，所以没有用户名/密码登陆过程，但还是要模拟一下，以便Yii自动将登录状态保存到Cookie中。
+					$identity = new UserIdentity($user->id, 'we_dont_need_password');
+					Yii::app()->user->login($identity, Yii::app()->params['loginExpireTime']);
 					
 					$this->redirect($_REQUEST['state']);
 				}  else {
