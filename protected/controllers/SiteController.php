@@ -189,7 +189,11 @@ class SiteController extends Controller
 
 					// 由于我们通过微博授权，所以没有用户名/密码登陆过程，但还是要模拟一下，以便Yii自动将登录状态保存到Cookie中。
 					$identity = new UserIdentity($user->id, 'we_dont_need_password');
-					Yii::app()->user->login($identity, Yii::app()->params['loginExpireTime']);
+					$duration = Yii::app()->params['loginExpireTime'];
+					if (empty($duration)) {
+						$duration = 3600 * 24 * 7; // 默认一天内免登陆。
+					}
+					Yii::app()->user->login($identity, $duration);
 					
 					$this->redirect($_REQUEST['state']);
 				}  else {
