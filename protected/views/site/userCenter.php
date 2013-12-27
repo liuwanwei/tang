@@ -1,22 +1,21 @@
 <?php
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
+echo sizeof($model->searchCreatedByMe(0));
 ?>
-<div class="user-header alert alert-danger">我的未审核通过的汤馆</div>
+
+<?php if(count($model->searchCreatedByMe(0))>0){ ?>
+<div class="user-header">我的未审核通过的汤馆</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-unchecked',
 	'dataProvider'=>$model->searchCreatedByMe(0),
 	'filter'=>$model,
 	'itemsCssClass'=>'table table-hover table-uc',
-	'emptyText'=>'没有数据',
+	'cssFile' => false,
+	'emptyText'=>false,
 	'summaryCssClass'=>'display-none',
 		'columns'=>array(
-		array(
-			'name'=>'id',
-			'value'=>'$data->id',
-			'filter'=>false,
-			),
 		'name',
 		// 'phone',
 		// 'business_hour',
@@ -28,7 +27,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
 		array(
 			'name'=>'county_id',
-			'value'=>'$data->county->name',
+			'value'=>'$data->county_id==0 ? "" : $data->county->name',
 			'filter'=>false,
 		),
 		array(
@@ -73,10 +72,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'cssFile'=>false,
 			),
 )); 
-
 ?>
+<?php }?>
 
-<div class="user-header alert alert-success">我的已审核通过的汤馆</div>
+<div class="user-header">我的已审核通过的汤馆</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-checked',
@@ -86,11 +85,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'filter'=>$model,
 	'summaryCssClass'=>'display-none',
 	'columns'=>array(
-		array(
-			'name'=>'id',
-			'value'=>'$data->id',
-			'filter'=>false,
-			),
 		'name',
 		// 'phone',
 		// 'business_hour',

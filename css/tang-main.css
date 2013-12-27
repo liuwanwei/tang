@@ -1137,8 +1137,9 @@ a.a-text-none
 {
 	padding: 10px;
 	margin:40px auto;
-	width: 300px;
+	width: 400px;
 	min-height: 100px;
+	vertical-align: baseline;
 	border:none;
 	background-color:rgba(234,112,84,.9);
 	opacity: 0.7;
@@ -1148,14 +1149,17 @@ a.a-text-none
 .g-alert .fa-bullhorn
 {
 	font-size: 40px;
-	margin-right: 20px;
+	float: left;
+
 }
 .g-alert .alertmsg
 {
+	width: 84%;
 	font-size: 16px;
 	line-height: 30px;
-	height: 30px;
 	font-weight: bold;
+	display: block;
+	float:right;
 }
 .g-alert #time
 {
