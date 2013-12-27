@@ -183,9 +183,6 @@ class SiteController extends Controller
 	
 						$user->save();
 					}
-	
-					Yii::app()->user->id = $user->id;
-					Yii::app()->user->name = $user->nick_name;
 
 					// 由于我们通过微博授权，所以没有用户名/密码登陆过程，但还是要模拟一下，以便Yii自动将登录状态保存到Cookie中。
 					$identity = new UserIdentity($user->id, 'we_dont_need_password');
@@ -194,6 +191,9 @@ class SiteController extends Controller
 						$duration = 3600 * 24 * 7; // 默认一天内免登陆。
 					}
 					Yii::app()->user->login($identity, $duration);
+	
+					Yii::app()->user->id = $user->id;
+					Yii::app()->user->name = $user->nick_name;
 					
 					$this->redirect($_REQUEST['state']);
 				}  else {
@@ -215,8 +215,15 @@ class SiteController extends Controller
 		if(isset($_GET['Restaurant']))
 			$model->attributes=$_GET['Restaurant'];
 
+		$uncheckedDataProvider = $model->searchCreatedByMe(0);
+		$checkedDataProvider = $model->searchCreatedByMe(1);
+
 		$this->render('userCenter', array(
-			'model'=>$model,
+			'model'=> $model,
+			'uncheckedDataProvider'=> $uncheckedDataProvider,
+			'uncheckedItemsCount'=> $uncheckedDataProvider->getTotalItemCount(),
+			'checkedDataProvider'=> $checkedDataProvider,
+			'checkedItemsCount'=> $checkedDataProvider->getTotalItemCount(),
 		));
 	}
 

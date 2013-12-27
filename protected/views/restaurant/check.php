@@ -33,11 +33,6 @@
 	'emptyText'=>'没有数据',
 	'filter'=>$model,
 	'columns'=>array(
-		array(
-			'name'=>'id',
-			'value'=>'$data->id',
-			'filter'=>false,
-			),
 		'name',
 		// 'phone',
 		// 'business_hour',
