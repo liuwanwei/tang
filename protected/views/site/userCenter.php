@@ -28,7 +28,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
 		array(
 			'name'=>'county_id',
-			'value'=>'$data->county->name',
+			'value'=>'$data->county_id==0 ? "" : $data->county->name',
 			'filter'=>false,
 		),
 		array(
@@ -102,7 +102,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
 		array(
 			'name'=>'county_id',
-			'value'=>'$data->county->name',
+			'value'=>'$data->county_id==0 ? "" : $data->county->name',
 			'filter'=>false,
 		),
 		array(
