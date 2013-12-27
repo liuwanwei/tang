@@ -172,11 +172,9 @@ class RestaurantController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Restaurant']))
-		{
+		if(isset($_POST['Restaurant'])) {
 			$model->attributes=$_POST['Restaurant'];
 
-			$filename = '';
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
 			if (!empty($uploadedFile)) {
 				$extension = $uploadedFile->getExtensionName();				
@@ -194,13 +192,14 @@ class RestaurantController extends Controller
 				if ($model->is_checked == 1) {
 					$this->clearCacheFile(false);	
 				}
-
-				$this->redirect("/restaurant/admin");
+			
+				$this->redirect($_POST['returnUrl']);
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 			'selectors'=>$this->staticSelectors(),
+			'returnUrl'=>Yii::app()->request->urlReferrer // 将上页地址传递给前端界面，用于保存成功后返回对应的上页界面
 		));
 	}
 

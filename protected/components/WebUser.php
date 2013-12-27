@@ -7,7 +7,7 @@ class WebUser extends CWebUser{
 	public function init(){		
 		parent::init();
 
-		// TODO: if not login, try login from HTTP header.
+		// 尝试从HTTP Header中获取认证信息，以实现RestFul API。
 		$this->initFromHeader();
 	}
 

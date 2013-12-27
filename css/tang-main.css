@@ -1137,8 +1137,7 @@ a.a-text-none
 {
 	padding: 10px;
 	margin:40px auto;
-	min-width: 300px;
-	max-width: 500px;
+	width: 500px;
 	min-height: 100px;
 	vertical-align: baseline;
 	border:none;
@@ -1155,7 +1154,7 @@ a.a-text-none
 }
 .g-alert .alertmsg
 {
-	width: 84%;
+	width: 87%;
 	font-size: 16px;
 	line-height: 30px;
 	font-weight: bold;
@@ -1166,7 +1165,7 @@ a.a-text-none
 {
 	display: inline-block;
 	width: 20px;
-	margin-left: 60px;
+	margin-left: 65px;
 }
 
 .rating-confirm span

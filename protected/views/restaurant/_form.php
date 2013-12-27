@@ -19,6 +19,10 @@
 	'htmlOptions' => array('enctype'=>'multipart/form-data','class'=>'form-horizontal'),
 	'enableAjaxValidation'=>false,
 )); ?>
+
+<?php if (isset($returnUrl)) {
+	echo '<input type="hidden" id="returnUrl" name="returnUrl" value="'.$returnUrl.'" />';
+} ?>
 <!-- <p class="note">带<span class="required">*</span>必填</p> -->
 <div style="height:10px;clear:both;"></div>
 <div class="form-group">

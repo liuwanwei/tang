@@ -3,12 +3,12 @@
 /* @var $model Restaurant */
 ?>
 
-<?php if(count($model->searchCreatedByMe(0))>0){ ?>
+<?php if($uncheckedItemsCount>0){ ?>
 <div class="user-header">我的未审核通过的汤馆</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-unchecked',
-	'dataProvider'=>$model->searchCreatedByMe(0),
+	'dataProvider'=>$uncheckedDataProvider,
 	'filter'=>$model,
 	'itemsCssClass'=>'table table-hover table-uc',
 	'cssFile' => false,
@@ -74,11 +74,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ?>
 <?php }?>
 
+<?php if ($checkedItemsCount>0) {?>
+	
+
 <div class="user-header">我的已审核通过的汤馆</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-checked',
-	'dataProvider'=>$model->searchCreatedByMe(1),
+	'dataProvider'=>$checkedDataProvider,
 	'cssFile' => Yii::app()->request->baseUrl. '/css/tang_uc_style.css',
 	'itemsCssClass'=>'table table-hover table-uc',
 	'filter'=>$model,
@@ -136,3 +139,4 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ));
 
 ?>
+<?php } ?>

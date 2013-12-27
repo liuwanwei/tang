@@ -18,7 +18,7 @@
 <div class="clear"></div>
 <h4 style="text-align:center;"><?php echo $model->name; ?></h4>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors,'returnUrl'=>$returnUrl)); ?>
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script>
 // var geoCoder,cityLocation,map,marker = null;
