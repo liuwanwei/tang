@@ -52,7 +52,7 @@ class RestaurantController extends Controller
 	 */
 	public function actionView($id)
 	{
-		parent::actionAdmin();
+		parent::importAdminLayout();
 		
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
@@ -112,7 +112,7 @@ class RestaurantController extends Controller
 	 */
 	public function actionCreate()
 	{
-		parent::actionAdmin();
+		parent::importAdminLayout();
 		
 		$model=new Restaurant;
 
@@ -165,7 +165,7 @@ class RestaurantController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		parent::actionAdmin();
+		parent::importAdminLayout();
 		
 		$model=$this->loadModel($id);
 
@@ -210,7 +210,7 @@ class RestaurantController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		parent::actionAdmin();
+		parent::importAdminLayout();
 
 		if (Yii::app()->user->id != $id  && ! parent::isAdmin()) {
 			// TODO 403 not permitted.
@@ -380,7 +380,7 @@ class RestaurantController extends Controller
 			die("404");
 		}
 
-		parent::actionAdmin();
+		parent::importAdminLayout();
 		
 		$model=new Restaurant('search');
 		$model->unsetAttributes();  // clear any default values
@@ -392,13 +392,24 @@ class RestaurantController extends Controller
 		));
 	}
 
+
+	/*
+	 * 根据关键词查询功能入口。
+	 */
+	public function actionSearch(){
+			
+	}
+
+	/*
+	 * 进入”审核汤馆“界面，仅列出未审核的汤馆。
+	 */
 	public function actionCheck(){
 		if (! parent::isAdmin()) {
 			// TODO 重定向到404。
 			die("404");
 		}
 
-		parent::actionAdmin();
+		parent::importAdminLayout();
 		
 		$model=new Restaurant('search');
 		$model->unsetAttributes();  // clear any default values
