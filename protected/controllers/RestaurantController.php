@@ -30,7 +30,7 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index', 'update', 'view', 'delete','indexByPage'),
+						'actions'=>array('index', 'update', 'view', 'delete','indexByPage', 'search'),
 						'users'=>array('*')),
 				array('allow',
 						'actions'=>array('create'),
@@ -397,7 +397,17 @@ class RestaurantController extends Controller
 	 * 根据关键词查询功能入口。
 	 */
 	public function actionSearch(){
-			
+		parent::importAdminLayout();
+
+		$model = new Restaurant('search');
+		$model->unsetAttributes();
+		if (isset($_GET['Restaurant'])) {
+			$model->attributes = $_GET['Restaurant'];
+		}
+
+		$this->render('admin', array(
+			'model'=>$model,
+		));
 	}
 
 	/*

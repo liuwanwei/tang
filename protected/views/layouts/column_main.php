@@ -57,6 +57,12 @@
 		)); 
 	?>
 
+	<div style="float:left;margin-left:1%;">
+		<form method="POST" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
+			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
+		</form>
+	</div>
+
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
 		<a href="#" class="login">登陆</a>
