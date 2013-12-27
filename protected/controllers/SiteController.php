@@ -216,7 +216,11 @@ class SiteController extends Controller
 			$model->attributes=$_GET['Restaurant'];
 
 		$this->render('userCenter', array(
-			'model'=>$model,
+			'model'=> $model,
+			'uncheckedDataProvider'=> $model->searchCreatedByMe(0),
+			'uncheckedItemsCount'=> $model->searchCreatedByMe(0)->getTotalItemCount(),
+			'checkedDataProvider'=> $model->searchCreatedByMe(1),
+			'checkedItemsCount'=> $model->searchCreatedByMe(1)->getTotalItemCount(),
 		));
 	}
 
