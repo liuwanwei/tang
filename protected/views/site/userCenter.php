@@ -1,7 +1,6 @@
 <?php
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
-echo sizeof($model->searchCreatedByMe(0));
 ?>
 
 <?php if(count($model->searchCreatedByMe(0))>0){ ?>
