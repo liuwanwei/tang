@@ -32,11 +32,6 @@
 	'itemsCssClass'=>'table table-hover table-uc',
 	'filter'=>$model,
 	'columns'=>array(
-		array(
-			'name'=>'id',
-			'value'=>'$data->id',
-			'filter'=>false,
-			),
 		'name',
 		// 'phone',
 		// 'business_hour',
