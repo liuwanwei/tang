@@ -529,8 +529,7 @@ function tang_main_rating(rating_list,ismouseover)
 			//console.log("a="+event.data.rating);
 		}
 
-		<?php if (User::model()->isAdmin()) {
-			?>
+		<?php if (User::model()->isAdmin()) { ?>
 			editbutton();
 			/*当用户角色是管理员，就显示编辑功能*/
 			function editbutton(){
@@ -582,7 +581,7 @@ function tang_main_rating(rating_list,ismouseover)
 				});
 
 				$("#feature-edit-close",btnedit_div).click(function(){
-					btnedit_div_hide($(this));
+					hide_edit_btn_div($(this));
 					
 				});
 
@@ -590,18 +589,16 @@ function tang_main_rating(rating_list,ismouseover)
 					var d_this=$(this);
 					var parent_edit_dom=$(this).parent().parent();
 					
-					var features1="";
-					var feature_arr=[];	
+					var features_items_str="";
 					$("input:checked",parent_edit_dom.find(".feature-content-content")).each(function(){
-						features1+=$(this).val()+",";		
-						//feature_arr.push({id:$(this).val(),name:$(this).parent().text()});
+						features_items_str+=$(this).val()+",";		
 					});
-					features1=features1.substring(0,features1.length-1);
+					features_items_str=features_items_str.substring(0,features_items_str.length-1);
 					//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
-					$.post("/feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
+					$.post("/feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features_items_str}},function(data){
 						if (data.success) {
 							//当提交成功时关闭窗体
-							btnedit_div_hide(d_this);
+							hide_edit_btn_div(d_this);
 							//刷新页面
 							location="/index.php"+window.location.search;
 							//当提交成功时动态更新特色数据
@@ -615,10 +612,9 @@ function tang_main_rating(rating_list,ismouseover)
 						}
 					},"json");
 				});
-
 			}
 
-	function btnedit_div_hide(a)
+	function hide_edit_btn_div(a)
 	{
 		a.parent().parent().hide(100,function(){
 			$(this).css({'width':'100px','min-height':'50px','left':$(this).parent().offset().left,'top':$(this).parent().offset().top+25});
