@@ -71,6 +71,7 @@
 								<li>
 									<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
 									<div>
+										<span class="source"><?php echo $value->user->nick_name; ?> 添加了评分</span>
 										<span class="title"><?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
 										<div class="rating-widget">
 											<span class="rating-widget-lable">评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
@@ -534,12 +535,11 @@ function tang_main_rating(rating_list,ismouseover)
 			/*当用户角色是管理员，就显示编辑功能*/
 			function editbutton(){
 				var btnedit_div=$(".view-edit-btn");
-
 				$(".view-edit-header",btnedit_div).hover(function(){
 					var d_this=$(this),p_this=d_this.parent();
 					d_this.find("ul").show();
 					d_this.find(".feature-btn").bind("click",function(){
-						var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
+					var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
 						//ajax加载数据
 						$.get("/restaurantFeature/query",{},function(data){
 
@@ -581,49 +581,48 @@ function tang_main_rating(rating_list,ismouseover)
 					$(this).find(".feature-btn").unbind("click");
 				});
 
-	$("#feature-edit-close",btnedit_div).click(function(){
-		btnedit_div_hide($(this));
-		
-	});
+				$("#feature-edit-close",btnedit_div).click(function(){
+					btnedit_div_hide($(this));
+					
+				});
 
-	$("#feature-edit-submit",btnedit_div).click(function(){
-		var d_this=$(this);
-		var parent_edit_dom=$(this).parent().parent();
-		
-		var features1="";
-		var feature_arr=[];	
-		$("input:checked",parent_edit_dom.find(".feature-content-content")).each(function(){
-			features1+=$(this).val()+",";		
-			//feature_arr.push({id:$(this).val(),name:$(this).parent().text()});
-		});
-		features1=features1.substring(0,features1.length-1);
-		//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
-		$.post("/feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
-			if (data.success) {
-		//当提交成功时关闭窗体
-		btnedit_div_hide(d_this);
-		//刷新页面
-		location="/index.php"+window.location.search;
-		//当提交成功时动态更新特色数据
+				$("#feature-edit-submit",btnedit_div).click(function(){
+					var d_this=$(this);
+					var parent_edit_dom=$(this).parent().parent();
+					
+					var features1="";
+					var feature_arr=[];	
+					$("input:checked",parent_edit_dom.find(".feature-content-content")).each(function(){
+						features1+=$(this).val()+",";		
+						//feature_arr.push({id:$(this).val(),name:$(this).parent().text()});
+					});
+					features1=features1.substring(0,features1.length-1);
+					//console.log("parent_content="+parent_edit_dom.attr("data-item-id"));
+					$.post("/feature/addrestaurantfeature",{Feature:{restaurant_id:parent_edit_dom.attr("data-item-id"),features:features1}},function(data){
+						if (data.success) {
+							//当提交成功时关闭窗体
+							btnedit_div_hide(d_this);
+							//刷新页面
+							location="/index.php"+window.location.search;
+							//当提交成功时动态更新特色数据
 
+							//console.log("className="+$(".restaurant-detail>ul>li>ul:eq(0) li",parent_edit_dom.parent().parent()).eq(0).text());
 
-		//console.log("className="+$(".restaurant-detail>ul>li>ul:eq(0) li",parent_edit_dom.parent().parent()).eq(0).text());
+							//$("<li>adfsadf</li>").appendTo($(".restaurant-detail>ul>li>ul:eq(0) li:eq(1)",parent_edit_dom.parent().parent()));
+						}else
+						{
+							//提示错误信息
+						}
+					},"json");
+				});
 
-		//$("<li>adfsadf</li>").appendTo($(".restaurant-detail>ul>li>ul:eq(0) li:eq(1)",parent_edit_dom.parent().parent()));
-	}else
-	{
-		//提示错误信息
-	}
-	},"json");
-	});
-
-	}
+			}
 
 	function btnedit_div_hide(a)
 	{
 		a.parent().parent().hide(100,function(){
 			$(this).css({'width':'100px','min-height':'50px','left':$(this).parent().offset().left,'top':$(this).parent().offset().top+25});
-			$(".feature-content-content").html('');
+			$(".feature-content-content",a.parent().parent()).html('');
 		});
 	}
 

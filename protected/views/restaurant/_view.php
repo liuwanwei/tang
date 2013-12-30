@@ -84,6 +84,7 @@
 				foreach ($data->features as $value) {
 					echo $value->feature_id.",";
 				} ?>">
+				<div class="feature-content-title"><?php echo CHtml::encode($data->name); ?></div>
 				<div class="feature-content-content"></div>
 				<div class="feature-content-footer"><button id="feature-edit-submit">提交</button><button id="feature-edit-close">关闭</button></div>
 			</div>
