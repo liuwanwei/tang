@@ -77,9 +77,9 @@
 	padding: 0px;
 	position: relative;
 }
-.right-content #last_votes .content ul li,.right-content #last_comments .content ul li
+.right-content #last_votes .content ul li
 {
-	min-height: 50px;
+	min-height: 70px;
 	height: auto;
 	position: relative;
 	padding:5px 0px;
@@ -88,6 +88,17 @@
 	z-index: 1;
 
 }
+.right-content #last_comments .content ul li
+{
+	min-height: 50px;
+	height: auto;
+	position: relative;
+	padding:5px 0px;
+	vertical-align: middle;
+	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
+	z-index: 1;
+}
+
 
 .right-content #last_comments .content ul li:last-child
 {
@@ -408,6 +419,7 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
 	min-height:50px;	
 	position: absolute;
 	z-index: 1061;
+	padding: 0px 3px;
 	display: none;
 	background: #FFFFFF;
     border-radius: 6px 6px 6px 6px;
@@ -437,6 +449,14 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
 .feature-content .feature-content-content
 {
 	min-height: 60%;
+	color: #666;
+}
+.feature-content-title
+{
+	color:#666;
+	font-weight: bold;
+	padding: 5px 0px;
+	border-bottom: 1px solid #ccc;
 }
 
 .feature-content .feature-content-footer
