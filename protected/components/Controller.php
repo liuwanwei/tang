@@ -48,7 +48,7 @@ class Controller extends CController
 		);
 	}
 	
-	public function actionAdmin()
+	public function importAdminLayout()
 	{
 		$this->layout='//layouts/column_admin';
 	}

@@ -57,6 +57,12 @@
 		)); 
 	?>
 
+	<div style="float:left;margin-left:1%;">
+		<form method="POST" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
+			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
+		</form>
+	</div>
+
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
 		<a href="#" class="login">登陆</a>
@@ -145,6 +151,8 @@
 <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
 </div><!-- page -->
 <div id="footer">
+	<a href="http://blog.laotangguan.com/?p=12" target="_blank">评分标准</a>
+	<span class='dot'>•</span>
 	<a href="http://blog.laotangguan.com/?p=5" target="_blank">排名算法</a>
 	<span class='dot'>•</span>
 	<a href="http://blog.laotangguan.com/?p=9" target="_blank">建议反馈</a>

@@ -41,7 +41,7 @@ class SiteController extends Controller
 						'users'=>array('*')
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('upVersion','admin'),
+						'actions'=>array('upVersion','admin', 'flushCache'),
 						'expression'=>array($this,'isAdmin'),
 				),
 				array('deny',  // deny all usersk
@@ -236,10 +236,14 @@ class SiteController extends Controller
 		// 代码更新成功后，清除缓存。
 		$error_prefix = "error:";
 		if (strpos($output, $error_prefix) === false) {
-			$success = Yii::app()->cache->flush();
-			if ($success) {
-				echo "<pre>缓存刷新成功</pre>";
-			}
+			$this->actionFlushCache();
+		}
+	}
+
+	public function actionFlushCache(){
+		$success = Yii::app()->cache->flush();
+		if ($success) {
+			echo "<pre>缓存刷新成功</pre>";
 		}
 
 		echo '<pre><h1><a href="http://www.laotangguan.com">老汤馆</a></h1></pre>';

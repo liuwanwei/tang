@@ -159,7 +159,7 @@ class CommentController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		parent::actionAdmin();
+		parent::importAdminLayout();
 		
 		$model=new Comment('search');
 		$model->unsetAttributes();  // clear any default values
