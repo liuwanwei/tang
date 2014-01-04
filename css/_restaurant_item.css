@@ -210,6 +210,7 @@
 .restaurant-left
 {
 	width: 655px;
+	min-height: 790px;
 	float: left;
 	background: #FFFFFF;
 	box-shadow: 0 0 6px #ccc;
