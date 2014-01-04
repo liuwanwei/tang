@@ -413,6 +413,10 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
 {
 	background: #ccc;
 }
+.view-edit-btn .view-edit-header ul li a
+{
+	color: #222!important;
+}
 
 .view-edit-btn .feature-content
 {
