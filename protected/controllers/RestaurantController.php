@@ -146,7 +146,7 @@ class RestaurantController extends Controller
 					echo $this->makeResultMessage(SUCCESS_CODE,SUCCESS_CODE_MESSAGE_RESTAURANT_CREATE);
 					return;
 				}else {
-					$this->redirect("admin");
+					$this->redirect("/site/userCenter");
 				}
 			}
 		}
@@ -212,7 +212,7 @@ class RestaurantController extends Controller
 		parent::importAdminLayout();		
 
 		$model = $this->loadModel($id);
-		
+
 		// 只有管理员或者汤馆创建者才能删除汤馆。
 		if (Yii::app()->user->id == $model->creator || parent::isAdmin()) {
 			
