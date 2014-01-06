@@ -36,7 +36,7 @@ class RestaurantController extends Controller
 						'actions'=>array('create'),
 						'users'=>array('@'),
 				),
-				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				array('allow', // allow admin user to perform 'admin' action.
 						'actions'=>array('admin','view', 'check'),
 						'expression'=>array($this,'isAdmin'),
 				),
@@ -208,23 +208,20 @@ class RestaurantController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
-	{
-		parent::importAdminLayout();
+	public function actionDelete($id){		
+		parent::importAdminLayout();		
 
-		if (Yii::app()->user->id != $id  && ! parent::isAdmin()) {
-			// TODO 403 not permitted.
-			die('403');
-		}
+		$model = $this->loadModel($id);
 		
-		$this->loadModel($id)->delete();
+		// 只有管理员或者汤馆创建者才能删除汤馆。
+		if (Yii::app()->user->id == $model->creator || parent::isAdmin()) {
+			
+			$model->delete();
 
-		//清空所有缓存文件
-		$this->clearCacheFile(false);
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax'])){
-			// $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('site/userCenter'));
+			//清空所有缓存文件
+			$this->clearCacheFile(false);
+		}else{
+			throw new CHttpException(403,'用户没有操作权限');
 		}
 	}
 
@@ -371,15 +368,9 @@ class RestaurantController extends Controller
 	}
 
 	/**
-	 * 汤馆审核功能-从导航栏”个人中心“进入。管理员才有。
+	 * 汤馆审核功能-从导航栏”个人中心“进入。只有管理员才有这个子菜单，通过accessRules限制非管理员进入。
 	 */
-	public function actionAdmin()
-	{
-		if (! parent::isAdmin()) {
-			// TODO 重定向到404。
-			die("404");
-		}
-
+	public function actionAdmin(){
 		parent::importAdminLayout();
 		
 		$model=new Restaurant('search');
@@ -414,9 +405,8 @@ class RestaurantController extends Controller
 	 * 进入”审核汤馆“界面，仅列出未审核的汤馆。
 	 */
 	public function actionCheck(){
-		if (! parent::isAdmin()) {
-			// TODO 重定向到404。
-			die("404");
+		if (! parent::isAdmin()) {			
+			throw new CHttpException(403,'用户没有操作权限');
 		}
 
 		parent::importAdminLayout();
