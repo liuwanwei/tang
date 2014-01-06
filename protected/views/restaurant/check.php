@@ -41,7 +41,6 @@
 			'value'=>'$data->address',
 			'filter'=>false,
 			),
-		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
 		array(
 			'name'=>'county_id',
 			'value'=>'$data->county->name',
@@ -51,7 +50,7 @@
 			'name'=>'is_checked',
 			'value'=>'$data->is_checked==1?"通过":"未通过"',
 			'filter'=>false,
-		),	// TODO 直接显示中文的‘通过’或“未通过'。
+		),
 		/*
 		'area',
 		'is_shutdown',
