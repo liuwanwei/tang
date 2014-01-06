@@ -276,8 +276,8 @@ body
 #county-menu>ul>li.active a,#area-menu>ul>li.active a
 {
 	cursor: pointer;
-	color: #aa2105!important;
-	text-decoration:none;
+	color: #aa2105;
+	text-decoration:none!important;
 }
 
 li.areamenu ul
@@ -376,7 +376,7 @@ li.areamenu ul li a
 
 #county-menu li a:hover,#county-menu li a:focus, #area-menu li a:hover,#area-menu li a:focus
 {
-	color:#FFFFFF;
+	color:#FFFFFF!important;
 }
 
 /*区域-----------------------------end*/
