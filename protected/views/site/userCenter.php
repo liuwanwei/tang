@@ -4,7 +4,7 @@
 ?>
 
 <?php if($uncheckedItemsCount>0){ ?>
-<div class="user-header">我的未审核通过的汤馆</div>
+<div class="user-header">我添加的汤馆 - 未审核</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-unchecked',
@@ -76,7 +76,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 <?php if ($checkedItemsCount>0) {?>
 	
 
-<div class="user-header">我的已审核通过的汤馆</div>
+<div class="user-header">我添加的汤馆 - 已审核</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-checked',
