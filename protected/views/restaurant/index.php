@@ -274,7 +274,7 @@ if (count>limit) {
 				'<div class="view-edit-header"><a title="'+item["restaurant"]["name"]+'" class="fa fa-pencil"></a>'+
 				'<ul>'+
 				'<li class="feature-btn">贴标</li>'+
-				'<li class="itemEdit-btn" data-item-url="/restaurant/update/id/'+item["restaurant"]["id"]+'">修改</li>'+
+				'<li class="itemEdit-btn" data-item-url="/restaurant/update/id/'+item["restaurant"]["id"]+'"><a href="/restaurant/update/id/'+item["restaurant"]["id"]+'" target="_blank">修改</a></li>'+
 				'</ul>'+
 				'</div>'+
 				'<div class="feature-content" data-item-id="'+item["restaurant"]["id"]+'" data-selected-items="';
@@ -570,11 +570,6 @@ function tang_main_rating(rating_list,ismouseover)
 							},200);
 					});
 					
-					//编辑导航
-					d_this.find(".itemEdit-btn").bind("click",function(){
-						window.location=$(this).attr('data-item-url');
-					});
-
 				},function(){
 					$(this).find("ul").hide();
 					$(this).find(".feature-btn").unbind("click");

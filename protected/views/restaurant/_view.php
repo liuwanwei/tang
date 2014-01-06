@@ -76,7 +76,7 @@
 					<a title="<?php echo CHtml::encode($data->name); ?>" class="fa fa-pencil"></a>
 					<ul>
 						<li class="feature-btn">贴标</li>
-						<li class="itemEdit-btn" data-item-url="<?php echo $this->createUrl('restaurant/update',array('id'=>$data->id)); ?>">修改</li>
+						<li class="itemEdit-btn" data-item-url="<?php echo $this->createUrl('restaurant/update',array('id'=>$data->id)); ?>"><a href="<?php echo $this->createUrl('restaurant/update',array('id'=>$data->id)); ?>" target="_blank">修改</a></li>
 					</ul>
 				</div>
 
