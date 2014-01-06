@@ -111,6 +111,7 @@ class CommentController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		// 对应的评论不存在时，$this->loadModeel($id)会直接抛出异常。
 		$model = $this->loadModel($id);
 		if ($model) {
 			$model->hidden = true;
@@ -119,12 +120,7 @@ class CommentController extends Controller
 			$this->clearCacheFile(false);
 			
 			$this->redirect($this->createUrl('comment/index', array('restaurantId' => $model->restaurant_id)));
-		}else{
-			// TODO: 评论不存在，显示错误信息。
-			die('');
 		}
-
-		// $this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -182,7 +178,7 @@ class CommentController extends Controller
 	{
 		$model=Comment::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'评论对象不存在');
 		return $model;
 	}
 
