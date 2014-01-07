@@ -100,6 +100,12 @@ class Controller extends CController
 		return $result;
 	}
 
+	public function makeDataMessage($code = 0, $msg = '', $data = array()) {
+		$result = array('code'=>$code, 'msg'=>$msg, 'data'=> $data);
+		
+		return CJSON::encode($result);
+	}
+
 	/** 移除组件默认加载的JS
 	* $script js文件名
 	*/
