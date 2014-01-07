@@ -1279,6 +1279,12 @@ a.a-text-none
 	margin:0px 2px!important;
 }
 
+#client_img>div>span
+{
+	display: block;
+	margin-top: 5px;
+}
+
 
 
 
