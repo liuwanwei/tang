@@ -122,10 +122,15 @@ class RestaurantTypeController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('RestaurantType');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$dataProvider = new CActiveDataProvider('RestaurantType');
+		if (isset($_POST['Json'])){
+			$types = $dataProvider->getData();
+			echo $this->makeDataMessage(SUCCESS_CODE,'',$types);
+		}else {
+			$this->render('index',array(
+				'dataProvider'=>$dataProvider,
+			));
+		}
 	}
 
 	/**
