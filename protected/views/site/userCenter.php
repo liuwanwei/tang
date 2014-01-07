@@ -4,7 +4,7 @@
 ?>
 
 <?php if($uncheckedItemsCount>0){ ?>
-<div class="user-header">我的未审核通过的汤馆</div>
+<div class="user-header">我添加的汤馆 - 未审核</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-unchecked',
@@ -23,7 +23,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'value'=>'$data->address',
 			'filter'=>false,
 			),
-		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
 		array(
 			'name'=>'county_id',
 			'value'=>'$data->county_id==0 ? "" : $data->county->name',
@@ -33,7 +32,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'name'=>'is_checked',
 			'value'=>'$data->is_checked==1?"通过":"未通过"',
 			'filter'=>false,
-		),	// TODO 直接显示中文的‘通过’或“未通过'。
+		),
 		/*
 		'area',
 		'is_shutdown',
@@ -77,7 +76,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 <?php if ($checkedItemsCount>0) {?>
 	
 
-<div class="user-header">我的已审核通过的汤馆</div>
+<div class="user-header">我添加的汤馆 - 已审核</div>
 <?php 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid-checked',
@@ -95,7 +94,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'value'=>'$data->address',
 			'filter'=>false,
 			),
-		//'county_id',	// TODO 直接显示中文的“区”，如涧西区。
 		array(
 			'name'=>'county_id',
 			'value'=>'$data->county->name',
@@ -105,7 +103,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'name'=>'is_checked',
 			'value'=>'$data->is_checked==1?"通过":"未通过"',
 			'filter'=>false,
-		),	// TODO 直接显示中文的‘通过’或“未通过'。
+		),
 		/*
 		'area',
 		'is_shutdown',

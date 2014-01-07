@@ -20,6 +20,7 @@
  * @property integer $votes
  * @property double $average_points
  * @property double $weighted_points
+ * @property integer $creator
  */
 class Restaurant extends CActiveRecord
 {

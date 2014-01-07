@@ -210,6 +210,7 @@
 .restaurant-left
 {
 	width: 655px;
+	min-height: 790px;
 	float: left;
 	background: #FFFFFF;
 	box-shadow: 0 0 6px #ccc;
@@ -411,6 +412,10 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
 .view-edit-btn .view-edit-header ul li:hover
 {
 	background: #ccc;
+}
+.view-edit-btn .view-edit-header ul li a
+{
+	color: #222!important;
 }
 
 .view-edit-btn .feature-content

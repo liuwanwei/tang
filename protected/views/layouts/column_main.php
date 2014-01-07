@@ -57,11 +57,11 @@
 		)); 
 	?>
 
-	<div style="float:left;margin-left:1%;">
+	<!-- <div style="float:left;margin-left:1%;">
 		<form method="POST" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
 			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
 		</form>
-	</div>
+	</div> -->
 
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
@@ -193,15 +193,47 @@ $(function(){
 
 	//菜单选中效果
 	var hostUrl=window.location.href.split(window.location.hostname);
+	var county="",area="",type="";
 	if (hostUrl[1]=='/') {
 		hostUrl[1]="<?php echo $this->createUrl('restaurant/index'); ?>";
 	}
+	county=hostUrl[1];
+	var params=hostUrl[1];
+	if (params.indexOf('area')>-1 && params.indexOf('type')==-1) {
+		county=params.split('/area')[0];
+		area=params;
+	}
+	if (params.indexOf('type')>-1) {
+		county=params.split('/area')[0];
+		area=params.split('/type')[0];
+		type=params;
+	}
+
 	$("#mainmenu .mainmenu-content>ul>li>a").each(function(){
-		if ($(this).attr('href')==hostUrl[1]) {
+		if ($(this).attr('href')==county) {
 			$(this).parent().attr('class','active');
 		}
 	});
 
+	if (area=="") {
+		$("#county-menu>ul>li>a").eq(0).parent().attr('class','active');
+	}else{
+		$("#county-menu>ul>li>a").each(function(){
+			if ($(this).attr('href')==area) {
+				$(this).parent().attr('class','active');
+			}
+		});
+	}
+
+	if (type=="") {
+		$("#area-menu>ul>li>a").eq(0).parent().attr('class','active');
+	}else{
+		$("#area-menu>ul>li>a").each(function(){
+			if ($(this).attr('href')==type) {
+				$(this).parent().attr('class','active');
+			}
+		});
+	}
 
 	//点击登陆弹出模态窗口
 	$(".login").click(function(){

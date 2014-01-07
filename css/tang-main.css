@@ -265,13 +265,19 @@ body
 	padding:5px 8px;
 }
 
-#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a,#county-menu>ul>li.active a
+#mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a
 {
 	cursor: pointer;
 	background-color:#AA2104;
 	color: #FFFFFF;
 	text-decoration:none;
-	
+}
+
+#county-menu>ul>li.active a,#area-menu>ul>li.active a
+{
+	cursor: pointer;
+	color: #aa2105;
+	text-decoration:none!important;
 }
 
 li.areamenu ul
@@ -370,7 +376,7 @@ li.areamenu ul li a
 
 #county-menu li a:hover,#county-menu li a:focus, #area-menu li a:hover,#area-menu li a:focus
 {
-	color:#FFFFFF;
+	color:#FFFFFF!important;
 }
 
 /*区域-----------------------------end*/

@@ -30,13 +30,13 @@ class RestaurantController extends Controller
 		
 		return array(
 				array('allow',
-						'actions'=>array('index', 'update', 'view', 'delete','indexByPage', 'search'),
+						'actions'=>array('index', 'view', 'indexByPage', 'search'),
 						'users'=>array('*')),
 				array('allow',
-						'actions'=>array('create'),
+						'actions'=>array('create', 'delete', 'update'),
 						'users'=>array('@'),
 				),
-				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				array('allow', // allow admin user to perform 'admin' action.
 						'actions'=>array('admin','view', 'check'),
 						'expression'=>array($this,'isAdmin'),
 				),
@@ -94,16 +94,35 @@ class RestaurantController extends Controller
 	}
 
 	private function randomFilename() {
+		$length = 6;
         $str = '';
-        for($i = 0; $i < 9; $i++) {
-            $str .= mt_rand(0, 9);
+        for($i = 0; $i < $length; $i++) {
+            $str .= mt_rand(0, $length);
         }
 
-        return date('Y-m-d-H-i-s') . $str;
+        return $str;
     }
 
-	private function urlImagePath($extension){
-		return '/images/restaurant/profile_'.$this->randomFilename().'.'.$extension;
+	private function createImagePathWithExtension($extension){
+		$datePart = date("Y") . '/' . date("m") . '/' . date("d");
+
+		// TODO: 部署时，要想办法检查Web服务器是否对图片目录有访问权限。
+		$destDir = '/images/profile/' . $datePart . '/';
+		return $destDir . $this->randomFilename().'.'.$extension;
+	}
+
+	private function saveImage($uploadedFile, $filename){
+		$destFile = Yii::app()->basePath.'/..'.$filename;
+		$destPath = dirname($destFile);
+		
+		// 创建图片子目录。
+		if (!file_exists($destPath)) {
+			if(false === mkdir($destPath, 0755, true)){
+				throw new CHttpException(403, '没有图片目录操作权限 ');
+			}		
+		}
+
+		$uploadedFile->saveAs($destFile);
 	}
 
 	/**
@@ -127,14 +146,14 @@ class RestaurantController extends Controller
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
 			if (!empty($uploadedFile)) {
 				$extension = $uploadedFile->getExtensionName();
-				$filename = $this->urlImagePath($extension);
+				$filename = $this->createImagePathWithExtension($extension);
 				$model->image_url = $filename;
 			}
 
 			if($model->save()) {
 				if (isset($filename)) {
 					// 保存汤馆图片到服务器存储路径。
-					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
+					$this->saveImage($uploadedFile, $filename);					
 				}
 				
 				//清空所有缓存文件，让用户添加的餐馆能显示在首页
@@ -146,7 +165,7 @@ class RestaurantController extends Controller
 					echo $this->makeResultMessage(SUCCESS_CODE,SUCCESS_CODE_MESSAGE_RESTAURANT_CREATE);
 					return;
 				}else {
-					$this->redirect("admin");
+					$this->redirect("/site/userCenter");
 				}
 			}
 		}
@@ -169,23 +188,20 @@ class RestaurantController extends Controller
 		
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Restaurant'])) {
 			$model->attributes=$_POST['Restaurant'];
 
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');
 			if (!empty($uploadedFile)) {
 				$extension = $uploadedFile->getExtensionName();				
-				$filename = $this->urlImagePath($extension);
+				$filename = $this->createImagePathWithExtension($extension);
 				$model->image_url = $filename;
 			}
 			
 			if($model->save())
 				if (isset($filename)) {
 					// 保存汤馆图片到服务器存储路径。
-					$uploadedFile->saveAs(Yii::app()->basePath.'/..'.$filename);
+					$this->saveImage($uploadedFile, $filename);
 				}
 				
 				//清空所有缓存文件，让用户添加的餐馆能显示在首页
@@ -208,23 +224,31 @@ class RestaurantController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
-	{
-		parent::importAdminLayout();
+	public function actionDelete($id){	
+		parent::importAdminLayout();		
 
-		if (Yii::app()->user->id != $id  && ! parent::isAdmin()) {
-			// TODO 403 not permitted.
-			die('403');
-		}
-		
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
 
-		//清空所有缓存文件
-		$this->clearCacheFile(false);
+		// 只有管理员或者汤馆创建者才能删除汤馆。
+		if ($model->creator  == Yii::app()->user->id || 
+			parent::isAdmin()) {
+			
+			$model->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax'])){
-			// $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('site/userCenter'));
+			// 删除汤馆图片。
+			if (! empty($model->image_url)) {
+				$imagePath = Yii::app()->basePath . '/..' . $model->image_url;
+				if (file_exists($imagePath)) {
+					if (false === unlink($imagePath)) {
+						throw new CHttpException(403, '没有图片目录访问权限');
+					}
+				}
+			}
+
+			//清空所有缓存文件
+			$this->clearCacheFile(false);
+		}else{
+			throw new CHttpException(403,'没有访问操作权限');
 		}
 	}
 
@@ -285,7 +309,7 @@ class RestaurantController extends Controller
 		$menuItems = array();
 
 		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
-		$menuItems[] = array('label'=>$county->name, 'url'=>array($this->createUrl('restaurant/index'), 'county' => $countyId));
+		$menuItems[] = array('label'=>'全部', 'url'=>array($this->createUrl('restaurant/index'), 'county' => $countyId));
 	
 		foreach ($data as $key => $value) {
 			$menuItems[] = array('label' => $value->name, 'url' => array($this->createUrl('restaurant/index'), 'county'=>$countyId,'area'=>$value->id));
@@ -371,15 +395,9 @@ class RestaurantController extends Controller
 	}
 
 	/**
-	 * 汤馆审核功能-从导航栏”个人中心“进入。管理员才有。
+	 * 汤馆审核功能-从导航栏”个人中心“进入。只有管理员才有这个子菜单，通过accessRules限制非管理员进入。
 	 */
-	public function actionAdmin()
-	{
-		if (! parent::isAdmin()) {
-			// TODO 重定向到404。
-			die("404");
-		}
-
+	public function actionAdmin(){
 		parent::importAdminLayout();
 		
 		$model=new Restaurant('search');
@@ -414,9 +432,8 @@ class RestaurantController extends Controller
 	 * 进入”审核汤馆“界面，仅列出未审核的汤馆。
 	 */
 	public function actionCheck(){
-		if (! parent::isAdmin()) {
-			// TODO 重定向到404。
-			die("404");
+		if (! parent::isAdmin()) {			
+			throw new CHttpException(403,'用户没有操作权限');
 		}
 
 		parent::importAdminLayout();
