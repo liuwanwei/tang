@@ -117,7 +117,7 @@
 	</div>
 	</div> -->
 
-	<?php  if(User::isAdmin()) {
+	<?php  if(Yii::app()->user->isAdmin) {
 		echo '<div class="form-group">';		
 		echo $form->labelEx($model, "is_checked",array('class'=>"col-sm-2 control-label"));
 		echo '<div class="col-sm-8">';

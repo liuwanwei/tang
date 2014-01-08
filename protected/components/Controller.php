@@ -27,7 +27,7 @@ class Controller extends CController
 	 */
 	protected function isAdmin()
 	{
-		return User::isAdmin();
+		return Yii::app()->user->isAdmin;
 	}
 	
 	/**

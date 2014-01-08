@@ -19,7 +19,7 @@
 			<span class="time"><?php echo CHtml::encode($data->create_datetime);?></span>
 			<div class="comment-item-info-edit">
 				<span class="comment-item-index"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?>楼</span>
-				<?php if (User::model()->isAdmin()) {
+				<?php if (Yii::app()->user->isAdmin) {
 					$actionUrl = $this->createUrl('comment/delete', array('id'=>$data->id));
 					echo CHtml::link('<i class="fa fa-times comment-del" title="删除评论"></i>', $actionUrl);
 				}?>
