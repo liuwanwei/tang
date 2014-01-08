@@ -53,12 +53,12 @@ class WebUser extends CWebUser{
 		}
 	}
 
-	public function setImage($value) {
-		$this->setState('__image',$value);
+	public function setImageUrl($value) {
+		$this->setState('__imageUrl',$value);
 	}
 
-	public function getImage() {
-		if(($value = $this->getState('__image'))!==null)
+	public function getImageUrl() {
+		if(($value = $this->getState('__imageUrl'))!==null)
 			return $value;
 		else
 			return "";
