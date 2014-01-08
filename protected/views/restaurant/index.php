@@ -267,7 +267,7 @@ if (count>limit) {
 			'</ul>'+
 			'</div>';
 
-			<?php if (User::model()->isAdmin()) {
+			<?php if (Yii::app()->user->isAdmin) {
 				?>	
 				strData+='<!--编辑功能-->';
 				strData+='<div class="view-edit-btn" >'+
@@ -296,7 +296,7 @@ if (count>limit) {
 	//var rating_list_dome1=$(strData).find(".rating-widget .rating-list");alert(rating_list_dome1.eq(0).html());
 	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
 	tang_main_rating(rating_list_dome1,true);
-	<?php if (User::model()->isAdmin()){?>
+	<?php if (Yii::app()->user->isAdmin){?>
 	editbutton();
 	<?php } ?>
 	
@@ -529,7 +529,7 @@ function tang_main_rating(rating_list,ismouseover)
 			//console.log("a="+event.data.rating);
 		}
 
-		<?php if (User::model()->isAdmin()) { ?>
+		<?php if (Yii::app()->user->isAdmin) { ?>
 			editbutton();
 			/*当用户角色是管理员，就显示编辑功能*/
 			function editbutton(){

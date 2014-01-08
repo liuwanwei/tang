@@ -68,7 +68,7 @@
 			</ul>
 		</div>
 
-		<?php if (User::model()->isAdmin()) {
+		<?php if (Yii::app()->user->isAdmin) {
 			?>	
 			<!--编辑功能-->
 			<div class="view-edit-btn" >

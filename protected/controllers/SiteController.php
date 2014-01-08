@@ -194,6 +194,8 @@ class SiteController extends Controller
 	
 					Yii::app()->user->id = $user->id;
 					Yii::app()->user->name = $user->nick_name;
+					Yii::app()->user->image_url = $user->image_url;
+					Yii::app()->user->isAdmin = $user->isAdmin();
 					
 					$this->redirect($_REQUEST['state']);
 				}  else {
