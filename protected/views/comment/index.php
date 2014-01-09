@@ -102,7 +102,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 </div>
 
 <div class="user-comment-list">
-	<div class="comment-list-title">汤馆评论</div>
+	<!-- <div class="comment-list-title">汤馆评论</div> -->
 	<?php
 	$this->widget('zii.widgets.CListView', array(
 		'dataProvider'=>$dataProvider,
@@ -110,7 +110,8 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 		'cssFile' => '',
 		'enablePagination'=>true,
 		'emptyText'=>'还没有人评论，客官您先来吐个槽吧.',
-		'summaryText' => '共收到 {count} 条评论',
+		'summaryCssClass'=>'comment-list-title',
+		'summaryText' => '{count} 条评论',
 		)); 
 		?>
 
