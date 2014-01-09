@@ -41,8 +41,6 @@ class WebUser extends CWebUser{
 			if($identity->authenticate()){
 				$duration = 0;
 				$this->login($identity, $duration);
-				$this->id = $identity->userId;
-				$this->isAdmin = $identity->isAdmin;
 				
 				return true;
 			}else {
@@ -77,18 +75,15 @@ class WebUser extends CWebUser{
 	}
 
 	/*
-	*	重构父类函数，当fromCookie为true时，需要将WebUser的image_url、name、isAdmin初始化
+	*	重构父类函数,登录成功后需要将WebUser的image_url、name、isAdmin初始化
 	*/
 	protected function afterLogin($fromCookie) {
-		if ($fromCookie == true) {
 			$user = User::model()->findByPk($this->id);
 			if ($user !== null) {
-				$this->id = $user->id;
 				$this->name = $user->nick_name;
 				$this->imageUrl = $user->image_url;
 				$this->isAdmin = $user->isAdmin();
 			}
-		}
 	}
 
 }
