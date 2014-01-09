@@ -9,6 +9,7 @@ class UserIdentity extends CUserIdentity
 {
 	// 当前登录用户在user表中的id。
 	public $userId;
+	public $isAdmin;
 
 	/**
 	 * Authenticates a user.
@@ -23,6 +24,7 @@ class UserIdentity extends CUserIdentity
 		$user = User::model()->getUser($this->username);
 		if ($user !== null) {
 			$this->userId = $user->id;
+			$this->isAdmin = $user->isAdmin();
 			$this->errorCode=self::ERROR_NONE;
 		}else {
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
