@@ -271,6 +271,7 @@ body
 	background-color:#AA2104;
 	color: #FFFFFF;
 	text-decoration:none;
+	border-radius: 10px;
 }
 
 #county-menu>ul>li.active a,#area-menu>ul>li.active a
@@ -357,6 +358,7 @@ li.areamenu ul li a
 	-webkit-box-shadow:3px 2px 5px rgba(143, 130, 117,.6);
 	-o-box-shadow:3px 2px 5px  rgba(143, 130, 117,.6);
 	background: #AA2104;
+	border-radius: 10px;
 }
 
 #county-menu li a, #area-menu li a
@@ -1277,6 +1279,12 @@ a.a-text-none
 {
 	font-size:18px;
 	margin:0px 2px!important;
+}
+
+#client_img>div>span
+{
+	display: block;
+	margin-top: 5px;
 }
 
 

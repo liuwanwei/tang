@@ -115,9 +115,14 @@ class CountyController extends Controller
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('County');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		if (isset($_POST['Json'])){
+			$counties = $dataProvider->getData();
+			echo $this->makeDataMessage(SUCCESS_CODE,'',$counties);
+		}else {
+			$this->render('index',array(
+				'dataProvider'=>$dataProvider,
+			));
+		}
 	}
 
 	/**

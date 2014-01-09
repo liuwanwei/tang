@@ -53,4 +53,26 @@ class WebUser extends CWebUser{
 		}
 	}
 
+	public function setImageUrl($value) {
+		$this->setState('__imageUrl',$value);
+	}
+
+	public function getImageUrl() {
+		if(($value = $this->getState('__imageUrl'))!==null)
+			return $value;
+		else
+			return "";
+	}
+
+	public function setIsAdmin($value) {
+		$this->setState('__IsAdmin',$value);
+	}
+
+	public function getIsAdmin() {
+		if(($value = $this->getState('__IsAdmin'))!==null)
+			return $value;
+		else
+			return false;
+	}
+
 }

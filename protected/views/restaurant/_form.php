@@ -9,6 +9,15 @@
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
 <script type="text/javascript">
 	$('.fancybox').fancybox();
+
+	function fileChange(filename)
+	{
+		if (filename) {
+			var file_arr=filename.split('\\');
+			$("#client_img_url").text(file_arr[file_arr.length-1]);
+			$("#client_img").show(100);
+		}
+	}
 </script>
 
 
@@ -32,8 +41,16 @@
 		<span class="upload-image"><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="100px" height="100px" alt="" /></a></span>
 		<?php } ?>
 		<a href="javascript:;" class="a-upload fa fa-plus-square-o">
-			<?php echo $form->fileField($model,'image_url');?>
+			<?php echo $form->fileField($model,'image_url',array('onchange'=>'fileChange(this.value);'));?>
 		</a>
+	</div>
+
+</div>
+
+<div class="form-group" id="client_img" style="display:none;">
+<label class="col-sm-2 control-label">图片地址</label>
+	<div class="col-sm-8">
+		<span id="client_img_url"></span>
 	</div>
 
 </div>
@@ -117,7 +134,7 @@
 	</div>
 	</div> -->
 
-	<?php  if(User::isAdmin()) {
+	<?php  if(Yii::app()->user->isAdmin) {
 		echo '<div class="form-group">';		
 		echo $form->labelEx($model, "is_checked",array('class'=>"col-sm-2 control-label"));
 		echo '<div class="col-sm-8">';
@@ -209,3 +226,4 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div><!-- form -->
+

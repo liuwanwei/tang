@@ -99,42 +99,18 @@ class User extends CActiveRecord
 	}
 	
 	/**
-	 * 获取当前登录者头像地址
-	 */
-	public function getCurrentUserImageUrl()
-	{
-		if (isset(Yii::app()->session['currentUserImageUrl']))
-		{
-			return Yii::app()->session['currentUserImageUrl'];
-		}
-		else
-		{
-			$user = User::model()->findByPk(Yii::app()->user->id);
-			if ($user != null)
-			{
-				Yii::app()->session->add('currentUserImageUrl',$user->image_url);
-				return $user->image_url;
-			}
-			else
-			{
-				return "";
-			}
-		}
-	}
-	
-	/**
 	 * 当前用户是否是管理员
 	 */
-	public static function isAdmin()
+	public function isAdmin()
 	{
-		$user = User::model()->findByPk(Yii::app()->user->id);
+		// $user = User::model()->findByPk(Yii::app()->user->id);
 	
-		if ($user !== null)
-		{
-			return $user->role == 1;
-		}
+		// if ($user !== null)
+		// {
+			return $this->role == 1;
+		// }
 	
-		return false;
+		// return false;
 	}
 
 
