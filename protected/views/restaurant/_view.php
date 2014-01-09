@@ -14,7 +14,7 @@
 				<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>				
 				<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
 				<?php if (! empty($data->coordinate)) { 
-					echo CHtml::link('<i class="fa fa-map-marker"></i>',  array('comment/index', 'restaurantId'=>$data->id), array('alt'=>"地图",'title'=>"看看汤馆的位置"));
+					echo CHtml::link('<i class="fa fa-map-marker"></i>',  array('comment/index', 'restaurantId'=>$data->id), array('alt'=>"地图",'title'=>"看看汤馆的位置", 'target'=>"_blank"));
 				} ?>				
 			</li>
 
@@ -61,9 +61,10 @@
 					</div>
 						<?php } ?>
 				</div>
+				<div class="fenxiang"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【<?php echo $data->name; ?>】打过分了&appkey=3495571392&ralateUid=" target="_blank"><i class="fa fa-weibo"></i> 分享</a></div>
 				<div class="clear"><!--清除浮动--></div>
 			</li>
-			<li class="hide"><span>评论数:</span> <strong><?php echo CHtml::encode($data->comment_count);?></strong>人</li>
+			
 			<div class="clear"></div>
 			</ul>
 		</div>
@@ -91,4 +92,5 @@
 		</div>
 		<?php } ?>
 		<div style="clear:both;"></div>
+
 	</div>

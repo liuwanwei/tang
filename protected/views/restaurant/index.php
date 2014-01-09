@@ -214,7 +214,7 @@ if (count>limit) {
 			'<span class="title">地址:</span>'+
 			'<span class="detail-value">'+item["restaurant"]["address"]+'</span> ';
 			if (item["restaurant"]["coordinate"]!=0){
-				strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" title="看看汤馆的位置"><i class="fa fa-map-marker"></i></a>';
+				strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" title="看看汤馆的位置"  target="_blank"><i class="fa fa-map-marker"></i></a>';
 			}
 			strData+='</li>';
 			//console.log("features="+(item["features"]));
@@ -260,9 +260,9 @@ if (count>limit) {
 				'</div>';
 			}
 			strData+='</div>'+
+			'<div class="fenxiang"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【'+item["restaurant"]["name"]+'】打过分了&appkey=3495571392&ralateUid="  target="_blank"><i class="fa fa-weibo"></i> 分享</a></div>'+
 			'<div class="clear"><!--清除浮动--></div>'+
 			'</li>'+
-			'<li class="hide"><span>评论数:</span> <strong>'+item["restaurant"]["comment_count"]+'"</strong>人</li>'+
 			'<div class="clear"></div>'+
 			'</ul>'+
 			'</div>';
@@ -323,11 +323,15 @@ function tang_main_rating(rating_list,ismouseover)
 	var raing_value=$(".rating-rating>.value",a_this);//评分的值
 	var raing_default=a_this.attr("data-rating-default");//评分的默认值
 	//raing_default=parseFloat(raing_default)==0? '-':raing_default;
-
 	ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 
 	if (ismouseover) {
-
+		a_this.unbind("hover");
+		a_this.parent().parent().parent().parent().parent().hover(function(){
+			$(this).find(".fenxiang").show();
+		},function(){
+			$(this).find(".fenxiang").hide();
+		});
 		a_arr.unbind('click'); 
 		//单击星星时发生
 		a_arr.live("click",function(event){
