@@ -241,6 +241,7 @@ div.view-item
 	margin: 5px 0px 5px 5px;	
 	display: inline-block;
 	vertical-align: top;
+	position: relative;
 	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
 }
 div.view-item:last-child
@@ -505,4 +506,19 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
     -webkit-box-shadow: 2px 2px 7px rgba(74,136,189, 0.6);
     -o-box-shadow: 2px 2px 7px rgba(74,136,189, 0.6);
 }
+.fenxiang
+{
+	width: auto;
+	float:left;
+	margin-left:30px;
+	display: none;
+}
+.fenxiang .sina
+{
+	color:#888;
 
+}
+.fenxiang .sina:hover
+{
+	color:#aa2105;
+}
