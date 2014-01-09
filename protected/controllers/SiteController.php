@@ -191,11 +191,6 @@ class SiteController extends Controller
 						$duration = 3600 * 24 * 7; // 默认一天内免登陆。
 					}
 					Yii::app()->user->login($identity, $duration);
-	
-					Yii::app()->user->id = $user->id;
-					Yii::app()->user->name = $user->nick_name;
-					Yii::app()->user->imageUrl = $user->image_url;
-					Yii::app()->user->isAdmin = $user->isAdmin();
 					
 					$this->redirect($_REQUEST['state']);
 				}  else {

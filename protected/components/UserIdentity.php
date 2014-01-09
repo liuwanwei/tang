@@ -30,4 +30,9 @@ class UserIdentity extends CUserIdentity
 		
 		return $this->errorCode == self::ERROR_NONE;;
 	}
+
+	//重构父类函数。父类的ID存的是username
+	public function getId() {
+		return $this->userId;
+	}
 }
