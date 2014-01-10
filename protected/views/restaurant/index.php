@@ -202,8 +202,13 @@ if (count>limit) {
 			var item=data[i];
 			//console.log("a="+item["name"]);
 			strData+=	'<div class="view-item">'+
-			'<span class="ranking badge1">'+itemIndex+'</span>'+
-			'<div class="restaurant-detail">'+
+			'<span class="ranking badge1">'+itemIndex+'</span>';
+			if (item["restaurant"]["image_url"]) {
+				strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" class="restaurant_img"  target＝"_blank"><img src="'+item["restaurant"]["image_url"]+'"></a>';
+			}else{
+				strData+='<span class="restaurant_defalut_img"><i class="fa fa-smile-o"></i></span>';
+			}
+			strData+='<div class="restaurant-detail">'+
 			'<ul>'+
 			'<li>'+
 			'<strong>'+
@@ -260,7 +265,7 @@ if (count>limit) {
 				'</div>';
 			}
 			strData+='</div>'+
-			'<div class="fenxiang"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【'+item["restaurant"]["name"]+'】打过分了&appkey=3495571392&ralateUid="  target="_blank"><i class="fa fa-weibo"></i> 分享</a></div>'+
+			'<div class="fenxiang"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【'+item["restaurant"]["name"]+'】打过分了&appkey=3495571392&ralateUid="  target="_blank"><i class="fa fa-share"></i> 分享</a></div>'+
 			'<div class="clear"><!--清除浮动--></div>'+
 			'</li>'+
 			'<div class="clear"></div>'+

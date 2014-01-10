@@ -2,9 +2,13 @@
 /* @var $this RestaurantController */
 /* @var $data Restaurant */
 ?>
-
 <div class="view-item">
 	<span class="ranking badge1"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?></span>
+	<?php if(!empty($data->image_url)) {?>
+	<a href="<?php echo $this->createUrl('comment/index',array('restaurantId'=>$data->id)); ?>" target＝"_blank" class="restaurant_img"><img src="<?php echo $data->image_url; ?>"></a>
+	<?php }else{?>
+	<span class="restaurant_defalut_img"><i class="fa fa-smile-o"></i></span>
+		<?php } ?>
 	<div class="restaurant-detail">
 		<ul>
 			<li>
@@ -61,7 +65,7 @@
 					</div>
 						<?php } ?>
 				</div>
-				<div class="fenxiang"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【<?php echo $data->name; ?>】打过分了&appkey=3495571392&ralateUid=" target="_blank"><i class="fa fa-weibo"></i> 分享</a></div>
+				<div class="fenxiang"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【<?php echo $data->name; ?>】打过分了&appkey=3495571392&ralateUid=" target="_blank"><i class="fa fa-share"></i> 分享</a></div>
 				<div class="clear"><!--清除浮动--></div>
 			</li>
 			

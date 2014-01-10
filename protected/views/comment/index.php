@@ -89,6 +89,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 				</div>
 				
 			</div>
+			<div class="fenxiang show"><a class="sina" href="http://service.weibo.com/share/share.php?url=http://www.laotangguan.com&pic=&title=原来汤馆也可以这么玩，快来看看我已经对【<?php echo $restaurant->name; ?>】打过分了&appkey=3495571392&ralateUid=" target="_blank"><i class="fa fa-share"></i> 分享</a></div>
 			<span class="rating-error-loading"></span>
 			<div class="clear"><!--清除浮动--></div>
 		</li>

@@ -506,19 +506,26 @@ div.view-item .restaurant-detail>ul li strong a:hover,div.view-item .restaurant-
     -webkit-box-shadow: 2px 2px 7px rgba(74,136,189, 0.6);
     -o-box-shadow: 2px 2px 7px rgba(74,136,189, 0.6);
 }
-.fenxiang
+
+.restaurant_img
 {
-	width: auto;
 	float:left;
-	margin-left:30px;
-	display: none;
-}
-.fenxiang .sina
-{
-	color:#888;
+	margin:0px 10px;
 
 }
-.fenxiang .sina:hover
+.restaurant_img img
 {
-	color:#aa2105;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 6px #ccc;
+	width: 50px;
+	height: 50px;
+}
+.restaurant_defalut_img
+{
+	font-size: 50px;
+	float:left;
+	color:#ccc;
+	margin:0px 10px;
 }

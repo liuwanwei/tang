@@ -263,6 +263,7 @@ body
 	font-size:15px;	
 	text-decoration:none;
 	padding:5px 8px;
+	margin:0px 2px;
 }
 
 #mainmenu .mainmenu-content>ul>li a:hover, #mainmenu .mainmenu-content>ul>li.active a
@@ -1285,6 +1286,28 @@ a.a-text-none
 {
 	display: block;
 	margin-top: 5px;
+}
+/**** 分享组件样式 *****/
+.fenxiang
+{
+	width: auto;
+	float:left;
+	margin-left:30px;
+	display: none;
+	font-size: 12px;
+}
+.fenxiang .sina
+{
+	color:#888;
+
+}
+.fenxiang .sina:hover
+{
+	color:#555;
+}
+.fontsize-14
+{
+	font-size: 14px!important;
 }
 
 
