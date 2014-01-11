@@ -391,6 +391,8 @@ class RestaurantController extends Controller
 			'typeMenu'=>$this->typeMenu($county, $area),
 			'lastVotes'=>Vote::model()->getLastVotes(),
 			'lastComments'=>Comment::model()->getLastComments(5),
+			'topVisits'=>Restaurant::model()->mostVisitedRestaurant($county, $area, $type, 10),
+			'topComments'=>Comment::model()->mostCommentedRestaurant($county, $area, $type, 10),
 		));
 	}
 

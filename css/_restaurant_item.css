@@ -265,8 +265,8 @@ div.view-item .ranking
 
 div.view-item .ranking.badge1
 {
-	padding: 3px 7px;
-	font-size: 12px;
+	padding: 2px 7px;
+	font-size: 13px;
 	font-weight: bold;
 	line-height: 1;
 	color: #fff;
@@ -278,9 +278,9 @@ div.view-item .ranking.badge1
 }
 div.view-item .ranking.badge2
 {
-	padding: 3px 7px;
-	font-size: 12px;
-	font-weight: bold;
+	padding: 2px 7px;
+	font-size: 14px;
+	/*font-weight: bold;*/
 	line-height: 1;
 	color: #fff;
 	text-align: center;

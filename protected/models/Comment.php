@@ -133,4 +133,59 @@ class Comment extends CActiveRecord
 		
 		return $lastCommentsDataProvider->getData();
 	}
+
+	/*
+	 *  查询评论量最大的餐馆列表。
+	 *  参数：
+	 *  	$county:	县区
+	 *  	$area: 		区域
+	 * 		$type: 		餐馆类型。
+	 * 		$count:		查询结果数。
+	 *  返回值：
+	 *  	array:		符合条件的餐馆信息数组。		
+	 */
+	public function mostCommentedRestaurant($county, $area, $type, $count){		
+        $whereClause = ' WHERE is_checked=1 ';
+        if (! empty($county)) {
+			$whereClause .= " AND county_id=$county ";
+		}
+
+		if ($area != -1) {
+			$whereClause .= " AND area_id=$area ";
+		}
+		
+		if (! empty($type)) {
+			$whereClause .= " AND type_id=$type ";
+		}
+
+		$sql = "SELECT
+         			r.id,r.name,
+         			c.comments
+    			FROM(
+        			SELECT
+            			id,name
+        			FROM restaurant 
+        			$whereClause 
+        		) as r
+    			INNER JOIN (
+                	SELECT
+                        restaurant_id,
+                        count(*) AS comments
+                  	FROM comment
+        		  	WHERE hidden=0
+                  	GROUP BY restaurant_id
+                ) as c
+           		on r.id = c.restaurant_id
+    			Order by c.comments desc
+    			LIMIT $count";
+
+    	// 执行一个超出当前model范围的查询，必须使用更“原始”接口，参考见这里：
+    	// http://www.yiiframework.com/doc/guide/1.1/zh_cn/database.dao#sec-3
+    	$connection = Yii::app()->db;
+		$command = $connection->createCommand($sql);
+		$result = $command->queryAll();
+
+		return $result;
+	}
 }
+
