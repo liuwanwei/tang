@@ -183,13 +183,45 @@ class Restaurant extends CActiveRecord
 	}
 
 	/*
+	 *  查询访问量最大的餐馆列表。
+	 *  参数：
+	 *  	$county:	县区
+	 *  	$area: 		区域
+	 * 		$type: 		餐馆类型。
+	 * 		$count:		查询结果数。
+	 *  返回值：
+	 *  	array:		符合条件的餐馆信息数组。		
+	 */
+	public function mostVisitedRestaurant($county, $area, $type, $count){
+		$criteria = new CDbCriteria(array(
+			'condition'=>'is_checked = 1',
+			'order'=>'visits DESC',
+			'limit'=>$count
+		));
+
+		if (! empty($county)) {
+			$criteria->compare('county_id', $county);
+		}
+
+		if ($area != -1) {
+			$criteria->compare('area_id', $area);
+		}
+		
+		if (! empty($type)) {
+			$criteria->compare('type_id', $type);
+		}
+
+		return $this->findAll($criteria);
+	}
+
+	/*
 	* 根据前台不同的过滤条件，搜索当前页的汤馆。
 	*/
 	public function indexByPage($page = 0, $limit = 10) {
 		$criteria = new CDbCriteria(array(
-				'condition'=> 'is_checked = 1',
-				'order'=> 'weighted_points DESC',
-				'with'=>array('features.details'),
+			'condition'=> 'is_checked = 1',
+			'order'=> 'weighted_points DESC',
+			'with'=>array('features.details'),
 		));
 		
 		if (! empty($this->county_id)) {
