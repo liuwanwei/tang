@@ -264,20 +264,20 @@ div.view-item .ranking
 
 div.view-item .ranking.badge1
 {
-	padding: 3px 7px;
-	font-size: 15px;
+	padding: 2px 7px;
+	font-size: 13px;
 	font-weight: bold;
 	line-height: 1;
-	color: rgba(159, 46, 24,0.7);
+	color: #fff;
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: baseline;
-	/*background-color: rgba(218, 214, 208, 1);*/
+	background-color: rgba(218, 214, 208, 1);
 	border-radius: 10px;
 }
 div.view-item .ranking.badge2
 {
-	padding: 1px 7px;
+	padding: 2px 7px;
 	font-size: 14px;
 	/*font-weight: bold;*/
 	line-height: 1;
