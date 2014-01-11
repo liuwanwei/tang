@@ -131,6 +131,13 @@ class CommentController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex($restaurantId) {
+		// 餐馆访问次数+1；
+		$restaurant = Restaurant::model()->findByPk($restaurantId);
+		if ($restaurant) {
+			$restaurant->visits += 1;
+			$restaurant->save();
+		}
+
 		$criteria=new CDbCriteria(array(
 				'condition'=>'restaurant_id='.$restaurantId . ' AND hidden=0',
 				'order'=>'create_datetime DESC',
