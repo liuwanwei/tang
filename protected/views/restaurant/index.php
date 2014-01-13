@@ -62,70 +62,34 @@
 				</div>
 			</div>
 			<div class="right-content">
-				<div id="last_votes">
-					<span class="header">最新评分</span>
-					<div class="content">
-						<ul>
-							<?php foreach ($lastVotes as $value) {
-								?>
-								<li>
-									<a href="#"><img src="<?php echo $value->user->image_url;?>" title="<?php echo $value->user->nick_name; ?>"/></a>
-									<div>
-										<span class="source"><?php echo $value->user->nick_name; ?> 添加了评分</span>
-										<span class="title"><?php echo CHtml::link('<span>'.$value->restaurant->name.'</span>', array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-										<div class="rating-widget">
-											<span class="rating-widget-lable">评分:</span><!--<span class="rating-imdb " style="width: 0px; display:block;"></span>-->
-											<div class="rating-list m" isclick="false" data-rating-default="<?php echo sprintf("%.1f",CHtml::encode($value->rating)); ?>" 
-												data-clicknum="0" 
-												data-user="<?php echo Yii::app()->user->id ?>"
-												data-id="<?php echo CHtml::encode($value->restaurant->id);?>"
-												data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
-												<span class="rating-stars">
-													<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
-													<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
-													<a class="rating-icon star-on" data-title="日常饮食"><span>3</span></a>
-													<a class="rating-icon star-on" data-title="值得品尝"><span>4</span></a>
-													<a class="rating-icon star-on" data-title="汤中一绝"><span>5</span></a>
-												</span>
-												<span class="rating-rating">
-													<span class="fonttext-shadow-2-3-5-000 value"><?php echo sprintf("%.1f",CHtml::encode($value->rating)); ?></span>
-													<span class="grey">/</span>
-													<span class="grey">5</span>
-												</span>
-												<span class="rating-cancel ">
-													<a title="删除">
-														<span>X</span>
-													</a>
-												</span>
-											</div>		
-										</div>
-										<div class="clear"><!--清除浮动--></div>
-									</div>
-								</li>
-								<?php
-							} ?>
-						</ul>
-					</div>
-				</div>
-				<div id="last_comments">
-					<span class="header">最新评论</span>
-					<div class="content">
-						<ul>
-							<?php foreach ($lastComments as $value) {
-								?>
-								<li>
-									<a href="#"><img src="<?php echo $value->user->image_url;?>"  title="<?php echo $value->user->nick_name; ?>" align="left"/></a>
-									<div>
-										<span class="source"><?php echo $value->user->nick_name; ?> 添加了评论</span>
-										<span class="title"><?php echo CHtml::link(CHtml::encode($value->restaurant->name), array('comment/index', 'restaurantId'=>$value->restaurant_id),array('target'=>'_blank')); ?></span>
-										<span><?php echo mb_strlen($value->content, "UTF-8") >= 71 ? mb_substr($value->content,0,71, "UTF-8").'...':$value->content;?></span>
-									</div>
-								</li>
-								<?php
-							} ?>
-						</ul>
-					</div>
-				</div>
+				<div class="title top-rank-title b-tottom">人气排行</div>
+                <div class="top-list">                                        
+                        <ol>
+                        	<?php 
+                        	foreach ($topVisits as $value) {
+                        		echo '<li><span class="top-item-detail">'.$value["visits"].'</span><a href="'.$this->createUrl('comment/index',array('restaurantId'=>$value['id'])).'" target="_blank">'.$value["name"].'</a></li>';
+                        	} ?>
+                        </ol>                                
+                </div>                                
+
+                <div class="title top-rank-title b-tottom"><a href="#">评论排行</a></div>
+                <div class="top-list">                                        
+                        <ol>
+                        	<?php 
+                        	foreach ($topComments as $value) {
+                        		echo '<li><span class="top-item-detail">'.$value["comments"].'</span><a href="'.$this->createUrl('comment/index',array('restaurantId'=>$value['id'])).'" target="_blank">'.$value["name"].'</a></li>';
+                        	} ?>
+                        </ol>
+                </div>
+
+                <!-- <div class="title top-rank-title b-tottom">星级排行</div>
+                <div class="rating-top">                                        
+                                <div><a href="#"><span class="ra-title">汤中一绝</span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span></a><div class="clear"></div></div>
+                                <div><a href="#"><span class="ra-title">值得品尝</span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span></a><div class="clear"></div></div>
+                                <div><a href="#"><span class="ra-title">日常饮食</span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span></a><div class="clear"></div></div>
+                                <div><a href="#"><span class="ra-title">聊胜于无</span><span class="rating-icon rating-init ra"></span><span class="rating-icon rating-init ra"></span></a><div class="clear"></div></div>
+                                <div><a href="#"><span class="ra-title">不推荐</span><span class="rating-icon rating-init ra"></span></a><div class="clear"></div></div>                                        
+                </div> -->
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -309,7 +273,6 @@ if (count>limit) {
 
 var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 tang_main_rating(rating_list_dome,true);
-tang_main_rating($(".rating-widget .rating-list",$(".right-content")),false);
 $(".restaurant-left .view-item>.ranking:lt(3)").removeClass('badge1').addClass('badge2');//removeClass('badge1').
 function tang_main_rating(rating_list,ismouseover)
 {

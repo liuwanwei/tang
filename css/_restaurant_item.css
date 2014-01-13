@@ -11,6 +11,7 @@
 {
 	display: none;
 }
+/**首页右侧样式 start**/
 .restaurant-content
 {
 
@@ -26,18 +27,12 @@
 
 .right-content
 {
-	
-	width: 280px;
-	min-height: 500px;
-	float: right;
-	background: #FFFFFF;
-	box-shadow: 0 0 6px #ccc;
-	border-radius: 6px;
-	padding: 10px;
-	font-size: 12px;
-	color:#555;
-
-
+	width: 250px;
+    min-height: 500px;
+    float: right;
+    padding: 0px 0px 0px 10px;
+    font-size: 14px;
+    color:#555;
 }
 .right-content a{
 	color: #555;
@@ -49,164 +44,58 @@
 	text-decoration: underline;
 
 }
+.right-content .top-rank-title{
+     margin-bottom: 15px;
+     font-weight: bold;
+}
+
+.top-list{
+     margin-left: 20px;
+}
+
+.top-item-detail{
+     float:right;
+}
+
 .right-content .title
 {
-	color: #6c6c6c;
-	font-weight: bold;
-	font-size: 13px;
+    color: #6c6c6c;
+    line-height: 30px;
+    font-size: 14px;
+    padding-bottom: 5px;
 }
 
-/* 最近评分、评论头部信息 */
-.right-content .header
+.right-content .title.b-tottom
 {
-	color:#999;
-	font-size: 13px;
+    border-bottom: 1px solid #999;
 }
-
-/* 最近评分、评论来源信息 */
-.right-content .source
+.right-content>ul
 {
-	color:#999;
-	font-size:10px;
+    list-style: none;
 }
-
-.right-content #last_votes .content ul,.right-content #last_comments .content ul
+.right-content>ul>li
 {
-	list-style: none;
-	margin: 0px; 
-	padding: 0px;
-	position: relative;
+    line-height: 25px;
 }
-.right-content #last_votes .content ul li
+.rating-top>div>a>span
 {
-	min-height: 70px;
-	height: auto;
-	position: relative;
-	padding:5px 0px;
-	vertical-align: middle;
-	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
-	z-index: 1;
-
+    line-height: 15px;
+    float: left;
 }
-.right-content #last_comments .content ul li
+.rating-top .ra-title
 {
-	min-height: 50px;
-	height: auto;
-	position: relative;
-	padding:5px 0px;
-	vertical-align: middle;
-	border-bottom:1px solid rgba(0, 0, 0, 0.1); 
-	z-index: 1;
+    width: 60px;
 }
-
-
-.right-content #last_comments .content ul li:last-child
+.rating-top .ra
 {
-	border-bottom: 0px none;
+    width: 13px;
+    height: 13px;
 }
-.right-content #last_votes .content ul li:first-child,.right-content #last_comments .content ul li:first-child
+.rating-top>div
 {
-	border-top:1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
 }
-.right-content #last_votes .content ul li>div,.right-content #last_votes .content ul li>a
-{
-	display: inline-block;
-	
-}
-.right-content #last_votes .content ul li>a
-{
-	position: relative;
-	top: 3px;
-}
-
-.right-content #last_votes .content ul li>a+div
-{
-	width: 230px;
-	position: absolute;
-	left: 35px;
-	line-height: 20px;
-
-}
-
-.right-content #last_votes .content ul li>a+div>span
-{
-	display: block;
-}
-
-
-.right-content #last_votes .content img
-{
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	-ms-border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-o-border-radius: 50%;
-	margin: 0px;
-	padding: 0px;
-
-}
-.right-content #last_comments
-{
-	margin-top: 20px;
-}
-.right-content #last_votes .content img:hover,.right-content #last_comments .content img:hover
-{
-	box-shadow: 0px 1px 5px #666;
-	-ms-box-shadow: 0px 1px 5px #ccc;
-	-webkit-box-shadow: 0px 1px 5px #ccc;
-	-moz-box-shadow: 0px 1px 5px #ccc;
-	-o-box-shadow: 0px 1px 5px #ccc;
-}
-
-.right-content #last_comments .content ul li>a,.right-content #last_comments .content ul li>div
-{
-	display: inline-block;	
-	height: auto;
-
-}
-.right-content #last_comments .content ul li>a
-{
-	width: 30px;
-	display: inline-block;
-	height: 30px;
-	position: relative;
-	top: 3px;
-}
-.right-content #last_comments .content ul li>a+div
-{
-	width: 225px;	
-	line-height: 20px;
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-
-}
-.right-content #last_comments .content ul li>a+div>span
-{
-	
-	display: block;
-	margin: 0px;
-	padding: 0px;
-	text-justify:inter-word;
-
-}
-
-.right-content #last_comments .content img
-{
-	width: 30px;
-	height: 30px;	
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-ms-border-radius: 50%;
-	-o-border-radius: 50%;
-	border-radius: 50%;
-	margin: 0px;
-	padding: 0px;
-}
-
-
+/**首页右侧样式 end**/
 .restaurant-left
 {
 	width: 655px;
@@ -230,9 +119,7 @@
 #yw1.list-view
 {
 	width: 100%;
-	
 }
-
 
 div.view-item
 {
