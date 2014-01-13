@@ -169,10 +169,9 @@ class SiteController extends Controller
 					//查询微博的账号信息
 					$c = new SaeTClientV2( WB_AKEY , WB_SKEY ,Yii::app()->session['sinaToken']['access_token']);
 					$userShow  = $c->getUserShow(Yii::app()->session['sinaToken']); // done
-					//查询是否有绑定账号
-					$user = User::model()->find('extension_user_id = :user_id',array(':user_id' =>Yii::app()->session['sinaToken']['uid']));
-					//如果没有存在则创建账号及绑定
-					if (!isset($user)){
+
+					$identity = new UserIdentity(Yii::app()->session['sinaToken']['uid'],'we_dont_need_password');
+					if(!$identity->authenticate()){
 						$user = new User;
 	
 						$user->extension_user_id = Yii::app()->session['sinaToken']['uid'];
@@ -183,9 +182,7 @@ class SiteController extends Controller
 	
 						$user->save();
 					}
-
-					// 由于我们通过微博授权，所以没有用户名/密码登陆过程，但还是要模拟一下，以便Yii自动将登录状态保存到Cookie中。
-					$identity = new UserIdentity($user->id, 'we_dont_need_password');
+			
 					$duration = Yii::app()->params['loginExpireTime'];
 					if (empty($duration)) {
 						$duration = 3600 * 24 * 7; // 默认一天内免登陆。
