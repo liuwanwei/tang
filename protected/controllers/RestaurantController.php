@@ -19,7 +19,7 @@ class RestaurantController extends Controller
 			array(
 				'COutputCache + index + indexByPage',
 				'duration'=>3600,
-				'varyByParam'=>array('county','area','type'),
+				'varyByParam'=>array('county','area','type','page'),
 				'varyByExpression'=>Yii::app()->user->id
 			),
 		);
