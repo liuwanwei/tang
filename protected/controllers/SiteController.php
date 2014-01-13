@@ -171,8 +171,7 @@ class SiteController extends Controller
 					$userShow  = $c->getUserShow(Yii::app()->session['sinaToken']); // done
 
 					$identity = new UserIdentity(Yii::app()->session['sinaToken']['uid'],'we_dont_need_password');
-					if($identity->authenticate()){
-					}else {
+					if(!$identity->authenticate()){
 						$user = new User;
 	
 						$user->extension_user_id = Yii::app()->session['sinaToken']['uid'];
