@@ -200,12 +200,12 @@ $(function(){
 	county=hostUrl[1];
 	var params=hostUrl[1];
 	if (params.indexOf('area')>-1 && params.indexOf('type')==-1) {
-		county=params.split('/area')[0];
+		county=params.split('/area')[0]=="/county/0"?"<?php echo $this->createUrl('restaurant/index'); ?>":params.split('/area')[0];
 		area=params;
 	}
 	if (params.indexOf('type')>-1) {
-		county=params.split('/area')[0];
-		area=params.split('/type')[0];
+		county=params.split('/area')[0]=="/county/0"?"<?php echo $this->createUrl('restaurant/index'); ?>":params.split('/area')[0];
+		area=params.split('/type')[0].indexOf("area/-1")>-1?county:params.split('/type')[0];
 		type=params;
 	}
 
