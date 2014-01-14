@@ -29,7 +29,6 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 	<ul>
 		<li><span class="title">店名:</span><span><?php echo $restaurant->name; ?></span></li>
 		<li><span class="title">地址:</span><span><?php echo $restaurant->address; ?></span></li>
-		<li><span class="title">电话:</span><span><?php echo $restaurant->phone; ?></span></li>
 		<li><span class="title">区域:</span><span><?php echo $restaurant->county->name.' '.$restaurant->area->name; ?></span></li>
 		<li><span class="title">营业时间:</span><span><?php echo $restaurant->business_hour; ?></span></li>
 		<?php if (!empty($restaurant->features)) {
