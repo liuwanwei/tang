@@ -92,6 +92,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 			<span class="rating-error-loading"></span>
 			<div class="clear"><!--清除浮动--></div>
 		</li>
+		<li>
+			<?php if(!empty($restaurant->image_url)) {?>
+			<a href="<?php echo $restaurant->image_url; ?>" class="restaurant_img" style="margin-left:0px;" title="<?php echo $restaurant->name;?>"><img src="<?php echo $restaurant->image_url; ?>"></a>
+			<?php }?>
+		</li>
 	</ul>
 
 	<?php if (empty($restaurant->coordinate)) { ?>
@@ -117,8 +122,8 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 
 		<?php echo $this->renderPartial('_form', array('restaurantId'=>$restaurant->id,'model'=>$model)); ?>
 </div>
-		<script type="text/javascript">
-		$(function(){
+<script type="text/javascript">
+$(function(){
 
 /*
  *评分组件
@@ -129,6 +134,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
  */
  var rating_list_dome=$(".rating-widget .rating-list");
  var rating_item1=rating_list_dome.eq(0); 
+ $(".restaurant_img").fancybox();
  <?php if (!yii::app()->user->isGuest) {?>
 
  	$.get("<?php echo $this->createUrl('vote/query'); ?>",{restaurantId:rating_item1.attr("data-id"),userId:rating_item1.attr("data-user")},function(data){
