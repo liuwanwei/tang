@@ -168,7 +168,7 @@ if (count>limit) {
 			strData+=	'<div class="view-item">'+
 			'<span class="ranking badge1">'+itemIndex+'</span>';
 			if (item["restaurant"]["image_url"]) {
-				strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" class="restaurant_img"  target＝"_blank"><img src="'+item["restaurant"]["image_url"]+'"></a>';
+				strData+='<a href="'+item["restaurant"]["image_url"]+'" class="restaurant_img" ><img src="'+item["restaurant"]["image_url"]+'"></a>';
 			}else{
 				strData+='<span class="restaurant_defalut_img"><i class="fa fa-smile-o"></i></span>';
 			}
@@ -265,6 +265,7 @@ if (count>limit) {
 	//var rating_list_dome1=$(strData).find(".rating-widget .rating-list");alert(rating_list_dome1.eq(0).html());
 	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
 	tang_main_rating(rating_list_dome1,true);
+	loadFancyBox();//图片放大
 	<?php if (Yii::app()->user->isAdmin){?>
 	editbutton();
 	<?php } ?>
@@ -274,6 +275,7 @@ if (count>limit) {
 var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 tang_main_rating(rating_list_dome,true);
 $(".restaurant-left .view-item>.ranking:lt(3)").removeClass('badge1').addClass('badge2');//removeClass('badge1').
+loadFancyBox();//图片放大
 function tang_main_rating(rating_list,ismouseover)
 {
 /*
@@ -602,7 +604,12 @@ function tang_main_rating(rating_list,ismouseover)
 	}
 
 	<?php } ?>
-
-	});
+	
+	//图片放大
+	function loadFancyBox()
+	{
+		$(".restaurant_img").fancybox();
+	}
+});
 
 </script>

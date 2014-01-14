@@ -5,8 +5,8 @@
 //http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js
 //Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js');
 ?>
-<script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
-<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
+<!-- <script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" /> -->
 <script type="text/javascript">
 	$('.fancybox').fancybox();
 
