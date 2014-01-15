@@ -190,6 +190,7 @@ div.view-item .restaurant-detail ul
 {
 	list-style: none;
 	float: left;
+	margin-top:-5px!important;
 }
 div.view-item .restaurant-detail>ul
 {
