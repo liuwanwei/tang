@@ -2,7 +2,7 @@
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
 ?>
-
+<div style="width:100%;height:1px;clear:both;"></div>
 <?php if($uncheckedItemsCount>0){ ?>
 <div class="user-header">我添加的汤馆 - 未审核</div>
 <?php 
@@ -138,3 +138,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 ?>
 <?php } ?>
+
+<?php if ($checkedItemsCount<=0 && $uncheckedItemsCount<=0) {?>
+	<div class="error_403">
+	<div class="error_403_text">
+		<p><i class="fa fa-quote-left"></i><span>等等，你好像没有一个汤馆</span><i class="fa fa-quote-right"></i></p>
+		<p>快把你周围的汤馆<a href="<?php echo $this->createUrl('restaurant/create') ;?>">添加</a>进来吧</p>
+	</div>
+	</div>
+<?php }?>
