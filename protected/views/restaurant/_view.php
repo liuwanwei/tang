@@ -3,7 +3,6 @@
 /* @var $data Restaurant */
 ?>
 <div class="view-item">
-	<span class="ranking badge1"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?></span>
 	<?php if(!empty($data->image_url)) {?>
 	<a href="<?php echo $data->image_url; ?>" class="restaurant_img"  title="<?php echo $data->name;?>"><img src="<?php echo $data->image_url; ?>"></a>
 	<?php }else{?>
@@ -17,9 +16,6 @@
 			<li>
 				<span class="title"><?php echo CHtml::encode($data->getAttributeLabel('address')); ?>:</span>				
 				<span class="detail-value"><?php echo CHtml::encode($data->address); ?></span>
-				<?php if (! empty($data->coordinate)) { 
-					echo CHtml::link('<i class="fa fa-map-marker"></i>',  array('comment/index', 'restaurantId'=>$data->id), array('alt'=>"地图",'title'=>"看看汤馆的位置", 'target'=>"_blank"));
-				} ?>				
 			</li>
 
 			<?php if (!empty($data->features)) {
