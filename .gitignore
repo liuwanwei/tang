@@ -1,6 +1,7 @@
 assets/*
 protected/runtime/*
 protected/config/main.php
+images/*
 .DS_Store
 .log
 Thumbs.db
