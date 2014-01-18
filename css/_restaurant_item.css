@@ -212,10 +212,6 @@ div.view-item .restaurant-detail>ul  li span.detail-value
 {
 	color: #555;
 }
-div.view-item .restaurant-detail>ul  li span.detail-value+a
-{
-	color:#888!important;
-}
 div.view-item .restaurant-detail>ul li strong
 {
 	font-size: 1.0em;	
