@@ -16,7 +16,6 @@
 	<div class="feed-main">
 		<div class="info">
 			<span class="source"><?php echo CHtml::encode($data->user->nick_name);?></span>
-			<span class="time"><?php echo CHtml::encode($data->create_datetime);?></span>
 			<div class="comment-item-info-edit">
 				<span class="comment-item-index"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?>楼</span>
 				<?php if (Yii::app()->user->isAdmin) {
@@ -27,6 +26,9 @@
 		</div>
 		<div class="content">			
 			<pre><?php echo $data->content ?></pre>			
+		</div>
+		<div class="feed-main-footer">
+			<span class="time"><?php echo CHtml::encode($data->create_datetime);?></span><a class="fa fa-thumbs-o-up zan"></a><span>7</span>
 		</div>
 	</div>
 </div>
