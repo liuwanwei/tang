@@ -164,8 +164,7 @@ if (count>limit) {
 			itemIndex++;
 			var item=data[i];
 			//console.log("a="+item["name"]);
-			strData+=	'<div class="view-item">'+
-			'<span class="ranking badge1">'+itemIndex+'</span>';
+			strData+=	'<div class="view-item">';
 			if (item["restaurant"]["image_url"]) {
 				strData+='<a href="'+item["restaurant"]["image_url"]+'" class="restaurant_img" ><img src="'+item["restaurant"]["image_url"]+'"></a>';
 			}else{

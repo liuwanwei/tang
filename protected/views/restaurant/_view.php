@@ -3,7 +3,6 @@
 /* @var $data Restaurant */
 ?>
 <div class="view-item">
-	<span class="ranking badge1"><?php echo $widget->dataProvider->getPagination()->getOffset() + $index + 1; ?></span>
 	<?php if(!empty($data->image_url)) {?>
 	<a href="<?php echo $data->image_url; ?>" class="restaurant_img"  title="<?php echo $data->name;?>"><img src="<?php echo $data->image_url; ?>"></a>
 	<?php }else{?>

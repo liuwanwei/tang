@@ -138,11 +138,10 @@ div.view-item:last-child
 
 
 /*排名*/
-
+/*
 div.view-item .ranking
 {
 	color:#555;
-	/*font-size: 1.0em;*/
 	font-family: Arial;	
 	display: block;
 	width: 30px;
@@ -167,7 +166,6 @@ div.view-item .ranking.badge2
 {
 	padding: 2px 7px;
 	font-size: 14px;
-	/*font-weight: bold;*/
 	line-height: 1;
 	color: #fff;
 	text-align: center;
@@ -177,6 +175,7 @@ div.view-item .ranking.badge2
 	border-radius: 10px;
 	
 }
+*/
 
 /*div.view-item:hover,div.view-item:focus
 {
