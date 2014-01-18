@@ -164,8 +164,7 @@ if (count>limit) {
 			itemIndex++;
 			var item=data[i];
 			//console.log("a="+item["name"]);
-			strData+=	'<div class="view-item">'+
-			'<span class="ranking badge1">'+itemIndex+'</span>';
+			strData+=	'<div class="view-item">';
 			if (item["restaurant"]["image_url"]) {
 				strData+='<a href="'+item["restaurant"]["image_url"]+'" class="restaurant_img" ><img src="'+item["restaurant"]["image_url"]+'"></a>';
 			}else{
@@ -180,11 +179,7 @@ if (count>limit) {
 			'</li>'+
 			'<li>'+
 			'<span class="title">地址:</span>'+
-			'<span class="detail-value">'+item["restaurant"]["address"]+'</span> ';
-			if (item["restaurant"]["coordinate"]!=0){
-				strData+='<a href="<?php echo $this->createUrl("comment/index",array("restaurantId"=>"")); ?>'+item["restaurant"]["id"]+'" title="看看汤馆的位置"  target="_blank"><i class="fa fa-map-marker"></i></a>';
-			}
-			strData+='</li>';
+			'<span class="detail-value">'+item["restaurant"]["address"]+'</span> </li>';
 			//console.log("features="+(item["features"]));
 			if(item["features"]){
 				strData+='<li><span class="title">特色:</span>';
