@@ -268,6 +268,13 @@ class RestaurantController extends Controller
 		return $menuItems;
 	}
 
+	/* 
+	 * 获取一个县区内的所有商圈。
+	 * 参数：
+	 *     $countyId: 县区id。
+	 * 返回值：
+     *     符合Yii菜单组建需要的商圈数组。
+	 */
 	private function areaMenu($countyId){
 		if ($countyId == 0) {
 			return null;
@@ -290,7 +297,7 @@ class RestaurantController extends Controller
 		{
 			return null;
 		}
-		
+
 		$areasId = array();
 		foreach ($restaurants as $key => $value)
 		{
@@ -301,6 +308,9 @@ class RestaurantController extends Controller
 		if ($countyId !== 0) {
 			$criteria = new CDbCriteria();
 			$criteria->addInCondition('id', $areasId);
+			// 对商圈所属县区进行再次确认，避免数据错误造成的错误：比如将一家西工的餐馆的商圈错误设置成万达广场，
+			// 就会出现奇特的西工区的“区域”中出现“万达”。
+			$criteria->compare('county_id', $countyId);
 			$criteria->order = 'id desc';
 			$dataProvider->criteria = $criteria;
 		}
@@ -318,11 +328,14 @@ class RestaurantController extends Controller
 		return $menuItems;
 	}
 
+	/*
+	 *
+	 */
 	private function typeMenu($countyId, $areaId){
 		$restaurantAreaDataProvider = new CActiveDataProvider('Restaurant');
 		$criteria = new CDbCriteria();
 		$criteria->select = array('type_id');
-		$criteria->group = 'type_id';
+		// $criteria->group = 'type_id';
 		
 		if ($countyId != 0) {
 			$criteria->compare('county_id', $countyId);
@@ -340,25 +353,31 @@ class RestaurantController extends Controller
 		{
 			return null;
 		}
-		
+
+		// 提取区域内餐馆所包含的所有类型id。
+		// 算法简介：
+		// 每个餐馆的type_id内容是字符串，形如：,1,2,3,
+		// 先从字符串生成数组，再将每个餐馆的类型数组合并起来，最后去重，得到唯一的类型数组。
 		$typesId = array();
-		foreach ($restaurants as $key => $value)
-		{
-			$typesId[] = $value->type_id;
+		foreach ($restaurants as $key => $value) {
+			$ids = array_filter(explode(',', $value->type_id));
+			$typesId = array_merge($typesId, $ids);
 		}
+		$typesId = array_unique($typesId);
 		
-		$dataProvider = new CActiveDataProvider('RestaurantType');
+		// 提取汤馆类型id对应的类型名称。
+		$restaurantTypeDataProvider = new CActiveDataProvider('RestaurantType');
 		$criteria = new CDbCriteria();
 		$criteria->compare('id', '<>0');
 		$criteria->addInCondition('id', $typesId);
-		$dataProvider->criteria = $criteria;
+		$restaurantTypeDataProvider->criteria = $criteria;
 
-		$data = $dataProvider->getData();
+		$types = $restaurantTypeDataProvider->getData();
 		$menuItems = array();
 		$urlParams = array('county'=>$countyId, 'area'=>$areaId);
 
 		$menuItems[] = array('label'=>'全部', 'url' => $this->createUrl('restaurant/index', $urlParams));
-		foreach ($data as $key => $value) {
+		foreach ($types as $key => $value) {
 			$urlParams['type'] = $value->id;
 			$menuItems[] = array('label'=>$value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
 		}

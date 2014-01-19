@@ -233,7 +233,10 @@ class Restaurant extends CActiveRecord
 		}
 		
 		if (! empty($this->type_id)) {
-			$criteria->compare('type_id', $this->type_id);
+			$keyword = ',' . $this->type_id . ',';
+			// TODO：用这行代码代替下下面一行，搜索不到数据，不知道为啥。
+			// $criteria->addSearchCondition('type_id', $keyword, false);
+			$criteria->addCondition("type_id LIKE '$keyword'");
 		}
 
 		return new CActiveDataProvider($this, array(
