@@ -125,6 +125,19 @@ class RestaurantController extends Controller
 		$uploadedFile->saveAs($destFile);
 	}
 
+	/*
+	 * 对餐馆参数进行验证和合法性处理。
+	 */
+	private function validateTypeId($typeId){
+		$typeArray = array_unique(array_filter(explode(',', $typeId)));
+		$typeIds = implode(',', $typeArray);
+
+		// 给数据两段加上逗号是最终目的，前面的步骤是为了处理不合法数据。
+		$typeIds = ',' . $typeIds . ',';
+
+		return $typeIds;
+	}
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -139,6 +152,7 @@ class RestaurantController extends Controller
 		// $this->performAjaxValidation($model);
 		if(isset($_POST['Restaurant']))
 		{
+			$_POST['Restaurant']['type_id'] = $this->validateTypeId($_POST['Restaurant']['type_id']);
 			$model->attributes=$_POST['Restaurant'];
 			$model->creator = Yii::app()->user->id;
 
@@ -189,6 +203,8 @@ class RestaurantController extends Controller
 		$model=$this->loadModel($id);
 
 		if(isset($_POST['Restaurant'])) {
+			// TODO: 换一种优美的写法。刘万伟留。
+			$_POST['Restaurant']['type_id'] = $this->validateTypeId($_POST['Restaurant']['type_id']);
 			$model->attributes=$_POST['Restaurant'];
 
 			$uploadedFile = CUploadedFile::getInstance($model, 'image_url');

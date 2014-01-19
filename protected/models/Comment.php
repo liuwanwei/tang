@@ -155,7 +155,9 @@ class Comment extends CActiveRecord
 		}
 		
 		if (! empty($type)) {
-			$whereClause .= " AND type_id=$type ";
+			// 支持多种经营的餐馆类型的查询。
+			$type = ',' . $type . ',';
+			$whereClause .= " AND type_id LIKE '$type' ";
 		}
 
 		$sql = "SELECT

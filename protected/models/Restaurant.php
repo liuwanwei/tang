@@ -9,7 +9,7 @@
  * @property string $phone
  * @property string $business_hour
  * @property string $address
- * @property integer $type_id
+ * @property string $type_id
  * @property integer $county_id
  * @property integer $area_id
  * @property integer $is_shutdown
@@ -51,7 +51,7 @@ class Restaurant extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, address, type_id, county_id, area_id', 'required'),
-			array('county_id, type_id, area_id, is_shutdown,  is_checked, votes', 'numerical', 'integerOnly'=>true),
+			array('county_id, area_id, is_shutdown,  is_checked, votes', 'numerical', 'integerOnly'=>true),
 			array('average_points, weighted_points', 'numerical'),
 			array('name, business_hour, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>64),
@@ -122,7 +122,6 @@ class Restaurant extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		// $criteria->compare('type_id', $this->type_id, true),
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('business_hour',$this->business_hour,true);
 		$criteria->compare('address',$this->address,true);
@@ -194,7 +193,7 @@ class Restaurant extends CActiveRecord
 	 */
 	public function mostVisitedRestaurant($county, $area, $type, $count){
 		$criteria = new CDbCriteria(array(
-			'condition'=>'is_checked = 1',
+			'condition'=>'is_checked = 1 AND visits <> 0',
 			'order'=>'visits DESC',
 			'limit'=>$count
 		));
@@ -208,7 +207,8 @@ class Restaurant extends CActiveRecord
 		}
 		
 		if (! empty($type)) {
-			$criteria->compare('type_id', $type);
+			$keyword = ',' . $type . ',';
+			$criteria->addCondition("type_id LIKE '$keyword'");
 		}
 
 		return $this->findAll($criteria);
