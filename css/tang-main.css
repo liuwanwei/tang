@@ -1231,14 +1231,19 @@ a.a-text-none
 	float:left;
 	position: relative;
 	cursor: pointer;
-	color: #999;
-	border-radius: 4px;
+	color: #9c9c9c;
+	border-radius: 10px;
 	overflow: hidden;
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
 	font-weight: bold;
-	font-size: 7em;
+	width: 50px;
+	height: 50px;
+	border:2px dashed #999;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 2em;
 }
  
 .a-upload  input {
@@ -1253,6 +1258,7 @@ a.a-text-none
  
 .a-upload:hover {
 	color: #888;
+	border-color:#888;
 	text-decoration: none
 }
 
@@ -1287,6 +1293,14 @@ a.a-text-none
 	display: block;
 	margin-top: 5px;
 }
+
+#checkbox_type label
+{
+	margin-right: 10px!important;
+	font-weight: normal;
+}
+
+
 /**** 分享组件样式 *****/
 .fenxiang
 {
