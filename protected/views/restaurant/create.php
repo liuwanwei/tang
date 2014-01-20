@@ -2,16 +2,7 @@
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
 
-$this->breadcrumbs=array(
-	'Restaurants'=>array('index'),
-	'Create',
-    );
-
-// $this->menu=array(
-// 	array('label'=>'汤馆列表', 'url'=>array('index')),
-// 	array('label'=>'汤馆管理', 'url'=>array('admin')),
-// );
-    ?>
+?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'selectors'=>$selectors)); ?>
 
