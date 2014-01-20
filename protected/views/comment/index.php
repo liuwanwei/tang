@@ -88,7 +88,7 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 				</div>
 				
 			</div>
-			<div class="fenxiang show"><a class="sina" href="http://v.t.sina.com.cn/share/share.php?url=http://www.laotangguan.com&pic=<?php echo empty($restaurant->image_url)?'':'http://www.laotangguan.com'.$restaurant->image_url;?>&title=原来汤馆也可以这么玩，快来看看我已经对【<?php echo $restaurant->name; ?>】打过分了&appkey=3495571392&ralateUid=&searchPic=false" target="_blank"><i class="fa fa-share"></i> 分享</a></div>
+			<div class="fenxiang show"><a class="sina" href="http://v.t.sina.com.cn/share/share.php?url=http://www.laotangguan.com<?php echo $this->createUrl('comment/index',array('restaurantId'=>$restaurant->id)); ?>&pic=<?php echo empty($restaurant->image_url)?'':'http://www.laotangguan.com'.$restaurant->image_url;?>&title=原来汤馆也可以这么玩，快来看看我已经对【<?php echo $restaurant->name; ?>】打过分了&appkey=3495571392&ralateUid=&searchPic=false" target="_blank"><i class="fa fa-share"></i> 分享</a></div>
 			<span class="rating-error-loading"></span>
 			<div class="clear"><!--清除浮动--></div>
 		</li>
