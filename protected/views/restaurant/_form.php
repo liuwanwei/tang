@@ -38,9 +38,9 @@
 	<?php echo $form->labelEx($model,'image_url',array('class'=>"col-sm-2 control-label")); ?>
 	<div class="col-sm-8">
 		<?php if (!empty($model->image_url)) { ?>
-		<span class="upload-image"><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="100px" height="100px" alt="" /></a></span>
+		<span class="upload-image"><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="50px" height="50px" alt="" /></a></span>
 		<?php } ?>
-		<a href="javascript:;" class="a-upload fa fa-plus-square-o">
+		<a href="javascript:;" class="a-upload fa fa-plus">
 			<?php echo $form->fileField($model,'image_url',array('onchange'=>'fileChange(this.value);'));?>
 		</a>
 	</div>
