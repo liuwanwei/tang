@@ -27,7 +27,7 @@ class Love extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Love';
+		return 'love';
 	}
 
 	/**
