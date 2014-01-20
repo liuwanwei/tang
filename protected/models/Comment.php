@@ -57,6 +57,7 @@ class Comment extends CActiveRecord
 		return array(
 				'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 				'restaurant' => array(self::BELONGS_TO, 'Restaurant', 'restaurant_id'),
+				'loves' => array(self::STAT, 'Love', 'target_id', 'condition'=>'target_type=2'),
 		);
 	}
 
@@ -155,7 +156,9 @@ class Comment extends CActiveRecord
 		}
 		
 		if (! empty($type)) {
-			$whereClause .= " AND type_id=$type ";
+			// 支持多种经营的餐馆类型的查询。
+			$type = ',' . $type . ',';
+			$whereClause .= " AND type_id LIKE '$type' ";
 		}
 
 		$sql = "SELECT

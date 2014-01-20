@@ -28,7 +28,13 @@
 			<pre><?php echo $data->content ?></pre>			
 		</div>
 		<div class="feed-main-footer">
-			<span class="time"><?php echo CHtml::encode($data->create_datetime);?></span><a class="fa fa-thumbs-o-up zan"></a><span>7</span>
+			<span class="time"><?php echo CHtml::encode($data->create_datetime);?></span>
+			<?php
+			$url = $this->createUrl('love/love', array('type'=>2, 'id'=>$data->id));
+			echo CHtml::link('', $url, array('class'=>"fa fa-thumbs-o-up zan"));
+			?>
+			<!-- <a class="fa fa-thumbs-o-up zan"></a> -->
+			<span><?php echo $data->loves; ?></span>
 		</div>
 	</div>
 </div>
