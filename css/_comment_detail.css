@@ -230,3 +230,18 @@ pre
 	color:#999;
 	font-size: 12px!important;
 }
+.zan
+{
+	color:#888;
+	margin-left:10px;
+	cursor: pointer;
+}
+.zan+span
+{
+	color:#888;
+	margin-left: 5px;
+}
+.zan:hover
+{
+	color:#555;
+}
