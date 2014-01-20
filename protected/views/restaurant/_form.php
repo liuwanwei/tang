@@ -72,9 +72,9 @@
 			<?php 
 			foreach ($selectors['types'] as $key=>$value) {
 				if (!empty($model->type_id) && strpos($model->type_id,','.$key.',')!==false) {
-					echo '<label><input type="checkbox" name="cbox_type" checked value="'.$key.'" > '.$value.'</label>';	
+					echo '<label><input type="checkbox" name="restaurantType" checked value="'.$key.'" > '.$value.'</label>';	
 				}else{
-					echo '<label><input type="checkbox" name="cbox_type" value="'.$key.'" > '.$value.'</label>';
+					echo '<label><input type="checkbox" name="restaurantType" value="'.$key.'" > '.$value.'</label>';
 			}} ?>
 		</div>
 		<input type="hidden" id="Restaurant_type_id" name="Restaurant[type_id]">
@@ -171,13 +171,13 @@
 <script type="text/javascript">
 $(function(){
 	$("#restaurantForm").click(function(){
-		var cbox_RestaurantTypes=$("#checkbox_type input[type='checkbox']:checked");
-		var cbox_TypeStr="";
-		if (cbox_RestaurantTypes.length>0) {
-			cbox_RestaurantTypes.each(function(){
-				cbox_TypeStr+=$(this).val()+","
+		var restaurantTypes=$("#checkbox_type input[type='checkbox']:checked");
+		var str_RestaurantTypes="";
+		if (restaurantTypes.length>0) {
+			restaurantTypes.each(function(){
+				str_RestaurantTypes+=$(this).val()+","
 			});
-			$("#Restaurant_type_id").val(cbox_TypeStr);
+			$("#Restaurant_type_id").val(str_RestaurantTypes);
 			return true;
 		}
 		alert("您还没有选择分类！");
