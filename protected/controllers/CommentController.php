@@ -128,7 +128,7 @@ class CommentController extends Controller
 	}
 
 	/**
-	 * Lists all models.
+	 * 展示餐馆详情和餐馆评论详情列表。
 	 */
 	public function actionIndex($restaurantId) {
 		// 餐馆访问次数+1；
@@ -138,22 +138,22 @@ class CommentController extends Controller
 			$restaurant->save();
 		}
 
-		$criteria=new CDbCriteria(array(
+		$criteria = new CDbCriteria(array(
 				'condition'=>'restaurant_id='.$restaurantId . ' AND hidden=0',
 				'order'=>'create_datetime DESC',
 		));
 
-		$dataProvider=new CActiveDataProvider('Comment',array(
+		$comments = new CActiveDataProvider('Comment',array(
 			'criteria'=>$criteria,
 		));
-		$dataProvider->pagination->pageSize = $dataProvider->totalItemCount;
+		$comments->pagination->pageSize = $comments->totalItemCount;
 		
 		$restaurant = Restaurant::model()->findByPk($restaurantId);
 		 
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-			'restaurant'=>$restaurant,
-			'model'=>new Comment //Yii CActiveForm需要使用Comment对象
+			'restaurant'=>$restaurant,		// 餐馆详情。
+			'dataProvider'=>$comments,	// 评论详情。
+			'model'=>new Comment 			//Yii CActiveForm需要使用Comment对象
 		));
 	}
 
