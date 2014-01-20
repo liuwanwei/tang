@@ -172,12 +172,12 @@
 $(function(){
 	$("#restaurantForm").click(function(){
 		var restaurantTypes=$("#checkbox_type input[type='checkbox']:checked");
-		var restaurantTypesid="";
+		var restaurantTypesId="";
 		if (restaurantTypes.length>0) {
 			restaurantTypes.each(function(){
-				restaurantTypesid+=$(this).val()+","
+				restaurantTypesId+=$(this).val()+","
 			});
-			$("#Restaurant_type_id").val(restaurantTypesid);
+			$("#Restaurant_type_id").val(restaurantTypesId);
 			return true;
 		}
 		alert("您还没有选择分类！");
