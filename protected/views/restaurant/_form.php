@@ -171,13 +171,13 @@
 <script type="text/javascript">
 $(function(){
 	$("#restaurantForm").click(function(){
-		var cboxtype=$("#checkbox_type input[type='checkbox']:checked");
-		var cboxtype_str="";
-		if (cboxtype.length>0) {
-			cboxtype.each(function(){
-				cboxtype_str+=$(this).val()+","
+		var cbox_RestaurantTypes=$("#checkbox_type input[type='checkbox']:checked");
+		var cbox_TypeStr="";
+		if (cbox_RestaurantTypes.length>0) {
+			cbox_RestaurantTypes.each(function(){
+				cbox_TypeStr+=$(this).val()+","
 			});
-			$("#Restaurant_type_id").val(cboxtype_str);
+			$("#Restaurant_type_id").val(cbox_TypeStr);
 			return true;
 		}
 		alert("您还没有选择分类！");
