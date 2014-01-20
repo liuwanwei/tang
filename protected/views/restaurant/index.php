@@ -223,7 +223,7 @@ if (count>limit) {
 				'</div>';
 			}
 			strData+='</div>'+
-			'<div class="fenxiang"><a class="sina" href="http://v.t.sina.com.cn/share/share.php?url=http://www.laotangguan.com/details/'+item["restaurant"]["id"]+'&title=原来汤馆也可以这么玩，快来看看我已经对【'+item["restaurant"]["name"]+'】打过分了&appkey=3495571392&pic='+(item["restaurant"]["image_url"]==""?"":"http://www.laotangguan.com"+item["restaurant"]["image_url"])+'&ralateUid=&searchPic=false"  target="_blank"><i class="fa fa-share"></i> 分享</a></div>'+
+			'<div class="fenxiang"><a class="sina" href="http://v.t.sina.com.cn/share/share.php?url=http://www.laotangguan.com/details/'+item["restaurant"]["id"]+'&title=发现了一个非常不错的汤馆：“'+item["restaurant"]["name"]+'”。(@洛阳老汤馆) &appkey=3495571392&pic='+(item["restaurant"]["image_url"]==""?"":"http://www.laotangguan.com"+item["restaurant"]["image_url"])+'&ralateUid=&searchPic=false"  target="_blank"><i class="fa fa-share"></i> 分享</a></div>'+
 			'<div class="clear"><!--清除浮动--></div>'+
 			'</li>'+
 			'<div class="clear"></div>'+
