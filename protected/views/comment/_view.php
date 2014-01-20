@@ -34,7 +34,7 @@
 			echo CHtml::link('', $url, array('class'=>"fa fa-thumbs-o-up zan"));
 			?>
 			<!-- <a class="fa fa-thumbs-o-up zan"></a> -->
-			<span>7</span>
+			<span><?php echo $data->loves; ?></span>
 		</div>
 	</div>
 </div>

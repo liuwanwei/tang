@@ -57,7 +57,7 @@ class Comment extends CActiveRecord
 		return array(
 				'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 				'restaurant' => array(self::BELONGS_TO, 'Restaurant', 'restaurant_id'),
-				'loves' => array(self::STAT, 'Love', 'target_id'),
+				'loves' => array(self::STAT, 'Love', 'target_id', 'condition'=>'target_type=2'),
 		);
 	}
 
