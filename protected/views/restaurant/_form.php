@@ -65,10 +65,19 @@
 
 	<div class="form-row-one">
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'type_id',array('class'=>"col-sm-2 control-label")); ?>
+		<?php echo $form->labelEx($model,'type_id',array('class'=>"col-sm-2 control-label"));?>
 		<!--<?php echo $form->textField($model,'type_id'); ?> -->
 		<div class="col-sm-8">
-		<?php echo $form->dropDownList($model, 'type_id',  $selectors['types'],array('class'=>"form-control"));?>
+		<div id="checkbox_type">
+			<?php 
+			foreach ($selectors['types'] as $key=>$value) {
+				if (!empty($model->type_id) && strpos($model->type_id,','.$key.',')!==false) {
+					echo '<label><input type="checkbox" name="cbox_type" checked value="'.$key.'" > '.$value.'</label>';	
+				}else{
+					echo '<label><input type="checkbox" name="cbox_type" value="'.$key.'" > '.$value.'</label>';
+			}} ?>
+		</div>
+		<input type="hidden" id="Restaurant_type_id" name="Restaurant[type_id]">
 		<?php echo $form->error($model,'type_id'); ?>
 	</div>
 	</div>
@@ -115,25 +124,6 @@
 		<?php echo $form->error($model,'address'); ?>
 	</div>
 	</div>
-
-	<!-- <div class="form-row-one">
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'phone',array('class'=>"col-sm-2 control-label")); ?>
-		<div class="col-sm-8">
-		<?php echo $form->textField($model,'phone',array('size'=>60,'maxlength'=>64,'class'=>"form-control",'placeholder'=>'输入电话')); ?>
-		<?php echo $form->error($model,'phone'); ?>
-	</div>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'business_hour',array('class'=>"col-sm-2 control-label")); ?>
-		<div class="col-sm-8">
-		<?php echo $form->textField($model,'business_hour',array('size'=>60,'maxlength'=>128,'class'=>"form-control")); ?>
-		<?php echo $form->error($model,'business_hour'); ?>
-	</div>
-	</div>
-	</div> -->
-
 	<?php  if(Yii::app()->user->isAdmin) {
 		echo '<div class="form-group">';		
 		echo $form->labelEx($model, "is_checked",array('class'=>"col-sm-2 control-label"));
@@ -144,57 +134,8 @@
 		echo '</div>';
 	}
 	?>
-		<!--
-		<div class="form-row-one">
-		<div class="row">
-			<?php echo $form->labelEx($model,'is_shutdown'); ?>
-			<?php echo $form->dropDownList($model, 'is_shutdown', $selectors['statuses']);?>
-			<?php echo $form->error($model,'is_shutdown'); ?>
-		</div>
-		-->
-
-		<!-- 图像文件上传框 
-		<div class="row">
-			<?php echo $form->labelEx($model,'image_url'); ?>
-			<?php echo CHtml::activeFileField($model, 'image_url'); ?>
-			<?php echo $form->error($model,'image_url'); ?>
-		</div>-->
-
-		<!-- 已有图像显示框 
-		<?php if($model->isNewRecord!='1' &&  !empty($model->image_url)){ ?>
-		<div class="row">
-			<?php echo CHtml::image(Yii::app()->request->baseUrl.$model->image_url,"image",array("width"=>300)); ?>
-		</div>
-		<?php } ?>
-		</div>-->
-
-	<!-- 
-	<div class="row">
-		<?php echo $form->labelEx($model,'weighted_points'); ?>
-		<?php echo $form->textField($model,'weighted_points'); ?>
-		<?php echo $form->error($model,'weighted_points'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'votes'); ?>
-		<?php echo $form->textField($model,'votes'); ?>
-		<?php echo $form->error($model,'votes'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'average_points'); ?>
-		<?php echo $form->textField($model,'average_points'); ?>
-		<?php echo $form->error($model,'average_points'); ?>
-	</div> 
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>256)); ?>
-		<?php echo $form->error($model,'description'); ?>
-	</div>-->
-
 	<div class="row buttons aligin-c">
-		<?php echo CHtml::submitButton($model->isNewRecord ? '新增提交' : '保存提交',array('class'=>'btn btn-primary btn-lg')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? '新增提交' : '保存提交',array('class'=>'btn btn-primary btn-lg','id'=>'restaurantForm')); ?>
 	</div>
 </div>
 <?php $this->endWidget(); ?>
@@ -226,4 +167,23 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div><!-- form -->
+
+<script type="text/javascript">
+$(function(){
+	$("#restaurantForm").click(function(){
+		var cboxtype=$("#checkbox_type input[type='checkbox']:checked");
+		var cboxtype_str="";
+		if (cboxtype.length>0) {
+			cboxtype.each(function(){
+				cboxtype_str+=$(this).val()+","
+			});
+			$("#Restaurant_type_id").val(cboxtype_str);
+			return true;
+		}
+		alert("您还没有选择分类！");
+		return false;
+	});
+});
+
+</script>
 

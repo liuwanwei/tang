@@ -1293,6 +1293,14 @@ a.a-text-none
 	display: block;
 	margin-top: 5px;
 }
+
+#checkbox_type label
+{
+	margin-right: 10px!important;
+	font-weight: normal;
+}
+
+
 /**** 分享组件样式 *****/
 .fenxiang
 {
