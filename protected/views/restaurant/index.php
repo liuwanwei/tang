@@ -100,13 +100,15 @@ $(function(){
  *@pageCurrent 从1开始是第二页，0是第一页已经在面页加载时加载过
  */
 
-var count=<?php echo $count;?>,
-area=<?php echo $area;?>,
-type=<?php echo $type;?>,
-county=<?php echo $county;?>,
-pageCurrent=1,
-limit=10,
-itemIndex=10;
+var count=<?php echo $count;?>,//总数
+area=<?php echo $area;?>,	   //县区
+type=<?php echo $type;?>,	   //类型
+county=<?php echo $county;?>,  //区域
+pageCurrent=1,				   //当前页数
+limit=10,					   //每页显示的条数
+itemIndex=10;				   //数据的排列顺序号
+var voteCreateUrl="<?php echo $this->createUrl('vote/create')?>";
+var voteDeleteUrl="<?php echo $this->createUrl('vote/delete');?>";
 var isdataload=true;
 
 if (count>limit) {
@@ -373,7 +375,7 @@ function tang_main_rating(rating_list,ismouseover)
 			btnsubmit_this.html('<span class="btn-loading"><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在提交中...</span>');
 			
 			//提交评分的开始
-			$.post("<?php echo $this->createUrl('vote/create')?>",{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
+			$.post(voteCreateUrl,{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 			rating:raing_value.text()},Comment:commentContent.val()},function(resultdata){
 			//console.log("aa="+resultdata.voteid);
 
@@ -391,7 +393,7 @@ function tang_main_rating(rating_list,ismouseover)
 					});			
 					rating_cancel.one('click',function(){
 						rating_cancel.removeClass('rating-icon rating-your').addClass("rating-pending");
-						$.post("/vote/delete",{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
+						$.post(voteDeleteUrl,{Vote:{id:a_this.attr("voteid")}},function(rating_cancel_result){								
 							if (rating_cancel_result.msg==="0") {
 								a_this.removeAttr('voteid');
 								rating_cancel.removeClass('rating-pending');
