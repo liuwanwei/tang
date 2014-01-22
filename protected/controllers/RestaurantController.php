@@ -332,13 +332,15 @@ class RestaurantController extends Controller
 		}
 
 		$data = $dataProvider->getData();
-		$menuItems = array();
-
-		// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
-		$menuItems[] = array('label'=>'全部', 'url'=>array($this->createUrl('restaurant/index'), 'county' => $countyId));
+		
+		$menuItems = array();		
+		if (count($data) !== 0) {
+			// 人为加入“全部”按钮后，区域选择界面也要改为区域总数大于1时再显示。
+			$menuItems[] = array('label'=>'全部', 'url'=>array($this->createUrl('restaurant/index'), 'county' => $countyId));
 	
-		foreach ($data as $key => $value) {
-			$menuItems[] = array('label' => $value->name, 'url' => array($this->createUrl('restaurant/index'), 'county'=>$countyId,'area'=>$value->id));
+			foreach ($data as $key => $value) {
+				$menuItems[] = array('label' => $value->name, 'url' => array($this->createUrl('restaurant/index'), 'county'=>$countyId,'area'=>$value->id));
+			}
 		}
 
 		return $menuItems;
@@ -389,14 +391,18 @@ class RestaurantController extends Controller
 		$restaurantTypeDataProvider->criteria = $criteria;
 
 		$types = $restaurantTypeDataProvider->getData();
-		$menuItems = array();
-		$urlParams = array('county'=>$countyId, 'area'=>$areaId);
 
-		$menuItems[] = array('label'=>'全部', 'url' => $this->createUrl('restaurant/index', $urlParams));
-		foreach ($types as $key => $value) {
-			$urlParams['type'] = $value->id;
-			$menuItems[] = array('label'=>$value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
-		}
+		$menuItems = array();
+		if (count($types) !== 0) {
+			
+			$urlParams = array('county'=>$countyId, 'area'=>$areaId);
+
+			$menuItems[] = array('label'=>'全部', 'url' => $this->createUrl('restaurant/index', $urlParams));
+			foreach ($types as $key => $value) {
+				$urlParams['type'] = $value->id;
+				$menuItems[] = array('label'=>$value->name, 'url' => $this->createUrl('restaurant/index', $urlParams));
+			}
+		}		
 
 		return $menuItems;
 	}
