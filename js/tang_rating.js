@@ -32,9 +32,7 @@ rating_list.each(function(){
 		a_arr.unbind('click'); 
 		//单击星星时发生
 		a_arr.live("click",function(event){
-
 			event.stopPropagation();
-
 			if (a_this.attr("isclick")=="true") {
 				return false;
 			}

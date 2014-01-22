@@ -105,13 +105,13 @@ $(function(){
  *@pageCurrent 从1开始是第二页，0是第一页已经在面页加载时加载过
  */
 var tangHomeObj=tangHome;
-	tangHomeObj.count=<?php echo $count;?>,//总数;
-	tangHomeObj.area=<?php echo $area;?>,	   //县区;
-	tangHomeObj.type=<?php echo $type;?>,	   //类型;
-	tangHomeObj.county=<?php echo $county;?>,  //区域;
-	tangHomeObj.pageCurrent=1;				   //当前页数
-	tangHomeObj.limit=10;					   //每页显示的条数
-	tangHomeObj.itemIndex=10;		   //数据的排列顺序号
+	tangHomeObj.count=<?php echo $count;?>,		//总数;
+	tangHomeObj.area=<?php echo $area;?>,		//县区;
+	tangHomeObj.type=<?php echo $type;?>,		//类型;
+	tangHomeObj.county=<?php echo $county;?>,	//区域;
+	tangHomeObj.pageCurrent=1;					//当前页数
+	tangHomeObj.limit=10;						//每页显示的条数
+	tangHomeObj.itemIndex=10;					//数据的排列顺序号
 	tangHomeObj.voteCreateUrl="<?php echo $this->createUrl('vote/create')?>";//新增评分;   
 	tangHomeObj.voteDeleteUrl="<?php echo $this->createUrl('vote/delete');?>";//删除评分;
 	tangHomeObj.restaurantFeatureQueryUrl="<?php echo $this->createUrl('restaurantFeature/query'); ?>";//查询特色数据;
