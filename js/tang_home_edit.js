@@ -59,9 +59,7 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 				//刷新页面
 				location="/index.php"+window.location.search;
 				//当提交成功时动态更新特色数据
-
 				//console.log("className="+$(".restaurant-detail>ul>li>ul:eq(0) li",parent_edit_dom.parent().parent()).eq(0).text());
-
 				//$("<li>adfsadf</li>").appendTo($(".restaurant-detail>ul>li>ul:eq(0) li:eq(1)",parent_edit_dom.parent().parent()));
 			}else
 			{

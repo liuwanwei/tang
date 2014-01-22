@@ -30,7 +30,6 @@ var tangHome={};
 					return false;
 				}
 				if (tang_this.isdataload && $(window).scrollTop()+10 >= $(document).height() - $(window).height()){
-
 					if (tang_this.isdataload) {
 						tang_this.isdataload=false;
 						tang_this.nextPage();
@@ -55,7 +54,6 @@ var tangHome={};
 				    		tang_this.pageCurrent++;
 				    	},1000);
 				    }
-				    
 				}else{
 				    if(data!=null){
 				        setTimeout(function(){
@@ -69,7 +67,6 @@ var tangHome={};
 			},"json");
 		}
 	};
-	
 
 //加载分页时，动态DOM
 tangHome.loadData=function(data)
@@ -103,7 +100,6 @@ tangHome.loadData=function(data)
 			}
 			strData+='</li>';
 		}
-
 		strData+='<li>'+
 		'<div class="rating-widget">'+
 		'<span class="rating-widget-lable">平均得分:</span>'+

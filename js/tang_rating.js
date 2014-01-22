@@ -14,7 +14,6 @@ function tang_main_rating(rating_list,ismouseover,voteCreateUrl,voteDeleteUrl)
  */
 
 rating_list.each(function(){
-
 	var a_this=$(this);//当前遍历rating-list的jqueryDOM对象
 	var a_arr=$(".rating-stars a",a_this);//取出当前rating-list下的所有a对象 
 	var raing_value=$(".rating-rating>.value",a_this);//评分的值
@@ -54,9 +53,7 @@ rating_list.each(function(){
 		var rating_cancel=$(".rating-cancel",a_this);
 		rating_cancel.addClass('rating-pending');
 		//执行评分的ajax
-
 		//console.log("user_id="+a_this.attr("data-user")+"  data-id="+a_this.attr("data-id")+"  value="+raing_value.text());
-		
 		//增加过渡窗口
 		var alertModalDialog=$(".alertModal-dialog");
 		var alertModalTitle=$(".alertModal-header .alertModal-title");
@@ -76,7 +73,6 @@ rating_list.each(function(){
 
 		alertModalTitle.text(a_this.attr('data-name'));
 		//alertModalBody.text('您将对'+a_this.attr('data-name')+'打'+raing_value.text()+'分('+$(this).attr('data-title')+')');
-
 		alertModalDialog.show();
 		$(".alertModal-footer #alertModalClose").click(function(){
 			alertModalDialog.hide();
@@ -93,7 +89,6 @@ rating_list.each(function(){
 			a_this.attr("data-clicknum","0");
 			raing_value.text(raing_default);
 			ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
-			
 			$(".alertModal-footer #alertModalSubmit").removeAttr('disabled');
 			$(".alertModal-footer #alertModalSubmit").html('提交');
 		});
@@ -103,7 +98,6 @@ rating_list.each(function(){
 			var btnsubmit_this=$(this);
 			btnsubmit_this.attr("disabled","disabled");//增加按钮状态锁定
 			btnsubmit_this.html('<span class="btn-loading"><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在提交中...</span>');
-			
 			//提交评分的开始
 			$.post(voteCreateUrl,{Vote:{user_id:a_this.attr("data-user"),restaurant_id:a_this.attr("data-id"),
 				rating:raing_value.text()},Comment:commentContent.val()},function(resultdata){
@@ -132,7 +126,6 @@ rating_list.each(function(){
 								ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
 							}else{
 							//服务器出错
-
 							}
 						},"json");
 					});
@@ -152,7 +145,6 @@ rating_list.each(function(){
 							btnsubmit_this.html('提交');
 						};
 					},1000);
-
 				}else{
 				//服务器出错
 				}
@@ -175,11 +167,9 @@ rating_list.each(function(){
 		var selected_a=$(".rating-stars a:lt("+i+")",a_this);
 		selected_a.removeClass();
 		selected_a.addClass("rating-icon rating-hover");
-
 		var no_selected_a=$(".rating-stars a:gt("+(i-1)+")",a_this);
 		no_selected_a.removeClass();
 		no_selected_a.addClass("rating-icon star-on");
-
 		raing_value.text(i);
 	},function(){
 		$(".tang-tooltip").hide();
