@@ -36,7 +36,7 @@
 						data-user="<?php echo Yii::app()->user->id ?>"
 						data-id="<?php echo CHtml::encode($data->id);?>" 
 						data-name="<?php echo CHtml::encode($data->name);?>" 
-						data-userlogin="<?php echo Yii::app()->user->isGuest ?>">
+						>
 						<span class="rating-stars">
 							<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
 							<a class="rating-icon star-on" data-title="聊胜于无"><span>2</span></a>
