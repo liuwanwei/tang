@@ -20,9 +20,6 @@ var tangHome={};
 	tangHome.isdataload=true;
 	tangHome.isAdmin=false;
 
-
-	
-
 	tangHome.initScroll=function(){
 		var tang_this=this;
 		if (tang_this.count>tang_this.limit) {
@@ -39,10 +36,10 @@ var tangHome={};
 						tang_this.nextPage();
 					}
 				}
-
 			});
 		}
 	};
+	
 	tangHome.nextPage=function(){
 		var tang_this=this;
 		if (tang_this.count>tang_this.limit) 
@@ -68,7 +65,6 @@ var tangHome={};
 					        tang_this.pageCurrent++;
 				    	},1000);
 				    }
-				    
 				}
 			},"json");
 		}
@@ -78,7 +74,6 @@ var tangHome={};
 //加载分页时，动态DOM
 tangHome.loadData=function(data)
 {
-	
 	var strData='';
 	for(var i in data){
 		this.itemIndex++;
@@ -172,19 +167,20 @@ tangHome.loadData=function(data)
 			'</div>';
 		}
 
-//console.log(strData);
-$(".list-view .items").append(strData);
-//var rating_list_dome1=$(strData).find(".rating-widget .rating-list");alert(rating_list_dome1.eq(0).html());
-var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
-tang_main_rating(rating_list_dome1,true,this.voteCreateUrl,this.voteDeleteUrl);
-loadFancyBox();//图片放大
-if (this.isAdmin) { //判断是否是管理员，给管理增加贴标功能
-	editbutton(this.restaurantFeatureQueryUrl,this.featureAddRestaurantFeatureUrl);
-}
+	//console.log(strData);
+	$(".list-view .items").append(strData);
+	//var rating_list_dome1=$(strData).find(".rating-widget .rating-list");alert(rating_list_dome1.eq(0).html());
+	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
+	tang_main_rating(rating_list_dome1,true,this.voteCreateUrl,this.voteDeleteUrl);
+	loadFancyBox();//图片放大
+	if (this.isAdmin) { //判断是否是管理员，给管理增加贴标功能
+		editbutton(this.restaurantFeatureQueryUrl,this.featureAddRestaurantFeatureUrl);
+	}
 };
 tangHome.initRating=function(){
 	var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 	tang_main_rating(rating_list_dome,true,this.voteCreateUrl,this.voteDeleteUrl);
+
 	loadFancyBox();//图片放大
 
 	if (this.isAdmin) { //判断是否是管理员，给管理增加贴标功能

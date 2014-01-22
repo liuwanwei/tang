@@ -8,7 +8,6 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 		var feature_selected_items=$(".feature-content",p_this).attr('data-selected-items').split(',');
 			//ajax加载数据
 			$.get(restaurantFeatureQuery,{},function(data){
-
 				var t="<ul>";
 				if (data) {
 					$.each(data,function(a){
@@ -24,7 +23,6 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 				$(".feature-content .feature-content-content",p_this).html(t);
 			},"json");
 
-
 			$(".feature-content",p_this).css({'display':'block',
 				'top':p_this.offset().top+25,
 				'left':p_this.offset().left}).animate(
@@ -33,10 +31,8 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 					minHeight:'200px',
 					left:$(this).offset().left-$(this).width()-200,
 					top:$(this).offset().top-25
-
 				},200);
 		});
-		
 	},function(){
 		$(this).find("ul").hide();
 		$(this).find(".feature-btn").unbind("click");
@@ -44,7 +40,6 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 
 	$("#feature-edit-close",btnedit_div).click(function(){
 		hide_edit_btn_div($(this));
-		
 	});
 
 	$("#feature-edit-submit",btnedit_div).click(function(){
