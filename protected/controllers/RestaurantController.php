@@ -183,8 +183,8 @@ class RestaurantController extends Controller
 				}
 			}
 		}
-
-
+		//如果验证失败就将图片地址赋为空
+		$model->image_url="";
 		$this->render('create',array(
 			'model'=>$model,
 			'selectors'=>$this->staticSelectors(),

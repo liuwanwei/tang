@@ -171,6 +171,11 @@
 <script type="text/javascript">
 $(function(){
 	$("#restaurantForm").click(function(){
+		if ($("#Restaurant_name").val()=="") {
+			alert("请输入汤馆名称！");
+			$("#Restaurant_name").focus();
+			return false;
+		}
 		var restaurantTypes=$("#checkbox_type input[type='checkbox']:checked");
 		var restaurantTypesId="";
 		if (restaurantTypes.length>0) {
@@ -178,10 +183,16 @@ $(function(){
 				restaurantTypesId+=$(this).val()+","
 			});
 			$("#Restaurant_type_id").val(restaurantTypesId);
-			return true;
+		}else{
+			alert("您还没有选择分类！");
+			return false;
 		}
-		alert("您还没有选择分类！");
-		return false;
+		if ($("#Restaurant_address").val()=="") {
+			alert("请输入汤馆地址！");
+			$("#Restaurant_name").focus();
+			return false;
+		}
+		return true;
 	});
 
 var geoCoder,map,marker = null;
