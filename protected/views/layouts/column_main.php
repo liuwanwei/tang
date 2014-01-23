@@ -18,20 +18,15 @@
         <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
         <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/tang-main.css" />
 	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />-->
-	
 	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css"> 
-
 	<!--显示图片放大的插件-->
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
 </head>
-
 <body>
-
 <div class="t-container" id="page">
 <?php
 	$menu = array(
@@ -49,7 +44,6 @@
 		}
 	}
 ?>
-
 <div id="mainmenu">
 <div class="mainmenu-content">	
 	<!-- <a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a> -->
@@ -57,16 +51,13 @@
   		//'firstItemCssClass'=>'active',
 		'items'=>$menu,
 		'activeCssClass'=>false,
-  		
 		)); 
 	?>
-
 	<!-- <div style="float:left;margin-left:1%;">
 		<form method="POST" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
 			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
 		</form>
 	</div> -->
-
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
 		<a href="#" class="login">登陆</a>
@@ -89,8 +80,6 @@
 	</div>
 </div>
 </div><!-- mainmenu -->
-
-
 <!--公共的模态窗口，提示信息用-->
 <!-- Modal -->
   <div class="alertModal-dialog">
@@ -123,10 +112,6 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-
-
-
-
 <!--登陆的模态窗口-->
 <div id="myModal" class="modal1 fade in " >
 	<div class="modal-header">
@@ -140,7 +125,6 @@
 	'back_url'=>Yii::app()->request->url,
 	));
 	}?>
-
 	<!-- <a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a> -->
 	</div>
 </div>
@@ -150,8 +134,6 @@
 	<?php echo $content; ?>
 </div>
 <div class="clear"></div>
-
-
 <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
 </div><!-- page -->
 <div id="footer">
@@ -164,7 +146,6 @@
 	<span>&copy; <?php echo date('Y'); ?>点滴科技</span>
 </div><!-- footer -->
 <div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"><i class="fa fa-arrow-circle-up" ></i></a></div>
-
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js"></script>
 </body>
