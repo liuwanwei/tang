@@ -120,7 +120,7 @@ var tangHomeObj=tangHome;
 	tangHomeObj.commentIndexUrl="<?php echo $this->createUrl('comment/index',array('restaurantId'=>'')); ?>";//详情页URl
 	tangHomeObj.userId="<?php echo Yii::app()->user->id ?>";//当前登陆的用户ID;
 	tangHomeObj.isdataload=true; //数量是否已经加载;
-	tangHomeObj.isAdmin="<?php echo is_null(Yii::app()->user->isAdmin);?>";//是否是管理员;
+	tangHomeObj.isAdmin="<?php echo Yii::app()->user->isAdmin;?>";//是否是管理员;
 tangHomeObj.initRating();
 tangHomeObj.initScroll();
 });
