@@ -18,20 +18,15 @@
         <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
         <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/tang-main.css" />
 	<!--<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />-->
-	
 	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css"> -->
 	<link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css"> 
-
 	<!--显示图片放大的插件-->
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
 </head>
-
 <body>
-
 <div class="t-container" id="page">
 <?php
 	$menu = array(
@@ -49,7 +44,6 @@
 		}
 	}
 ?>
-
 <div id="mainmenu">
 <div class="mainmenu-content">	
 	<!-- <a href="<?php echo $this->createUrl('restaurant/index'); ?>" class="mainmenu-home"><img src="/images/icon/laotangguan.png" /></a> -->
@@ -57,16 +51,13 @@
   		//'firstItemCssClass'=>'active',
 		'items'=>$menu,
 		'activeCssClass'=>false,
-  		
 		)); 
 	?>
-
 	<!-- <div style="float:left;margin-left:1%;">
 		<form method="POST" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
 			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
 		</form>
 	</div> -->
-
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
 		<a href="#" class="login">登陆</a>
@@ -89,8 +80,6 @@
 	</div>
 </div>
 </div><!-- mainmenu -->
-
-
 <!--公共的模态窗口，提示信息用-->
 <!-- Modal -->
   <div class="alertModal-dialog">
@@ -123,10 +112,6 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-
-
-
-
 <!--登陆的模态窗口-->
 <div id="myModal" class="modal1 fade in " >
 	<div class="modal-header">
@@ -140,7 +125,6 @@
 	'back_url'=>Yii::app()->request->url,
 	));
 	}?>
-
 	<!-- <a class="qq-login"  href="#" title="QQ登陆"><span>QQ登陆</span></a> -->
 	</div>
 </div>
@@ -150,8 +134,6 @@
 	<?php echo $content; ?>
 </div>
 <div class="clear"></div>
-
-
 <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap/bootstrap.min.js"></script>-->
 </div><!-- page -->
 <div id="footer">
@@ -164,131 +146,7 @@
 	<span>&copy; <?php echo date('Y'); ?>点滴科技</span>
 </div><!-- footer -->
 <div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"><i class="fa fa-arrow-circle-up" ></i></a></div>
-
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/main_tang.js"></script>
-<script type="text/javascript">
-$(function(){
-	var footerHeight = 0,
-	footerTop = 0,
-	$footer = $("#footer");
-	positionFooter();
-	//定义positionFooter function
-	function positionFooter() {
-	//取到div#footer高度
-	footerHeight = $footer.height();
-	//div#footer离屏幕顶部的距离
-	footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";								
-	//如果页面内容高度小于屏幕高度，div#footer将绝对定位到屏幕底部，否则div#footer保留它的正常静态定位
-	if ( ($(document.body).height()+footerHeight) < $(window).height()) {
-		$footer.css({
-		position: "absolute"
-		,top: footerTop
-		});
-	} else {
-		$footer.css({
-		position: "static"
-		});
-
-	}
-	}
-	$(window).scroll(positionFooter).resize(positionFooter);
-
-
-	//菜单选中效果
-	var hostUrl=window.location.href.split(window.location.hostname);
-	var county="",area="",type="";
-	if (hostUrl[1]=='/') {
-		hostUrl[1]="<?php echo $this->createUrl('restaurant/index'); ?>";
-	}
-	county=hostUrl[1];
-	var params=hostUrl[1];
-	if (params.indexOf('area')>-1 && params.indexOf('type')==-1) {
-		county=params.split('/area')[0]=="/county/0"?"<?php echo $this->createUrl('restaurant/index'); ?>":params.split('/area')[0];
-		area=params;
-	}
-	if (params.indexOf('type')>-1) {
-		county=params.split('/area')[0]=="/county/0"?"<?php echo $this->createUrl('restaurant/index'); ?>":params.split('/area')[0];
-		area=params.split('/type')[0].indexOf("area/-1")>-1?county:params.split('/type')[0];
-		type=params;
-	}
-
-	$("#mainmenu .mainmenu-content>ul>li>a").each(function(){
-		if ($(this).attr('href')==county) {
-			$(this).parent().attr('class','active');
-		}
-	});
-
-	if (area=="") {
-		$("#county-menu>ul>li>a").eq(0).parent().attr('class','active');
-	}else{
-		$("#county-menu>ul>li>a").each(function(){
-			if ($(this).attr('href')==area) {
-				$(this).parent().attr('class','active');
-			}
-		});
-	}
-
-	if (type=="") {
-		$("#area-menu>ul>li>a").eq(0).parent().attr('class','active');
-	}else{
-		$("#area-menu>ul>li>a").each(function(){
-			if ($(this).attr('href')==type) {
-				$(this).parent().attr('class','active');
-			}
-		});
-	}
-
-	//点击登陆弹出模态窗口
-	$(".login").click(function(){
-		loginModal();
-	});
-	$(".loginuser").bind("mouseover",function(){
-	/*$(this).parent().addClass('show').bind("mouseout",function(){
-
-	$(this).removeClass('show');
-	});*/
-
-	});
-
-	$(".modal-backdrop1").click(function(){
-		$("#myModal").hide();
-		$(this).hide();
-	});
-	$(document.body).keyup(function(event){
-	//if(event.ctrlKey && event.which == 13)       //13等于回车键(Enter)键值,ctrlKey 等于 Ctrl
-	//alert("按了ctrl+回车键!")
-	if(event.keyCode==27)
-		$("#myModal").hide();
-	$(".modal-backdrop1").hide();
-	});
-
-
-	//县菜单鼠标放上去显示下级菜单
-	$(".areamenu").hover(function(){
-		$(this).find('ul').show(100);
-	},function(){
-		$(this).find('ul').hide(100);
-	});
-
-	//回到顶部ＪＳ
-	$(window).scroll(function(){
-
-		if($(window).scrollTop()>($(document.body).height()/4))
-		{
-			$("#right_float_panel").show();
-		}else
-		{
-			$("#right_float_panel").hide();
-		}
-
-	});
-
-	//回到顶部功能
-	$(".top_up").click(function(){
-		$('html,body').animate({scrollTop:'0px'},500);
-	});
-});
-</script>
 </body>
 </html>
