@@ -167,7 +167,7 @@ tangHome.loadData=function(data)
 	$(".list-view .items").append(strData);
 	//var rating_list_dome1=$(strData).find(".rating-widget .rating-list");alert(rating_list_dome1.eq(0).html());
 	var rating_list_dome1=$(".rating-widget .rating-list",$(".restaurant-left"));
-	tang_main_rating(rating_list_dome1,true,this.voteCreateUrl,this.voteDeleteUrl);
+	tang_main_rating(rating_list_dome1,true,this.voteCreateUrl,this.voteDeleteUrl,"rating-icon rating-init");
 	loadFancyBox();//图片放大
 	if (this.isAdmin) { //判断是否是管理员，给管理增加贴标功能
 		editbutton(this.restaurantFeatureQueryUrl,this.featureAddRestaurantFeatureUrl);
@@ -175,7 +175,7 @@ tangHome.loadData=function(data)
 };
 tangHome.initRating=function(){
 	var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
-	tang_main_rating(rating_list_dome,true,this.voteCreateUrl,this.voteDeleteUrl);
+	tang_main_rating(rating_list_dome,true,this.voteCreateUrl,this.voteDeleteUrl,"rating-icon rating-init");
 
 	loadFancyBox();//图片放大
 

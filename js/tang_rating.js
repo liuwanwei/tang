@@ -3,7 +3,7 @@
 *评分的组件
 *2014-01-22
 */
-function tang_main_rating(rating_list,ismouseover,voteCreateUrl,voteDeleteUrl)
+function tang_main_rating(rating_list,ismouseover,voteCreateUrl,voteDeleteUrl,initClass)
 {
 /*
  *评分组件 @rating_list 为评分组件集，@ismouseover是否加载鼠移上去事件
@@ -19,7 +19,7 @@ rating_list.each(function(){
 	var raing_value=$(".rating-rating>.value",a_this);//评分的值
 	var raing_default=a_this.attr("data-rating-default");//评分的默认值
 	//raing_default=parseFloat(raing_default)==0? '-':raing_default;
-	ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+	ratingInit(a_this,initClass,Math.round(parseFloat(raing_default)),raing_value);
 
 	if (ismouseover) {
 		a_this.unbind("hover");
