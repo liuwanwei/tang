@@ -49,6 +49,7 @@ var tangHome={};
 				    if(data!=null){
 				    	setTimeout(function(){
 				    		tang_this.loadData(data);
+				    		dataLoadPrompt(data.length);
 				    		$(".list-footer-load>span").hide();
 				    		tang_this.isdataload=false;
 				    		tang_this.pageCurrent++;
@@ -58,6 +59,7 @@ var tangHome={};
 				    if(data!=null){
 				        setTimeout(function(){
 				    		tang_this.loadData(data);
+				    		dataLoadPrompt(data.length);
 				    		$(".list-footer-load>span").hide();
 					        tang_this.isdataload=true;
 					        tang_this.pageCurrent++;
@@ -176,13 +178,21 @@ tangHome.loadData=function(data)
 tangHome.initRating=function(){
 	var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 	tang_main_rating(rating_list_dome,true,this.voteCreateUrl,this.voteDeleteUrl,"rating-icon rating-init");
-
+	dataLoadPrompt(rating_list_dome.length);
 	loadFancyBox();//图片放大
 
 	if (this.isAdmin) { //判断是否是管理员，给管理增加贴标功能
 		editbutton(this.restaurantFeatureQueryUrl,this.featureAddRestaurantFeatureUrl);
 	}
 };
+//加载数据提示
+function dataLoadPrompt(count)
+{
+	$(".data-load-prompt>div>span").text(count);
+	$(".data-load-prompt").stop( true, true ).fadeIn(2000,function(){
+		$(this).stop( true, true ).fadeOut(3000);
+	});
+}
 //图片放大
 function loadFancyBox()
 {
