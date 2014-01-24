@@ -88,7 +88,6 @@ $(function(){
 	$(".modal-backdrop1").hide();
 	});
 
-
 	//县菜单鼠标放上去显示下级菜单
 	$(".areamenu").hover(function(){
 		$(this).find('ul').show(100);
@@ -106,7 +105,6 @@ $(function(){
 		{
 			$("#right_float_panel").hide();
 		}
-
 	});
 
 	//回到顶部功能
@@ -117,6 +115,11 @@ $(function(){
 	$("#formSearch").click(function(){
 		$(".column-main-form").submit();
 	});
+	//顶部搜索框按驾车时触发表单的提交
+	$(".column-main-form>input[type=text]").keyup(function(event){
+		if(event.keyCode==13)
+			$(".column-main-form").submit();
+	});
 });
 
 //弹出登陆窗口
@@ -126,7 +129,6 @@ function loginModal(){
 	$(".close").one("click",function(){
 		$(".modal-backdrop1").hide();
 		$("#myModal").slideUp(100);
-
 	});
 }
 
