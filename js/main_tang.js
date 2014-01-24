@@ -114,7 +114,7 @@ $(function(){
 		$('html,body').animate({scrollTop:'0px'},500);
 	});
 	//顶部搜索功能的表单事件
-	$("#form_search").click(function(){
+	$("#formSearch").click(function(){
 		$(".column-main-form").submit();
 	});
 });

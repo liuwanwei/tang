@@ -42,7 +42,7 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 		hide_edit_btn_div($(this));
 	});
 
-	$("#feature-edit-submit",btnedit_div).click(function(){
+	$("#featureEditSubmit",btnedit_div).click(function(){
 		var d_this=$(this);
 		var parent_edit_dom=$(this).parent().parent();
 		

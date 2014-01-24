@@ -56,7 +56,7 @@
 	<div style="float:left;margin-left:1%; line-height:56px;">
 		<form method="POST" class="column-main-form" action="<?php echo $this->createUrl('restaurant/index'); ?>" onsubmit="return checkSearchForm()">
 			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
-			<a href="javascript:" class="fa fa-search" id="form_search"></a>
+			<a href="javascript:" class="fa fa-search" id="formSearch"></a>
 		</form>
 	</div>
 	<div class="rigth-menu">

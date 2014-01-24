@@ -14,8 +14,8 @@
 	{
 		if (filename) {
 			var file_arr=filename.split('\\');
-			$("#client_img_url").text(file_arr[file_arr.length-1]);
-			$("#client_img").show(100);
+			$("#clientImgUrl").text(file_arr[file_arr.length-1]);
+			$("#clientImg").show(100);
 		}
 	}
 </script>
@@ -47,10 +47,10 @@
 
 </div>
 
-<div class="form-group" id="client_img" style="display:none;">
+<div class="form-group" id="clientImg" style="display:none;">
 <label class="col-sm-2 control-label">图片地址</label>
 	<div class="col-sm-8">
-		<span id="client_img_url"></span>
+		<span id="clientImgUrl"></span>
 	</div>
 
 </div>
