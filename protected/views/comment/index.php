@@ -65,7 +65,8 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 					<div class="rating-list m" data-rating-default="0" 
 					data-clicknum="0" 
 					data-user="<?php echo Yii::app()->user->id ?>"
-					data-id="<?php echo CHtml::encode($restaurant->id);?>"
+					data-id="<?php echo CHtml::encode($restaurant->id);?>" 
+					data-name="<?php echo CHtml::encode($restaurant->name);?>" 
 					>
 					<span class="rating-stars">
 						<a class="rating-icon star-on" data-title="不推荐"><span>1</span></a>
