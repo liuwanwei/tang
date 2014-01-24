@@ -113,6 +113,10 @@ $(function(){
 	$(".top_up").click(function(){
 		$('html,body').animate({scrollTop:'0px'},500);
 	});
+	//顶部搜索功能的表单事件
+	$("#formSearch").click(function(){
+		$(".column-main-form").submit();
+	});
 });
 
 //弹出登陆窗口
@@ -128,7 +132,6 @@ function loginModal(){
 
 // 检查搜索条件。
 function checkSearchForm(){
-	return true;
 	// TODO: 会弹框两次，搜索功能调试通过后解决。
 	if(document.getElementById('key').value){
 		return true;
@@ -137,4 +140,5 @@ function checkSearchForm(){
 		alert("请输入搜索关键词！");
 		return false;
 	}
+	return true;
 }

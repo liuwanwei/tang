@@ -53,11 +53,12 @@
 		'activeCssClass'=>false,
 		)); 
 	?>
-	<!-- <div style="float:left;margin-left:1%;">
-		<form method="POST" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
+	<div style="float:left;margin-left:1%; line-height:56px;">
+		<form method="POST" class="column-main-form" action="<?php echo $this->createUrl('restaurant/index'); ?>" onsubmit="return checkSearchForm()">
 			<input type ="text" id="key" name="keywords" onkeydown="javascript:if(event.keyCode==13) return checkSearchForm();">
+			<a href="javascript:" class="fa fa-search" id="formSearch"></a>
 		</form>
-	</div> -->
+	</div>
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
 		<a href="#" class="login">登陆</a>

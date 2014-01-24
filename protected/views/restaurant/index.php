@@ -93,6 +93,8 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+	<!--加载数量提示框-->
+	<div class="data-load-prompt"><div>成功加载了<span>0</span>个汤馆</div></div>
 	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl.'/js/tang_rating.js' ?>"></script>
 	<?php if (Yii::app()->user->isAdmin) { 
 		echo '<script type="text/javascript" src="'.Yii::app()->request->baseUrl.'/js/tang_home_edit.js"></script>';
