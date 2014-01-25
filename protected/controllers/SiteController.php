@@ -235,6 +235,10 @@ class SiteController extends Controller
 	}
 
 	public function actionFlushCache(){
+		if (empty(Yii::app()->cache)) {
+			die('配置文件中没有打开缓存功能');
+		}
+		
 		$success = Yii::app()->cache->flush();
 		if ($success) {
 			echo "<pre>缓存刷新成功</pre>";
