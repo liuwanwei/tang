@@ -38,7 +38,7 @@ class Controller extends CController
 	/**
 	*定义meta keyword的内容
 	*/
-	protected $pageKeyWord;
+	protected $pageKeyword;
 
 	/**
 	 * Specifies the access control rules.
