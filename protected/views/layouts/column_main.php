@@ -8,6 +8,9 @@
 	<meta name="language" content="en" />
 	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<?php if (!empty($this->pageDescription)) {
+		echo '<meta name="description" content="'.$this->pageDescription.'" />';
+	} ?>
 	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 	<!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
  	<!-- Bootstrap -->

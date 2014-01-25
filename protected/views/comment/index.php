@@ -4,6 +4,7 @@
 
 $this->layout="column_main";
 $this->pageTitle=$restaurant->name;
+$this->pageDescription=$restaurant->address;
 $attribute = $restaurant->attributeLabels();
 
 //动态给layout添加css文件

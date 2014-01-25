@@ -3,6 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->pageTitle="老汤馆-分享洛阳好滋味";
+$this->pageDescription="老汤馆-牛肉汤 丸子汤 豆腐汤 羊肉汤 驴肉汤";
 ?>
 
 <div class="tang-tooltip">

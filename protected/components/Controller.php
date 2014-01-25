@@ -29,7 +29,17 @@ class Controller extends CController
 	{
 		return Yii::app()->user->isAdmin;
 	}
+
+	/**
+	*定义meta description的内容
+	*/
+	protected $pageDescription;
 	
+	/**
+	*定义meta keyword的内容
+	*/
+	protected $pageKeyWord;
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
