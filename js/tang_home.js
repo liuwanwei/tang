@@ -50,7 +50,6 @@ var tangHome={};
 				    if(data!=null){
 				    	setTimeout(function(){
 				    		tang_this.loadData(data);
-				    		//dataLoadPrompt(data.length);
 				    		$(".list-footer-load>span").hide();
 				    		tang_this.isdataload=false;
 				    		tang_this.pageCurrent++;
@@ -60,7 +59,6 @@ var tangHome={};
 				    if(data!=null){
 				        setTimeout(function(){
 				    		tang_this.loadData(data);
-				    		//dataLoadPrompt(data.length);
 				    		$(".list-footer-load>span").hide();
 					        tang_this.isdataload=true;
 					        tang_this.pageCurrent++;
