@@ -57,7 +57,7 @@
 
 				));
 				?>
-				<div class="list-footer-load"><span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在加载中...</span>
+				<div class="list-footer-load"><span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在载入<span>0</span>个汤馆...</span>
 				</div>
 			</div>
 			<div class="right-content">
@@ -93,8 +93,6 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<!--加载数量提示框-->
-	<div class="data-load-prompt"><div>成功加载了<span>0</span>个汤馆</div></div>
 	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl.'/js/tang_rating.js' ?>"></script>
 	<?php if (Yii::app()->user->isAdmin) { 
 		echo '<script type="text/javascript" src="'.Yii::app()->request->baseUrl.'/js/tang_home_edit.js"></script>';

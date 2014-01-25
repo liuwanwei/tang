@@ -44,12 +44,12 @@ var tangHome={};
 		if (tang_this.count>tang_this.limit) 
 		{
 			$(".list-footer-load>span").show();
+			dataLoadPrompt(tang_this.count,tang_this.itemIndex,tang_this.limit);
 			$.get(tang_this.restaurantIndexByPageUrl,{county:tang_this.county,area:tang_this.area,type:tang_this.type,page:tang_this.pageCurrent,limit:tang_this.limit},function(data){
 				if (data.length<tang_this.limit){
 				    if(data!=null){
 				    	setTimeout(function(){
 				    		tang_this.loadData(data);
-				    		dataLoadPrompt(data.length);
 				    		$(".list-footer-load>span").hide();
 				    		tang_this.isdataload=false;
 				    		tang_this.pageCurrent++;
@@ -59,7 +59,6 @@ var tangHome={};
 				    if(data!=null){
 				        setTimeout(function(){
 				    		tang_this.loadData(data);
-				    		dataLoadPrompt(data.length);
 				    		$(".list-footer-load>span").hide();
 					        tang_this.isdataload=true;
 					        tang_this.pageCurrent++;
@@ -178,7 +177,6 @@ tangHome.loadData=function(data)
 tangHome.initRating=function(){
 	var rating_list_dome=$(".rating-widget .rating-list",$(".restaurant-left"));
 	tang_main_rating(rating_list_dome,true,this.voteCreateUrl,this.voteDeleteUrl,"rating-icon rating-init");
-	dataLoadPrompt(rating_list_dome.length);
 	loadFancyBox();//图片放大
 
 	if (this.isAdmin) { //判断是否是管理员，给管理增加贴标功能
@@ -186,12 +184,15 @@ tangHome.initRating=function(){
 	}
 };
 //加载数据提示
-function dataLoadPrompt(count)
+function dataLoadPrompt(dataCount,itemIndex,limit)
 {
-	$(".data-load-prompt>div>span").text(count);
-	$(".data-load-prompt").stop( true, true ).fadeIn(2000,function(){
-		$(this).stop( true, true ).fadeOut(3000);
-	});
+	var loadCount=0;
+	if ((dataCount-itemIndex)>limit) {
+		loadCount=limit;
+	}else{
+		loadCount=dataCount-itemIndex;
+	}
+	$(".list-footer-load>span>span").text(loadCount);
 }
 //图片放大
 function loadFancyBox()
