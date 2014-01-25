@@ -3,14 +3,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->layout="column_main";
-
+$this->pageTitle=$restaurant->name;
 $attribute = $restaurant->attributeLabels();
 
 //动态给layout添加css文件
 $cs=Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
-
-
 ?>
 <div class="tang-tooltip">
 	<div class="bottomtitle"></div>
