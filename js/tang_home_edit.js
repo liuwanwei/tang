@@ -47,6 +47,10 @@ function editbutton(restaurantFeatureQuery,featureAddRestaurantFeature){
 		var parent_edit_dom=$(this).parent().parent();
 		
 		var features_items_str="";
+		if ($("input:checked",parent_edit_dom.find(".feature-content-content")).length<=0) {
+			parent_edit_dom.css({'box-shadow':'0px 0px 3px red'});
+			return false;
+		}
 		$("input:checked",parent_edit_dom.find(".feature-content-content")).each(function(){
 			features_items_str+=$(this).val()+",";		
 		});
