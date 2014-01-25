@@ -453,7 +453,6 @@ class RestaurantController extends Controller
 		));
 	}
 
-
 	/*
 	 * 根据关键词查询功能入口。
 	 */
@@ -462,11 +461,12 @@ class RestaurantController extends Controller
 
 		$model = new Restaurant('search');
 		$model->unsetAttributes();
-		if (isset($_GET['Restaurant'])) {
-			$model->attributes = $_GET['Restaurant'];
+
+		if (isset($_POST['Restaurant'])) {
+			$model->attributes = $_POST['Restaurant'];
 		}
 
-		$this->render('admin', array(
+		$this->render('_result', array(
 			'model'=>$model,
 		));
 	}

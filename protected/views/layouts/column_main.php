@@ -53,6 +53,7 @@
 		'activeCssClass'=>false,
 		)); 
 	?>
+
 	<div class="rigth-menu">
 		<?php if (yii::app()->user->isGuest) {?>
 		<a href="#" class="login">登陆</a>
@@ -74,8 +75,9 @@
 		<?php	}?>
 	</div>
 	<div style="float:right;margin-left:1%; line-height:50px;width:140px;">
-		<form method="POST" class="column-main-form" action="<?php echo $this->createUrl('restaurant/index'); ?>" onsubmit="return checkSearchForm()">
-			<input type ="text" id="key" name="keywords">
+		<form method="POST" class="column-main-form" action="<?php echo $this->createUrl('restaurant/search'); ?>" onsubmit="return checkSearchForm()">
+			<input type="hidden" name="Restaurant[is_checked]" value="1">
+			<input type ="text" id="key" name="Restaurant[name]">
 			<a href="javascript:" class="fa fa-search" id="formSearch"></a>
 		</form>
 	</div>

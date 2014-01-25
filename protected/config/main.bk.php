@@ -48,6 +48,7 @@ return array(
 				'details/<restaurantId:\d+>' => 'comment/index',
 				'logout' => 'site/logout',
 				'up' => 'site/upversion',
+				'search' => 'restaurant/search',
 				// '<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				// '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				// '<controller:\w+>/<action:\w+>/<county:\d+>/*'=>'<controller>/<action>/*',

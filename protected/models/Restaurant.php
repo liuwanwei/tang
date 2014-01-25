@@ -128,6 +128,7 @@ class Restaurant extends CActiveRecord
 		$criteria->compare('county_id',$this->county_id);
 		$criteria->compare('area_id',$this->area_id);
 		$criteria->compare('is_shutdown',$this->is_shutdown);
+		$criteria->compare('is_checked', $this->is_checked);
 		// $criteria->compare('image_url',$this->image_url,true);
 		// $criteria->compare('description',$this->description,true);
 		// $criteria->compare('votes',$this->votes);
