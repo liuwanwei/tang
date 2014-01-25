@@ -88,7 +88,7 @@ rating_list.each(function(){
 			rating_cancel.removeClass('rating-pending');
 			a_this.attr("data-clicknum","0");
 			raing_value.text(raing_default);
-			ratingInit(a_this,"rating-icon rating-init",Math.round(parseFloat(raing_default)),raing_value);
+			ratingInit(a_this,initClass,Math.round(parseFloat(raing_default)),raing_value);
 			$(".alertModal-footer #alertModalSubmit").removeAttr('disabled');
 			$(".alertModal-footer #alertModalSubmit").html('提交');
 		});
