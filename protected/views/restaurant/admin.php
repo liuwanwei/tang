@@ -24,6 +24,7 @@
 // 	return false;
 // });
 // ");
+$this->pageTitle="老汤馆-汤馆管理";
 ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'restaurant-grid',

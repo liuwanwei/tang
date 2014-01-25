@@ -1,6 +1,7 @@
 <?php
 /* @var $this RestaurantController */
 /* @var $model Restaurant */
+$this->pageTitle="老汤馆-个人中心";
 ?>
 <div style="width:100%;height:1px;clear:both;"></div>
 <?php if($uncheckedItemsCount>0){ ?>
