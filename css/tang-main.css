@@ -1423,31 +1423,3 @@ a.a-text-none
 	color: #777;
 	font-size: 20px;
 }
-
-/*汤馆的提示框的公共样式*/
-.data-load-prompt
-{	
-	padding: 5px;
-	border:1px solid rgba(170, 33, 5, 0.7);
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	-ms-border-radius: 10px;
-	border-radius: 20px;
-	box-shadow: 0px 0px 7px rgba(170, 33, 5, 0.9);
-	background: rgba(170, 33, 5, 0.8);
-	color: #FFF;
-	position: fixed;
-	top: 40%;
-	left: 40%;
-	display: none;
-	z-index: 9999;
-}
-.data-load-prompt>div
-{
-	position: relative;
-}
-.data-load-prompt>div>span
-{
-	font-weight: bold;
-	font-size: 1.2em;
-}
