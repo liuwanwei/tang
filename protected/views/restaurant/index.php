@@ -1,6 +1,8 @@
 <?php
 /* @var $this RestaurantController */
 /* @var $dataProvider CActiveDataProvider */
+
+$this->pageTitle="老汤馆-分享洛阳好滋味";
 ?>
 
 <div class="tang-tooltip">

@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
 	<script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js"></script>
-	<title><?php echo CHtml::encode("老汤馆-分享洛阳好滋味"); ?></title>
+	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
 	<meta property="wb:webmaster" content="e90b5cef4e51c718" />
