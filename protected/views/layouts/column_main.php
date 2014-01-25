@@ -73,7 +73,7 @@
 		</div>
 		<?php	}?>
 	</div>
-	<div style="float:right;margin-left:1%; line-height:56px;width:140px;">
+	<div style="float:right;margin-left:1%; line-height:50px;width:140px;">
 		<form method="POST" class="column-main-form" action="<?php echo $this->createUrl('restaurant/index'); ?>" onsubmit="return checkSearchForm()">
 			<input type ="text" id="key" name="keywords">
 			<a href="javascript:" class="fa fa-search" id="formSearch"></a>
