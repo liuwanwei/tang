@@ -177,5 +177,26 @@ function loadScript() {
 	document.body.appendChild(script);
 }
 //window.onload = loadScript;
+
+$(".feed-main-footer .zan").bind("click", function () {
+	love($(this).attr("loveType"), $(this).attr("dataId"), this);
+});
+
+function love(type, id, obj)
+{
+	$.get("<?php echo $this->createUrl('love/love');?>", {type:type, id:id}, function (result){
+		if (result) {
+			if (result["code"] == 0) {
+				if (result["type"] == "cancel") {
+					$(obj).parent().find(".loveCount").text(parseInt($(obj).parent().find(".loveCount").text())-1);
+				}
+
+				if (result["type"] == "create") {
+					$(obj).parent().find(".loveCount").text(parseInt($(obj).parent().find(".loveCount").text())+1);
+				}
+			}
+		}
+	}, "json");
+}
 </script>
 
