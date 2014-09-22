@@ -150,6 +150,7 @@
 	<a href="http://blog.laotangguan.com/?p=2" target="_blank">建议反馈</a>
 	<span class='dot'>•</span>
 	<span>&copy; <?php echo date('Y'); ?>点滴科技</span>
+	<span><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1253295455'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1253295455%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></span>
 </div><!-- footer -->
 <div id="right_float_panel"><a class="top_up" href="javascript:void(0);" target="_self" title="回到顶部"><i class="fa fa-arrow-circle-up" ></i></a></div>
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
