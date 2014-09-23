@@ -20,6 +20,7 @@ var tangHome={};
 	tangHome.isdataload=true;
 	tangHome.isAdmin=false;
 
+	// 初始化滚动加载
 	tangHome.initScroll=function(){
 		var tang_this=this;
 		if (tang_this.count>tang_this.limit) {
@@ -38,33 +39,55 @@ var tangHome={};
 			});
 		}
 	};
+
+	tangHome.initClickNextData = function(obj){
+		var tang_this=this;
+		if (tang_this.count>tang_this.limit) {
+			$(".loading-nextPage").css({"display":"block"});
+		}
+
+		obj.bind("click", function(){
+			tang_this.nextPage();
+			// if (tang_this.itemIndex>=tang_this.count) {
+			// 	$(".loading-nextPage").hide();
+			// 	return false;
+			// }
+		});
+	};
 	
 	tangHome.nextPage=function(){
 		var tang_this=this;
 		if (tang_this.count>tang_this.limit) 
 		{
-			$(".list-footer-load>span").show();
+			$(".loading-nextPage .loading-msg").show();
+			$(".loading-nextPage .loading-btn-msg").hide();
+			//$(".list-footer-load>span").show();
 			dataLoadPrompt(tang_this.count,tang_this.itemIndex,tang_this.limit);
 			$.get(tang_this.restaurantIndexByPageUrl,{county:tang_this.county,area:tang_this.area,type:tang_this.type,page:tang_this.pageCurrent,limit:tang_this.limit},function(data){
 				if (data.length<tang_this.limit){
 				    if(data!=null){
 				    	setTimeout(function(){
 				    		tang_this.loadData(data);
-				    		$(".list-footer-load>span").hide();
+				    		$(".loading-nextPage .loading-msg").hide();
+				    		$(".loading-nextPage .loading-btn-msg").show();
+				    		//$(".list-footer-load>span").hide();
 				    		tang_this.isdataload=false;
 				    		tang_this.pageCurrent++;
-				    	},1000);
+				    	},500);
 				    }
 				}else{
 				    if(data!=null){
 				        setTimeout(function(){
 				    		tang_this.loadData(data);
-				    		$(".list-footer-load>span").hide();
+				    		$(".loading-nextPage .loading-msg").hide();
+				    		$(".loading-nextPage .loading-btn-msg").show();
+				    		//$(".list-footer-load>span").hide();
 					        tang_this.isdataload=true;
 					        tang_this.pageCurrent++;
-				    	},1000);
+				    	},500);
 				    }
 				}
+
 			},"json");
 		}
 	};
@@ -192,7 +215,12 @@ function dataLoadPrompt(dataCount,itemIndex,limit)
 	}else{
 		loadCount=dataCount-itemIndex;
 	}
-	$(".list-footer-load>span>span").text(loadCount);
+
+	if (loadCount < limit) {
+		$(".loading-nextPage .loading-btn-msg").text("没有更多了");
+		$(".loading-nextPage").unbind("click");
+	}
+	//$(".list-footer-load>span>span").text(loadCount);
 }
 //图片放大
 function loadFancyBox()
