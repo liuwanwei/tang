@@ -60,8 +60,14 @@ $this->pageDescription="老汤馆-牛肉汤 羊肉汤 驴肉汤 丸子汤 不翻
 
 				));
 				?>
-				<div class="list-footer-load"><span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在载入<span>0</span>个汤馆...</span>
-				</div>
+				<a href="javascript:void(0);" class="loading-nextPage">
+					<span class="loading-msg">正在加载...<i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i></span>
+					<span class="loading-btn-msg">加载更多</span>
+				</a>
+
+				<!-- <div class="list-footer-load">
+					<span><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></i> 正在载入<span>0</span>个汤馆...</span>
+				</div> -->
 			</div>
 			<div class="right-content">
 				<div class="title top-rank-title b-tottom">人气排行</div>
@@ -125,7 +131,7 @@ var tangHomeObj=tangHome;
 	tangHomeObj.isdataload=true; //数量是否已经加载;
 	tangHomeObj.isAdmin="<?php echo Yii::app()->user->isAdmin;?>";//是否是管理员;
 tangHomeObj.initRating();
-tangHomeObj.initScroll();
+tangHomeObj.initClickNextData($(".loading-nextPage"));
 });
 
 </script>
