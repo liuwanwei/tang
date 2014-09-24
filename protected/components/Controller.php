@@ -40,6 +40,8 @@ class Controller extends CController
 	*/
 	protected $pageKeyword;
 
+	public $allowType = array("image/jpg", "image/jpeg", "image/png", "image/pjpeg", "image/gif", "image/bmp", "image/x-png");
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -128,5 +130,78 @@ class Controller extends CController
 		$scriptMap[$script] = false;
 		
 		Yii::app()->clientScript->scriptMap = $scriptMap;
+	}
+
+	protected function createImagePathWithExtension($extension, $fileDir = "/images/profile/origin/"){
+		// TODO: 部署时，要想办法检查Web服务器是否对图片目录有访问权限。
+		$destDir = $fileDir;
+		return $destDir . $this->createUuid().'.'.$extension;
+	}
+
+	protected function saveImage($uploadedFile, $filename){
+		$destFile = Yii::app()->basePath.'/..'.$filename;
+		$destPath = dirname($destFile);
+		
+		// 创建图片子目录。
+		if (!file_exists($destPath)) {
+			if(false === mkdir($destPath, 0755, true)){
+				throw new CHttpException(403, '没有图片目录操作权限 ');
+			}		
+		}
+
+		$uploadedFile->saveAs($destFile);
+	}
+
+	/**
+	* 生成缩略图
+	* @param $filename,$thumbnailFilename,$thumbnailWidth,$thumbnailHeight
+	* 参数说明
+	* 		filename 原图路径
+	* 		thumbnailFilename 缩略图路径
+	* 		thumbnailWidth 缩略图宽度
+	* 		thumbnailHeight 缩略图高度
+	* @author 朱萌萌
+	*/
+	protected function createThumbnail($filename, $thumbnailFilename, $thumbnailWidth = 100, $thumbnailHeight = 65)
+	{
+		$absoluteFilename = Yii::app()->basePath.'/..' . $filename;
+		$image = Yii::app()->image->load($absoluteFilename);
+		
+		/** 
+		* resize 缩放原图的尺寸，Image::WIDTH 按宽度缩放
+		* crop 按设置的宽和高裁剪图片
+		*/
+		$image->resize($thumbnailWidth, $thumbnailHeight, Image::WIDTH)->crop($thumbnailWidth, $thumbnailHeight)->quality(75)->sharpen(20);
+		$absoluteThumbnail =  Yii::app()->basePath.'/..' . $thumbnailFilename;
+		$image->save($absoluteThumbnail);
+	}
+
+	/**
+	 * 版本号: v1_5(创建)
+	 * 上传图片格式,大小验证
+	 * @param $uploadedFile
+	 * @author 何孝林 
+	 */
+	protected function validateImage($uploadedFile){
+		/* 设置允许上传文件的类型 */
+		$type = $uploadedFile->type;
+		if (!in_array($type, $this->allowType)) {
+			echo CJSON::encode(array('msg'=>'','error'=>'图片格式不对，请重新上传!'));
+			Yii::app()->end();
+		}
+		/* 设置允许上传文件的大小 */
+		$filesize=$uploadedFile->getSize();
+		if ($filesize>1048576) {
+			echo CJSON::encode(array('msg'=>'','error'=>'图片太大!'));
+			Yii::app()->end();
+		}
+	}
+
+	/**
+	 * 生成uuid做为文件名
+	 * @author liangbo
+	 */
+	function createUuid() {     
+	    return str_replace('.', '', uniqid(null,true));
 	}
 }

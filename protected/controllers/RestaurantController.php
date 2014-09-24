@@ -16,12 +16,12 @@ class RestaurantController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// 'postOnly + delete', // we only allow deletion via POST request
-			array(
-				'COutputCache + index + indexByPage',
-				'duration'=>3600,
-				'varyByParam'=>array('county','area','type','page'),
-				'varyByExpression'=>Yii::app()->user->id
-			),
+			// array(
+			// 	'COutputCache + index + indexByPage',
+			// 	'duration'=>3600,
+			// 	'varyByParam'=>array('county','area','type','page'),
+			// 	'varyByExpression'=>Yii::app()->user->id
+			// ),
 		);
 	}
 	
@@ -33,7 +33,7 @@ class RestaurantController extends Controller
 						'actions'=>array('index', 'view', 'indexByPage', 'search'),
 						'users'=>array('*')),
 				array('allow',
-						'actions'=>array('create', 'delete', 'update'),
+						'actions'=>array('create', 'delete', 'update', 'upload'),
 						'users'=>array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' action.
@@ -93,38 +93,6 @@ class RestaurantController extends Controller
 		return array('counties'=>$counties, 'areas'=>$areas, 'statuses'=>$statuses, 'types'=>$types);
 	}
 
-	private function randomFilename() {
-		$length = 6;
-        $str = '';
-        for($i = 0; $i < $length; $i++) {
-            $str .= mt_rand(0, $length);
-        }
-
-        return $str;
-    }
-
-	private function createImagePathWithExtension($extension){
-		$datePart = date("Y") . '/' . date("m") . '/' . date("d");
-
-		// TODO: 部署时，要想办法检查Web服务器是否对图片目录有访问权限。
-		$destDir = '/images/profile/' . $datePart . '/';
-		return $destDir . $this->randomFilename().'.'.$extension;
-	}
-
-	private function saveImage($uploadedFile, $filename){
-		$destFile = Yii::app()->basePath.'/..'.$filename;
-		$destPath = dirname($destFile);
-		
-		// 创建图片子目录。
-		if (!file_exists($destPath)) {
-			if(false === mkdir($destPath, 0755, true)){
-				throw new CHttpException(403, '没有图片目录操作权限 ');
-			}		
-		}
-
-		$uploadedFile->saveAs($destFile);
-	}
-
 	/*
 	 * 对餐馆参数进行验证和合法性处理。
 	 */
@@ -136,6 +104,34 @@ class RestaurantController extends Controller
 		$typeIds = ',' . $typeIds . ',';
 
 		return $typeIds;
+	}
+
+	/**
+	* 上传图片
+	*/
+	public function actionUpload()
+	{	
+		$resultJson = array('msg' => '', 'error' => '-1');
+
+		// 获取file组件对象
+		$uploadedFile = CUploadedFile::getInstanceByName('fileToUpload');
+		if (!empty($uploadedFile)) {
+			
+			$this->validateImage($uploadedFile);//图片验证
+			list($width, $height) = getimagesize($uploadedFile->tempName);
+			$extension = $uploadedFile->getExtensionName();
+			$filename = $this->createImagePathWithExtension($extension);
+			$thumbnailFilename = $this->createImagePathWithExtension($extension,'/images/profile/thumbnail/');
+
+			// 执行上传
+			$this->saveImage($uploadedFile, $filename);
+			$this->createThumbnail($filename, $thumbnailFilename, 100, 65);		
+			
+			$resultJson["thumbnail"] = $thumbnailFilename;
+			$resultJson["origin"] = $filename;
+			$resultJson["error"] = 0;
+		}
+		echo CJSON::encode($resultJson);
 	}
 
 	/**
@@ -165,10 +161,7 @@ class RestaurantController extends Controller
 			}
 
 			if($model->save()) {
-				if (isset($filename)) {
-					// 保存汤馆图片到服务器存储路径。
-					$this->saveImage($uploadedFile, $filename);					
-				}
+				$this->saveRestaurantImage($_POST["image_url"], $model);
 				
 				//清空所有缓存文件，让用户添加的餐馆能显示在首页
 				if ($model->is_checked == 1) {
@@ -215,11 +208,11 @@ class RestaurantController extends Controller
 			}
 			
 			if($model->save())
-				if (isset($filename)) {
-					// 保存汤馆图片到服务器存储路径。
-					$this->saveImage($uploadedFile, $filename);
-				}
-				
+				// if (isset($filename)) {
+				// 	// 保存汤馆图片到服务器存储路径。
+				// 	$this->saveImage($uploadedFile, $filename);
+				// }
+				$this->saveRestaurantImage($_POST["image_url"], $model);
 				//清空所有缓存文件，让用户添加的餐馆能显示在首页
 				if ($model->is_checked == 1) {
 					$this->clearCacheFile(false);	
@@ -228,11 +221,50 @@ class RestaurantController extends Controller
 				$this->redirect($_POST['returnUrl']);
 		}
 
+		$imgs = RestaurantImages::model()->findAllByAttributes(array('restaurant_id' => $model->id));
+		$imgUrl = "";
+
+		if (!empty($imgs)) {
+			foreach ($imgs as $key => $value) {
+				$imgUrl .= $value->origin_url.','.$value->thumbnail.','.$value->id.';';
+			}
+		}
+
 		$this->render('update',array(
-			'model'=>$model,
-			'selectors'=>$this->staticSelectors(),
-			'returnUrl'=>Yii::app()->request->urlReferrer // 将上页地址传递给前端界面，用于保存成功后返回对应的上页界面
+			'model' => $model,
+			'selectors' => $this->staticSelectors(),
+			'imgs' => $imgUrl,
+			'imgData' => $imgs,
+			'returnUrl' => Yii::app()->request->urlReferrer // 将上页地址传递给前端界面，用于保存成功后返回对应的上页界面
 		));
+	}
+
+	//拆分字符串保存到图片表中
+	private function saveRestaurantImage($img_url, $RestaurantModel)
+	{
+		if (!empty($img_url)) {
+			$imgData = explode(';', $img_url);
+			if (!empty($imgData)) {
+				list($origin, $thumbnail) = explode(',', $imgData[0]);
+				$RestaurantModel->image_url = $thumbnail;
+				$RestaurantModel->save();
+			}
+
+			foreach ($imgData as $key => $value) {
+				if (!empty($value)) {
+					list($origin, $thumbnail, $itemId) = explode(',', $value);
+					if (empty($itemId)) {
+						$model = new RestaurantImages;
+						$model->origin_url = $origin;
+						$model->thumbnail = $thumbnail;
+						$model->creator = Yii::app()->user->id;
+						$model->restaurant_id = $RestaurantModel->id;
+						$model->create_datetime = date('Y-m-d h:i:s');
+						$model->save();
+					}
+				}
+			}
+		}
 	}
 
 	/**

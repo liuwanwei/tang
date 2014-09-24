@@ -4,6 +4,7 @@
 /* @var $form CActiveForm */
 //http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js
 //Yii::app()->clientScript->registerScriptFile('http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js');
+Yii::app()->clientScript->registerScriptFile('/js/ajaxfileupload.js');
 ?>
 <!-- <script type="text/javascript" src="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.js"></script>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.css" media="screen" /> -->
@@ -37,14 +38,20 @@
 <div class="form-group">
 	<?php echo $form->labelEx($model,'image_url',array('class'=>"col-sm-2 control-label")); ?>
 	<div class="col-sm-8">
-		<?php if (!empty($model->image_url)) { ?>
-		<span class="upload-image"><a class="fancybox" href="<?php echo $model->image_url;?>" data-fancybox-group="gallery" ><img src="<?php echo $model->image_url;?>" class="img-rounded" width="50px" height="50px" alt="" /></a></span>
-		<?php } ?>
+		<?php if (!empty($imgData)) { 
+			foreach ($imgData as $key => $value) { ?>
+				<span class="upload-image"><a class="fancybox" href="<?php echo $value->thumbnail;?>" data-fancybox-group="gallery" ><img src="<?php echo $value->thumbnail;?>" class="img-rounded" width="50px" height="50px" alt="" /></a></span>
+			<?php }
+		} ?>
 		<a href="javascript:;" class="a-upload fa fa-plus">
-			<?php echo $form->fileField($model,'image_url',array('onchange'=>'fileChange(this.value);'));?>
+			<input type="file" id="fileToUpload" name="fileToUpload" onchange='ajaxFileUpload();' />
 		</a>
 	</div>
-
+	<?php if (!$model->isNewRecord) { ?>
+		<input type="hidden" id="image_url" name="image_url" value="<?php echo $imgs; ?>">
+	<?php }else{ ?>
+		<input type="hidden" id="image_url" name="image_url">
+		<?php } ?>
 </div>
 
 <div class="form-group" id="clientImg" style="display:none;">
@@ -167,6 +174,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div><!-- form -->
+
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script type="text/javascript">
 $(function(){
@@ -267,6 +275,45 @@ $("#mapPosition").click(function(){
 });
    init();
 });
+
+function ajaxFileUpload()
+{
+	var imgLoad = $('<span class="upload-image loading-tip"><i class="fa fa-spinner fa-spin fa-2" id="icon-load"></span>');
+	$(".a-upload").before(imgLoad);
+ 
+    $.ajaxFileUpload
+    (
+        {
+            url:"<?php echo $this->createUrl('restaurant/upload');?>",//'../js/AjaxFileUploader/doajaxfileupload.php', 
+            secureuri:false,
+            fileElementId:'fileToUpload',
+            dataType: 'json',
+            success: function (data, status)
+            {
+                if(typeof(data.error) != 'undefined')
+                {
+                    if(data.error != 0)
+                    {
+                        alert(data.error);
+                    }else{
+                    	// $(".loading-tip").remove();
+                    	imgLoad.remove();
+                    	var imgUrl = $("#image_url");
+                    	imgUrl.val(imgUrl.val() + data.origin + ',' + data.thumbnail + ';');
+
+                    	var img = $('<span class="upload-image"><a class="fancybox" href="'+data.thumbnail+'" data-fancybox-group="gallery" ><img src="'+data.thumbnail+'" class="img-rounded" width="50px" height="50px" alt="" /></a></span>');
+                    	$(".a-upload").before(img);
+                    }
+                }
+            },
+            error: function (data, status, e)
+            {
+                alert(e);
+            }
+        }
+    )
+    return false;
+}
 
 </script>
 

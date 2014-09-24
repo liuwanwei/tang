@@ -102,9 +102,9 @@ tangHome.loadData=function(data)
 		//console.log("a="+item["name"]);
 		strData+=	'<div class="view-item">';
 		if (item["restaurant"]["image_url"]) {
-			strData+='<a href="'+item["restaurant"]["image_url"]+'" class="restaurant_img" ><img src="'+item["restaurant"]["image_url"]+'"></a>';
+			strData+='<a href="'+item["restaurant"]["image_url"]+'" class="restaurant_img indexImg" ><img src="'+item["restaurant"]["image_url"]+'"></a>';
 		}else{
-			strData+='<span class="restaurant_defalut_img"><i class="fa fa-smile-o"></i></span>';
+			strData+='<a href="javascript:void(0);" class="restaurant_img indexImg" ><img src="/images/tang_default.png"></a>';
 		}
 		strData+='<div class="restaurant-detail">'+
 		'<ul>'+

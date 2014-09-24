@@ -93,9 +93,11 @@ $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/_comment_detail.css');
 			<div class="clear"><!--清除浮动--></div>
 		</li>
 		<li>
-			<?php if(!empty($restaurant->image_url)) {?>
-			<a href="<?php echo $restaurant->image_url; ?>" class="restaurant_img" style="margin-left:0px;" title="<?php echo $restaurant->name;?>"><img src="<?php echo $restaurant->image_url; ?>"></a>
-			<?php }?>
+			<?php if(!empty($imgs)) {
+				foreach ($imgs as $key => $value) { ?>
+					<a href="<?php echo $value->origin_url; ?>" class="restaurant_img detailImg" style="margin-left:0px;" ><img src="<?php echo $value->thumbnail; ?>"></a>
+			<?php }
+			}?>
 		</li>
 	</ul>
 
