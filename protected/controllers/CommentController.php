@@ -149,11 +149,14 @@ class CommentController extends Controller
 		$comments->pagination->pageSize = $comments->totalItemCount;
 		
 		$restaurant = Restaurant::model()->findByPk($restaurantId);
+
+		$imgs = RestaurantImages::model()->findAllByAttributes(array('restaurant_id' => $restaurantId));
 		 
 		$this->render('index',array(
-			'restaurant'=>$restaurant,		// 餐馆详情。
-			'dataProvider'=>$comments,	// 评论详情。
-			'model'=>new Comment 			//Yii CActiveForm需要使用Comment对象
+			'restaurant' => $restaurant,		// 餐馆详情。
+			'dataProvider' => $comments,	// 评论详情。
+			'model' => new Comment, 			//Yii CActiveForm需要使用Comment对象
+			'imgs' => $imgs
 		));
 	}
 

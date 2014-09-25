@@ -4,9 +4,10 @@
 ?>
 <div class="view-item">
 	<?php if(!empty($data->image_url)) {?>
-	<a href="<?php echo $data->image_url; ?>" class="restaurant_img"  title="<?php echo $data->name;?>"><img src="<?php echo $data->image_url; ?>"></a>
+	<a href="<?php echo $data->image_url; ?>" class="restaurant_img indexImg"  title="<?php echo $data->name;?>"><img src="<?php echo $data->image_url; ?>"></a>
 	<?php }else{?>
-	<span class="restaurant_defalut_img"><i class="fa fa-smile-o"></i></span>
+	<!-- <span class="restaurant_defalut_img"><i class="fa fa-smile-o"></i></span> -->
+	<a href="javascript:void(0);" class="restaurant_img indexImg"><img src="/images/tang_default.png"></a>
 		<?php } ?>
 	<div class="restaurant-detail">
 		<ul>

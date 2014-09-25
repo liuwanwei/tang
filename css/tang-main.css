@@ -14,7 +14,9 @@ body
 {
 	margin: 0;
 	padding: 0;
-	font-family:微软雅黑;
+	/*font-family:微软雅黑;*/
+	font-family: 'Helvetica Neue',Helvetica,Arial,Sans-serif;
+	/*font-family: 'Open Sans','Helvetica Neue',Arial,'Hiragino Sans GB','Microsoft YaHei','WenQuanYi Micro Hei',sans-serif;*/
 	_background: #F5F3EF;
 	background: radial-gradient(ellipse at center, #ffffff 0%,#F5F3EF 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#F5F3EF',GradientType=1 );
@@ -86,7 +88,7 @@ body
 	width:960px;
 	min-height: 600px;
 	margin:0 auto;
-	font-family:微软雅黑;
+	/*font-family:微软雅黑;*/
 	padding:0px 10px;
 }
 
@@ -94,7 +96,7 @@ body
 { 
 	display:block;
 	padding: 15px 0px;
-	margin: 10px 0px 0px 0px;	
+	margin: 40px 0px 0px 0px;	
 	width: 100%;
 	font-size: 1em;
 	text-align: center;		
@@ -137,7 +139,7 @@ body
 	width: 200px;
 	height: 40px;
 	line-height: 40px;
-	margin: 0 auto;
+	margin: 20px auto;
 	border-radius: 8px;
 	text-align: center;
 	text-decoration: none;
@@ -157,7 +159,7 @@ body
 	background:#e9e4df;
 	height:55px;
 	line-height:55px;
-	font-family:微软雅黑;
+	/*font-family:微软雅黑;*/
 }
 
 #mainmenu .login
@@ -602,7 +604,6 @@ div.search-form
 
 body, input, textarea, select, button 
 {
-	font-family: 'Helvetica Neue',Helvetica,Arial,Sans-serif;
 	line-height: 1.7;
 	font-size: 14px;
 	color: #222;
@@ -1334,6 +1335,11 @@ a.a-text-none
 	float:left;
 	*display: inline;
 }
+.upload-image>a
+{
+	display: block;
+	margin-right: 10px;
+}
 
 .errorMessage
 {
@@ -1402,10 +1408,21 @@ a.a-text-none
 {
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 6px #ccc;
-	width: 50px;
-	height: 50px;
+	border-radius: 3px;
+	box-shadow: 0px 0px 3px #ccc;
+}
+.restaurant_img.indexImg>img
+{
+	width: 100px;
+	height: 65px;
+}
+.restaurant_img.detailImg>img
+{
+	width: 60px;
+	height: 40px;
+}
+.restaurant_img>a{
+	margin-top: 5px;
 }
 .restaurant_defalut_img
 {
