@@ -15,13 +15,13 @@ class RestaurantController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			// 'postOnly + delete', // we only allow deletion via POST request
-			// array(
-			// 	'COutputCache + index + indexByPage',
-			// 	'duration'=>3600,
-			// 	'varyByParam'=>array('county','area','type','page'),
-			// 	'varyByExpression'=>Yii::app()->user->id
-			// ),
+			//'postOnly + delete', // we only allow deletion via POST request
+			array(
+				'COutputCache + index + indexByPage',
+				'duration'=>3600,
+				'varyByParam'=>array('county','area','type','page'),
+				'varyByExpression'=>Yii::app()->user->id
+			),
 		);
 	}
 	
@@ -125,7 +125,7 @@ class RestaurantController extends Controller
 
 			// 执行上传
 			$this->saveImage($uploadedFile, $filename);
-			$this->createThumbnail($filename, $thumbnailFilename, 100, 65);		
+			$this->createThumbnail($filename, $thumbnailFilename, 200, 130);		
 			
 			$resultJson["thumbnail"] = $thumbnailFilename;
 			$resultJson["origin"] = $filename;
