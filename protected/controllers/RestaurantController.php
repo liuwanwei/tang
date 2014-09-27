@@ -379,13 +379,12 @@ class RestaurantController extends Controller
 	}
 
 	/*
-	 *
+	 * 获取县区内、以及商圈内所有汤馆类型
 	 */
 	private function typeMenu($countyId, $areaId){
-		$restaurantAreaDataProvider = new CActiveDataProvider('Restaurant');
+		$restaurantAreaDataProvider = new CActiveDataProvider('Restaurant', array('pagination' => false));
 		$criteria = new CDbCriteria();
 		$criteria->select = array('type_id');
-		// $criteria->group = 'type_id';
 		
 		if ($countyId != 0) {
 			$criteria->compare('county_id', $countyId);
@@ -398,7 +397,7 @@ class RestaurantController extends Controller
 		$restaurantAreaDataProvider->criteria = $criteria;
 		
 		$restaurants = $restaurantAreaDataProvider->getData();
-		
+
 		if (!isset($restaurants) && count($restaurants) === 0)
 		{
 			return null;
